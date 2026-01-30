@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg: 255 255 255;
+  --text: 31 41 55;
+  --muted: 107 114 128;
+  --accent: 59 130 246; /* blue-500 */
+  --radius: 0.5rem;
+  --font-scale: 1;
+}
+
+/* Dark mode variables */
+.[data-theme="dark"]{
+  --bg: 17 24 39;
+  --text: 226 232 240;
+  --muted: 148 163 184;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--text));
+  font-size: calc(16px * var(--font-scale));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Accent utilities */
+.btn-accent{
+  background-color: rgb(var(--accent));
+  color: white;
+}
+
+.card{
+  background-color: rgba(var(--bg), 0.9);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.08);
+  padding: 1rem;
+}
+
+/* small helpers */
+.muted{ color: rgb(var(--muted)); }
+

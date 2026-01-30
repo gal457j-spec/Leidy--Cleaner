@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: config/docker/Dockerfile.backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app
+      - ./backend/uploads:/app/uploads
+      - ./backend/backend_data:/app/backend_data
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - BASE_URL=http://localhost:3001
+      - JWT_SECRET=${JWT_SECRET}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - MERCADOPAGO_TOKEN=${MERCADOPAGO_TOKEN}
+
+  frontend:
+    build:
+      context: .
+      dockerfile: config/docker/Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+
+  # opcional: postgres/redis podem ficar fora para dev com sqlite
