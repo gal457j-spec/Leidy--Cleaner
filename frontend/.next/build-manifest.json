@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/SDIceo6Zz8wsmmRHl7trE/_buildManifest.js",
-    "static/SDIceo6Zz8wsmmRHl7trE/_ssgManifest.js"
+    "static/aXbJgEXK7BVOG3WyGhlb4/_buildManifest.js",
+    "static/aXbJgEXK7BVOG3WyGhlb4/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -21,7 +21,7 @@
       "static/chunks/webpack-6af0e3c12b874bb0.js",
       "static/chunks/framework-6d18543c2c368b0c.js",
       "static/chunks/main-5232346dfb644e31.js",
-      "static/css/81b846ecca5b9237.css",
+      "static/css/968b66311199067c.css",
       "static/chunks/pages/_app-c3b5f6e6e41decce.js"
     ],
     "/_error": [
@@ -56,7 +56,7 @@
       "static/chunks/main-5232346dfb644e31.js",
       "static/chunks/664-0356555cfd50fb3d.js",
       "static/chunks/874-e0e0d83ad6f1fab9.js",
-      "static/chunks/pages/agendar-f4b119123ea2ea24.js"
+      "static/chunks/pages/agendar-7f0f2a0388e8f319.js"
     ],
     "/agendar-updated": [
       "static/chunks/webpack-6af0e3c12b874bb0.js",
@@ -73,12 +73,26 @@
       "static/chunks/664-0356555cfd50fb3d.js",
       "static/chunks/pages/chat-4c682c64166dccce.js"
     ],
+    "/checkout": [
+      "static/chunks/webpack-6af0e3c12b874bb0.js",
+      "static/chunks/framework-6d18543c2c368b0c.js",
+      "static/chunks/main-5232346dfb644e31.js",
+      "static/chunks/664-0356555cfd50fb3d.js",
+      "static/chunks/pages/checkout-8e868f185551fdcf.js"
+    ],
     "/dashboard": [
       "static/chunks/webpack-6af0e3c12b874bb0.js",
       "static/chunks/framework-6d18543c2c368b0c.js",
       "static/chunks/main-5232346dfb644e31.js",
       "static/chunks/664-0356555cfd50fb3d.js",
       "static/chunks/pages/dashboard-5a9fae2589033f3a.js"
+    ],
+    "/reviews": [
+      "static/chunks/webpack-6af0e3c12b874bb0.js",
+      "static/chunks/framework-6d18543c2c368b0c.js",
+      "static/chunks/main-5232346dfb644e31.js",
+      "static/chunks/664-0356555cfd50fb3d.js",
+      "static/chunks/pages/reviews-c860665bf18ece48.js"
     ],
     "/servicos": [
       "static/chunks/webpack-6af0e3c12b874bb0.js",

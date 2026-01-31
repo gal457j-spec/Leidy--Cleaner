@@ -6,6 +6,7 @@ import ServiceSelector from '../components/Scheduling/ServiceSelector';
 import PriceCalculator from '../components/Scheduling/PriceCalculator';
 import PhotoUpload from '../components/Scheduling/PhotoUpload';
 import RecurringBookings from '../components/Scheduling/RecurringBookings';
+import MapEmbed from '../components/Map/MapEmbed';
 import { useToast } from '../context/ToastContext';
 import { LoadingOverlay } from '../components/UI/LoadingSpinner';
 
@@ -155,6 +156,12 @@ export default function Agendar() {
                     placeholder="Rua, número, complemento, bairro, cidade"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600"
                   />
+                  {/* Map preview (Google Maps embed if API key set, fallback OSM) */}
+                  {(address || location) && (
+                    <div className="mt-3">
+                      <MapEmbed address={address} lat={location?.lat} lng={location?.lng} height={200} />
+                    </div>
+                  )}
                 </div>
                 <div>
                   <label className="block font-semibold mb-2">CEP</label>
