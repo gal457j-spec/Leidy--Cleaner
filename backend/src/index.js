@@ -80,6 +80,23 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date() });
 });
 
+// ===== DB HEALTH CHECK =====
+const { checkDatabase } = require('./utils/health');
+
+app.get('/health/db', async (req, res) => {
+  try {
+    const dbStatus = await checkDatabase();
+    if (dbStatus.ok) {
+      res.json({ status: 'OK', db: dbStatus, timestamp: new Date() });
+    } else {
+      res.status(500).json({ status: 'ERROR', db: dbStatus, timestamp: new Date() });
+    }
+  } catch (err) {
+    logger.error('Health DB route error', err);
+    res.status(500).json({ status: 'ERROR', error: err.message });
+  }
+});
+
 // ===== SERVE SPA =====
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'public', 'index.html'));
