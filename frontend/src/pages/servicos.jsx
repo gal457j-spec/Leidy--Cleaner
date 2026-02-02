@@ -1,127 +1,269 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import Head from 'next/head';
-import Header from '../components/Layout/Header';
-import Footer from '../components/Layout/Footer';
 
+/**
+ * Página de Serviços - Gallery com cartões premium
+ */
 export default function Servicos() {
-  const [loading, setLoading] = useState(false);
   const services = [
     {
       id: 1,
-      name: 'Limpeza Padrão',
-      price: 80,
-      icon: '🧹',
-      description: 'Limpeza completa: varredura, aspiração, limpeza de pisos, panos, banheiro.',
-      duration: '2-3 horas',
-      features: ['Pisos', 'Vidros', 'Móveis', 'Banheiro'],
+      icon: '🏠',
+      name: 'Limpeza Residencial',
+      description: 'Limpeza completa para apartamentos e casas',
+      features: ['Limpeza geral', 'Desinfecção', 'Organização'],
+      price: 'A partir de R$ 150',
+      image: '🏠',
+      color: 'from-blue-600 to-cyan-500'
     },
     {
       id: 2,
-      name: 'Limpeza Profunda',
-      price: 120,
-      icon: '✨',
-      description: 'Faxina completa com desinfeção, limpeza de armários, desodorização.',
-      duration: '4-5 horas',
-      features: ['Tudo da Padrão', 'Desodorização', 'Desinfeção', 'Armários'],
+      icon: '🏢',
+      name: 'Limpeza Comercial',
+      description: 'Serviços profissionais para empresas e escritórios',
+      features: ['Limpeza diária', 'Higiene profunda', 'Monitoramento'],
+      price: 'Sob orçamento',
+      image: '🏢',
+      color: 'from-purple-600 to-pink-500'
     },
     {
       id: 3,
-      name: 'Limpeza de Mudança',
-      price: 150,
-      icon: '📦',
-      description: 'Limpeza completa antes/após mudança. Cada canto impecável.',
-      duration: '6+ horas',
-      features: ['Casa Vazia', 'Completa', 'Desinfeção Total'],
+      icon: '✨',
+      name: 'Limpeza Profunda',
+      description: 'Limpeza intensiva com técnicas avançadas',
+      features: ['Vapor profissional', 'Desinfetante premium', 'Aromatização'],
+      price: 'A partir de R$ 250',
+      image: '✨',
+      color: 'from-orange-600 to-red-500'
     },
     {
       id: 4,
-      name: 'Limpeza de Vidros',
-      price: 30,
       icon: '🪟',
-      description: 'Limpeza profissional de vidros internos e externos.',
-      duration: '1 hora',
-      features: ['Vidros Internos', 'Espelhos', 'Sem Manchas'],
+      name: 'Limpeza de Vidros',
+      description: 'Vidros espelhados e brilhantes em seu imóvel',
+      features: ['Interior/Exterior', 'Sem manchas', 'Seguro'],
+      price: 'A partir de R$ 100',
+      image: '🪟',
+      color: 'from-green-600 to-emerald-500'
     },
     {
       id: 5,
-      name: 'Limpeza de Refrigerador',
-      price: 25,
-      icon: '❄️',
-      description: 'Higienização completa do interior e exterior do refrigerador.',
-      duration: '1-2 horas',
-      features: ['Interior', 'Exterior', 'Prateleiras'],
+      icon: '🧽',
+      name: 'Limpeza de Tapetes',
+      description: 'Higienização profissional com máquina a vapor',
+      features: ['Remoção de ácaros', 'Secagem rápida', 'Aroma fresco'],
+      price: 'A partir de R$ 80',
+      image: '🧽',
+      color: 'from-indigo-600 to-blue-500'
     },
     {
       id: 6,
-      name: 'Limpeza de Forno',
-      price: 40,
-      icon: '🔥',
-      description: 'Limpeza profunda de forno, micro-ondas e fogão.',
-      duration: '1-2 horas',
-      features: ['Forno', 'Fogão', 'Micro-ondas'],
-    },
+      icon: '🌳',
+      name: 'Limpeza de Áreas Externas',
+      description: 'Limpeza de jardins, garagens e espaços abertos',
+      features: ['Pressão alta', 'Desobstrução', 'Desinfecção'],
+      price: 'A partir de R$ 120',
+      image: '🌳',
+      color: 'from-teal-600 to-cyan-500'
+    }
   ];
 
   return (
-      <>
-        <Head>
-          <title>Serviços de Limpeza - Leidy Cleaner</title>
-          <meta name="description" content="Conheça todos os serviços de limpeza profissional. Preços transparentes e sem surpresas." />
-        </Head>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-grow container py-12">
-            <div className="max-w-6xl mx-auto">
-              <div className="mb-12">
-                <div className="kicker">Nossos Serviços</div>
-                <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-3">Limpeza para Todas as Necessidades</h1>
-                <p className="lead muted max-w-3xl">Escolha o serviço ideal para sua casa ou negócio. Todos incluem profissionais treinados e produtos de qualidade.</p>
-              </div>
+    <>
+      <Head>
+        <title>Nossos Serviços - Leidy Cleaner | Limpeza Premium</title>
+        <meta name="description" content="Conheça todos os serviços de limpeza profissional da Leidy Cleaner. Limpeza residencial, comercial, profunda e mais." />
+        <meta name="keywords" content="limpeza profissional, serviços de limpeza, Porto Alegre" />
+      </Head>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {services.map((service) => (
-                  <div key={service.id} className="card hover:shadow-lg transition-all">
-                    <div className="text-5xl mb-3">{service.icon}</div>
-                    <h3 className="text-xl font-bold mb-2">{service.name}</h3>
-                    <p className="text-sm muted mb-4">{service.description}</p>
-                    
-                    <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-lg p-4 mb-4">
-                      <div className="text-2xl font-bold text-emerald-600">R$ {service.price.toFixed(2)}</div>
-                      <div className="text-xs muted">⏱️ {service.duration}</div>
-                    </div>
+      <main className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-slate-900 dark:to-slate-950">
+        {/* Header Section */}
+        <section className="pt-20 sm:pt-28 pb-12 sm:pb-16 container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-600 bg-clip-text text-transparent">
+              Nossos Serviços
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+              Soluções completas de limpeza profissional adaptadas às suas necessidades, com qualidade premium e preços acessíveis.
+            </p>
+          </div>
 
-                    <div className="mb-4">
-                      <p className="text-xs font-semibold muted mb-2">Inclui:</p>
-                      <ul className="text-sm space-y-1">
-                        {service.features.map((feature, i) => (
-                          <li key={i} className="flex items-center gap-2">
-                            <span className="text-emerald-500">✓</span>
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <a href="/agendar" className="btn-primary w-full text-center block">Agendar</a>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-16 card bg-gradient-to-r from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-900/10">
-                <h3 className="text-2xl font-bold mb-3">💡 Serviços Personalizados</h3>
-                <p className="text-gray-700 mb-4">
-                  Não encontrou o serviço que procura? Podemos criar um pacote personalizado de acordo com suas necessidades.
-                  Fale conosco para mais informações!
-                </p>
-                <a href="https://wa.me/5551980303740" target="_blank" rel="noopener noreferrer" className="btn-primary inline-block">
-                  💬 Fale Conosco no WhatsApp
-                </a>
-              </div>
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-4 sm:gap-6 mb-12">
+            <div className="text-center">
+              <p className="text-3xl sm:text-4xl font-black bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                6+
+              </p>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                Serviços
+              </p>
             </div>
-          </main>
+            <div className="text-center">
+              <p className="text-3xl sm:text-4xl font-black bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                2000+
+              </p>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                Clientes
+              </p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl sm:text-4xl font-black bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                ⭐ 4.9
+              </p>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                Avaliação
+              </p>
+            </div>
+          </div>
+        </section>
 
-          <Footer />
-        </div>
-      </>
-    );
-  }
+        {/* Services Grid */}
+        <section className="container mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service) => (
+              <div
+                key={service.id}
+                className="group relative bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              >
+                {/* Gradient Background */}
+                <div className={`h-32 bg-gradient-to-br ${service.color} relative overflow-hidden`}>
+                  <div className="absolute top-1/2 right-0 transform translate-y-1/2 text-8xl opacity-30">
+                    {service.image}
+                  </div>
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 relative z-10">
+                  {/* Icon */}
+                  <div className="w-16 h-16 -mt-12 mb-4 rounded-xl bg-white dark:bg-slate-800 flex items-center justify-center text-4xl shadow-lg border-4 border-gray-50 dark:border-slate-700">
+                    {service.icon}
+                  </div>
+
+                  {/* Title & Description */}
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    {service.name}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                    {service.description}
+                  </p>
+
+                  {/* Features */}
+                  <ul className="space-y-2 mb-6">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500"></span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Price */}
+                  <p className="text-lg font-bold text-blue-600 dark:text-blue-400 mb-4">
+                    {service.price}
+                  </p>
+
+                  {/* CTA Button */}
+                  <Link href="/agendar">
+                    <a className="block w-full py-3 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-center hover:shadow-lg hover:scale-105 transition-all">
+                      Agendar Serviço
+                    </a>
+                  </Link>
+                </div>
+
+                {/* Hover Border */}
+                <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-600/30 transition-colors pointer-events-none"></div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Additional Services */}
+        <section className="border-t border-gray-200 dark:border-slate-700 py-16 sm:py-20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Serviços Especiais
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 text-lg">
+                Não encontrou o que procura? Temos soluções customizadas
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                { icon: '🎉', title: 'Limpeza para Eventos', desc: 'Preparação e pós-evento com equipe especializada' },
+                { icon: '🏥', title: 'Limpeza Hospitalar', desc: 'Desinfecção com protocolos de saúde rigorosos' },
+                { icon: '🚗', title: 'Limpeza Automotiva', desc: 'Interior e exterior de veículos com cuidado' },
+                { icon: '🛏️', title: 'Higienização de Móveis', desc: 'Sofás, colchões e estofados profissionalmente' }
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-6 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 rounded-xl border border-blue-200 dark:border-slate-600 hover:shadow-lg transition-all"
+                >
+                  <p className="text-4xl mb-3">{item.icon}</p>
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                    {item.title}
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-8">
+              <Link href="/agendar">
+                <a className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold hover:shadow-lg hover:scale-105 transition-all">
+                  <span>💬</span>
+                  Solicitar Orçamento Custom
+                </a>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Us */}
+        <section className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-16 sm:py-20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
+              Por que Escolher a Leidy Cleaner?
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { icon: '✓', title: 'Profissionais Treinados', desc: 'Equipe certificada e experiente' },
+                { icon: '🌱', title: 'Produtos Eco-Friendly', desc: 'Sustentáveis e seguros' },
+                { icon: '⚡', title: 'Rápido & Eficiente', desc: 'Resultados garantidos' },
+                { icon: '💰', title: 'Preços Justos', desc: 'Melhor custo-benefício' }
+              ].map((item, idx) => (
+                <div key={idx} className="text-center">
+                  <p className="text-5xl mb-3">{item.icon}</p>
+                  <h4 className="font-bold text-lg mb-2">{item.title}</h4>
+                  <p className="text-blue-100">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Pronto para Uma Limpeza Premium?
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 text-lg mb-8">
+            Agende seu serviço agora e receba 10% de desconto na primeira limpeza
+          </p>
+          <Link href="/agendar">
+            <a className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold hover:shadow-lg hover:scale-105 transition-all">
+              <span>📅</span>
+              Agendar Agora
+            </a>
+          </Link>
+        </section>
+      </main>
+    </>
+  );
+}
