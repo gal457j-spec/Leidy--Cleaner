@@ -143,22 +143,22 @@ class AutomationService {
       logger.info(`Tratando problema: ${issue.type}`);
 
       switch (issue.type) {
-        case 'no_show':
-          // Cliente não apareceu
-          // await this.handleNoShow(issue.bookingId);
-          break;
+      case 'no_show':
+        // Cliente não apareceu
+        // await this.handleNoShow(issue.bookingId);
+        break;
 
-        case 'quality_complaint':
-          // Reclamação de qualidade
-          // await this.handleQualityComplaint(issue.bookingId);
-          break;
+      case 'quality_complaint':
+        // Reclamação de qualidade
+        // await this.handleQualityComplaint(issue.bookingId);
+        break;
 
-        case 'team_unavailable':
-          // Equipa não disponível
-          // await this.handleTeamUnavailable(issue.bookingId);
-          break;
+      case 'team_unavailable':
+        // Equipa não disponível
+        // await this.handleTeamUnavailable(issue.bookingId);
+        break;
 
-        default:
+      default:
           // Escalar para admin
           // await NotificationService.alertAdmin(issue);
       }

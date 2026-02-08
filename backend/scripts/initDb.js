@@ -5,28 +5,28 @@
  * Cria o banco SQLite e popula com dados iniciais
  */
 
-const sqlite3 = require('sqlite3').verbose()
-const path = require('path')
-const fs = require('fs')
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
+const fs = require('fs');
 
-const dbPath = path.join(__dirname, '..', 'backend_data', 'limpeza.db')
-const dbDir = path.dirname(dbPath)
+const dbPath = path.join(__dirname, '..', 'backend_data', 'limpeza.db');
+const dbDir = path.dirname(dbPath);
 
 // Garantir que o diretório existe
 if (!fs.existsSync(dbDir)) {
-  fs.mkdirSync(dbDir, { recursive: true })
+  fs.mkdirSync(dbDir, { recursive: true });
 }
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
-    console.error('❌ Erro ao conectar ao banco:', err.message)
-    process.exit(1)
+    console.error('❌ Erro ao conectar ao banco:', err.message);
+    process.exit(1);
   }
-  console.log('✅ Conectado ao banco SQLite:', dbPath)
-})
+  console.log('✅ Conectado ao banco SQLite:', dbPath);
+});
 
 // Habilitar foreign keys
-db.run('PRAGMA foreign_keys = ON')
+db.run('PRAGMA foreign_keys = ON');
 
 const schema = `
 -- Tabela de Usuários
@@ -169,7 +169,7 @@ CREATE INDEX IF NOT EXISTS idx_bookings_status ON bookings(status);
 CREATE INDEX IF NOT EXISTS idx_bookings_service ON bookings(service_id);
 CREATE INDEX IF NOT EXISTS idx_reviews_booking ON reviews(booking_id);
 CREATE INDEX IF NOT EXISTS idx_transactions_booking ON transactions(booking_id);
-`
+`;
 
 const seedData = `
 -- Usuários
@@ -198,54 +198,54 @@ INSERT OR IGNORE INTO bookings (id, user_id, service_id, staff_id, date, time, d
 INSERT OR IGNORE INTO reviews (id, booking_id, user_id, rating, comment, is_approved) VALUES
 (1, 2, 4, 5, 'Excelente trabalho! Muito profissional.', 1),
 (2, 3, 4, 4, 'Muito bom, recomendo!', 1);
-`
+`;
 
 db.serialize(() => {
-  console.log('\n📋 Criando schema do banco...')
+  console.log('\n📋 Criando schema do banco...');
   
   // Criar tabelas
   db.exec(schema, (err) => {
     if (err) {
-      console.error('❌ Erro ao criar tabelas:', err.message)
-      process.exit(1)
+      console.error('❌ Erro ao criar tabelas:', err.message);
+      process.exit(1);
     }
-    console.log('✅ Tabelas criadas com sucesso')
+    console.log('✅ Tabelas criadas com sucesso');
 
     // Inserir dados seed
-    console.log('\n🌱 Inserindo dados iniciais...')
+    console.log('\n🌱 Inserindo dados iniciais...');
     db.exec(seedData, (err) => {
       if (err) {
-        console.error('❌ Erro ao inserir dados:', err.message)
-        process.exit(1)
+        console.error('❌ Erro ao inserir dados:', err.message);
+        process.exit(1);
       }
-      console.log('✅ Dados iniciais inseridos')
+      console.log('✅ Dados iniciais inseridos');
 
       // Verificar dados
-      console.log('\n📊 Verificando dados...')
+      console.log('\n📊 Verificando dados...');
       db.get('SELECT COUNT(*) as count FROM users', (err, row) => {
-        if (!err) console.log(`   ✓ Usuários: ${row.count}`)
-      })
+        if (!err) console.log(`   ✓ Usuários: ${row.count}`);
+      });
       db.get('SELECT COUNT(*) as count FROM services', (err, row) => {
-        if (!err) console.log(`   ✓ Serviços: ${row.count}`)
-      })
+        if (!err) console.log(`   ✓ Serviços: ${row.count}`);
+      });
       db.get('SELECT COUNT(*) as count FROM bookings', (err, row) => {
-        if (!err) console.log(`   ✓ Agendamentos: ${row.count}`)
-      })
+        if (!err) console.log(`   ✓ Agendamentos: ${row.count}`);
+      });
       db.get('SELECT COUNT(*) as count FROM reviews', (err, row) => {
-        if (!err) console.log(`   ✓ Avaliações: ${row.count}`)
-      })
+        if (!err) console.log(`   ✓ Avaliações: ${row.count}`);
+      });
 
       setTimeout(() => {
-        console.log('\n✅ Banco inicializado com sucesso!')
-        console.log(`📍 Arquivo: ${dbPath}\n`)
-        db.close()
-        process.exit(0)
-      }, 500)
-    })
-  })
-})
+        console.log('\n✅ Banco inicializado com sucesso!');
+        console.log(`📍 Arquivo: ${dbPath}\n`);
+        db.close();
+        process.exit(0);
+      }, 500);
+    });
+  });
+});
 
 db.on('error', (err) => {
-  console.error('❌ Erro no banco:', err.message)
-  process.exit(1)
-})
+  console.error('❌ Erro no banco:', err.message);
+  process.exit(1);
+});

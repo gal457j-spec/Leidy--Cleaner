@@ -79,6 +79,8 @@ class ChatEncryptionClient {
    */
   storeKeyLocally(conversationId, encryptionKeyHex) {
     if (window.location.protocol !== 'https:' && process.env.NODE_ENV === 'production') {
+      // eslint-disable-next-line no-console
+      console.warn('Warning: Storing encryption keys over HTTPS is recommended');
     }
 
     const key = `chat_key_${conversationId}`;

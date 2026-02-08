@@ -34,7 +34,7 @@ class AdvancedPaymentService {
         instructions: [
           'Pagável em qualquer banco até a data vencimento',
           'Após vencimento, cobrar R$ 0,50 de multa diária',
-'Após dias do vencimento, realizar protesto eletrônico'
+          'Após dias do vencimento, realizar protesto eletrônico'
         ]
       };
 
@@ -372,15 +372,15 @@ class AdvancedPaymentService {
     const next = new Date(now);
 
     switch (interval) {
-      case 'weekly':
-        next.setDate(next.getDate() + 7);
-        break;
-      case 'monthly':
-        next.setMonth(next.getMonth() + 1);
-        break;
-      case 'yearly':
-        next.setFullYear(next.getFullYear() + 1);
-        break;
+    case 'weekly':
+      next.setDate(next.getDate() + 7);
+      break;
+    case 'monthly':
+      next.setMonth(next.getMonth() + 1);
+      break;
+    case 'yearly':
+      next.setFullYear(next.getFullYear() + 1);
+      break;
     }
 
     return next;

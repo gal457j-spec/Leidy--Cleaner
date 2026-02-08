@@ -12,7 +12,7 @@ class CouponService {
   static async validateCoupon(code, userId = null) {
     try {
       const coupon = await db.get(
-        `SELECT * FROM coupons WHERE UPPER(code) = UPPER(?) AND is_active = 1`,
+        'SELECT * FROM coupons WHERE UPPER(code) = UPPER(?) AND is_active = 1',
         code
       );
 
@@ -241,7 +241,7 @@ class CouponService {
       const coupons = await db.all(query, ...params);
 
       // Enriquecer com dados de uso
-      for (let coupon of coupons) {
+      for (const coupon of coupons) {
         const [{ uses }] = await db.all(
           'SELECT COUNT(*) as uses FROM coupon_uses WHERE coupon_id = ?',
           coupon.id

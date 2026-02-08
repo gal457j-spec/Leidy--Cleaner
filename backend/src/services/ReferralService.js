@@ -13,7 +13,7 @@ class ReferralService {
   static async generateReferralLink(userId) {
     try {
       // Verificar se já tem link
-      let referralLink = await db.get(
+      const referralLink = await db.get(
         'SELECT code FROM referral_links WHERE user_id = ?',
         userId
       );

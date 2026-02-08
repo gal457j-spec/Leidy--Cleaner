@@ -39,7 +39,8 @@ class ThemeManager {
       if (stored && Object.values(THEMES).includes(stored)) {
         return stored;
       }
-    } catch (e) {
+    } catch (_e) {
+      // Local storage not available, use default
     }
     return THEMES.AUTO;
   }
@@ -96,7 +97,8 @@ class ThemeManager {
     if (window.localStorage) {
       try {
         localStorage.setItem(THEME_KEY, theme);
-      } catch (e) {
+      } catch (_e) {
+        // Storage quota exceeded or disabled, continue silently
       }
     }
 

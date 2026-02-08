@@ -166,35 +166,35 @@ ${i + 1}. ${b.serviceName} em ${new Date(b.date).toLocaleDateString('pt-BR')}`;
     if (lowerMessage.match(/preço|custa|valor|quanto/i)) {
       return {
         intent: 'pricing',
-        response: `💰 Nossa tabela de preços:\n\n🏠 Limpeza Residencial: R$150-300\n🔬 Limpeza Profunda: R$400-600\n🪟 Limpeza de Vidros: R$100-150\n\nQual serviço te interessa?`
+        response: '💰 Nossa tabela de preços:\n\n🏠 Limpeza Residencial: R$150-300\n🔬 Limpeza Profunda: R$400-600\n🪟 Limpeza de Vidros: R$100-150\n\nQual serviço te interessa?'
       };
     }
 
     if (lowerMessage.match(/cancelar|desmarcar|remarcar/i)) {
       return {
         intent: 'cancellation',
-        response: `📅 Para cancelar/remarcar um agendamento:\n\n✓ Até 24h antes = sem custo\n✗ Menos de 24h = 50% de taxa\n\nVocê pode fazer isso direto no app ou site!`
+        response: '📅 Para cancelar/remarcar um agendamento:\n\n✓ Até 24h antes = sem custo\n✗ Menos de 24h = 50% de taxa\n\nVocê pode fazer isso direto no app ou site!'
       };
     }
 
     if (lowerMessage.match(/horário|quando|segunda|sexta|sábado|domingo/i)) {
       return {
         intent: 'hours',
-        response: `⏰ Funcionamos:\n\n📅 Segunda a Sexta: 8h-18h\n\n📅 Sábado: 8h-14h\n\n❌ Domingos: Fechado\n\nQuer agendar?`
+        response: '⏰ Funcionamos:\n\n📅 Segunda a Sexta: 8h-18h\n\n📅 Sábado: 8h-14h\n\n❌ Domingos: Fechado\n\nQuer agendar?'
       };
     }
 
     if (lowerMessage.match(/agendar|agendamento|marcar/i)) {
       return {
         intent: 'booking',
-        response: `📋 Para agendar, é fácil!\n\n1. Clique em "Agendar" no menu\n2. Escolha o serviço\n3. Selecione data e hora\n4. Pagamento\n\nQuer começar?`
+        response: '📋 Para agendar, é fácil!\n\n1. Clique em "Agendar" no menu\n2. Escolha o serviço\n3. Selecione data e hora\n4. Pagamento\n\nQuer começar?'
       };
     }
 
     if (lowerMessage.match(/obrigad(o|a)|vale|flw|tchaü/i)) {
       return {
         intent: 'farewell',
-        response: `👋 De nada! Qualquer dúvida, é só chamar! 😊\n\n💬 Chat: sempre disponível\n📞 Suporte: contato@leidycleaner.com`
+        response: '👋 De nada! Qualquer dúvida, é só chamar! 😊\n\n💬 Chat: sempre disponível\n📞 Suporte: contato@leidycleaner.com'
       };
     }
 

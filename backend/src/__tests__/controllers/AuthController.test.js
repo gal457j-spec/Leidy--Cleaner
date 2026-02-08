@@ -382,7 +382,7 @@ describe('AuthController', () => {
 
     test('should handle special characters in input', async () => {
       req.body = {
-        email: "test+tag@example.com",
+        email: 'test+tag@example.com',
         password: 'password123!@#',
         name: "Test's User",
         phone: '11999999999'

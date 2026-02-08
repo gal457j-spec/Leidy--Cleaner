@@ -261,7 +261,7 @@ class NewsletterController {
 
       return res.json({
         success: true,
-        message: `Newsletter enviado`,
+        message: 'Newsletter enviado',
         stats: {
           total: subscribers.length,
           sent,

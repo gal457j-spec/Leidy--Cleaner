@@ -19,7 +19,7 @@ router.get('/dashboard', authenticateToken, authorizeRole(['admin']), async (req
     const totalBookings = bookingsRes[0]?.count || 0;
 
     const revenueRes = await db.all(
-      `SELECT SUM(COALESCE(price, 0)) as total FROM bookings WHERE status = 'completed'`
+      'SELECT SUM(COALESCE(price, 0)) as total FROM bookings WHERE status = \'completed\''
     );
     const revenue = parseFloat(revenueRes[0]?.total || 0).toFixed(2);
 
@@ -27,7 +27,7 @@ router.get('/dashboard', authenticateToken, authorizeRole(['admin']), async (req
     const customers = usersRes[0]?.count || 0;
 
     const todayRes = await db.all(
-      `SELECT COUNT(*) as count FROM bookings WHERE date = DATE('now')`
+      'SELECT COUNT(*) as count FROM bookings WHERE date = DATE(\'now\')'
     );
     const todaysScheduled = todayRes[0]?.count || 0;
 
@@ -80,7 +80,7 @@ router.put('/bookings/:bookingId', authenticateToken, authorizeRole(['admin']), 
     }
 
     await db.run(
-      `UPDATE bookings SET status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
+      'UPDATE bookings SET status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
       status,
       bookingId
     );

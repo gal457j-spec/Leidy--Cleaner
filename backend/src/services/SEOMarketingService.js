@@ -61,51 +61,51 @@ class SEOMarketingService {
     };
 
     switch (entityType) {
-      case 'Service':
-        schema = {
-          ...schema,
-          name: entityData.name,
-          description: entityData.description,
-          provider: {
-            '@type': 'Organization',
-            name: 'Avante'
-          },
-          areaServed: 'BR',
-          offers: {
-            '@type': 'Offer',
-            priceCurrency: 'BRL',
-            price: entityData.price
-          }
-        };
-        break;
+    case 'Service':
+      schema = {
+        ...schema,
+        name: entityData.name,
+        description: entityData.description,
+        provider: {
+          '@type': 'Organization',
+          name: 'Avante'
+        },
+        areaServed: 'BR',
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'BRL',
+          price: entityData.price
+        }
+      };
+      break;
 
-      case 'LocalBusiness':
-        schema = {
-          ...schema,
-          name: entityData.name,
-          address: {
-            '@type': 'PostalAddress',
-            streetAddress: entityData.address,
-            addressLocality: entityData.city,
-            addressRegion: entityData.state,
-            postalCode: entityData.zipCode,
-            addressCountry: 'BR'
-          },
-          telephone: entityData.phone,
-          url: entityData.website,
-          image: entityData.logo
-        };
-        break;
+    case 'LocalBusiness':
+      schema = {
+        ...schema,
+        name: entityData.name,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: entityData.address,
+          addressLocality: entityData.city,
+          addressRegion: entityData.state,
+          postalCode: entityData.zipCode,
+          addressCountry: 'BR'
+        },
+        telephone: entityData.phone,
+        url: entityData.website,
+        image: entityData.logo
+      };
+      break;
 
-      case 'AggregateRating':
-        schema = {
-          ...schema,
-          ratingValue: entityData.rating,
-          ratingCount: entityData.reviewCount,
-          bestRating: 5,
-          worstRating: 1
-        };
-        break;
+    case 'AggregateRating':
+      schema = {
+        ...schema,
+        ratingValue: entityData.rating,
+        ratingCount: entityData.reviewCount,
+        bestRating: 5,
+        worstRating: 1
+      };
+      break;
     }
 
     return schema;

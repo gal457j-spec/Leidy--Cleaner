@@ -38,7 +38,7 @@ const socketCorsOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000,htt
 const io = socketIO(server, {
   cors: {
     origin: socketCorsOrigins,
-    methods: ["GET", "POST"],
+    methods: ['GET', 'POST'],
     credentials: true
   }
 });

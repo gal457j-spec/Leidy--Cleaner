@@ -68,7 +68,7 @@ class PixService {
   static async verifyPayment(pixTransactionId) {
     try {
       const pix = await db.get(
-        `SELECT * FROM pix_transactions WHERE id = ?`,
+        'SELECT * FROM pix_transactions WHERE id = ?',
         pixTransactionId
       );
 
@@ -101,7 +101,7 @@ class PixService {
   static async confirmPayment(pixTransactionId, bankTransactionId) {
     try {
       const pix = await db.get(
-        `SELECT * FROM pix_transactions WHERE id = ?`,
+        'SELECT * FROM pix_transactions WHERE id = ?',
         pixTransactionId
       );
 
@@ -111,14 +111,14 @@ class PixService {
 
       // Atualizar status
       await db.run(
-        `UPDATE pix_transactions SET status = 'paid', bank_transaction_id = ? WHERE id = ?`,
+        'UPDATE pix_transactions SET status = \'paid\', bank_transaction_id = ? WHERE id = ?',
         bankTransactionId, pixTransactionId
       );
 
       // Atualizar booking relacionado
       if (pix.order_id) {
         await db.run(
-          `UPDATE bookings SET status = 'confirmed', paid = 1 WHERE id = ?`,
+          'UPDATE bookings SET status = \'confirmed\', paid = 1 WHERE id = ?',
           pix.order_id
         );
       }
@@ -221,7 +221,7 @@ class PixService {
     const polynomial = 0x1021;
     
     for (let i = 0; i < data.length; i++) {
-      let byte = data.charCodeAt(i);
+      const byte = data.charCodeAt(i);
       crc ^= (byte << 8);
       
       for (let j = 0; j < 8; j++) {

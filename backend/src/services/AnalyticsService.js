@@ -33,7 +33,7 @@ class AnalyticsService {
     const now = new Date();
     const bookings = this.metrics.bookings;
 
-    let cutoff = new Date();
+    const cutoff = new Date();
     if (period === 'day') cutoff.setDate(cutoff.getDate() - 1);
     else if (period === 'week') cutoff.setDate(cutoff.getDate() - 7);
     else if (period === 'month') cutoff.setMonth(cutoff.getMonth() - 1);
@@ -57,7 +57,7 @@ class AnalyticsService {
   async getRevenueStats(period = 'month') {
     const bookings = this.metrics.bookings.filter(b => b.status === 'completed');
 
-    let cutoff = new Date();
+    const cutoff = new Date();
     if (period === 'day') cutoff.setDate(cutoff.getDate() - 1);
     else if (period === 'week') cutoff.setDate(cutoff.getDate() - 7);
     else if (period === 'month') cutoff.setMonth(cutoff.getMonth() - 1);

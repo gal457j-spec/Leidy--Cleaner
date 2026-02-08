@@ -22,7 +22,7 @@ async function ensureSchema() {
     const hasFinalPrice = Array.isArray(cols) && cols.some(c => c.name === 'final_price');
     if (!hasFinalPrice) {
       try {
-        await db.run("ALTER TABLE bookings ADD COLUMN final_price REAL DEFAULT 0.0;");
+        await db.run('ALTER TABLE bookings ADD COLUMN final_price REAL DEFAULT 0.0;');
         logger.info('Coluna final_price adicionada à tabela bookings');
       } catch (err) {
         // Em alguns casos ALTER TABLE falha por limitações; apenas logamos

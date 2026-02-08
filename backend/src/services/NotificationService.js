@@ -442,9 +442,9 @@ Qualquer dúvida, entre em contato! 📞`;
 
       // Build message based on reminder type
       const reminderMessages = {
-        '2days_before': `👋 Olá {{firstName}}! Lembrando seu agendamento de {{serviceName}} em 2 dias:\n📅 {{bookingDate}} às {{bookingTime}}\n📍 {{location}}\n\nCódigo: #{{bookingId}}\n\n✓ Confirmar | 📅 Reagendar | 📞 Suporte`,
-        '1day_before': `📌 Leidy Cleaner: Limpeza de {{serviceName}} amanhã às {{bookingTime}} no endereço {{location}}. Código: #{{bookingId}}. Confirme: [link]`,
-        '1hour_before': `⏰ Falta 1 hora! {{firstName}}, estamos chegando em breve.\n🏠 Endereço: {{location}}\n\nEstou a caminho! Qualquer dúvida: [tel]`
+        '2days_before': '👋 Olá {{firstName}}! Lembrando seu agendamento de {{serviceName}} em 2 dias:\n📅 {{bookingDate}} às {{bookingTime}}\n📍 {{location}}\n\nCódigo: #{{bookingId}}\n\n✓ Confirmar | 📅 Reagendar | 📞 Suporte',
+        '1day_before': '📌 Leidy Cleaner: Limpeza de {{serviceName}} amanhã às {{bookingTime}} no endereço {{location}}. Código: #{{bookingId}}. Confirme: [link]',
+        '1hour_before': '⏰ Falta 1 hora! {{firstName}}, estamos chegando em breve.\n🏠 Endereço: {{location}}\n\nEstou a caminho! Qualquer dúvida: [tel]'
       };
 
       const template = reminderMessages[notif.notification_type];

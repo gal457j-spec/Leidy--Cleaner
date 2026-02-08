@@ -119,10 +119,10 @@ class BookingController {
           staff_fee, post_work_adjustment, final_price,
           is_post_work, has_extra_quarter, has_staff, status, notes
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, validated.userId, validated.serviceId, validated.date, validated.time, 
-         validated.durationHours, validated.address, validated.phone,
-         booking.base_price, booking.extra_quarter_hours,
-         booking.staff_fee, booking.post_work_adjustment, booking.final_price,
-         booking.is_post_work, booking.has_extra_quarter, hasStaff ? 1 : 0, 'pending', sanitizedNotes);
+      validated.durationHours, validated.address, validated.phone,
+      booking.base_price, booking.extra_quarter_hours,
+      booking.staff_fee, booking.post_work_adjustment, booking.final_price,
+      booking.is_post_work, booking.has_extra_quarter, hasStaff ? 1 : 0, 'pending', sanitizedNotes);
 
       // ✅ Invalidar cache
       CacheService.invalidatePattern(`user:${validated.userId}:*`);
@@ -247,7 +247,7 @@ class BookingController {
       }
 
       // Atualizar agendamento com avaliação
-      await db.run(`UPDATE bookings SET rating = ?, review = ? WHERE id = ?`,
+      await db.run('UPDATE bookings SET rating = ?, review = ? WHERE id = ?',
         rating, review || '', bookingId
       );
 
@@ -257,7 +257,7 @@ class BookingController {
         const user = await db.get('SELECT * FROM users WHERE id = ?', booking.user_id);
 
         // Incrementar streak
-        let newStreak = (user.five_star_streak || 0) + 1;
+        const newStreak = (user.five_star_streak || 0) + 1;
         let loyaltyBonus = 0;
         let bonusReached = false;
 
@@ -323,7 +323,7 @@ class BookingController {
       }
 
       let query = 'UPDATE bookings SET ';
-      let params = [];
+      const params = [];
 
       if (status) {
         query += 'status = ?, ';
@@ -388,7 +388,7 @@ class BookingController {
       }
 
       const notes = reason ? ` | Motivo do cancelamento: ${reason}` : '';
-      await db.run(`UPDATE bookings SET status = 'cancelled', notes = notes || ? WHERE id = ?`, notes, bookingId);
+      await db.run('UPDATE bookings SET status = \'cancelled\', notes = notes || ? WHERE id = ?', notes, bookingId);
 
       const updatedBooking = await db.get('SELECT * FROM bookings WHERE id = ?', bookingId);
 

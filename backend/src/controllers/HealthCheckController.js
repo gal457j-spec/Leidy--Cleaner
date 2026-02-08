@@ -16,7 +16,7 @@ class HealthCheckController {
       const health = await HealthCheckService.getFullHealthStatus();
       
       const statusCode = health.status === 'healthy' ? 200 : 
-                        health.status === 'degraded' ? 200 : 503;
+        health.status === 'degraded' ? 200 : 503;
       
       res.status(statusCode).json(health);
     } catch (error) {
@@ -95,7 +95,7 @@ class HealthCheckController {
     try {
       const queueHealth = await HealthCheckService.checkEmailQueue();
       const statusCode = queueHealth.status === 'healthy' ? 200 : 
-                        queueHealth.status === 'degraded' ? 200 : 503;
+        queueHealth.status === 'degraded' ? 200 : 503;
       
       res.status(statusCode).json(queueHealth);
     } catch (error) {

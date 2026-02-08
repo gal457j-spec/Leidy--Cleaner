@@ -15,7 +15,7 @@ const authorizeByRole = (requiredRoles) => {
       const userRole = req.user?.role;
 
       if (!userRole) {
-        logger.warn(`Unauthorized access attempt - no role`);
+        logger.warn('Unauthorized access attempt - no role');
         return res.status(401).json({
           success: false,
           error: 'User role not found'

@@ -54,7 +54,7 @@ class RoutingService {
    */
   generateItinerary(bookings) {
     const itinerary = [];
-    let currentTime = new Date();
+    const currentTime = new Date();
 
     bookings.forEach((booking, index) => {
       const startTime = new Date(booking.date);

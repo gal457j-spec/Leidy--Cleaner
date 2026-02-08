@@ -66,12 +66,12 @@ function calculateBookingPrice(booking, service) {
     postWorkAdjustment: booking.post_work_adjustment,
     finalPrice: booking.final_price,
     breakdown: {
-      "1ª hora": firstHourPrice,
-      "Horas adicionais": (durationHours - 1) * additionalHourPrice,
-      "Quarto do trabalho": booking.extra_quarter_hours,
-      "Taxa funcionária (+40%)": booking.staff_fee,
-      "Pós-obra (+50%)": booking.post_work_adjustment,
-      "Total": booking.final_price
+      '1ª hora': firstHourPrice,
+      'Horas adicionais': (durationHours - 1) * additionalHourPrice,
+      'Quarto do trabalho': booking.extra_quarter_hours,
+      'Taxa funcionária (+40%)': booking.staff_fee,
+      'Pós-obra (+50%)': booking.post_work_adjustment,
+      'Total': booking.final_price
     }
   };
 }
@@ -85,16 +85,16 @@ function calculateLoyaltyBonus(user) {
     fiveStarStreak: user.five_star_streak || 0,
     bonusAmount: 0,
     bonusReached: false,
-    message: ""
+    message: ''
   };
 
   if (bonus.fiveStarStreak >= 10 && !user.bonus_redeemed) {
     bonus.bonusAmount = 100.00;
     bonus.bonusReached = true;
-    bonus.message = `🎉 Parabéns! Você atingiu 10 avaliações 5⭐! Ganhou R$ 100 de desconto!`;
+    bonus.message = '🎉 Parabéns! Você atingiu 10 avaliações 5⭐! Ganhou R$ 100 de desconto!';
   } else if (user.bonus_redeemed) {
     bonus.bonusAmount = 100.00;
-    bonus.message = `✅ Bônus de R$ 100 disponível para usar!`;
+    bonus.message = '✅ Bônus de R$ 100 disponível para usar!';
   } else {
     const remaining = 10 - bonus.fiveStarStreak;
     bonus.message = `${bonus.fiveStarStreak}/10 avaliações 5⭐. Faltam ${remaining} para ganhar R$ 100!`;
@@ -117,34 +117,34 @@ function generatePriceSummary(booking, service) {
 
   if (calc.basePrice > 0) {
     summary.components.push({
-      label: "Preço base",
+      label: 'Preço base',
       value: `R$ ${calc.basePrice.toFixed(2)}`
     });
   }
 
   if (calc.extraQuarter > 0) {
     summary.components.push({
-      label: "Quarto do trabalho (organização)",
+      label: 'Quarto do trabalho (organização)',
       value: `+ R$ ${calc.extraQuarter.toFixed(2)}`
     });
   }
 
   if (calc.staffFee > 0) {
     summary.components.push({
-      label: "Taxa funcionária (40%)",
+      label: 'Taxa funcionária (40%)',
       value: `+ R$ ${calc.staffFee.toFixed(2)}`
     });
   }
 
   if (calc.postWorkAdjustment > 0) {
     summary.components.push({
-      label: "Pós-obra (50% extra)",
+      label: 'Pós-obra (50% extra)',
       value: `+ R$ ${calc.postWorkAdjustment.toFixed(2)}`
     });
   }
 
   summary.components.push({
-    label: "TOTAL",
+    label: 'TOTAL',
     value: `R$ ${calc.finalPrice.toFixed(2)}`,
     highlight: true
   });

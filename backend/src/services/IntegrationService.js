@@ -218,7 +218,7 @@ class IntegrationService {
       };
 
       // In production, make HTTP POST to Zapier webhook
-      logger.info(`Zapier integration triggered`);
+      logger.info('Zapier integration triggered');
 
       return { success: true, eventId: `zapier_${Date.now()}` };
     } catch (error) {

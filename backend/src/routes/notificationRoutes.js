@@ -79,7 +79,7 @@ module.exports = (db, notificationService) => {
       }
 
       let query = 'SELECT * FROM notification_logs WHERE userId = ?';
-      let params = [userId];
+      const params = [userId];
 
       if (type) {
         query += ' AND type = ?';

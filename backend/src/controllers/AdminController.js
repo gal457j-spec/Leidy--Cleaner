@@ -106,7 +106,7 @@ class AdminController {
 
       let groupBy, dateFormat;
       if (period === 'daily') {
-        groupBy = "date(date)";
+        groupBy = 'date(date)';
         dateFormat = "strftime('%d/%m', date)";
       } else if (period === 'weekly') {
         groupBy = "strftime('%Y-W%W', date)";
@@ -167,21 +167,21 @@ class AdminController {
       const params = [];
 
       if (status) {
-        query += ` AND b.status = ?`;
+        query += ' AND b.status = ?';
         params.push(status);
       }
 
       if (startDate) {
-        query += ` AND b.date >= ?`;
+        query += ' AND b.date >= ?';
         params.push(startDate);
       }
 
       if (endDate) {
-        query += ` AND b.date <= ?`;
+        query += ' AND b.date <= ?';
         params.push(endDate);
       }
 
-      query += ` ORDER BY b.date DESC LIMIT ? OFFSET ?`;
+      query += ' ORDER BY b.date DESC LIMIT ? OFFSET ?';
       params.push(limit, offset);
 
       const result = await allAsync(db, query, params);
@@ -305,13 +305,13 @@ class AdminController {
         WHERE b.status = 'completed'
       `;
 
-      let params = [];
+      const params = [];
       if (staffId) {
-        query += ` AND b.staff_id = ?`;
+        query += ' AND b.staff_id = ?';
         params.push(staffId);
       }
 
-      query += ` ORDER BY b.date DESC`;
+      query += ' ORDER BY b.date DESC';
 
       const result = await allAsync(db, query, params);
       db.close();

@@ -108,12 +108,12 @@ class StaffAvailabilityController {
           final_score: Math.round(finalScore),
           ranking_position: index + 1,
           load_status: staff.bookings_today === 0 ? 'available' 
-                     : staff.bookings_today <= 2 ? 'light' 
-                     : staff.bookings_today <= 4 ? 'medium' 
-                     : 'heavy',
+            : staff.bookings_today <= 2 ? 'light' 
+              : staff.bookings_today <= 4 ? 'medium' 
+                : 'heavy',
           recommendation: finalScore > 85 ? 'highly_recommended' 
-                       : finalScore > 70 ? 'recommended' 
-                       : 'available'
+            : finalScore > 70 ? 'recommended' 
+              : 'available'
         };
       });
 
