@@ -14,6 +14,10 @@ node_modules/
 /out
 /dist
 
+# Exclude frontend build cache (avoid large binaries in repo)
+frontend/.next/
+frontend/.next/**
+
 # Environment
 .env
 .env.local
