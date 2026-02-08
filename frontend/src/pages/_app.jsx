@@ -14,6 +14,7 @@ import WhatsAppButton from '../components/UI/WhatsAppButton'
 import LiveChat from '../components/UI/LiveChat'
 import PushNotifications from '../components/UI/PushNotifications'
 import PWABanner from '../components/UI/PWABanner'
+import { registerServiceWorker } from '../utils/pwa'
 import Script from 'next/script'
 import { useRouter } from 'next/router'
 import * as gtag from '../../lib/gtag'
@@ -38,6 +39,13 @@ export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
     try {
       if (typeof window !== 'undefined') prefs.applyPrefs(prefs.getStoredPrefs())
+    } catch (e) {
+      // ignore
+    }
+
+    // Register PWA service worker
+    try {
+      registerServiceWorker()
     } catch (e) {
       // ignore
     }
