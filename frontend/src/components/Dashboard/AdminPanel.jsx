@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { apiCall } from '../../config/api';
 
 function AdminPanel() {
   const [metrics, setMetrics] = useState({
@@ -21,18 +22,7 @@ function AdminPanel() {
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-        
-        const response = await fetch(`${API_URL}/api/admin/dashboard`, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
-          },
-          credentials: 'include'
-        });
-        
-        if (!response.ok) throw new Error('Falha ao buscar métricas');
-        
-        const data = await response.json();
+        const data = await apiCall('/api/admin/dashboard', { method: 'GET' });
         setMetrics(data);
         
         // Simular dados de gráfico se não houver
@@ -42,7 +32,6 @@ function AdminPanel() {
         
         setLoading(false);
       } catch (error) {
-        console.error('❌ Erro ao buscar métricas:', error);
         setMetrics({
           totalBookings: 0,
           revenue: 0,
@@ -92,7 +81,6 @@ function AdminPanel() {
         setExportLoading(false);
       }, 1000);
     } catch (error) {
-      console.error('Erro ao exportar:', error);
       setExportLoading(false);
     }
   };

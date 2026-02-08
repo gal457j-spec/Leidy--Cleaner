@@ -43,7 +43,6 @@ export default function Chat({ bookingId, userId, userRole = 'customer' }) {
 
     // Connection events
     socket.on('connect', () => {
-      console.log('✅ Conectado ao chat');
       setConnected(true);
       setError(null);
 
@@ -56,19 +55,16 @@ export default function Chat({ bookingId, userId, userRole = 'customer' }) {
     });
 
     socket.on('connect_error', (error) => {
-      console.error('❌ Erro de conexão:', error);
       setError('Falha ao conectar. Tentando reconectar...');
       setConnected(false);
     });
 
     // Chat events
     socket.on('chat-history', (data) => {
-      console.log('📜 Histórico recebido:', data.messages.length);
       setMessages(data.messages || []);
     });
 
     socket.on('new-message', (data) => {
-      console.log('💬 Nova mensagem:', data.message);
       setMessages(prev => [...prev, {
         id: data.id,
         userId: data.userId,
@@ -79,7 +75,6 @@ export default function Chat({ bookingId, userId, userRole = 'customer' }) {
     });
 
     socket.on('user-joined', (data) => {
-      console.log('👤 Usuário entrou:', data.userRole);
       setUsers(prev => [
         ...prev,
         { userId: data.userId, userRole: data.userRole }
@@ -94,7 +89,6 @@ export default function Chat({ bookingId, userId, userRole = 'customer' }) {
     });
 
     socket.on('user-left', (data) => {
-      console.log('👤 Usuário saiu:', data.userRole);
       setMessages(prev => [...prev, {
         id: `system-${Date.now()}`,
         userRole: 'system',
@@ -104,12 +98,10 @@ export default function Chat({ bookingId, userId, userRole = 'customer' }) {
     });
 
     socket.on('message-error', (data) => {
-      console.error('❌ Erro:', data.error);
       setError(data.error);
     });
 
     socket.on('disconnect', () => {
-      console.log('❌ Desconectado do chat');
       setConnected(false);
     });
 
@@ -140,7 +132,6 @@ export default function Chat({ bookingId, userId, userRole = 'customer' }) {
       setMessage('');
     } catch (err) {
       setError('Erro ao enviar mensagem');
-      console.error('Send error:', err);
     } finally {
       setLoading(false);
     }

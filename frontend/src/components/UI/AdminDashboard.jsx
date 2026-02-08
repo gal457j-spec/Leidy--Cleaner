@@ -253,28 +253,28 @@ function QuickActions() {
       description: 'Agendar um serviço',
       icon: CalendarIcon,
       color: 'bg-blue-500',
-      action: () => console.log('Novo agendamento'),
+      action: () => {},
     },
     {
       title: 'Gerenciar Clientes',
       description: 'Ver lista de clientes',
       icon: UsersIcon,
       color: 'bg-green-500',
-      action: () => console.log('Gerenciar clientes'),
+      action: () => {},
     },
     {
       title: 'Relatórios',
       description: 'Ver relatórios detalhados',
       icon: ChartBarIcon,
       color: 'bg-purple-500',
-      action: () => console.log('Ver relatórios'),
+      action: () => {},
     },
     {
       title: 'Promoções',
       description: 'Criar nova promoção',
       icon: StarIcon,
       color: 'bg-yellow-500',
-      action: () => console.log('Criar promoção'),
+      action: () => {},
     },
   ];
 

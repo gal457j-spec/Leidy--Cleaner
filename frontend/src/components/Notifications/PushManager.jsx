@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useToast } from '../../context/ToastContext';
+import { apiCall } from '../../config/api';
 
 function urlBase64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
@@ -30,7 +31,6 @@ function PushManagerComponent() {
       const sub = await reg.pushManager.getSubscription();
       setSubscribed(!!sub);
     } catch (err) {
-      console.error(err);
     }
   };
 
@@ -60,20 +60,16 @@ function PushManagerComponent() {
 
       // send subscription to backend
       try {
-        await fetch((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001') + '/api/notifications/subscribe', {
+        await apiCall('/api/notifications/subscribe', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(sub),
-          credentials: 'include'
+          body: JSON.stringify(sub)
         });
       } catch (err) {
-        console.warn('Não foi possível enviar subscription ao backend (ok no dev)', err);
       }
 
       setSubscribed(true);
       addToast('Inscrito para notificações', 'success');
     } catch (err) {
-      console.error('Erro ao registrar/inscrever push:', err);
       addToast('Erro ao ativar notificações', 'error');
     }
   };
@@ -87,15 +83,15 @@ function PushManagerComponent() {
         await sub.unsubscribe();
         // inform backend
         try {
-          await fetch((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001') + '/api/notifications/unsubscribe', {
-            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: sub.endpoint }), credentials: 'include'
+          await apiCall('/api/notifications/unsubscribe', {
+            method: 'POST',
+            body: JSON.stringify({ endpoint: sub.endpoint })
           });
         } catch (err) { /* ignore */ }
       }
       setSubscribed(false);
       addToast('Cancelado registro de notificações', 'info');
     } catch (err) {
-      console.error(err);
       addToast('Erro ao cancelar inscrição', 'error');
     }
   };

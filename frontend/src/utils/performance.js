@@ -124,7 +124,6 @@ export function usePerformanceMonitor(name) {
     return () => {
       if (startTimeRef.current) {
         const duration = performance.now() - startTimeRef.current;
-        console.log(`${name} took ${duration.toFixed(2)}ms`);
 
         // Send to analytics if available
         if (window.gtag) {

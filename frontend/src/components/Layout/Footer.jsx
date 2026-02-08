@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { apiCall } from '../../config/api';
 
 /**
  * Footer Component - Premium com newsletter e redes sociais
@@ -23,29 +24,19 @@ export default function Footer() {
     setError(null);
 
     try {
-      const response = await fetch('/api/newsletter/subscribe', {
+      const data = await apiCall('/api/newsletter/subscribe', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({
           email: email.trim(),
           name: null
         })
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setSubscribed(true);
-        setEmail('');
-        setTimeout(() => setSubscribed(false), 3000);
-      } else {
-        setError(data.message || 'Erro ao inscrever. Tente novamente.');
-      }
+      setSubscribed(true);
+      setEmail('');
+      setTimeout(() => setSubscribed(false), 3000);
     } catch (err) {
-      setError('Erro de conexão. Tente novamente mais tarde.');
-      console.error('Newsletter subscription error:', err);
+      setError(err.message || 'Erro ao inscrever. Tente novamente.');
     } finally {
       setLoading(false);
     }

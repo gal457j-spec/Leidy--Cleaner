@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getThemeManager } from '../../utils/themeManager';
+import prefs, { getStoredPrefs } from '../../utils/preferences';
 
 /**
  * Theme Selector Component
@@ -38,6 +39,11 @@ export default function ThemeSelector() {
       description: 'Tema escuro para economia de bateria'
     },
     {
+      id: 'green',
+      name: 'Verde',
+      description: 'Tema verde inspirado na marca'
+    },
+    {
       id: 'high-contrast',
       name: 'Alto Contraste',
       description: 'Acessibilidade aumentada'
@@ -56,6 +62,31 @@ export default function ThemeSelector() {
       setCurrentTheme(themeId);
     }
     setIsOpen(false);
+  };
+
+  // Preferences: load and apply
+  const [userPrefs, setUserPrefs] = useState(getStoredPrefs());
+
+  useEffect(() => {
+    prefs.applyPrefs(userPrefs);
+  }, []);
+
+  const handleFontSize = (size) => {
+    setUserPrefs((p) => {
+      const next = { ...p, fontSize: size };
+      prefs.savePrefs(next);
+      prefs.applyPrefs(next);
+      return next;
+    });
+  };
+
+  const handleAccent = (accent) => {
+    setUserPrefs((p) => {
+      const next = { ...p, accent };
+      prefs.savePrefs(next);
+      prefs.applyPrefs(next);
+      return next;
+    });
   };
 
   const currentThemeName = themes.find(t => t.id === currentTheme)?.name || 'Tema';
@@ -105,6 +136,23 @@ export default function ThemeSelector() {
                   </div>
                 </button>
               ))}
+
+                {/* Personalização rápida */}
+                <div className="mt-2 px-2 pt-2 border-t border-gray-100 dark:border-slate-700">
+                  <div className="text-xs font-semibold text-gray-500 dark:text-gray-300 mb-2">Tamanho da fonte</div>
+                  <div className="flex gap-2">
+                    <button onClick={() => handleFontSize('small')} className={`px-3 py-1 rounded ${userPrefs.fontSize==='small' ? 'bg-primary text-white' : 'bg-gray-50'}`}>A</button>
+                    <button onClick={() => handleFontSize('normal')} className={`px-3 py-1 rounded ${userPrefs.fontSize==='normal' ? 'bg-primary text-white' : 'bg-gray-50'}`}>A</button>
+                    <button onClick={() => handleFontSize('large')} className={`px-3 py-1 rounded ${userPrefs.fontSize==='large' ? 'bg-primary text-white' : 'bg-gray-50'}`}>A+</button>
+                  </div>
+
+                  <div className="text-xs font-semibold text-gray-500 dark:text-gray-300 mt-3 mb-2">Acento</div>
+                  <div className="flex gap-2">
+                    <button onClick={() => handleAccent('cyan')} aria-label="Accent Cyan" className="w-8 h-8 rounded bg-cyan-500" />
+                    <button onClick={() => handleAccent('green')} aria-label="Accent Green" className="w-8 h-8 rounded bg-emerald-500" />
+                    <button onClick={() => handleAccent('purple')} aria-label="Accent Purple" className="w-8 h-8 rounded bg-purple-600" />
+                  </div>
+                </div>
             </div>
           </div>
         )}

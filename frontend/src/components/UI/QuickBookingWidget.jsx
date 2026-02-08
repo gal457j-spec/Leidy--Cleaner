@@ -36,7 +36,6 @@ export default function QuickBookingWidget() {
         setLoading(false)
       }, 1500)
     } catch (error) {
-      console.error('Erro:', error)
       setLoading(false)
     }
   }

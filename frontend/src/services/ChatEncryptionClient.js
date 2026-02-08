@@ -4,6 +4,8 @@
  * Use este arquivo no frontend/src/services/ChatEncryptionClient.js
  */
 
+import { apiCall } from '../config/api';
+
 /**
  * Classe para gerenciar criptografia no cliente
  */
@@ -77,7 +79,6 @@ class ChatEncryptionClient {
    */
   storeKeyLocally(conversationId, encryptionKeyHex) {
     if (window.location.protocol !== 'https:' && process.env.NODE_ENV === 'production') {
-      console.warn('⚠️  HTTPS recomendado para armazenar chaves de criptografia');
     }
 
     const key = `chat_key_${conversationId}`;
@@ -130,7 +131,6 @@ class ChatEncryptionClient {
     // crypto.getRandomValues(iv);
     // const cipher = crypto.subtle.encrypt(...);
     
-    console.log(`📦 Encriptando: "${message.substring(0, 30)}..."`);
     return {
       iv: 'random_iv_hex',
       authTag: 'random_tag_hex',
@@ -142,7 +142,6 @@ class ChatEncryptionClient {
    ✅ NOVO: Descriptografar mensagem
    */
   async decryptMessage(_encrypted, _ivHex, _authTagHex, _encryptionKeyHex) {
-    console.log(`🔓 Descriptografando mensagem...`);
     // Simulado: em produção seria crypto.subtle.decrypt(...)
     return 'Mensagem descriptografada com sucesso';
   }
@@ -181,122 +180,67 @@ class ChatEncryptionClient {
     formData.append('conversationId', conversationId);
     formData.append('encryptionKey', encryptionKeyHex);
 
-    const response = await fetch('/api/chat/upload-encrypted', {
+    return await apiCall('/api/chat/upload-encrypted', {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
       body: formData
     });
-
-    if (!response.ok) {
-      throw new Error(`Upload falhou: ${response.statusText}`);
-    }
-
-    return await response.json();
   }
 
   /**
    ✅ NOVO: Download de arquivo descriptografado
    */
   async downloadEncryptedFile(fileId, encryptionKeyHex) {
-    const response = await fetch(
+    const response = await apiCall(
       `/api/chat/download-encrypted/${fileId}?encryptionKey=${encryptionKeyHex}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      }
+      { method: 'GET' }
     );
 
-    if (!response.ok) {
-      throw new Error(`Download falhou: ${response.statusText}`);
-    }
-
-    const blob = await response.blob();
-    return blob;
+    return response;
   }
 
   /**
    ✅ NOVO: Enviar mensagem encriptada via API
    */
   async sendEncryptedMessage(receiverId, message, encryptionKey) {
-    const response = await fetch('/api/chat/messages', {
+    return await apiCall('/api/chat/messages', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
       body: JSON.stringify({
         receiverId,
         message,
         encryptionKey
       })
     });
-
-    if (!response.ok) {
-      throw new Error(`Envio falhou: ${response.statusText}`);
-    }
-
-    return await response.json();
   }
 
   /**
    ✅ NOVO: Obter mensagens descriptografadas
    */
   async getEncryptedMessages(conversationId, encryptionKey) {
-    const response = await fetch(
+    return await apiCall(
       `/api/chat/messages/${conversationId}?encryptionKey=${encryptionKey}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      }
+      { method: 'GET' }
     );
-
-    if (!response.ok) {
-      throw new Error(`Busca falhou: ${response.statusText}`);
-    }
-
-    return await response.json();
   }
 
   /**
    ✅ NOVO: Obter hash de mensagem para verificação
    */
   async getMessageHash(messageId) {
-    const response = await fetch(`/api/chat/message-hash/${messageId}`, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
+    return await apiCall(`/api/chat/message-hash/${messageId}`, {
+      method: 'GET'
     });
-
-    if (!response.ok) {
-      throw new Error(`Falha ao obter hash: ${response.statusText}`);
-    }
-
-    return await response.json();
   }
 
   /**
    ✅ NOVO: Deletar conversa
    */
   async deleteConversation(conversationId) {
-    const response = await fetch(`/api/chat/conversations/${conversationId}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
+    const response = await apiCall(`/api/chat/conversations/${conversationId}`, {
+      method: 'DELETE'
     });
 
-    if (!response.ok) {
-      throw new Error(`Delção falhou: ${response.statusText}`);
-    }
-
-    // Limpar chave do localStorage
     this.clearKeyLocally(conversationId);
-
-    return await response.json();
+    return response;
   }
 }
 

@@ -6,7 +6,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// Use consistent API configuration across app
+const API_BASE = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api`;
 
 export const useAnalytics = (dateRange = '30days') => {
   const [data, setData] = useState(null);
@@ -34,7 +35,6 @@ export const useAnalytics = (dateRange = '30days') => {
       setData(response.data.data);
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to fetch analytics');
-      console.error('Analytics error:', err);
     } finally {
       setLoading(false);
     }
@@ -60,7 +60,6 @@ export const useAnalytics = (dateRange = '30days') => {
 
       return response.data.data;
     } catch (err) {
-      console.error('Revenue stats error:', err);
       throw err;
     }
   }, []);
@@ -81,7 +80,6 @@ export const useAnalytics = (dateRange = '30days') => {
 
       return response.data.data;
     } catch (err) {
-      console.error('Conversion stats error:', err);
       throw err;
     }
   }, []);
@@ -102,7 +100,6 @@ export const useAnalytics = (dateRange = '30days') => {
 
       return response.data.data;
     } catch (err) {
-      console.error('Customer analytics error:', err);
       throw err;
     }
   }, []);
@@ -123,7 +120,6 @@ export const useAnalytics = (dateRange = '30days') => {
 
       return response.data.data;
     } catch (err) {
-      console.error('Churn analytics error:', err);
       throw err;
     }
   }, []);
@@ -144,7 +140,6 @@ export const useAnalytics = (dateRange = '30days') => {
 
       return response.data.data;
     } catch (err) {
-      console.error('Booking stats error:', err);
       throw err;
     }
   }, []);
@@ -174,7 +169,6 @@ export const useAnalytics = (dateRange = '30days') => {
       link.click();
       link.parentElement.removeChild(link);
     } catch (err) {
-      console.error('Export error:', err);
       throw err;
     }
   }, [dateRange]);

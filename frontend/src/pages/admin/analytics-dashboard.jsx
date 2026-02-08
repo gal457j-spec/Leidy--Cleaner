@@ -29,7 +29,6 @@ export default function AdminAnalytics() {
       await exportReport(exportFormat, { dateRange });
       // Success - file downloaded
     } catch (err) {
-      console.error('Export failed:', err);
       alert('Falha ao exporting relatório');
     } finally {
       setIsExporting(false);

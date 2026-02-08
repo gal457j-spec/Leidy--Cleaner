@@ -17,10 +17,8 @@ export const usePWA = () => {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
           .then((registration) => {
-            console.log('SW registered: ', registration);
           })
           .catch((registrationError) => {
-            console.log('SW registration failed: ', registrationError);
           });
       });
     }
@@ -71,7 +69,6 @@ export const usePWA = () => {
       try {
         await navigator.share(data);
       } catch (error) {
-        console.log('Erro ao compartilhar:', error);
       }
     }
   };

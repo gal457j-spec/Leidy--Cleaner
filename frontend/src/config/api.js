@@ -4,10 +4,10 @@
  */
 
 export const API_CONFIG = {
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3001',
-  timeout: parseInt(process.env.REACT_APP_API_TIMEOUT || '30000'),
-  environment: process.env.REACT_APP_ENVIRONMENT || 'development',
-  debug: process.env.REACT_APP_DEBUG === 'true'
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
+  timeout: parseInt(process.env.NEXT_PUBLIC_API_TIMEOUT || '30000'),
+  environment: process.env.NEXT_PUBLIC_ENVIRONMENT || 'development',
+  debug: process.env.NEXT_PUBLIC_DEBUG === 'true'
 };
 
 /**
@@ -41,7 +41,6 @@ export async function apiCall(endpoint, options = {}) {
   }
 
   if (API_CONFIG.debug) {
-    console.log(`[API] ${options.method || 'GET'} ${url}`);
   }
 
   try {
@@ -66,7 +65,6 @@ export async function apiCall(endpoint, options = {}) {
     const data = await response.json();
 
     if (API_CONFIG.debug) {
-      console.log(`[API] ✓ ${response.status}`, data);
     }
 
     return data;
@@ -79,18 +77,15 @@ export async function apiCall(endpoint, options = {}) {
         `Requisição expirou (timeout de ${API_CONFIG.timeout}ms)`
       );
       timeoutError.code = 'TIMEOUT';
-      console.error('[API] ⏱ Timeout:', endpoint);
       throw timeoutError;
     }
 
     // Erro de rede (sem resposta do servidor)
     if (err instanceof TypeError && err.message.includes('fetch')) {
-      console.error('[API] 🌐 Network error:', endpoint);
       throw new Error(`Erro de conexão com servidor: ${API_CONFIG.baseURL}`);
     }
 
     // Outro erro
-    console.error('[API] ❌ Error:', err.message);
     throw err;
   }
 }

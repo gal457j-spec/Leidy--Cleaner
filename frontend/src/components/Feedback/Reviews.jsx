@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useToast } from '../../context/ToastContext';
+import { apiCall } from '../../config/api';
 
 function Reviews({ serviceId }) {
   const [reviews, setReviews] = useState([]);
@@ -11,13 +12,7 @@ function Reviews({ serviceId }) {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-        const res = await fetch(`${API_URL}/api/services/${serviceId}/reviews`, {
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('token') || ''}` },
-          credentials: 'include'
-        });
-        if (!res.ok) throw new Error('Failed');
-        const data = await res.json();
+        const data = await apiCall(`/api/services/${serviceId}/reviews`, { method: 'GET' });
         setReviews(data.reviews || []);
       } catch (err) {
         // fallback mock
@@ -35,15 +30,10 @@ function Reviews({ serviceId }) {
   const submitReview = async () => {
     if (!comment.trim()) return addToast('Escreva um comentário', 'warning');
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-      const res = await fetch(`${API_URL}/api/services/${serviceId}/reviews`, {
+      const saved = await apiCall(`/api/services/${serviceId}/reviews`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token') || ''}` },
-        body: JSON.stringify({ rating, comment }),
-        credentials: 'include'
+        body: JSON.stringify({ rating, comment })
       });
-      if (!res.ok) throw new Error('Falha');
-      const saved = await res.json();
       setReviews([saved.review, ...reviews]);
       setComment('');
       setRating(5);

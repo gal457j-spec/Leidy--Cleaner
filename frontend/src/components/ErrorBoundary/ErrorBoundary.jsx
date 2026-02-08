@@ -37,7 +37,6 @@ export default class ErrorBoundary extends React.Component {
 
     // Log erro para console em desenvolvimento
     if (process.env.NODE_ENV === 'development') {
-      console.error('ErrorBoundary caught:', error, errorInfo);
     }
   }
 
@@ -185,8 +184,6 @@ export default class ErrorBoundary extends React.Component {
 // Hook para usar Error Boundary em componentes funcionais
 export function useErrorHandler() {
   return (error, errorInfo) => {
-    console.error('Error caught by hook:', error, errorInfo);
-
     if (Sentry && Sentry.captureException) {
       Sentry.captureException(error, {
         contexts: {

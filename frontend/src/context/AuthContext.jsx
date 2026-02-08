@@ -71,13 +71,10 @@ export function AuthProvider({ children }) {
   const logout = useCallback(async () => {
     setIsLoading(true);
     try {
-      // ✅ CORRIGIDO: Chamar /api/auth/logout
+      // ✅ CORRIGIDO: Usar apiCall com timeout automático
       if (token) {
-        await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/api/auth/logout`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
+        await apiCall('/api/auth/logout', {
+          method: 'POST'
         });
       }
       setUser(null);

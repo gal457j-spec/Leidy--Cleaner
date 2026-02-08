@@ -45,9 +45,7 @@ export default function ChatbotWidget() {
     try {
       const data = await apiCall('/api/chatbot/history?limit=5');
       // Optionally load previous conversation
-      console.log('Chat history loaded:', data);
     } catch (err) {
-      console.error('Error loading history:', err);
     }
   };
 
@@ -91,8 +89,6 @@ export default function ChatbotWidget() {
         setEscalated(true);
       }
     } catch (err) {
-      console.error('Error sending message:', err);
-
       const errorMessage = {
         role: 'assistant',
         content: '😕 Desculpe, estou tendo dificuldades. Você pode conectar com um agente humano? 📞',
@@ -125,7 +121,6 @@ export default function ChatbotWidget() {
 
       setMessages(prev => [...prev, escalationMessage]);
     } catch (err) {
-      console.error('Error escalating:', err);
     } finally {
       setLoading(false);
     }
@@ -143,7 +138,6 @@ export default function ChatbotWidget() {
           }
         ]);
       } catch (err) {
-        console.error('Error clearing history:', err);
       }
     }
   };

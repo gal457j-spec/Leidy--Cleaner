@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { apiCall } from '../../config/api';
 
 function StaffDashboard() {
   const [staffStats, setStaffStats] = useState({
@@ -17,26 +18,14 @@ function StaffDashboard() {
   useEffect(() => {
     const fetchStaffStats = async () => {
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
         const userId = localStorage.getItem('userId');
-        
-        const response = await fetch(`${API_URL}/api/staff/${userId}/dashboard`, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
-          },
-          credentials: 'include'
-        });
-        
-        if (!response.ok) throw new Error('Falha ao buscar dados');
-        
-        const data = await response.json();
+        const data = await apiCall(`/api/staff/${userId}/dashboard`, { method: 'GET' });
         setStaffStats(data.stats);
         setUpcomingBookings(data.upcomingBookings || generateMockUpcoming());
         setEarningsChart(data.earningsChart || generateMockEarnings());
         
         setLoading(false);
       } catch (error) {
-        console.error('❌ Erro ao buscar dados:', error);
         setStaffStats({
           earnings: 2450.50,
           monthlyEarnings: 8900.00,

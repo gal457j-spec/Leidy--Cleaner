@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useToast } from '../../context/ToastContext';
+import { apiCall } from '../../config/api';
 
 function ChatComponent({ bookingId, userId, userName = 'Você' }) {
   const [messages, setMessages] = useState([]);
@@ -23,25 +24,13 @@ function ChatComponent({ bookingId, userId, userName = 'Você' }) {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-        
-        const response = await fetch(`${API_URL}/api/chat/${bookingId}`, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
-          },
-          credentials: 'include'
-        });
-
-        if (!response.ok) throw new Error('Falha ao carregar mensagens');
-
-        const data = await response.json();
+        const data = await apiCall(`/api/chat/${bookingId}`, { method: 'GET' });
         setMessages(data.messages || generateMockMessages());
         setLoading(false);
 
         // Simular conexão com WebSocket
         simulateWebSocket();
       } catch (error) {
-        console.error('Erro ao carregar mensagens:', error);
         setMessages(generateMockMessages());
         setLoading(false);
         simulateWebSocket();
@@ -95,21 +84,10 @@ function ChatComponent({ bookingId, userId, userName = 'Você' }) {
     setSending(true);
 
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-
-      const response = await fetch(`${API_URL}/api/chat/${bookingId}/send`, {
+      const data = await apiCall(`/api/chat/${bookingId}/send`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
-        },
-        body: JSON.stringify({ message: newMessage }),
-        credentials: 'include'
+        body: JSON.stringify({ message: newMessage })
       });
-
-      if (!response.ok) throw new Error('Falha ao enviar mensagem');
-
-      const data = await response.json();
 
       const message = {
         id: data.id || Date.now(),
@@ -125,7 +103,6 @@ function ChatComponent({ bookingId, userId, userName = 'Você' }) {
       addToast('Mensagem enviada', 'success');
       setSending(false);
     } catch (error) {
-      console.error('Erro ao enviar:', error);
       addToast('Erro ao enviar mensagem', 'error');
       setSending(false);
     }

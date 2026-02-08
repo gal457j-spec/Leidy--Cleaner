@@ -33,7 +33,6 @@ export default function NotificationPreferences() {
       const data = await apiCall(`/api/notifications/preferences/${user.id}`);
       setPreferences(data);
     } catch (err) {
-      console.error('Error loading preferences:', err);
     }
   };
 

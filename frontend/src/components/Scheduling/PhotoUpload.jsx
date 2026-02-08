@@ -64,7 +64,6 @@ function PhotoUpload({ onPhotosChange, maxPhotos = 5 }) {
         reader.readAsDataURL(file);
       }
     } catch (error) {
-      console.error('Erro ao processar fotos:', error);
       addToast('Erro ao processar fotos', 'error');
       setUploading(false);
     }

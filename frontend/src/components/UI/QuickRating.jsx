@@ -161,7 +161,6 @@ export const useQuickRating = () => {
     localStorage.setItem('leidy-ratings', JSON.stringify([...existing, ratingData]));
 
     // Log para analytics
-    console.log('Nova avaliação:', ratingData);
   };
 
   return { ratings, submitRating };

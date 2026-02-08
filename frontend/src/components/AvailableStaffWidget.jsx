@@ -7,6 +7,7 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './AvailableStaffWidget.module.css';
+import { apiCall } from '../config/api';
 
 const AvailableStaffWidget = ({ 
   date, 
@@ -38,14 +39,7 @@ const AvailableStaffWidget = ({
           duration: 2
         });
 
-        const response = await fetch(`/api/staff/available?${params}`, {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' }
-        });
-
-        if (!response.ok) throw new Error('Failed to fetch staff');
-
-        const result = await response.json();
+        const result = await apiCall(`/api/staff/available?${params.toString()}`, { method: 'GET' });
         setStaff(result.data || []);
         setError(null);
 
@@ -57,7 +51,6 @@ const AvailableStaffWidget = ({
         }
       } catch (err) {
         setError(err.message);
-        console.error('Error fetching staff:', err);
       } finally {
         setLoading(false);
       }

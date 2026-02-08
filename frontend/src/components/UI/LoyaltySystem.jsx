@@ -140,7 +140,6 @@ export function LoyaltyProvider({ children }) {
       });
 
       // Em produção, isso seria enviado para a API
-      console.log('Reward redeemed:', reward);
     }
   };
 

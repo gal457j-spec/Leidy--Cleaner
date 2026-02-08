@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import React, { useEffect } from 'react'
 import '../sentry.client'
 import { ThemeProvider } from '../context/ThemeContext'
+import prefs from '../utils/preferences'
 import { AuthProvider } from '../context/AuthContext'
 import { ToastProvider } from '../context/ToastContext'
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
@@ -32,6 +33,15 @@ export default function MyApp({ Component, pageProps }) {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
   }, [router.events])
+
+  // Apply stored user preferences (font-size, accent)
+  useEffect(() => {
+    try {
+      if (typeof window !== 'undefined') prefs.applyPrefs(prefs.getStoredPrefs())
+    } catch (e) {
+      // ignore
+    }
+  }, [])
 
   return (
     <>

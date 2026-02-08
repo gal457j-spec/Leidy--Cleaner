@@ -39,7 +39,6 @@ export const useLocalStorage = (key, initialValue) => {
       const item = typeof window !== 'undefined' ? window.localStorage?.getItem(key) : null;
       return item ? JSON.parse(item) : initialValue;
     } catch (err) {
-      console.error(err);
       return initialValue;
     }
   });
@@ -52,7 +51,6 @@ export const useLocalStorage = (key, initialValue) => {
         window.localStorage?.setItem(key, JSON.stringify(valueToStore));
       }
     } catch (err) {
-      console.error(err);
     }
   };
 

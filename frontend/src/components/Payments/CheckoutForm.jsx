@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useToast } from '../../context/ToastContext';
+import { apiCall } from '../../config/api';
 
 function CheckoutForm({ amount = 120.00 }) {
   const [method, setMethod] = useState('pix');
@@ -9,19 +10,13 @@ function CheckoutForm({ amount = 120.00 }) {
   const handlePay = async () => {
     setProcessing(true);
     try {
-      // Call backend payment endpoint (mock)
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-      const res = await fetch(`${API_URL}/api/payments/create`, {
+      const data = await apiCall('/api/payments/create', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token') || ''}` },
-        body: JSON.stringify({ amount, method }),
-        credentials: 'include'
+        body: JSON.stringify({ amount, method })
       });
-      if (!res.ok) throw new Error('Erro no pagamento');
-      const data = await res.json();
       addToast('Pagamento realizado (mock). ID: ' + (data.id || 'MOCK'), 'success');
     } catch (err) {
-      addToast('Pagamento simulado com sucesso (fallback).', 'info');
+      addToast(err.message || 'Erro ao processar pagamento', 'error');
     } finally {
       setProcessing(false);
     }

@@ -64,7 +64,6 @@ export default function PromotionsBanner() {
       setCopiedCode(true)
       setTimeout(() => setCopiedCode(false), 2000)
     } catch (err) {
-      console.error('Clipboard copy failed:', err)
       // leave UI as-is, optionally show toast
     }
   }

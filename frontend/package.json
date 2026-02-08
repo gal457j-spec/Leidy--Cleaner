@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "test:e2e": "npx playwright test",
     "cypress:open": "cypress open --project ./frontend",
     "cypress:run": "cypress run --project ./frontend",
     "test": "jest"
@@ -50,5 +51,8 @@
     "jest-environment-jsdom": "^30.2.0",
     "postcss": "^8.4.0",
     "tailwindcss": "^3.4.0"
+    ,
+    "@playwright/test": "^1.36.0",
+    "playwright": "^1.36.0"
   }
 }

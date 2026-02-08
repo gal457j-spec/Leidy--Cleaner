@@ -7,6 +7,7 @@ const THEMES = {
   LIGHT: 'light',
   DARK: 'dark',
   HIGH_CONTRAST: 'high-contrast',
+  GREEN: 'green',
   AUTO: 'auto'
 };
 
@@ -39,7 +40,6 @@ class ThemeManager {
         return stored;
       }
     } catch (e) {
-      console.warn('localStorage not available:', e);
     }
     return THEMES.AUTO;
   }
@@ -73,17 +73,18 @@ class ThemeManager {
     
     const effectiveTheme = theme === THEMES.AUTO ? this.getSystemTheme() : theme;
     
-    // Remover todas as classes de tema
+    // Remover todas as classes de tema e atributo data-theme
     Object.values(THEMES).forEach(t => {
       if (t !== THEMES.AUTO) {
         this.element.classList.remove(`theme-${t}`);
-        this.element.removeAttribute(`data-theme`);
       }
     });
-    
-    // Aplicar novo tema
-    if (effectiveTheme !== THEMES.LIGHT) {
+    this.element.removeAttribute('data-theme');
+
+    // Aplicar novo tema (somente se não for light)
+    if (effectiveTheme && effectiveTheme !== THEMES.LIGHT) {
       this.element.setAttribute('data-theme', effectiveTheme);
+      this.element.classList.add(`theme-${effectiveTheme}`);
     }
     
     // Atualizar meta tag
@@ -96,8 +97,14 @@ class ThemeManager {
       try {
         localStorage.setItem(THEME_KEY, theme);
       } catch (e) {
-        console.warn('Cannot save theme to localStorage:', e);
       }
+    }
+
+    // Persistir em cookie para SSR poder ler o tema
+    try {
+      document.cookie = `${THEME_KEY}=${encodeURIComponent(theme)}; path=/; max-age=${60 * 60 * 24 * 365}`;
+    } catch (e) {
+      // ignore
     }
     
     // Disparar evento customizado
@@ -121,7 +128,7 @@ class ThemeManager {
    * Ciclar entre temas
    */
   cycleTheme() {
-    const themes = [THEMES.LIGHT, THEMES.DARK, THEMES.HIGH_CONTRAST];
+    const themes = [THEMES.LIGHT, THEMES.DARK, THEMES.GREEN, THEMES.HIGH_CONTRAST];
     const currentIndex = themes.indexOf(
       this.currentTheme === THEMES.AUTO ? this.getSystemTheme() : this.currentTheme
     );
@@ -160,11 +167,13 @@ class ThemeManager {
     if (typeof window === 'undefined' || !document) return;
     
     let color = '#22c55e'; // Verde padrão (light)
-    
+
     if (theme === THEMES.DARK) {
-      color = '#1e293b'; // Escuro
+      color = '#0f172a'; // Navy dark
     } else if (theme === THEMES.HIGH_CONTRAST) {
       color = '#ffffff'; // Branco
+    } else if (theme === THEMES.GREEN) {
+      color = '#16a34a'; // Verde mais escuro para meta
     }
     
     let metaTag = document.querySelector('meta[name="theme-color"]');
