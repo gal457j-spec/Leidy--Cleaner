@@ -224,3 +224,67 @@ ALTER TABLE bookings ADD COLUMN completed_at DATETIME;
 ALTER TABLE bookings ADD COLUMN photos_count INTEGER DEFAULT 0;
 -- Nota: SQLite não permite ADD FOREIGN KEY via ALTER TABLE em runtime.
 -- A referência será mantida nas definições iniciais das tabelas quando possível.
+
+-- TABELA: webhook_retries (fila de retentativas com backoff exponencial)
+CREATE TABLE IF NOT EXISTS webhook_retries (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  retry_id TEXT NOT NULL UNIQUE,
+  operation_id TEXT NOT NULL,
+  operation_type TEXT CHECK(operation_type IN ('process_webhook', 'send_notification', 'reconcile_payment')),
+  payload LONGTEXT,
+  metadata LONGTEXT,
+  status TEXT DEFAULT 'pending' CHECK(status IN ('pending', 'completed', 'failed', 'error')),
+  retry_count INTEGER DEFAULT 0,
+  next_retry_at DATETIME,
+  last_error TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  completed_at DATETIME,
+  failed_at DATETIME
+);
+
+-- ÍNDICES PARA FILA DE RETENTATIVAS
+CREATE INDEX IF NOT EXISTS idx_webhook_retries_status ON webhook_retries(status);
+CREATE INDEX IF NOT EXISTS idx_webhook_retries_operation_id ON webhook_retries(operation_id);
+CREATE INDEX IF NOT EXISTS idx_webhook_retries_next_retry ON webhook_retries(next_retry_at);
+
+-- TABELA: background_jobs (jobs agendados para reconciliation, limpeza, etc)
+CREATE TABLE IF NOT EXISTS background_jobs (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  job_id TEXT NOT NULL UNIQUE,
+  job_type TEXT NOT NULL CHECK(job_type IN ('reconcile_payments', 'cleanup_old_events', 'send_notifications', 'payment_reminder')),
+  status TEXT DEFAULT 'pending' CHECK(status IN ('pending', 'running', 'completed', 'failed')),
+  payload LONGTEXT,
+  result LONGTEXT,
+  error_message TEXT,
+  next_run_at DATETIME,
+  scheduled_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  started_at DATETIME,
+  completed_at DATETIME,
+  run_count INTEGER DEFAULT 0
+);
+
+-- ÍNDICES PARA BACKGROUND JOBS
+CREATE INDEX IF NOT EXISTS idx_background_jobs_status ON background_jobs(status);
+CREATE INDEX IF NOT EXISTS idx_background_jobs_type ON background_jobs(job_type);
+CREATE INDEX IF NOT EXISTS idx_background_jobs_next_run ON background_jobs(next_run_at);
+
+-- TABELA: payment_reconciliation (auditoria de reconciliação)
+CREATE TABLE IF NOT EXISTS payment_reconciliation (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  transaction_id TEXT NOT NULL UNIQUE,
+  booking_id INTEGER,
+  payment_id INTEGER,
+  pix_status_from_bank TEXT,
+  status_in_system TEXT,
+  reconciled BOOLEAN DEFAULT 0,
+  reconciled_at DATETIME,
+  notes TEXT,
+  checked_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (booking_id) REFERENCES bookings(id),
+  FOREIGN KEY (payment_id) REFERENCES payments(id)
+);
+
+-- ÍNDICES PARA RECONCILIATION
+CREATE INDEX IF NOT EXISTS idx_payment_reconciliation_transaction_id ON payment_reconciliation(transaction_id);
+CREATE INDEX IF NOT EXISTS idx_payment_reconciliation_reconciled ON payment_reconciliation(reconciled);
+CREATE INDEX IF NOT EXISTS idx_payment_reconciliation_checked_at ON payment_reconciliation(checked_at);

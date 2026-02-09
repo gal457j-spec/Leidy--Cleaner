@@ -539,6 +539,10 @@ router.use('/smart-notifications', authenticateToken, SmartNotificationControlle
 const adminRoutes = require('./adminRoutes');
 router.use('/admin', authenticateToken, authorizeRole(['admin']), adminRoutes);
 
+// ===== BACKGROUND JOBS =====
+const backgroundJobRoutes = require('./backgroundJobRoutes');
+router.use('/admin/background-jobs', authenticateToken, authorizeRole(['admin']), backgroundJobRoutes);
+
 // ===== BLOG =====
 const blogRoutes = require('./blogRoutes');
 router.use('/blog', blogRoutes);
