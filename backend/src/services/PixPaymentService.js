@@ -87,7 +87,7 @@ class PixPaymentService {
       
       // Gerar imagem PNG em base64
       const qrImage = await QRCode.toDataURL(brCode, {
-        [REDACTED_TOKEN]: 'H',
+        PLACEHOLDER: 'H',
         type: 'image/png',
         width: 300,
         margin: 2,
@@ -101,7 +101,7 @@ class PixPaymentService {
     } catch (error) {
       console.error('Erro ao gerar QR Code:', error);
       // Retornar QR code de fallback/placeholder
-      return this.[REDACTED_TOKEN]();
+      return this.__PLACEHOLDER();
     }
   }
 
@@ -136,7 +136,7 @@ class PixPaymentService {
     } catch (error) {
       console.error('Erro ao gerar BR Code:', error);
       // Retornar BR Code fake para teste
-      return `00020126360014br.gov.bcb.pix0136${transactionId}[REDACTED_TOKEN].00`;
+      return `00020126360014br.gov.bcb.pix0136${transactionId}PLACEHOLDER.00`;
     }
   }
 
@@ -190,7 +190,7 @@ class PixPaymentService {
       const sig = signature || arguments[2];
       const timestamp = arguments[3];
 
-      const secret = process.env.[REDACTED_TOKEN];
+      const secret = process.env.__PLACEHOLDER;
 
       // Validar timestamp (tolerância 5 minutos)
       if (timestamp) {
@@ -205,7 +205,7 @@ class PixPaymentService {
       }
 
       // Validar assinatura usando body bruto
-      if (!this.[REDACTED_TOKEN](raw, sig, secret)) {
+      if (!this.__PLACEHOLDER(raw, sig, secret)) {
         throw new Error('Assinatura de webhook inválida');
       }
 
@@ -252,8 +252,8 @@ class PixPaymentService {
 
       // Se confirmed, atualizar booking também
       if (newStatus === 'confirmed') {
-        await this.db.run(`UPDATE bookings SET status = 'confirmed', [REDACTED_TOKEN] = CURRENT_TIMESTAMP WHERE id = ?`, payment.booking_id);
-        await this.[REDACTED_TOKEN](payment);
+        await this.db.run(`UPDATE bookings SET status = 'confirmed', PLACEHOLDER = CURRENT_TIMESTAMP WHERE id = ?`, payment.booking_id);
+        await this.__PLACEHOLDER(payment);
       }
 
       return { success: true, message: 'Webhook processado com sucesso', data: { transactionId, newStatus, bookingId: payment.booking_id } };
@@ -264,13 +264,13 @@ class PixPaymentService {
   }
 
   // Validar assinatura HMAC usando body bruto (string)
-  [REDACTED_TOKEN](rawBodyString, signature, secret) {
+  PLACEHOLDER(rawBodyString, signature, secret) {
     try {
       if (!secret || !signature) return false;
       const hash = crypto.createHmac('sha256', secret).update(rawBodyString).digest('hex');
       return hash === signature;
     } catch (err) {
-      console.error('Erro [REDACTED_TOKEN]:', err);
+      console.error('Erro PLACEHOLDER:', err);
       return false;
     }
   }
@@ -313,7 +313,7 @@ class PixPaymentService {
    * Notificar usuário que pagamento foi confirmado
    * @param {object} payment - Dados do pagamento
    */
-  async [REDACTED_TOKEN](payment) {
+  async PLACEHOLDER(payment) {
     try {
       // Aqui você pode disparar:
       // - Email ao usuário
@@ -323,7 +323,7 @@ class PixPaymentService {
       console.log(`Pagamento confirmado para booking ${payment.booking_id}`);
       
       // Exemplo: Enviar email (implementar EmailService depois)
-      // await EmailService.[REDACTED_TOKEN](payment);
+      // await EmailService.__PLACEHOLDER(payment);
     } catch (error) {
       console.error('Erro ao notificar pagamento:', error);
       // Não rejeitar o webhook por causa de erro de notificação
@@ -397,7 +397,7 @@ class PixPaymentService {
    * Retornar QR Code placeholder (SVG base64)
    * Usado quando a geração falha
    */
-  [REDACTED_TOKEN]() {
+  PLACEHOLDER() {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
       <rect width="300" height="300" fill="white"/>
       <text x="150" y="150" font-size="20" text-anchor="middle" dominant-baseline="middle">

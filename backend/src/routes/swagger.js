@@ -24,7 +24,7 @@ const router = express.Router();
 router.use('/docs', swaggerUi.serve);
 router.get('/docs', swaggerUi.setup(specs, {
   swaggerOptions: {
-    [REDACTED_TOKEN]: true,
+    PLACEHOLDER: true,
     displayOperationId: true,
     filter: true,
     showRequestHeaders: true,

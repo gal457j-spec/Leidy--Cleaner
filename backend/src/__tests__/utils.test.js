@@ -237,7 +237,7 @@ describe('Validation Utils', () => {
     const value = 5;
     const min = 1;
     const max = 10;
-    expect(value).[REDACTED_TOKEN](min);
+    expect(value).__PLACEHOLDER(min);
     expect(value).toBeLessThanOrEqual(max);
   });
 });

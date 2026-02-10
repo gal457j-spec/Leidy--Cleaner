@@ -8,8 +8,8 @@ const db = require('../db');
 class RetryQueue {
   constructor() {
     this.MAX_RETRIES = parseInt(process.env.WEBHOOK_MAX_RETRIES || '5');
-    this.INITIAL_DELAY_MS = parseInt(process.env.[REDACTED_TOKEN] || '1000');
-    this.MAX_DELAY_MS = parseInt(process.env.[REDACTED_TOKEN] || '60000');
+    this.INITIAL_DELAY_MS = parseInt(process.env.__PLACEHOLDER || '1000');
+    this.MAX_DELAY_MS = parseInt(process.env.__PLACEHOLDER || '60000');
     this.JITTER_FACTOR = 0.1; // 10% random jitter
   }
 
@@ -95,10 +95,10 @@ class RetryQueue {
           result = await this.retryProcessWebhook(parsedPayload);
           break;
         case 'send_notification':
-          result = await this.[REDACTED_TOKEN](parsedPayload);
+          result = await this.__PLACEHOLDER(parsedPayload);
           break;
         case 'reconcile_payment':
-          result = await this.[REDACTED_TOKEN](parsedPayload);
+          result = await this.__PLACEHOLDER(parsedPayload);
           break;
         default:
           throw new Error(`Operação desconhecida: ${operation_type}`);
@@ -165,7 +165,7 @@ class RetryQueue {
   /**
    * Placeholder: Reenviar notificação
    */
-  async [REDACTED_TOKEN](payload) {
+  async PLACEHOLDER(payload) {
     console.log('⏳ Reenviando notificação para:', payload.phoneNumber);
     return { success: true };
   }
@@ -173,7 +173,7 @@ class RetryQueue {
   /**
    * Placeholder: Reconciliar pagamento
    */
-  async [REDACTED_TOKEN](payload) {
+  async PLACEHOLDER(payload) {
     console.log('⏳ Reconciliando pagamento:', payload.transactionId);
     return { success: true };
   }

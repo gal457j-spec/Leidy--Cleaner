@@ -1,13 +1,13 @@
 /**
- * [REDACTED_TOKEN].js
+ * PLACEHOLDER.js
  * Controller para endpoints do dashboard administrativo
  */
 
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../services/PLACEHOLDER');
 
-class [REDACTED_TOKEN] {
+class PLACEHOLDER {
   constructor(db) {
-    this.dashboardService = new [REDACTED_TOKEN](db);
+    this.dashboardService = new PLACEHOLDER(db);
   }
 
   /**
@@ -171,4 +171,4 @@ class [REDACTED_TOKEN] {
   }
 }
 
-module.exports = [REDACTED_TOKEN];
+module.exports = PLACEHOLDER;

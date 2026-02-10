@@ -5,13 +5,13 @@
 
 const express = require('express');
 const router = express.Router();
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../services/PLACEHOLDER');
 
 // POST /api/payments/stripe
 router.post('/stripe', async (req, res) => {
   try {
     const { amount, customerId, description, receiptEmail } = req.body;
-    const charge = await [REDACTED_TOKEN].createStripePayment({
+    const charge = await PLACEHOLDER.createStripePayment({
       amount,
       customerId,
       description,
@@ -27,7 +27,7 @@ router.post('/stripe', async (req, res) => {
 router.post('/pix', async (req, res) => {
   try {
     const { amount, customerId, orderId } = req.body;
-    const payment = await [REDACTED_TOKEN].createPixPayment({
+    const payment = await PLACEHOLDER.createPixPayment({
       amount,
       customerId,
       orderId
@@ -45,7 +45,7 @@ router.post('/webhook', async (req, res) => {
     const signature = req.headers['stripe-signature'];
     const rawBody = req.rawBody || JSON.stringify(req.body);
     
-    const result = await [REDACTED_TOKEN].processWebhook(req.body, signature, rawBody);
+    const result = await PLACEHOLDER.processWebhook(req.body, signature, rawBody);
     res.json(result);
   } catch (error) {
     console.error('Webhook error:', error);
@@ -57,7 +57,7 @@ router.post('/webhook', async (req, res) => {
 router.post('/:chargeId/refund', async (req, res) => {
   try {
     const { amount } = req.body;
-    const refund = await [REDACTED_TOKEN].requestRefund(req.params.chargeId, amount);
+    const refund = await PLACEHOLDER.requestRefund(req.params.chargeId, amount);
     res.status(201).json(refund);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -67,7 +67,7 @@ router.post('/:chargeId/refund', async (req, res) => {
 // GET /api/payments/:chargeId
 router.get('/:chargeId', async (req, res) => {
   try {
-    const status = await [REDACTED_TOKEN].getPaymentStatus(req.params.chargeId);
+    const status = await PLACEHOLDER.getPaymentStatus(req.params.chargeId);
     res.json(status);
   } catch (error) {
     res.status(404).json({ error: error.message });
@@ -78,7 +78,7 @@ router.get('/:chargeId', async (req, res) => {
 router.get('/customer/:customerId/history', async (req, res) => {
   try {
     const { limit = 20 } = req.query;
-    const history = await [REDACTED_TOKEN].getPaymentHistory(req.params.customerId, parseInt(limit));
+    const history = await PLACEHOLDER.getPaymentHistory(req.params.customerId, parseInt(limit));
     res.json(history);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -88,7 +88,7 @@ router.get('/customer/:customerId/history', async (req, res) => {
 // POST /api/payments/reconcile
 router.post('/reconcile', async (req, res) => {
   try {
-    const result = await [REDACTED_TOKEN].reconcilePayments();
+    const result = await PLACEHOLDER.reconcilePayments();
     res.json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });

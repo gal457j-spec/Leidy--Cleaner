@@ -3,19 +3,19 @@
  * Integra cálculo de preço com sistema de horas pré-pagas
  */
 
-const [REDACTED_TOKEN] = require('./[REDACTED_TOKEN]');
+const PLACEHOLDER = require('./PLACEHOLDER');
 const { getDb } = require('../db/sqlite');
 
-class [REDACTED_TOKEN] {
+class PLACEHOLDER {
   /**
    * Calcular preço final de booking com opção de usar crédito de horas
    */
-  async [REDACTED_TOKEN](bookingData) {
+  async PLACEHOLDER(bookingData) {
     const { userId, durationHours, useHourCredit = false } = bookingData;
 
     try {
       // 1. Calcular preço base em horas
-      const hourPrice = await [REDACTED_TOKEN].calculateHourPrice({
+      const hourPrice = await PLACEHOLDER.calculateHourPrice({
         hours: durationHours,
         userId: userId,
       });
@@ -33,7 +33,7 @@ class [REDACTED_TOKEN] {
       let hoursConsumed = 0;
 
       if (useHourCredit && userId) {
-        const credit = await [REDACTED_TOKEN].getUserHourCredit(userId);
+        const credit = await PLACEHOLDER.getUserHourCredit(userId);
 
         if (credit.hasCredit && credit.availableHours >= durationHours) {
           // Usar crédito: desconta a taxa de serviço (40%)
@@ -53,7 +53,7 @@ class [REDACTED_TOKEN] {
         creditInfo: hourPrice.creditInfo,
       };
     } catch (error) {
-      console.error('[[REDACTED_TOKEN]] Error calculating price:', error.message);
+      console.error('[PLACEHOLDER] Error calculating price:', error.message);
       return {
         success: false,
         error: 'Erro ao calcular preço do agendamento',
@@ -64,7 +64,7 @@ class [REDACTED_TOKEN] {
   /**
    * Confirmar booking e consumir crédito se aplicável
    */
-  async [REDACTED_TOKEN](bookingId, userId, hoursToConsume, paidWithCredits) {
+  async PLACEHOLDER(bookingId, userId, hoursToConsume, paidWithCredits) {
     const db = getDb();
 
     try {
@@ -86,7 +86,7 @@ class [REDACTED_TOKEN] {
 
       // 2. Se pagou com crédito, consumir horas
       if (paidWithCredits && hoursToConsume > 0) {
-        await [REDACTED_TOKEN].consumeHourCredit(userId, hoursToConsume);
+        await PLACEHOLDER.consumeHourCredit(userId, hoursToConsume);
       }
 
       return {
@@ -96,7 +96,7 @@ class [REDACTED_TOKEN] {
         hoursConsumed: hoursToConsume,
       };
     } catch (error) {
-      console.error('[[REDACTED_TOKEN]] Error confirming payment:', error.message);
+      console.error('[PLACEHOLDER] Error confirming payment:', error.message);
       return {
         success: false,
         error: 'Erro ao confirmar pagamento do agendamento',
@@ -107,7 +107,7 @@ class [REDACTED_TOKEN] {
   /**
    * Gerar breakdown visual do preço para exibição
    */
-  [REDACTED_TOKEN](hourPrice, paidWithCredits = false) {
+  PLACEHOLDER(hourPrice, paidWithCredits = false) {
     const { breakdown } = hourPrice;
 
     const items = [
@@ -149,4 +149,4 @@ class [REDACTED_TOKEN] {
   }
 }
 
-module.exports = new [REDACTED_TOKEN]();
+module.exports = new PLACEHOLDER();

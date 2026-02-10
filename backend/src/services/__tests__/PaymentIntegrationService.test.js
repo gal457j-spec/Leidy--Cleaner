@@ -1,14 +1,14 @@
 /**
- * [REDACTED_TOKEN].test.js
+ * PLACEHOLDER.test.js
  * Testes para integração de pagamentos (Stripe, PIX, webhooks)
  */
 
-const [REDACTED_TOKEN] = require('../[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../PLACEHOLDER');
 const PixService = require('../PixService');
 
 jest.mock('../PixService');
 
-describe('[REDACTED_TOKEN]', () => {
+describe('PLACEHOLDER', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -23,7 +23,7 @@ describe('[REDACTED_TOKEN]', () => {
         receiptEmail: 'test@example.com'
       };
 
-      const result = await [REDACTED_TOKEN].createStripePayment(paymentData);
+      const result = await PLACEHOLDER.createStripePayment(paymentData);
 
       expect(result).toHaveProperty('id');
       expect(result.status).toBe('succeeded');
@@ -38,7 +38,7 @@ describe('[REDACTED_TOKEN]', () => {
         metadata: { bookingId: 'booking_123' }
       };
 
-      const result = await [REDACTED_TOKEN].createStripePayment(paymentData);
+      const result = await PLACEHOLDER.createStripePayment(paymentData);
 
       expect(result.metadata).toEqual({ bookingId: 'booking_123' });
     });
@@ -52,7 +52,7 @@ describe('[REDACTED_TOKEN]', () => {
         orderId: 'order_pix_001'
       };
 
-      const result = await [REDACTED_TOKEN].createPixPayment(paymentData);
+      const result = await PLACEHOLDER.createPixPayment(paymentData);
 
       expect(result).toHaveProperty('id');
       expect(result).toHaveProperty('qrCode');
@@ -67,7 +67,7 @@ describe('[REDACTED_TOKEN]', () => {
         orderId: 'order_123'
       };
 
-      const result = await [REDACTED_TOKEN].createPixPayment(paymentData);
+      const result = await PLACEHOLDER.createPixPayment(paymentData);
       const expiresIn = result.expiresAt - new Date();
 
       expect(expiresIn).toBeGreaterThan(3500000); // ~1 hora em ms
@@ -88,7 +88,7 @@ describe('[REDACTED_TOKEN]', () => {
         }
       };
 
-      const result = await [REDACTED_TOKEN].processWebhook(event);
+      const result = await PLACEHOLDER.processWebhook(event);
 
       expect(result.success).toBe(true);
     });
@@ -104,7 +104,7 @@ describe('[REDACTED_TOKEN]', () => {
         }
       };
 
-      const result = await [REDACTED_TOKEN].processWebhook(event);
+      const result = await PLACEHOLDER.processWebhook(event);
 
       expect(result.success).toBe(true);
     });
@@ -120,13 +120,13 @@ describe('[REDACTED_TOKEN]', () => {
         }
       };
 
-      const result = await [REDACTED_TOKEN].processWebhook(event);
+      const result = await PLACEHOLDER.processWebhook(event);
 
       expect(result.success).toBe(true);
     });
 
     it('deve chamar PixService.confirmPayment quando receber evento PIX', async () => {
-      PixService.confirmPayment.[REDACTED_TOKEN]({ success: true });
+      PixService.confirmPayment.__PLACEHOLDER({ success: true });
 
       const event = {
         type: 'pix.payment_confirmed',
@@ -137,9 +137,9 @@ describe('[REDACTED_TOKEN]', () => {
         }
       };
 
-      await [REDACTED_TOKEN].processWebhook(event);
+      await PLACEHOLDER.processWebhook(event);
 
-      expect(PixService.confirmPayment).[REDACTED_TOKEN]('pix_123', 'bank_456');
+      expect(PixService.confirmPayment).__PLACEHOLDER('pix_123', 'bank_456');
     });
   });
 
@@ -152,10 +152,10 @@ describe('[REDACTED_TOKEN]', () => {
         description: 'Refundable payment'
       };
 
-      const payment = await [REDACTED_TOKEN].createStripePayment(paymentData);
+      const payment = await PLACEHOLDER.createStripePayment(paymentData);
 
       // Depois solicitar reembolso
-      const refund = await [REDACTED_TOKEN].requestRefund(payment.id, 5000);
+      const refund = await PLACEHOLDER.requestRefund(payment.id, 5000);
 
       expect(refund).toHaveProperty('id');
       expect(refund.status).toBe('pending');
@@ -166,13 +166,13 @@ describe('[REDACTED_TOKEN]', () => {
   describe('reconcilePayments', () => {
     it('deve reconciliar pagamentos pendentes', async () => {
       // Criar alguns pagamentos
-      await [REDACTED_TOKEN].createStripePayment({
+      await PLACEHOLDER.createStripePayment({
         amount: 100,
         customerId: 'cust_1',
         description: 'Payment 1'
       });
 
-      const result = await [REDACTED_TOKEN].reconcilePayments();
+      const result = await PLACEHOLDER.reconcilePayments();
 
       expect(result).toHaveProperty('reconciled');
       expect(result).toHaveProperty('failed');
@@ -184,19 +184,19 @@ describe('[REDACTED_TOKEN]', () => {
     it('deve retornar histórico de pagamentos do cliente', async () => {
       // Criar alguns pagamentos
       const customerId = 'cust_history';
-      await [REDACTED_TOKEN].createStripePayment({
+      await PLACEHOLDER.createStripePayment({
         amount: 100,
         customerId,
         description: 'Payment 1'
       });
 
-      await [REDACTED_TOKEN].createStripePayment({
+      await PLACEHOLDER.createStripePayment({
         amount: 50,
         customerId,
         description: 'Payment 2'
       });
 
-      const history = await [REDACTED_TOKEN].getPaymentHistory(customerId);
+      const history = await PLACEHOLDER.getPaymentHistory(customerId);
 
       expect(history.customerId).toBe(customerId);
       expect(history.payments).toBeDefined();
@@ -212,8 +212,8 @@ describe('[REDACTED_TOKEN]', () => {
         description: 'Status test'
       };
 
-      const payment = await [REDACTED_TOKEN].createStripePayment(paymentData);
-      const status = await [REDACTED_TOKEN].getPaymentStatus(payment.id);
+      const payment = await PLACEHOLDER.createStripePayment(paymentData);
+      const status = await PLACEHOLDER.getPaymentStatus(payment.id);
 
       expect(status.id).toBe(payment.id);
       expect(status.status).toBe('succeeded');
@@ -222,7 +222,7 @@ describe('[REDACTED_TOKEN]', () => {
 
     it('deve lançar erro se pagamento não encontrado', async () => {
       await expect(
-        [REDACTED_TOKEN].getPaymentStatus('invalid_id')
+        PLACEHOLDER.getPaymentStatus('invalid_id')
       ).rejects.toThrow('Payment not found');
     });
   });

@@ -244,7 +244,7 @@ if (process.env.NODE_ENV !== 'production') {
 const PORT = process.env.PORT || 3001;
 
 // Iniciar o servidor. Por padrão não iniciamos durante testes, mas suportamos
-// sobrescrever esse comportamento com `[REDACTED_TOKEN]=true` para permitir
+// sobrescrever esse comportamento com `PLACEHOLDER=true` para permitir
 // rodar a aplicação localmente em um processo de teste.
 if (process.env.NODE_ENV !== 'test' || process.env.FORCE_RUN === 'true') {
   (async () => {

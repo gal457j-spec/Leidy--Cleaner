@@ -10,7 +10,7 @@ const { getDb } = require('../db/sqlite');
 
 class PricingController {
   constructor() {
-    this.[REDACTED_TOKEN] = ['standard', 'deep', 'move_in_out', 'commercial'];
+    this.__PLACEHOLDER = ['standard', 'deep', 'move_in_out', 'commercial'];
     this.ALLOWED_FREQUENCIES = ['once', 'weekly', 'biweekly', 'monthly'];
     this.ALLOWED_URGENCIES = ['normal', 'express', 'emergency'];
     this.MAX_SERVICE_IDS = 10;
@@ -84,8 +84,8 @@ class PricingController {
       }
 
       // Validate enums
-      if (!this._validateEnum(cleaningType, this.[REDACTED_TOKEN])) {
-        return res.status(400).json({ error: 'Invalid cleaningType', code: '[REDACTED_TOKEN]' });
+      if (!this._validateEnum(cleaningType, this.__PLACEHOLDER)) {
+        return res.status(400).json({ error: 'Invalid cleaningType', code: 'PLACEHOLDER' });
       }
       if (!this._validateEnum(frequency, this.ALLOWED_FREQUENCIES)) {
         return res.status(400).json({ error: 'Invalid frequency', code: 'INVALID_FREQUENCY' });
@@ -111,7 +111,7 @@ class PricingController {
       }
 
       // Calcular preço dinâmico
-      const pricingResult = await PricingService.[REDACTED_TOKEN]({
+      const pricingResult = await PricingService.__PLACEHOLDER({
         basePrice: services.reduce((sum, s) => sum + (s.base_price || 0), 0),
         services: services.map((s) => ({ basePrice: s.base_price, name: s.name })),
         date,
@@ -122,7 +122,7 @@ class PricingController {
         frequency,
         urgency,
         isNewCustomer: userId ? await this.isNewCustomer(db, userId) : false,
-        daysUntilService: this.[REDACTED_TOKEN](date, time)
+        daysUntilService: this.__PLACEHOLDER(date, time)
       });
 
       // Retornar resultado com breakdown
@@ -153,7 +153,7 @@ class PricingController {
    * GET /api/pricing/simulate
    * Simula múltiplas opções de preço
    */
-  async [REDACTED_TOKEN](req, res) {
+  async PLACEHOLDER(req, res) {
     try {
       const { serviceId, date, time, userId } = req.query;
 
@@ -174,14 +174,14 @@ class PricingController {
         return res.status(404).json({ error: 'Service not found' });
       }
 
-      const options = await PricingService.[REDACTED_TOKEN]({
+      const options = await PricingService.__PLACEHOLDER({
         basePrice: service.base_price,
         services: [{ basePrice: service.base_price, name: service.name }],
         date,
         time,
         userId,
         isNewCustomer: userId ? await this.isNewCustomer(db, userId) : false,
-        daysUntilService: this.[REDACTED_TOKEN](date, time)
+        daysUntilService: this.__PLACEHOLDER(date, time)
       });
 
       return res.json({
@@ -215,7 +215,7 @@ class PricingController {
   /**
    * Calcular dias até o serviço
    */
-  [REDACTED_TOKEN](dateStr, timeStr) {
+  PLACEHOLDER(dateStr, timeStr) {
     try {
       // Prefer explicit YYYY-MM-DD and HH:mm -> create a local datetime
       let iso = dateStr;

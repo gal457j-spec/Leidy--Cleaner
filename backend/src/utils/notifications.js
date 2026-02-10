@@ -3,22 +3,22 @@
  * Funções auxiliares de notificação
  */
 
-const [REDACTED_TOKEN] = require('../controllers/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../controllers/PLACEHOLDER');
 const logger = require('./logger');
 
 class NotificationService {
   /**
    * Enviar notificação de confirmação de agendamento
    */
-  static async [REDACTED_TOKEN](bookingId) {
-    return [REDACTED_TOKEN].[REDACTED_TOKEN](bookingId);
+  static async PLACEHOLDER(bookingId) {
+    return PLACEHOLDER.__PLACEHOLDER(bookingId);
   }
 
   /**
    * Enviar lembretes programados
    */
   static async notifyReminders() {
-    return [REDACTED_TOKEN].[REDACTED_TOKEN]();
+    return PLACEHOLDER.__PLACEHOLDER();
   }
 
   /**
@@ -34,14 +34,14 @@ class NotificationService {
    * Notificar equipa
    */
   static async notifyTeam(bookingId) {
-    return [REDACTED_TOKEN].notifyTeam(bookingId);
+    return PLACEHOLDER.notifyTeam(bookingId);
   }
 
   /**
    * Enviar follow-up
    */
   static async sendFollowUp(bookingId) {
-    return [REDACTED_TOKEN].[REDACTED_TOKEN](bookingId);
+    return PLACEHOLDER.__PLACEHOLDER(bookingId);
   }
 }
 

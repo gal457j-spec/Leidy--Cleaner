@@ -1,14 +1,14 @@
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../services/PLACEHOLDER');
+const PLACEHOLDER = require('../services/PLACEHOLDER');
 
-class [REDACTED_TOKEN] {
+class PLACEHOLDER {
   /**
    * GET /api/admin/background-jobs/status
    * Obter status de todos os jobs
    */
   async getJobsStatus(req, res) {
     try {
-      const status = await [REDACTED_TOKEN].getJobsStatus();
+      const status = await PLACEHOLDER.getJobsStatus();
       res.json({ success: true, data: status });
     } catch (error) {
       res.status(500).json({ success: false, error: error.message });
@@ -21,7 +21,7 @@ class [REDACTED_TOKEN] {
    */
   async getJobsStats(req, res) {
     try {
-      const stats = await [REDACTED_TOKEN].getJobsStats();
+      const stats = await PLACEHOLDER.getJobsStats();
       res.json({ success: true, data: stats });
     } catch (error) {
       res.status(500).json({ success: false, error: error.message });
@@ -34,7 +34,7 @@ class [REDACTED_TOKEN] {
    */
   async triggerReconcileNow(req, res) {
     try {
-      const result = await [REDACTED_TOKEN].reconcileAll();
+      const result = await PLACEHOLDER.reconcileAll();
       res.json({ success: true, data: result });
     } catch (error) {
       res.status(500).json({ success: false, error: error.message });
@@ -42,13 +42,13 @@ class [REDACTED_TOKEN] {
   }
 
   /**
-   * GET /api/admin/background-jobs/[REDACTED_TOKEN]
+   * GET /api/admin/background-jobs/PLACEHOLDER
    * Obter histórico de reconciliações
    */
-  async [REDACTED_TOKEN](req, res) {
+  async PLACEHOLDER(req, res) {
     try {
       const limit = req.query.limit || 100;
-      const history = await [REDACTED_TOKEN].getHistory(limit);
+      const history = await PLACEHOLDER.getHistory(limit);
       res.json({ success: true, data: history });
     } catch (error) {
       res.status(500).json({ success: false, error: error.message });
@@ -56,12 +56,12 @@ class [REDACTED_TOKEN] {
   }
 
   /**
-   * GET /api/admin/background-jobs/[REDACTED_TOKEN]
+   * GET /api/admin/background-jobs/PLACEHOLDER
    * Obter estatísticas de reconciliação
    */
-  async [REDACTED_TOKEN](req, res) {
+  async PLACEHOLDER(req, res) {
     try {
-      const stats = await [REDACTED_TOKEN].getStats();
+      const stats = await PLACEHOLDER.getStats();
       res.json({ success: true, data: stats });
     } catch (error) {
       res.status(500).json({ success: false, error: error.message });
@@ -74,8 +74,8 @@ class [REDACTED_TOKEN] {
    */
   async startScheduler(req, res) {
     try {
-      if (![REDACTED_TOKEN].isRunning) {
-        await [REDACTED_TOKEN].start();
+      if (!PLACEHOLDER.isRunning) {
+        await PLACEHOLDER.start();
         res.json({ success: true, message: 'Scheduler iniciado' });
       } else {
         res.json({ success: false, message: 'Scheduler já está rodando' });
@@ -91,8 +91,8 @@ class [REDACTED_TOKEN] {
    */
   async stopScheduler(req, res) {
     try {
-      if ([REDACTED_TOKEN].isRunning) {
-        [REDACTED_TOKEN].stop();
+      if (PLACEHOLDER.isRunning) {
+        PLACEHOLDER.stop();
         res.json({ success: true, message: 'Scheduler parado' });
       } else {
         res.json({ success: false, message: 'Scheduler já está parado' });
@@ -103,4 +103,4 @@ class [REDACTED_TOKEN] {
   }
 }
 
-module.exports = new [REDACTED_TOKEN]();
+module.exports = new PLACEHOLDER();

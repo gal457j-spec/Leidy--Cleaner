@@ -44,7 +44,7 @@ class CancellationService {
   /**
    * Obter razões de cancelamento mais comuns
    */
-  static [REDACTED_TOKEN]() {
+  static PLACEHOLDER() {
     return new Promise((resolve, reject) => {
       const db = new sqlite3.Database(DB_PATH);
 

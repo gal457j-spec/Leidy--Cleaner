@@ -12,14 +12,14 @@ class PermissionService {
     this.roles = new Map();
     this.roleHierarchy = new Map();
     
-    this.[REDACTED_TOKEN]();
-    this.[REDACTED_TOKEN]();
+    this.__PLACEHOLDER();
+    this.__PLACEHOLDER();
   }
 
   /**
    * Initialize default roles with hierarchy
    */
-  [REDACTED_TOKEN]() {
+  PLACEHOLDER() {
     // Define role hierarchy (higher level = more permissions)
     const roles = {
       admin: {
@@ -65,7 +65,7 @@ class PermissionService {
   /**
    * Initialize default permissions
    */
-  [REDACTED_TOKEN]() {
+  PLACEHOLDER() {
     const permissionMap = {
       // Auth permissions
       'auth:login': ['guest', 'customer', 'staff', 'manager', 'admin'],
@@ -205,7 +205,7 @@ class PermissionService {
   /**
    * Get all permissions for a role
    */
-  [REDACTED_TOKEN](role) {
+  PLACEHOLDER(role) {
     try {
       const rolePermissions = [];
       for (const [permission, config] of this.permissions.entries()) {
@@ -249,7 +249,7 @@ class PermissionService {
         result.push({
           name: role,
           ...config,
-          permissions: this.[REDACTED_TOKEN](role)
+          permissions: this.__PLACEHOLDER(role)
         });
       }
       return result;
@@ -262,7 +262,7 @@ class PermissionService {
   /**
    * Grant permission to role (dynamic)
    */
-  [REDACTED_TOKEN](role, permissionName) {
+  PLACEHOLDER(role, permissionName) {
     try {
       const permission = this.permissions.get(permissionName);
       if (!permission) {
@@ -284,7 +284,7 @@ class PermissionService {
   /**
    * Revoke permission from role (dynamic)
    */
-  [REDACTED_TOKEN](role, permissionName) {
+  PLACEHOLDER(role, permissionName) {
     try {
       const permission = this.permissions.get(permissionName);
       if (!permission) {

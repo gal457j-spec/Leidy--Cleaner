@@ -17,7 +17,7 @@ class OAuthService {
   /**
    * Google OAuth Callback Handler
    */
-  async [REDACTED_TOKEN](googleProfile) {
+  async PLACEHOLDER(googleProfile) {
     try {
       logger.info(`Google OAuth callback for user: ${googleProfile.email}`);
 
@@ -54,7 +54,7 @@ class OAuthService {
   /**
    * Facebook OAuth Callback Handler
    */
-  async [REDACTED_TOKEN](facebookProfile) {
+  async PLACEHOLDER(facebookProfile) {
     try {
       logger.info(`Facebook OAuth callback for user: ${facebookProfile.email}`);
 
@@ -89,7 +89,7 @@ class OAuthService {
   /**
    * WhatsApp Business API Callback Handler
    */
-  async [REDACTED_TOKEN](whatsappProfile) {
+  async PLACEHOLDER(whatsappProfile) {
     try {
       logger.info(`WhatsApp OAuth callback for user: ${whatsappProfile.phone}`);
 

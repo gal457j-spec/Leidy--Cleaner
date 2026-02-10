@@ -5,7 +5,7 @@
 const express = require('express');
 const router = express.Router();
 const PaymentService = require('../services/PaymentService');
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../services/PLACEHOLDER');
 const { authenticateToken } = require('../middleware/auth');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
@@ -23,7 +23,7 @@ router.post('/create-checkout', authenticateToken, async (req, res) => {
     const userId = req.user.id;
 
     // Validar pacote
-    const packages = [REDACTED_TOKEN].[REDACTED_TOKEN]();
+    const packages = PLACEHOLDER.__PLACEHOLDER();
     const selectedPackage = packages.find(p => p.hours === parseInt(hourPackage));
 
     if (!selectedPackage) {
@@ -34,7 +34,7 @@ router.post('/create-checkout', authenticateToken, async (req, res) => {
     }
 
     // Criar sessão Stripe
-    const checkout = await PaymentService.[REDACTED_TOKEN](
+    const checkout = await PaymentService.__PLACEHOLDER(
       userId,
       hourPackage,
       selectedPackage.totalPrice
@@ -87,7 +87,7 @@ router.get('/session/:sessionId', async (req, res) => {
 router.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   try {
     const signature = req.headers['stripe-signature'];
-    const event = PaymentService.[REDACTED_TOKEN](req.body, signature);
+    const event = PaymentService.__PLACEHOLDER(req.body, signature);
 
     console.log('🔔 Webhook Stripe recebido:', event.type);
 
@@ -96,7 +96,7 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
       const session = event.data.object;
 
       // Validar se realmente foi pago
-      const isPaid = await PaymentService.[REDACTED_TOKEN](session.id);
+      const isPaid = await PaymentService.__PLACEHOLDER(session.id);
       if (!isPaid) {
         console.log('❌ Pagamento não confirmado ainda');
         return res.status(200).json({ received: true });
@@ -107,7 +107,7 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
       const amount = session.amount_total / 100;
 
       // Adicionar crédito de horas ao usuário
-      await [REDACTED_TOKEN].addUserHourCredit(
+      await PLACEHOLDER.addUserHourCredit(
         userId,
         hourPackage,
         `Compra de ${hourPackage}h - Transação Stripe ${session.id}`,
@@ -192,7 +192,7 @@ router.post('/refund', authenticateToken, async (req, res) => {
     // Criar refund
     const refund = await PaymentService.createRefund(
       session.payment_intent,
-      reason || '[REDACTED_TOKEN]'
+      reason || 'PLACEHOLDER'
     );
 
     res.json(refund);

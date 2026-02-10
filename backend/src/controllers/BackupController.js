@@ -21,7 +21,7 @@ router.post('/full', async (req, res) => {
 // POST /api/backup/incremental
 router.post('/incremental', async (req, res) => {
   try {
-    const backup = await BackupService.[REDACTED_TOKEN]();
+    const backup = await BackupService.__PLACEHOLDER();
     res.status(201).json(backup);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -32,7 +32,7 @@ router.post('/incremental', async (req, res) => {
 router.post('/schedule', async (req, res) => {
   try {
     const { schedule, time, retention } = req.body;
-    const result = await BackupService.[REDACTED_TOKEN]({
+    const result = await BackupService.__PLACEHOLDER({
       schedule,
       time,
       retention
@@ -47,7 +47,7 @@ router.post('/schedule', async (req, res) => {
 router.post('/restore-pitr', async (req, res) => {
   try {
     const { restoreDate } = req.body;
-    const restore = await BackupService.[REDACTED_TOKEN](restoreDate);
+    const restore = await BackupService.__PLACEHOLDER(restoreDate);
     res.status(201).json(restore);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -69,7 +69,7 @@ router.post('/:backupId/restore', async (req, res) => {
 router.post('/geo-replication', async (req, res) => {
   try {
     const { primaryRegion, replicaRegions } = req.body;
-    const replication = await BackupService.[REDACTED_TOKEN]({
+    const replication = await BackupService.__PLACEHOLDER({
       primaryRegion,
       replicaRegions
     });
@@ -102,7 +102,7 @@ router.get('/stats', async (req, res) => {
 // GET /api/backup/validate
 router.get('/validate', async (req, res) => {
   try {
-    const result = await BackupService.[REDACTED_TOKEN]();
+    const result = await BackupService.__PLACEHOLDER();
     res.json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });

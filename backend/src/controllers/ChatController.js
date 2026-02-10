@@ -1,9 +1,9 @@
 /**
  * Chat Controller com Criptografia
- * Integra [REDACTED_TOKEN] para mensagens privadas
+ * Integra ChatEncryptionService para mensagens privadas
  */
 
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
+const ChatEncryptionService = require('../services/ChatEncryptionService');
 const logger = require('../utils/logger');
 
 class ChatController {
@@ -11,7 +11,7 @@ class ChatController {
    * Enviar mensagem privada criptografada
    * POST /api/chat/messages
    */
-  static async [REDACTED_TOKEN](req, res) {
+  static async sendMessage(req, res) {
     try {
       const { receiverId, message, encryptionKey } = req.body;
       const senderId = req.user.id;
@@ -38,7 +38,7 @@ class ChatController {
       }
 
       // Criptografar mensagem
-      const encrypted = [REDACTED_TOKEN].encryptMessage(message, keyBuffer);
+      const encrypted = ChatEncryptionService.encryptMessage(message, keyBuffer);
 
       // Salvar no banco (aqui é DB.query ou similar)
       const chatMessage = {
@@ -55,7 +55,7 @@ class ChatController {
       // Simular salvamento (em produção: INSERT INTO messages)
       // const savedMessage = await db.chat_messages.create(chatMessage);
 
-      [REDACTED_TOKEN].logCryptoOperation(senderId, 'send_message', true);
+      ChatEncryptionService.logCryptoOperation(senderId, 'send_message', true);
 
       return res.status(201).json({
         success: true,
@@ -68,7 +68,7 @@ class ChatController {
         error: error.message, 
         userId: req.user.id 
       });
-      [REDACTED_TOKEN].logCryptoOperation(req.user.id, 'send_message', false);
+      ChatEncryptionService.logCryptoOperation(req.user.id, 'send_message', false);
       return res.status(500).json({ error: 'Falha ao enviar mensagem' });
     }
   }
@@ -77,7 +77,7 @@ class ChatController {
    * Obter mensagens criptografadas
    * GET /api/chat/messages/:conversationId
    */
-  static async [REDACTED_TOKEN](req, res) {
+  static async downloadEncryptedFile(req, res) {
     try {
       const { conversationId } = req.params;
       const { encryptionKey } = req.query;
@@ -117,7 +117,7 @@ class ChatController {
       // Descriptografar cada mensagem
       const decryptedMessages = simulatedMessages.map(msg => {
         try {
-          const decrypted = [REDACTED_TOKEN].decryptMessage(
+          const decrypted = ChatEncryptionService.decryptMessage(
             msg.encryptedMessage,
             msg.iv,
             msg.authTag,
@@ -138,7 +138,7 @@ class ChatController {
         }
       });
 
-      [REDACTED_TOKEN].logCryptoOperation(userId, 'read_messages', true);
+      ChatEncryptionService.logCryptoOperation(userId, 'read_messages', true);
 
       return res.json({
         success: true,
@@ -182,9 +182,9 @@ class ChatController {
       }
 
       // Criptografar arquivo
-      const encrypted = [REDACTED_TOKEN].encryptFile(req.file.buffer, keyBuffer);
+      const encrypted = ChatEncryptionService.encryptFile(req.file.buffer, keyBuffer);
 
-      [REDACTED_TOKEN].logCryptoOperation(userId, '[REDACTED_TOKEN]', true);
+      ChatEncryptionService.logCryptoOperation(userId, 'file_upload', true);
 
       return res.json({
         success: true,
@@ -203,7 +203,7 @@ class ChatController {
         error: error.message, 
         userId: req.user.id 
       });
-      [REDACTED_TOKEN].logCryptoOperation(req.user.id, '[REDACTED_TOKEN]', false);
+      ChatEncryptionService.logCryptoOperation(req.user.id, 'file_operation', false);
       return res.status(500).json({ error: 'Falha ao fazer upload' });
     }
   }
@@ -212,7 +212,7 @@ class ChatController {
    ✅ NOVO: Download de arquivo descriptografado
    * GET /api/chat/download-encrypted/:fileId
    */
-  static async [REDACTED_TOKEN](req, res) {
+  static async downloadEncryptedFile(req, res) {
     try {
       const { fileId } = req.params;
       const { encryptionKey } = req.query;
@@ -231,20 +231,20 @@ class ChatController {
         mimeType: 'application/pdf',
         iv: '1234567890ab',
         authTag: 'fedcba9876543210',
-        encryptedData: '[REDACTED_TOKEN]'
+        encryptedData: 'PLACEHOLDER'
       };
 
       const keyBuffer = Buffer.from(encryptionKey, 'hex');
 
       // Descriptografar
-      const decrypted = [REDACTED_TOKEN].decryptFile(
+      const decrypted = ChatEncryptionService.decryptFile(
         simulatedFile.encryptedData,
         simulatedFile.iv,
         simulatedFile.authTag,
         keyBuffer
       );
 
-      [REDACTED_TOKEN].logCryptoOperation(userId, '[REDACTED_TOKEN]', true);
+      ChatEncryptionService.logCryptoOperation(userId, 'file_upload', true);
 
       res.setHeader('Content-Type', simulatedFile.mimeType);
       res.setHeader(
@@ -257,7 +257,7 @@ class ChatController {
         error: error.message, 
         userId: req.user.id 
       });
-      [REDACTED_TOKEN].logCryptoOperation(req.user.id, '[REDACTED_TOKEN]', false);
+      ChatEncryptionService.logCryptoOperation(req.user.id, 'file_operation', false);
       return res.status(500).json({ error: 'Falha ao fazer download' });
     }
   }
@@ -281,7 +281,7 @@ class ChatController {
       };
 
       // Calcular hash
-      const hash = [REDACTED_TOKEN].hashMessage(simulatedMessage.message);
+      const hash = ChatEncryptionService.hashMessage(simulatedMessage.message);
 
       return res.json({
         success: true,
@@ -309,7 +309,7 @@ class ChatController {
       // await db.chat_messages.deleteMany({ conversationId });
       // await db.conversations.deleteOne({ id: conversationId });
 
-      [REDACTED_TOKEN].logCryptoOperation(userId, 'delete_conversation', true);
+      ChatEncryptionService.logCryptoOperation(userId, 'delete_conversation', true);
 
       return res.json({
         success: true,
@@ -317,7 +317,7 @@ class ChatController {
       });
     } catch (error) {
       logger.error('Error deleting conversation', { error: error.message });
-      [REDACTED_TOKEN].logCryptoOperation(req.user.id, 'delete_conversation', false);
+      ChatEncryptionService.logCryptoOperation(req.user.id, 'delete_conversation', false);
       return res.status(500).json({ error: 'Falha ao deletar conversa' });
     }
   }

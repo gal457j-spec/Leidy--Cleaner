@@ -7,8 +7,8 @@ const jwt = require('jsonwebtoken');
 const logger = require('../utils/logger');
 
 // Use environment variables or defaults for dev
-const JWT_SECRET = process.env.JWT_SECRET || '[REDACTED_TOKEN]';
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || '[REDACTED_TOKEN]';
+const JWT_SECRET = process.env.JWT_SECRET || 'PLACEHOLDER';
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'PLACEHOLDER';
 
 // Warning if not set in production
 if (process.env.NODE_ENV === 'production' && (!process.env.JWT_SECRET || !process.env.JWT_REFRESH_SECRET)) {

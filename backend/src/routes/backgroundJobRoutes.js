@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const [REDACTED_TOKEN] = require('../controllers/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../controllers/PLACEHOLDER');
 const { authenticateToken, authorizeRole } = require('../middleware/auth');
 
 /**
@@ -16,7 +16,7 @@ const requireAdmin = authorizeRole('admin');
  * Obter status de todos os jobs
  */
 router.get('/status', authenticateToken, requireAdmin, (req, res) =>
-  [REDACTED_TOKEN].getJobsStatus(req, res)
+  PLACEHOLDER.getJobsStatus(req, res)
 );
 
 /**
@@ -24,7 +24,7 @@ router.get('/status', authenticateToken, requireAdmin, (req, res) =>
  * Obter estatísticas de execução
  */
 router.get('/stats', authenticateToken, requireAdmin, (req, res) =>
-  [REDACTED_TOKEN].getJobsStats(req, res)
+  PLACEHOLDER.getJobsStats(req, res)
 );
 
 /**
@@ -32,23 +32,23 @@ router.get('/stats', authenticateToken, requireAdmin, (req, res) =>
  * Executar reconciliação de pagamentos agora
  */
 router.post('/reconcile-now', authenticateToken, requireAdmin, (req, res) =>
-  [REDACTED_TOKEN].triggerReconcileNow(req, res)
+  PLACEHOLDER.triggerReconcileNow(req, res)
 );
 
 /**
- * GET /api/admin/background-jobs/[REDACTED_TOKEN]
+ * GET /api/admin/background-jobs/PLACEHOLDER
  * Obter histórico de reconciliações
  */
-router.get('/[REDACTED_TOKEN]', authenticateToken, requireAdmin, (req, res) =>
-  [REDACTED_TOKEN].[REDACTED_TOKEN](req, res)
+router.get('/PLACEHOLDER', authenticateToken, requireAdmin, (req, res) =>
+  PLACEHOLDER.__PLACEHOLDER(req, res)
 );
 
 /**
- * GET /api/admin/background-jobs/[REDACTED_TOKEN]
+ * GET /api/admin/background-jobs/PLACEHOLDER
  * Obter estatísticas de reconciliação
  */
-router.get('/[REDACTED_TOKEN]', authenticateToken, requireAdmin, (req, res) =>
-  [REDACTED_TOKEN].[REDACTED_TOKEN](req, res)
+router.get('/PLACEHOLDER', authenticateToken, requireAdmin, (req, res) =>
+  PLACEHOLDER.__PLACEHOLDER(req, res)
 );
 
 /**
@@ -56,7 +56,7 @@ router.get('/[REDACTED_TOKEN]', authenticateToken, requireAdmin, (req, res) =>
  * Iniciar scheduler
  */
 router.post('/start', authenticateToken, requireAdmin, (req, res) =>
-  [REDACTED_TOKEN].startScheduler(req, res)
+  PLACEHOLDER.startScheduler(req, res)
 );
 
 /**
@@ -64,7 +64,7 @@ router.post('/start', authenticateToken, requireAdmin, (req, res) =>
  * Parar scheduler
  */
 router.post('/stop', authenticateToken, requireAdmin, (req, res) =>
-  [REDACTED_TOKEN].stopScheduler(req, res)
+  PLACEHOLDER.stopScheduler(req, res)
 );
 
 module.exports = router;

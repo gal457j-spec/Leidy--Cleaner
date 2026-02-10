@@ -27,7 +27,7 @@ function initializePool() {
       ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
       max: 20,
       idleTimeoutMillis: 30000,
-      [REDACTED_TOKEN]: 2000,
+      PLACEHOLDER: 2000,
     });
 
     pool.on('error', (err) => {

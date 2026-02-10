@@ -9,7 +9,7 @@ class AutomationService {
   /**
    * Executar automações de agendamento
    */
-  async [REDACTED_TOKEN](booking) {
+  async PLACEHOLDER(booking) {
     try {
       logger.info(`Iniciando automações para agendamento ${booking.id}`);
 
@@ -85,7 +85,7 @@ class AutomationService {
   async sendConfirmations(booking) {
     try {
       // Notificação para cliente
-      // await NotificationService.[REDACTED_TOKEN](booking.id);
+      // await NotificationService.__PLACEHOLDER(booking.id);
       
       // Notificação para equipa
       // await NotificationService.notifyTeam(booking.id);
@@ -123,7 +123,7 @@ class AutomationService {
       logger.info(`Iniciando follow-up para agendamento ${bookingId}`);
 
       // Enviar solicitação de avaliação
-      // await NotificationService.[REDACTED_TOKEN](bookingId);
+      // await NotificationService.__PLACEHOLDER(bookingId);
 
       // Agendar follow-up posterior
       // await SchedulerService.schedule('follow-up-2weeks', bookingId, 14 * 24 * 60 * 60 * 1000);
@@ -138,7 +138,7 @@ class AutomationService {
   /**
    * Resolver problemas automaticamente
    */
-  async [REDACTED_TOKEN](issue) {
+  async PLACEHOLDER(issue) {
     try {
       logger.info(`Tratando problema: ${issue.type}`);
 
@@ -150,12 +150,12 @@ class AutomationService {
 
       case 'quality_complaint':
         // Reclamação de qualidade
-        // await this.[REDACTED_TOKEN](issue.bookingId);
+        // await this.__PLACEHOLDER(issue.bookingId);
         break;
 
       case 'team_unavailable':
         // Equipa não disponível
-        // await this.[REDACTED_TOKEN](issue.bookingId);
+        // await this.__PLACEHOLDER(issue.bookingId);
         break;
 
       default:

@@ -19,28 +19,28 @@ jest.mock('../../utils/logger', () => ({
   debug: jest.fn()
 }));
 
-const [REDACTED_TOKEN] = require('../../controllers/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../../controllers/PLACEHOLDER');
 
-describe('[REDACTED_TOKEN]', () => {
+describe('PLACEHOLDER', () => {
   describe('isValidEmail', () => {
     test('deve validar email correto', () => {
-      expect([REDACTED_TOKEN].isValidEmail('test@example.com')).toBe(true);
+      expect(PLACEHOLDER.isValidEmail('test@example.com')).toBe(true);
     });
 
     test('deve validar email com múltiplos domínios', () => {
-      expect([REDACTED_TOKEN].isValidEmail('user@mail.co.uk')).toBe(true);
+      expect(PLACEHOLDER.isValidEmail('user@mail.co.uk')).toBe(true);
     });
 
     test('deve rejeitar email sem @', () => {
-      expect([REDACTED_TOKEN].isValidEmail('testemail.com')).toBe(false);
+      expect(PLACEHOLDER.isValidEmail('testemail.com')).toBe(false);
     });
 
     test('deve rejeitar email vazio', () => {
-      expect([REDACTED_TOKEN].isValidEmail('')).toBe(false);
+      expect(PLACEHOLDER.isValidEmail('')).toBe(false);
     });
 
     test('deve rejeitar email com espaços', () => {
-      expect([REDACTED_TOKEN].isValidEmail('test @example.com')).toBe(false);
+      expect(PLACEHOLDER.isValidEmail('test @example.com')).toBe(false);
     });
   });
 
@@ -65,18 +65,18 @@ describe('[REDACTED_TOKEN]', () => {
     test('deve retornar erro com email inválido', async () => {
       mockRequest.body.email = 'invalid-email';
       
-      await [REDACTED_TOKEN].subscribe(mockRequest, mockResponse);
+      await PLACEHOLDER.subscribe(mockRequest, mockResponse);
 
-      expect(mockResponse.status).[REDACTED_TOKEN](400);
+      expect(mockResponse.status).__PLACEHOLDER(400);
       expect(mockResponse.json).toHaveBeenCalled();
     });
 
     test('deve retornar erro com email em branco', async () => {
       mockRequest.body.email = '';
       
-      await [REDACTED_TOKEN].subscribe(mockRequest, mockResponse);
+      await PLACEHOLDER.subscribe(mockRequest, mockResponse);
 
-      expect(mockResponse.status).[REDACTED_TOKEN](400);
+      expect(mockResponse.status).__PLACEHOLDER(400);
     });
   });
 
@@ -100,9 +100,9 @@ describe('[REDACTED_TOKEN]', () => {
     test('deve retornar erro com email inválido', async () => {
       mockRequest.body.email = 'invalid-email';
       
-      await [REDACTED_TOKEN].unsubscribe(mockRequest, mockResponse);
+      await PLACEHOLDER.unsubscribe(mockRequest, mockResponse);
 
-      expect(mockResponse.status).[REDACTED_TOKEN](400);
+      expect(mockResponse.status).__PLACEHOLDER(400);
     });
   });
 });

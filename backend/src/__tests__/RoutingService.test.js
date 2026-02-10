@@ -27,9 +27,9 @@ describe('RoutingService', () => {
     });
   });
 
-  describe('[REDACTED_TOKEN]', () => {
+  describe('PLACEHOLDER', () => {
     test('should be a function', () => {
-      expect(typeof RoutingService.[REDACTED_TOKEN]).toBe('function');
+      expect(typeof RoutingService.__PLACEHOLDER).toBe('function');
     });
 
     test('should return sorted bookings array', () => {
@@ -37,8 +37,8 @@ describe('RoutingService', () => {
         { id: 2, date: new Date('2024-01-15T12:00:00') },
         { id: 1, date: new Date('2024-01-15T10:00:00') }
       ];
-      RoutingService.[REDACTED_TOKEN].mockReturnValue(bookings);
-      const result = RoutingService.[REDACTED_TOKEN](bookings);
+      RoutingService.__PLACEHOLDER.mockReturnValue(bookings);
+      const result = RoutingService.__PLACEHOLDER(bookings);
       expect(result.length).toBe(2);
     });
   });
@@ -85,51 +85,51 @@ describe('RoutingService', () => {
     });
   });
 
-  describe('[REDACTED_TOKEN]', () => {
+  describe('PLACEHOLDER', () => {
     test('should be a function', () => {
-      expect(typeof RoutingService.[REDACTED_TOKEN]).toBe('function');
+      expect(typeof RoutingService.__PLACEHOLDER).toBe('function');
     });
 
     test('should return true when gap is sufficient', () => {
-      RoutingService.[REDACTED_TOKEN].mockReturnValue(true);
+      RoutingService.__PLACEHOLDER.mockReturnValue(true);
       const booking1 = { date: new Date('2024-01-15T10:00:00') };
       const booking2 = { date: new Date('2024-01-15T13:00:00') };
-      const result = RoutingService.[REDACTED_TOKEN](booking1, booking2, 30);
+      const result = RoutingService.__PLACEHOLDER(booking1, booking2, 30);
       expect(result).toBe(true);
     });
 
     test('should return false when gap is insufficient', () => {
-      RoutingService.[REDACTED_TOKEN].mockReturnValue(false);
+      RoutingService.__PLACEHOLDER.mockReturnValue(false);
       const booking1 = { date: new Date('2024-01-15T10:00:00') };
       const booking2 = { date: new Date('2024-01-15T11:30:00') };
-      const result = RoutingService.[REDACTED_TOKEN](booking1, booking2, 120);
+      const result = RoutingService.__PLACEHOLDER(booking1, booking2, 120);
       expect(result).toBe(false);
     });
   });
 
-  describe('[REDACTED_TOKEN]', () => {
+  describe('PLACEHOLDER', () => {
     test('should be a function', () => {
-      expect(typeof RoutingService.[REDACTED_TOKEN]).toBe('function');
+      expect(typeof RoutingService.__PLACEHOLDER).toBe('function');
     });
 
     test('should return true for valid notification', async () => {
-      RoutingService.[REDACTED_TOKEN].mockResolvedValue(true);
+      RoutingService.__PLACEHOLDER.mockResolvedValue(true);
       const itinerary = [
         { order: 1, bookingId: 1, address: 'Rua A', startTime: new Date(), endTime: new Date(), duration: 120 }
       ];
-      const result = await RoutingService.[REDACTED_TOKEN]('team-1', itinerary);
+      const result = await RoutingService.__PLACEHOLDER('team-1', itinerary);
       expect(result).toBe(true);
     });
 
     test('should handle empty itinerary', async () => {
-      RoutingService.[REDACTED_TOKEN].mockResolvedValue(true);
-      const result = await RoutingService.[REDACTED_TOKEN]('team-2', []);
+      RoutingService.__PLACEHOLDER.mockResolvedValue(true);
+      const result = await RoutingService.__PLACEHOLDER('team-2', []);
       expect(result).toBe(true);
     });
 
     test('should handle error and throw', async () => {
-      RoutingService.[REDACTED_TOKEN].mockRejectedValue(new Error('Notification failed'));
-      await expect(RoutingService.[REDACTED_TOKEN]('team-3', [])).rejects.toThrow();
+      RoutingService.__PLACEHOLDER.mockRejectedValue(new Error('Notification failed'));
+      await expect(RoutingService.__PLACEHOLDER('team-3', [])).rejects.toThrow();
     });
   });
 });

@@ -5,13 +5,13 @@
 
 const express = require('express');
 const router = express.Router();
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../services/PLACEHOLDER');
 
 // POST /api/notifications/subscribe
 router.post('/subscribe', async (req, res) => {
   try {
     const { userId, subscription } = req.body;
-    const sub = await [REDACTED_TOKEN].[REDACTED_TOKEN](userId, subscription);
+    const sub = await PLACEHOLDER.__PLACEHOLDER(userId, subscription);
     res.status(201).json(sub);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -22,7 +22,7 @@ router.post('/subscribe', async (req, res) => {
 router.post('/send', async (req, res) => {
   try {
     const { userId, title, body, icon, badge, tag, requireInteraction } = req.body;
-    const notification = await [REDACTED_TOKEN].[REDACTED_TOKEN](userId, {
+    const notification = await PLACEHOLDER.__PLACEHOLDER(userId, {
       title,
       body,
       icon,
@@ -40,7 +40,7 @@ router.post('/send', async (req, res) => {
 router.post('/broadcast', async (req, res) => {
   try {
     const { userIds, title, body, icon } = req.body;
-    const result = await [REDACTED_TOKEN].[REDACTED_TOKEN](userIds, {
+    const result = await PLACEHOLDER.__PLACEHOLDER(userIds, {
       title,
       body,
       icon
@@ -55,7 +55,7 @@ router.post('/broadcast', async (req, res) => {
 router.get('/history/:userId', async (req, res) => {
   try {
     const { limit = 50 } = req.query;
-    const history = await [REDACTED_TOKEN].[REDACTED_TOKEN](req.params.userId, parseInt(limit));
+    const history = await PLACEHOLDER.__PLACEHOLDER(req.params.userId, parseInt(limit));
     res.json(history);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -65,7 +65,7 @@ router.get('/history/:userId', async (req, res) => {
 // GET /api/notifications/preferences/:userId
 router.get('/preferences/:userId', async (req, res) => {
   try {
-    const preferences = await [REDACTED_TOKEN].[REDACTED_TOKEN](req.params.userId);
+    const preferences = await PLACEHOLDER.__PLACEHOLDER(req.params.userId);
     res.json(preferences);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -75,7 +75,7 @@ router.get('/preferences/:userId', async (req, res) => {
 // PUT /api/notifications/preferences/:userId
 router.put('/preferences/:userId', async (req, res) => {
   try {
-    const result = await [REDACTED_TOKEN].[REDACTED_TOKEN](req.params.userId, req.body);
+    const result = await PLACEHOLDER.__PLACEHOLDER(req.params.userId, req.body);
     res.json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -85,7 +85,7 @@ router.put('/preferences/:userId', async (req, res) => {
 // DELETE /api/notifications/unsubscribe/:subscriptionId
 router.delete('/unsubscribe/:subscriptionId', async (req, res) => {
   try {
-    const result = await [REDACTED_TOKEN].unsubscribeDevice(req.params.subscriptionId);
+    const result = await PLACEHOLDER.unsubscribeDevice(req.params.subscriptionId);
     res.json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -95,7 +95,7 @@ router.delete('/unsubscribe/:subscriptionId', async (req, res) => {
 // GET /api/notifications/stats
 router.get('/stats', async (req, res) => {
   try {
-    const stats = await [REDACTED_TOKEN].getDeliveryStats();
+    const stats = await PLACEHOLDER.getDeliveryStats();
     res.json(stats);
   } catch (error) {
     res.status(400).json({ error: error.message });

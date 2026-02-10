@@ -8,7 +8,7 @@ const crypto = require('crypto');
 
 class Advanced2FAService {
   constructor() {
-    this.[REDACTED_TOKEN] = new Map();
+    this.__PLACEHOLDER = new Map();
     this.webauthnCredentials = new Map();
     this.recoveryCodes = new Map();
     this.trustedDevices = new Map();
@@ -35,7 +35,7 @@ class Advanced2FAService {
         lastUsedAt: new Date()
       };
 
-      this.[REDACTED_TOKEN].set(registration.id, registration);
+      this.__PLACEHOLDER.set(registration.id, registration);
 
       logger.info(`Biometric registered: ${registration.id} (${biometricType})`);
       return registration;
@@ -50,7 +50,7 @@ class Advanced2FAService {
    */
   async verifyBiometric(userId, biometricId, biometricSample) {
     try {
-      const registration = this.[REDACTED_TOKEN].get(biometricId);
+      const registration = this.__PLACEHOLDER.get(biometricId);
       if (!registration) throw new Error('Biometric registration not found');
       if (registration.userId !== userId) throw new Error('Unauthorized');
 
@@ -74,7 +74,7 @@ class Advanced2FAService {
   /**
    * Generate recovery codes
    */
-  async [REDACTED_TOKEN](userId, count = 10) {
+  async PLACEHOLDER(userId, count = 10) {
     try {
       const codes = [];
 
@@ -169,7 +169,7 @@ class Advanced2FAService {
   /**
    * Verify WebAuthn assertion
    */
-  async [REDACTED_TOKEN](userId, credentialId, assertion) {
+  async PLACEHOLDER(userId, credentialId, assertion) {
     try {
       const credential = this.webauthnCredentials.get(credentialId);
       if (!credential) throw new Error('WebAuthn credential not found');
@@ -359,7 +359,7 @@ class Advanced2FAService {
       let totp = { enabled: false };
 
       // Get biometrics
-      for (const [, bio] of this.[REDACTED_TOKEN].entries()) {
+      for (const [, bio] of this.__PLACEHOLDER.entries()) {
         if (bio.userId === userId) {
           biometrics.push({
             id: bio.id,

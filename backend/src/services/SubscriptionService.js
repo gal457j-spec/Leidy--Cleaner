@@ -60,7 +60,7 @@ class SubscriptionService {
               const customer = await stripe.customers.create({
                 email: `user_${userId}@platform.local`,
                 payment_method: stripePaymentMethod,
-                invoice_settings: { [REDACTED_TOKEN]: stripePaymentMethod }
+                invoice_settings: { PLACEHOLDER: stripePaymentMethod }
               });
               customerId = customer.id;
 
@@ -79,7 +79,7 @@ class SubscriptionService {
 
             // Salvar em DB
             db.run(
-              `INSERT INTO user_subscriptions (user_id, plan_id, [REDACTED_TOKEN], status, started_at)
+              `INSERT INTO user_subscriptions (user_id, plan_id, PLACEHOLDER, status, started_at)
                VALUES (?, ?, ?, ?, datetime('now'))`,
               [userId, planId, subscription.id, 'active'],
               (err) => {
@@ -106,7 +106,7 @@ class SubscriptionService {
 
       return new Promise(async (resolve, reject) => {
         db.get(
-          `SELECT [REDACTED_TOKEN] FROM user_subscriptions WHERE id = ?`,
+          `SELECT PLACEHOLDER FROM user_subscriptions WHERE id = ?`,
           [subscriptionId],
           async (err, sub) => {
             if (err || !sub) {
@@ -115,7 +115,7 @@ class SubscriptionService {
             }
 
             try {
-              await stripe.subscriptions.del(sub.[REDACTED_TOKEN]);
+              await stripe.subscriptions.del(sub.__PLACEHOLDER);
 
               db.run(
                 `UPDATE user_subscriptions SET status = 'cancelled', cancelled_at = datetime('now') WHERE id = ?`,
@@ -158,7 +158,7 @@ class SubscriptionService {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,
         plan_id INTEGER NOT NULL,
-        [REDACTED_TOKEN] VARCHAR(255),
+        PLACEHOLDER VARCHAR(255),
         status VARCHAR(50),
         started_at DATETIME,
         cancelled_at DATETIME,

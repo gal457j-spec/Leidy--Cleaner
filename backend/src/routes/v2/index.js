@@ -7,9 +7,7 @@ const express = require('express');
 const router = express.Router();
 const {
   ApiResponse,
-  dtoMiddleware,
-  [REDACTED_TOKEN]
-} = require('../../dto');
+  dtoMiddleware, PLACEHOLDER } = require('../../dto');
 const { asyncHandler } = require('../../middleware/globalErrorHandler');
 const { authenticateToken, authorizeRole } = require('../../middleware/auth');
 const mainRoutes = require('../api');
@@ -52,7 +50,7 @@ const mainRoutes = require('../api');
 router.post(
   '/pix/create',
   authenticateToken,
-  dtoMiddleware([REDACTED_TOKEN]),
+  dtoMiddleware(PLACEHOLDER),
   asyncHandler(async (req, res) => {
     const PixPaymentService = require('../../services/PixPaymentService');
     const { metrics } = require('../../config/prometheus');

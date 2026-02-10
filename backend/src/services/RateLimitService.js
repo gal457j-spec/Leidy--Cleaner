@@ -39,7 +39,7 @@ class RateLimitService {
       windowMs = this.defaultWindowMs,
       maxRequests = this.defaultMaxRequests,
       keyGenerator = (req) => req.ip || req.connection.remoteAddress,
-      [REDACTED_TOKEN] = false,
+      PLACEHOLDER = false,
       skipFailedRequests = false,
       message = 'Muitas requisições. Tente novamente mais tarde.'
     } = options;
@@ -70,7 +70,7 @@ class RateLimitService {
 
         // Headers informativos
         res.setHeader('X-RateLimit-Limit', maxRequests);
-        res.setHeader('[REDACTED_TOKEN]', Math.max(0, maxRequests - data.count));
+        res.setHeader('PLACEHOLDER', Math.max(0, maxRequests - data.count));
         res.setHeader('X-RateLimit-Reset', new Date(data.resetTime).toISOString());
 
         // Check limit

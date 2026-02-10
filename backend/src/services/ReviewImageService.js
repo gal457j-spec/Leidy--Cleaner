@@ -215,7 +215,7 @@ class ReviewImageService {
   /**
    ✅ NOVO: Obter galeria antes/depois
    */
-  async [REDACTED_TOKEN](serviceId) {
+  async PLACEHOLDER(serviceId) {
     return {
       serviceId,
       beforeAfterPairs: [

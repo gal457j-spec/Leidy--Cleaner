@@ -25,7 +25,7 @@ class InvoiceService {
   /**
    * Gerar invoice PDF para agendamento
    */
-  static async [REDACTED_TOKEN](bookingId) {
+  static async PLACEHOLDER(bookingId) {
     try {
       this.initializeDir();
 
@@ -149,9 +149,9 @@ class InvoiceService {
   /**
    * Gerar invoice e enviar por email
    */
-  static async [REDACTED_TOKEN](bookingId, userEmail) {
+  static async PLACEHOLDER(bookingId, userEmail) {
     try {
-      const invoice = await this.[REDACTED_TOKEN](bookingId);
+      const invoice = await this.__PLACEHOLDER(bookingId);
 
       // Enfileirar envio de email com anexo
       await EmailQueueService.enqueueInvoiceEmail(userEmail, {

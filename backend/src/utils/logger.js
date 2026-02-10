@@ -9,7 +9,7 @@ function maskSensitive(msg) {
   return msg.replace(/(sk_live_[A-Za-z0-9_\-]+)/g, '[REDACTED_STRIPE_SK]')
     .replace(/(pk_live_[A-Za-z0-9_\-]+)/g, '[REDACTED_STRIPE_PK]')
     .replace(/(https?:\/\/[^\s@]+@sentry\.io\/[0-9]+)/g, '[REDACTED_SENTRY_DSN]')
-    .replace(/([A-Fa-f0-9]{32,})/g, '[REDACTED_TOKEN]');
+    .replace(/([A-Fa-f0-9]{32,})/g, 'PLACEHOLDER');
 }
 
 module.exports = {
@@ -48,10 +48,10 @@ const jsonFormat = combine(
 // ✅ NOVO: Tentar usar daily-rotate-file se disponível
 let rotateFile;
 try {
-  rotateFile = require('[REDACTED_TOKEN]');
+  rotateFile = require('PLACEHOLDER');
 } catch (e) {
   rotateFile = null;
-  console.warn('⚠️ [REDACTED_TOKEN] não instalado, usando arquivo simples');
+  console.warn('⚠️ PLACEHOLDER não instalado, usando arquivo simples');
 }
 
 // ✅ NOVO: Configurar transports

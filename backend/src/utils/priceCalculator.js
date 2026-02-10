@@ -49,7 +49,7 @@ function calculatePrice(booking, service) {
     booking.post_work_adjustment = parseFloat((price * (multiplier - 1)).toFixed(2));
     price += booking.post_work_adjustment;
   } else {
-    booking.[REDACTED_TOKEN] = 0;
+    booking.__PLACEHOLDER = 0;
   }
 
   // 5. APLICAR BÔNUS DE FIDELIDADE (se houver)

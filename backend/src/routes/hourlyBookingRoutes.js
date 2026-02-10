@@ -1,6 +1,6 @@
 const express = require('express');
 const { authenticateToken } = require('../middleware/auth');
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../services/PLACEHOLDER');
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.post('/create', authenticateToken, async (req, res) => {
     const { professionalId, date, startTime, durationHours } = req.body;
     const userId = req.user.id;
 
-    const booking = await [REDACTED_TOKEN].createHourlyBooking(
+    const booking = await PLACEHOLDER.createHourlyBooking(
       userId,
       professionalId,
       date,
@@ -38,7 +38,7 @@ router.get('/availability/:professionalId', async (req, res) => {
       });
     }
 
-    const isAvailable = await [REDACTED_TOKEN].checkAvailability(
+    const isAvailable = await PLACEHOLDER.checkAvailability(
       professionalId,
       date,
       startTime,
@@ -57,7 +57,7 @@ router.get('/rates/:professionalId', async (req, res) => {
   try {
     const { professionalId } = req.params;
 
-    const rates = await [REDACTED_TOKEN].[REDACTED_TOKEN](professionalId);
+    const rates = await PLACEHOLDER.__PLACEHOLDER(professionalId);
     res.json({ success: true, rates });
   } catch (error) {
     console.error('Erro ao obter tarifas:', error);

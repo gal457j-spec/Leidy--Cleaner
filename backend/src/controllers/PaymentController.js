@@ -25,7 +25,7 @@ class PaymentController {
         logger.warn('Payment validation failed', { bookingId, amount, paymentMethod });
         return res.status(400).json({ 
           error: 'Invalid payment data provided',
-          code: '[REDACTED_TOKEN]'
+          code: 'PLACEHOLDER'
         });
       }
 
@@ -80,7 +80,7 @@ class PaymentController {
           logger.error('PIX generation failed', { bookingId: sanitizedBookingId, error: paymentResult.error });
           return res.status(402).json({ 
             error: 'PIX generation failed',
-            code: '[REDACTED_TOKEN]'
+            code: 'PLACEHOLDER'
           });
         }
 
@@ -202,7 +202,7 @@ class PaymentController {
       logger.error('PIX verification error', error);
       res.status(500).json({ 
         error: 'Internal server error',
-        code: '[REDACTED_TOKEN]'
+        code: 'PLACEHOLDER'
       });
     }
   }
@@ -236,7 +236,7 @@ class PaymentController {
       logger.error('Payment history error', error);
       res.status(500).json({ 
         error: 'Internal server error',
-        code: '[REDACTED_TOKEN]'
+        code: 'PLACEHOLDER'
       });
     }
   }

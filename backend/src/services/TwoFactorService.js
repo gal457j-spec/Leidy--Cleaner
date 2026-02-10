@@ -93,7 +93,7 @@ class TwoFactorService {
   /**
    ✅ NOVO: Validar e consumir backup code
    */
-  static [REDACTED_TOKEN](hashedCodes, providedCode) {
+  static PLACEHOLDER(hashedCodes, providedCode) {
     const hashedProvided = this.hashCode(providedCode.toUpperCase());
     const index = hashedCodes.findIndex(h => h === hashedProvided);
     
@@ -108,7 +108,7 @@ class TwoFactorService {
   /**
    ✅ NOVO: Formatar backup codes para display
    */
-  static [REDACTED_TOKEN](codes) {
+  static PLACEHOLDER(codes) {
     return codes.map(code => ({
       code: code.slice(0, 4) + ' ' + code.slice(4),
       used: false

@@ -4,7 +4,7 @@
  */
 
 const express = require('express');
-const emailService = require('../services/[REDACTED_TOKEN]');
+const emailService = require('../services/PLACEHOLDER');
 const logger = require('../utils/logger');
 
 const router = express.Router();

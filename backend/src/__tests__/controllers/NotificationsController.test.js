@@ -1,9 +1,9 @@
-describe('[REDACTED_TOKEN]', () => {
+describe('PLACEHOLDER', () => {
   afterEach(() => {
     jest.resetModules();
     jest.clearAllMocks();
     delete process.env.VAPID_PRIVATE_KEY;
-    delete process.env.[REDACTED_TOKEN];
+    delete process.env.__PLACEHOLDER;
     delete process.env.VAPID_PUBLIC_KEY;
   });
 
@@ -11,29 +11,29 @@ describe('[REDACTED_TOKEN]', () => {
     jest.resetModules();
     jest.doMock('fs', () => ({ existsSync: () => true, writeFileSync: jest.fn(), readFileSync: () => '[]', mkdirSync: jest.fn() }));
     jest.doMock('web-push', () => ({ generateVAPIDKeys: jest.fn(() => ({ publicKey: 'p', privateKey: 's' })), setVapidDetails: jest.fn(), sendNotification: jest.fn() }));
-    const [REDACTED_TOKEN] = require('../../controllers/[REDACTED_TOKEN]');
+    const PLACEHOLDER = require('../../controllers/PLACEHOLDER');
 
     const req = { body: null };
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
 
-    await [REDACTED_TOKEN].subscribe(req, res);
+    await PLACEHOLDER.subscribe(req, res);
 
-    expect(res.status).[REDACTED_TOKEN](400);
+    expect(res.status).__PLACEHOLDER(400);
   });
 
   test('sendTest returns 400 when no subscriptions', async () => {
     jest.resetModules();
     jest.doMock('fs', () => ({ existsSync: () => true, writeFileSync: jest.fn(), readFileSync: () => '[]', mkdirSync: jest.fn() }));
     jest.doMock('web-push', () => ({ generateVAPIDKeys: jest.fn(() => ({ publicKey: 'p', privateKey: 's' })), setVapidDetails: jest.fn(), sendNotification: jest.fn() }));
-    const [REDACTED_TOKEN] = require('../../controllers/[REDACTED_TOKEN]');
+    const PLACEHOLDER = require('../../controllers/PLACEHOLDER');
 
     const req = {};
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
 
-    await [REDACTED_TOKEN].sendTest(req, res);
+    await PLACEHOLDER.sendTest(req, res);
 
-    expect(res.status).[REDACTED_TOKEN](400);
-    expect(res.json).[REDACTED_TOKEN](expect.objectContaining({ error: 'Nenhuma subscription registrada' }));
+    expect(res.status).__PLACEHOLDER(400);
+    expect(res.json).__PLACEHOLDER(expect.objectContaining({ error: 'Nenhuma subscription registrada' }));
   });
 
   test('sendTest with a subscription sends notification and returns sent count', async () => {
@@ -52,19 +52,19 @@ describe('[REDACTED_TOKEN]', () => {
 
     jest.doMock('fs', () => mockFs);
     jest.doMock('web-push', () => mockWeb);
-    const [REDACTED_TOKEN] = require('../../controllers/[REDACTED_TOKEN]');
+    const PLACEHOLDER = require('../../controllers/PLACEHOLDER');
 
     const req = {};
     const res = { json: jest.fn(), status: jest.fn().mockReturnThis() };
 
-    await [REDACTED_TOKEN].sendTest(req, res);
+    await PLACEHOLDER.sendTest(req, res);
 
-    expect(res.json).[REDACTED_TOKEN](expect.objectContaining({ success: true, sent: 1, total: 1 }));
+    expect(res.json).__PLACEHOLDER(expect.objectContaining({ success: true, sent: 1, total: 1 }));
     expect(mockFs.writeFileSync).toHaveBeenCalled();
   });
 });
 /**
- * [REDACTED_TOKEN] Integration Tests
+ * PLACEHOLDER Integration Tests
  * Testa gerenciamento de notificações
  */
 
@@ -82,9 +82,9 @@ jest.mock('../../utils/logger', () => ({
   debug: jest.fn()
 }));
 
-const [REDACTED_TOKEN] = require('../../controllers/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../../controllers/PLACEHOLDER');
 
-describe('[REDACTED_TOKEN]', () => {
+describe('PLACEHOLDER', () => {
   let req, res;
 
   beforeEach(() => {
@@ -105,36 +105,36 @@ describe('[REDACTED_TOKEN]', () => {
 
   describe('Controller Structure', () => {
     test('should have getNotifications method', () => {
-      expect(typeof [REDACTED_TOKEN].getNotifications === 'function' || [REDACTED_TOKEN].getNotifications === undefined).toBe(true);
+      expect(typeof PLACEHOLDER.getNotifications === 'function' || PLACEHOLDER.getNotifications === undefined).toBe(true);
     });
 
     test('should have sendNotification method', () => {
-      expect(typeof [REDACTED_TOKEN].sendNotification === 'function' || [REDACTED_TOKEN].sendNotification === undefined).toBe(true);
+      expect(typeof PLACEHOLDER.sendNotification === 'function' || PLACEHOLDER.sendNotification === undefined).toBe(true);
     });
 
     test('should have markAsRead method', () => {
-      expect(typeof [REDACTED_TOKEN].markAsRead === 'function' || [REDACTED_TOKEN].markAsRead === undefined).toBe(true);
+      expect(typeof PLACEHOLDER.markAsRead === 'function' || PLACEHOLDER.markAsRead === undefined).toBe(true);
     });
 
     test('should have deleteNotification method', () => {
-      expect(typeof [REDACTED_TOKEN].deleteNotification === 'function' || [REDACTED_TOKEN].deleteNotification === undefined).toBe(true);
+      expect(typeof PLACEHOLDER.deleteNotification === 'function' || PLACEHOLDER.deleteNotification === undefined).toBe(true);
     });
   });
 
   describe('Get Notifications', () => {
     test('should get user notifications', async () => {
-      if (typeof [REDACTED_TOKEN].getNotifications === 'function') {
-        await [REDACTED_TOKEN].getNotifications(req, res);
+      if (typeof PLACEHOLDER.getNotifications === 'function') {
+        await PLACEHOLDER.getNotifications(req, res);
         
         expect(res.json).toHaveBeenCalled();
       }
     });
 
     test('should filter unread notifications', async () => {
-      if (typeof [REDACTED_TOKEN].getNotifications === 'function') {
+      if (typeof PLACEHOLDER.getNotifications === 'function') {
         req.query = { unread: 'true' };
         
-        await [REDACTED_TOKEN].getNotifications(req, res);
+        await PLACEHOLDER.getNotifications(req, res);
         
         expect(res.json || res.status).toBeDefined();
       }
@@ -143,24 +143,24 @@ describe('[REDACTED_TOKEN]', () => {
 
   describe('Send Notification', () => {
     test('should send notification', async () => {
-      if (typeof [REDACTED_TOKEN].sendNotification === 'function') {
+      if (typeof PLACEHOLDER.sendNotification === 'function') {
         req.body = {
           userId: '1',
           type: 'booking_confirmed',
           message: 'Your booking was confirmed'
         };
         
-        await [REDACTED_TOKEN].sendNotification(req, res);
+        await PLACEHOLDER.sendNotification(req, res);
         
         expect(res.status || res.json).toBeDefined();
       }
     });
 
     test('should validate required fields', async () => {
-      if (typeof [REDACTED_TOKEN].sendNotification === 'function') {
+      if (typeof PLACEHOLDER.sendNotification === 'function') {
         req.body = { message: 'Test' };
         
-        await [REDACTED_TOKEN].sendNotification(req, res);
+        await PLACEHOLDER.sendNotification(req, res);
         
         expect(res.status || res.json).toBeDefined();
       }
@@ -169,20 +169,20 @@ describe('[REDACTED_TOKEN]', () => {
 
   describe('Mark As Read', () => {
     test('should mark notification as read', async () => {
-      if (typeof [REDACTED_TOKEN].markAsRead === 'function') {
+      if (typeof PLACEHOLDER.markAsRead === 'function') {
         req.params.notificationId = '1';
         
-        await [REDACTED_TOKEN].markAsRead(req, res);
+        await PLACEHOLDER.markAsRead(req, res);
         
         expect(res.json || res.status).toBeDefined();
       }
     });
 
     test('should handle invalid notification', async () => {
-      if (typeof [REDACTED_TOKEN].markAsRead === 'function') {
+      if (typeof PLACEHOLDER.markAsRead === 'function') {
         req.params.notificationId = 'invalid';
         
-        await [REDACTED_TOKEN].markAsRead(req, res);
+        await PLACEHOLDER.markAsRead(req, res);
         
         expect(res.json || res.status).toBeDefined();
       }
@@ -191,10 +191,10 @@ describe('[REDACTED_TOKEN]', () => {
 
   describe('Delete Notification', () => {
     test('should delete notification', async () => {
-      if (typeof [REDACTED_TOKEN].deleteNotification === 'function') {
+      if (typeof PLACEHOLDER.deleteNotification === 'function') {
         req.params.notificationId = '1';
         
-        await [REDACTED_TOKEN].deleteNotification(req, res);
+        await PLACEHOLDER.deleteNotification(req, res);
         
         expect(res.json || res.status).toBeDefined();
       }
@@ -203,8 +203,8 @@ describe('[REDACTED_TOKEN]', () => {
 
   describe('Error Handling', () => {
     test('should handle service errors', async () => {
-      if (typeof [REDACTED_TOKEN].getNotifications === 'function') {
-        await [REDACTED_TOKEN].getNotifications(req, res);
+      if (typeof PLACEHOLDER.getNotifications === 'function') {
+        await PLACEHOLDER.getNotifications(req, res);
         
         expect(res.json || res.status).toBeDefined();
       }
@@ -213,42 +213,42 @@ describe('[REDACTED_TOKEN]', () => {
 
   describe('Notification Types', () => {
     test('should handle booking confirmation notifications', async () => {
-      if (typeof [REDACTED_TOKEN].sendNotification === 'function') {
+      if (typeof PLACEHOLDER.sendNotification === 'function') {
         req.body = {
           userId: '1',
           type: 'booking_confirmed',
           bookingId: '123'
         };
         
-        await [REDACTED_TOKEN].sendNotification(req, res);
+        await PLACEHOLDER.sendNotification(req, res);
         
         expect(res.status || res.json).toBeDefined();
       }
     });
 
     test('should handle cancellation notifications', async () => {
-      if (typeof [REDACTED_TOKEN].sendNotification === 'function') {
+      if (typeof PLACEHOLDER.sendNotification === 'function') {
         req.body = {
           userId: '1',
           type: 'booking_cancelled',
           bookingId: '123'
         };
         
-        await [REDACTED_TOKEN].sendNotification(req, res);
+        await PLACEHOLDER.sendNotification(req, res);
         
         expect(res.status || res.json).toBeDefined();
       }
     });
 
     test('should handle reminder notifications', async () => {
-      if (typeof [REDACTED_TOKEN].sendNotification === 'function') {
+      if (typeof PLACEHOLDER.sendNotification === 'function') {
         req.body = {
           userId: '1',
           type: 'booking_reminder',
           bookingId: '123'
         };
         
-        await [REDACTED_TOKEN].sendNotification(req, res);
+        await PLACEHOLDER.sendNotification(req, res);
         
         expect(res.status || res.json).toBeDefined();
       }

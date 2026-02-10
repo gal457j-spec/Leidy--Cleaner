@@ -19,14 +19,14 @@ class WebSocketService {
     this.userSockets = new Map(); // userId -> socket.id
     this.roomSubscriptions = new Map(); // room -> Set<userId>
 
-    this.[REDACTED_TOKEN]();
-    this.[REDACTED_TOKEN]();
+    this.__PLACEHOLDER();
+    this.__PLACEHOLDER();
   }
 
   /**
    * Middleware de autenticação para Socket.io
    */
-  [REDACTED_TOKEN]() {
+  PLACEHOLDER() {
     this.io.use((socket, next) => {
       const token = socket.handshake.auth.token;
 
@@ -48,7 +48,7 @@ class WebSocketService {
   /**
    * Inicializa event handlers
    */
-  [REDACTED_TOKEN]() {
+  PLACEHOLDER() {
     this.io.on('connection', (socket) => {
       logger.info(`WebSocket connected: ${socket.id} (user: ${socket.userId})`);
 
@@ -116,7 +116,7 @@ class WebSocketService {
   /**
    * Notificar usuário sobre novo booking
    */
-  [REDACTED_TOKEN](bookingId, userId, bookingData) {
+  PLACEHOLDER(bookingId, userId, bookingData) {
     const room = `booking:${bookingId}`;
     this.io.to(room).emit('booking:created', {
       bookingId,
@@ -130,7 +130,7 @@ class WebSocketService {
   /**
    * Notificar sobre pagamento confirmado
    */
-  [REDACTED_TOKEN](paymentId, bookingId, amount) {
+  PLACEHOLDER(paymentId, bookingId, amount) {
     const room = `payment:${paymentId}`;
     this.io.to(room).emit('payment:confirmed', {
       paymentId,

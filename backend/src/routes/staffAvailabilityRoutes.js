@@ -7,32 +7,32 @@
 
 const express = require('express');
 const router = express.Router();
-const [REDACTED_TOKEN] = require('../controllers/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../controllers/PLACEHOLDER');
 const { authenticateToken, authorizeRole } = require('../middleware/auth');
 
 // ===== PUBLIC ENDPOINTS (sem autenticação) =====
 // Clientes veem staff disponível durante agendamento
 router.get('/available', (req, res) => {
-  [REDACTED_TOKEN].getAvailableStaff(req, res);
+  PLACEHOLDER.getAvailableStaff(req, res);
 });
 
 router.get('/:staffId/availability-status', (req, res) => {
-  [REDACTED_TOKEN].[REDACTED_TOKEN](req, res);
+  PLACEHOLDER.__PLACEHOLDER(req, res);
 });
 
 router.get('/shift-assignments/suggestions', (req, res) => {
-  [REDACTED_TOKEN].getShiftAssignments(req, res);
+  PLACEHOLDER.getShiftAssignments(req, res);
 });
 
 // ===== AUTHENTICATED ENDPOINTS (staff only) =====
 // Ver seu próprio calendário
 router.get('/:staffId/calendar', authenticateToken, authorizeRole(['staff', 'admin']), (req, res) => {
-  [REDACTED_TOKEN].getWeeklyCalendar(req, res);
+  PLACEHOLDER.getWeeklyCalendar(req, res);
 });
 
 // Mudar seu status (available/busy/offline)
 router.post('/:staffId/set-status', authenticateToken, authorizeRole(['staff']), (req, res) => {
-  [REDACTED_TOKEN].setStatus(req, res);
+  PLACEHOLDER.setStatus(req, res);
 });
 
 module.exports = router;

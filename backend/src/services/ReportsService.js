@@ -14,7 +14,7 @@ class ReportsService {
   /**
    * Gerar relatório de receita
    */
-  async [REDACTED_TOKEN](startDate, endDate, format = 'pdf') {
+  async PLACEHOLDER(startDate, endDate, format = 'pdf') {
     try {
       const reportId = `report_${Date.now()}`;
       const report = {
@@ -65,7 +65,7 @@ class ReportsService {
   /**
    * Gerar relatório de profissionais
    */
-  async [REDACTED_TOKEN](startDate, endDate) {
+  async PLACEHOLDER(startDate, endDate) {
     const report = {
       id: `report_prof_${Date.now()}`,
       type: 'professional',
@@ -80,7 +80,7 @@ class ReportsService {
           { name: 'Pedro Costa', bookings: 128, rating: 4.7, earnings: 18200 }
         ],
         performanceMetrics: {
-          [REDACTED_TOKEN]: 31.4,
+          PLACEHOLDER: 31.4,
           averageRating: 4.65,
           totalEarnings: 1285400.00,
           utilization: 76.5
@@ -95,7 +95,7 @@ class ReportsService {
   /**
    * Gerar relatório de clientes
    */
-  async [REDACTED_TOKEN](startDate, endDate) {
+  async PLACEHOLDER(startDate, endDate) {
     const report = {
       id: `report_cust_${Date.now()}`,
       type: 'customer',
@@ -114,7 +114,7 @@ class ReportsService {
           churned: 1667,
           atRisk: 1234
         },
-        [REDACTED_TOKEN]: {
+        PLACEHOLDER: {
           average: 850.00,
           median: 620.00,
           top10Percent: 12500.00
@@ -129,7 +129,7 @@ class ReportsService {
   /**
    * Gerar relatório de churn
    */
-  async [REDACTED_TOKEN]() {
+  async PLACEHOLDER() {
     return {
       id: `report_churn_${Date.now()}`,
       type: 'churn_analysis',
@@ -144,7 +144,7 @@ class ReportsService {
         ],
         riskScore: 6.8,
         atRiskCustomers: 1234,
-        [REDACTED_TOKEN]: [
+        PLACEHOLDER: [
           'Email de reengajamento',
           'Ofertas especiais',
           'Análise de satisfação'
@@ -156,9 +156,9 @@ class ReportsService {
   /**
    * Gerar relatório de satisfação
    */
-  async [REDACTED_TOKEN]() {
+  async PLACEHOLDER() {
     return {
-      id: `[REDACTED_TOKEN]${Date.now()}`,
+      id: `PLACEHOLDER${Date.now()}`,
       type: 'satisfaction',
       generatedAt: new Date(),
       data: {
@@ -184,7 +184,7 @@ class ReportsService {
   /**
    * Agendar relatório recorrente
    */
-  async [REDACTED_TOKEN](config) {
+  async PLACEHOLDER(config) {
     const schedule = {
       id: `schedule_${Date.now()}`,
       type: config.type,
@@ -217,7 +217,7 @@ class ReportsService {
     const formats = {
       pdf: 'application/pdf',
       csv: 'text/csv',
-      xlsx: 'application/vnd.[REDACTED_TOKEN].spreadsheetml.sheet',
+      xlsx: 'application/vnd.__PLACEHOLDER.spreadsheetml.sheet',
       json: 'application/json'
     };
 
@@ -234,7 +234,7 @@ class ReportsService {
   /**
    * Gerar relatório customizado
    */
-  async [REDACTED_TOKEN](config) {
+  async PLACEHOLDER(config) {
     const {
       name,
       filters = {},
@@ -285,7 +285,7 @@ class ReportsService {
   /**
    ✅ NOVO: Gerar comparativo de períodos
    */
-  async [REDACTED_TOKEN](metric, period1Start, period1End, period2Start, period2End) {
+  async PLACEHOLDER(metric, period1Start, period1End, period2Start, period2End) {
     return {
       metric,
       period1: {

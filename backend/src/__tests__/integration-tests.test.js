@@ -77,7 +77,7 @@ describe('Integration Tests - Pricing Calculations', () => {
       const price = await PricingService.calculatePrice(data);
       const minimum = PricingService.getMinimumPrice();
       
-      expect(price).[REDACTED_TOKEN](minimum);
+      expect(price).__PLACEHOLDER(minimum);
     });
 
     test('should handle multiple services correctly', async () => {
@@ -157,46 +157,46 @@ describe('Integration Tests - Pricing Calculations', () => {
     });
 
     test('should calculate price per square meter', async () => {
-      const pricePerSqm = PricingService.[REDACTED_TOKEN]();
+      const pricePerSqm = PricingService.__PLACEHOLDER();
       expect(typeof pricePerSqm).toBe('number');
       expect(pricePerSqm).toBeGreaterThan(0);
     });
 
     test('should get cleaning type multiplier for standard', async () => {
-      const multiplier = PricingService.[REDACTED_TOKEN]('standard');
+      const multiplier = PricingService.__PLACEHOLDER('standard');
       expect(multiplier).toBe(1.0);
     });
 
     test('should get cleaning type multiplier for deep', async () => {
-      const multiplier = PricingService.[REDACTED_TOKEN]('deep');
+      const multiplier = PricingService.__PLACEHOLDER('deep');
       expect(multiplier).toBe(1.5);
     });
 
     test('should get cleaning type multiplier for moveInOut', async () => {
-      const multiplier = PricingService.[REDACTED_TOKEN]('move_in_out');
+      const multiplier = PricingService.__PLACEHOLDER('move_in_out');
       expect(multiplier).toBe(1.8);
     });
 
     test('should get cleaning type multiplier for commercial', async () => {
-      const multiplier = PricingService.[REDACTED_TOKEN]('commercial');
+      const multiplier = PricingService.__PLACEHOLDER('commercial');
       expect(multiplier).toBe(2.0);
     });
 
     test('should return default multiplier for unknown type', async () => {
-      const multiplier = PricingService.[REDACTED_TOKEN]('unknown_type');
+      const multiplier = PricingService.__PLACEHOLDER('unknown_type');
       expect(multiplier).toBe(1.0);
     });
 
     test('should get minimum price', async () => {
       const minimum = PricingService.getMinimumPrice();
       expect(typeof minimum).toBe('number');
-      expect(minimum).[REDACTED_TOKEN](0);
+      expect(minimum).__PLACEHOLDER(0);
     });
 
     test('should handle frequency multipliers', async () => {
-      const once = PricingService.[REDACTED_TOKEN]('once');
-      const weekly = PricingService.[REDACTED_TOKEN]('weekly');
-      const biweekly = PricingService.[REDACTED_TOKEN]('biweekly');
+      const once = PricingService.__PLACEHOLDER('once');
+      const weekly = PricingService.__PLACEHOLDER('weekly');
+      const biweekly = PricingService.__PLACEHOLDER('biweekly');
 
       expect(typeof once).toBe('number');
       expect(typeof weekly).toBe('number');
@@ -204,8 +204,8 @@ describe('Integration Tests - Pricing Calculations', () => {
     });
 
     test('should handle urgency multipliers', async () => {
-      const standard = PricingService.[REDACTED_TOKEN]('standard');
-      const urgent = PricingService.[REDACTED_TOKEN]('urgent');
+      const standard = PricingService.__PLACEHOLDER('standard');
+      const urgent = PricingService.__PLACEHOLDER('urgent');
 
       expect(typeof standard).toBe('number');
       expect(typeof urgent).toBe('number');
@@ -239,7 +239,7 @@ describe('Integration Tests - Pricing Calculations', () => {
       const price = await PricingService.calculatePrice(data);
       const minimum = PricingService.getMinimumPrice();
       
-      expect(price).[REDACTED_TOKEN](minimum);
+      expect(price).__PLACEHOLDER(minimum);
     });
 
     test('should handle very large metragem', async () => {

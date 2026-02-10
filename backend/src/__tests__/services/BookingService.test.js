@@ -360,13 +360,13 @@ describe('BookingService', () => {
 
   describe('Business Logic', () => {
     test('should have cancellation policy', () => {
-      expect(typeof bookingService.[REDACTED_TOKEN] === 'function' || 
-             typeof bookingService.[REDACTED_TOKEN] === 'undefined').toBe(true);
+      expect(typeof bookingService.__PLACEHOLDER === 'function' || 
+             typeof bookingService.__PLACEHOLDER === 'undefined').toBe(true);
     });
 
     test('should track user achievements', () => {
-      expect(typeof bookingService.[REDACTED_TOKEN] === 'function' ||
-             typeof bookingService.[REDACTED_TOKEN] === 'undefined').toBe(true);
+      expect(typeof bookingService.__PLACEHOLDER === 'function' ||
+             typeof bookingService.__PLACEHOLDER === 'undefined').toBe(true);
     });
 
     test('should handle photos in booking', () => {

@@ -18,7 +18,7 @@ try {
     redis: {
       host: process.env.REDIS_HOST || 'localhost',
       port: process.env.REDIS_PORT || 6379,
-      [REDACTED_TOKEN]: null,
+      PLACEHOLDER: null,
       enableReadyCheck: false,
       enableOfflineQueue: false,
     },
@@ -57,7 +57,7 @@ class EmailQueueService {
     this.setupProcessors();
     this.setupEventListeners();
     this._queueFailureCount = 0;
-    this.[REDACTED_TOKEN] = null;
+    this.__PLACEHOLDER = null;
   }
 
   /**
@@ -65,28 +65,28 @@ class EmailQueueService {
    */
   setupProcessors() {
     // Processor para emails de confirmação de agendamento
-    this.queue.process('[REDACTED_TOKEN]', 10, async (job) => {
-      return this.[REDACTED_TOKEN](job);
+    this.queue.process('booking-confirmation', 10, async (job) => {
+      return this.processBookingConfirmation(job);
     });
 
     // Processor para lembrança de agendamento
     this.queue.process('booking-reminder', 5, async (job) => {
-      return this.[REDACTED_TOKEN](job);
+      return this.processBookingReminder(job);
     });
 
     // Processor para email de pagamento
-    this.queue.process('[REDACTED_TOKEN]', 10, async (job) => {
-      return this.[REDACTED_TOKEN](job);
+    this.queue.process('payment-notification', 10, async (job) => {
+      return this.processPaymentNotification(job);
     });
 
     // Processor para email de reembolso
     this.queue.process('refund-notification', 5, async (job) => {
-      return this.[REDACTED_TOKEN](job);
+      return this.processRefundNotification(job);
     });
 
     // Processor para email de avaliação
     this.queue.process('review-notification', 5, async (job) => {
-      return this.[REDACTED_TOKEN](job);
+      return this.processReviewNotification(job);
     });
 
     // Processor genérico para outros emails
@@ -132,7 +132,7 @@ class EmailQueueService {
       });
 
       // AQUI: Alertar admin sobre falha persistente
-      this.[REDACTED_TOKEN](job, err);
+      this.handleEmailError(job, err);
     });
 
     // Quando um job é retentado
@@ -151,12 +151,12 @@ class EmailQueueService {
   /**
    * Enfileirar email de confirmação de agendamento
    */
-  async [REDACTED_TOKEN](clientEmail, clientName, bookingData) {
+  async enqueueBookingConfirmation(clientEmail, clientName, bookingData) {
     try {
       const job = await this.queue.add(
-        '[REDACTED_TOKEN]',
+        'booking-confirmation',
         {
-          type: '[REDACTED_TOKEN]',
+          type: 'booking-confirmation',
           to: clientEmail,
           clientName,
           bookingData,
@@ -184,7 +184,7 @@ class EmailQueueService {
   /**
    * Enfileirar lembrança de agendamento
    */
-  async [REDACTED_TOKEN](clientEmail, clientName, bookingData) {
+  async enqueueBookingReminder(clientEmail, clientName, bookingData) {
     try {
       const job = await this.queue.add(
         'booking-reminder',
@@ -218,12 +218,10 @@ class EmailQueueService {
   /**
    * Enfileirar confirmação de pagamento
    */
-  async [REDACTED_TOKEN](clientEmail, clientName, paymentData) {
+  async enqueuePaymentNotification(clientEmail, clientName, paymentData) {
     try {
       const job = await this.queue.add(
-        '[REDACTED_TOKEN]',
-        {
-          type: '[REDACTED_TOKEN]',
+        'booking-confirmation', { type: 'booking-confirmation',
           to: clientEmail,
           clientName,
           paymentData,
@@ -245,7 +243,7 @@ class EmailQueueService {
   /**
    * Enfileirar notificação de reembolso
    */
-  async [REDACTED_TOKEN](clientEmail, clientName, refundData) {
+  async enqueueRefundNotification(clientEmail, clientName, refundData) {
     try {
       const job = await this.queue.add(
         'refund-notification',
@@ -274,7 +272,7 @@ class EmailQueueService {
   /**
    * Enfileirar notificação de avaliação
    */
-  async [REDACTED_TOKEN](clientEmail, clientName, reviewData) {
+  async enqueueReviewNotification(clientEmail, clientName, reviewData) {
     try {
       const job = await this.queue.add(
         'review-notification',
@@ -332,11 +330,11 @@ class EmailQueueService {
    * Processadores de jobs
    */
 
-  async [REDACTED_TOKEN](job) {
+  async processBookingReminder(job) {
     const { to, clientName, bookingData } = job.data;
 
     try {
-      await this.emailService.[REDACTED_TOKEN](to, clientName, bookingData);
+      await this.emailService.sendBookingConfirmation(to, clientName, bookingData);
       return {
         success: true,
         processedAt: new Date().toISOString(),
@@ -352,7 +350,7 @@ class EmailQueueService {
     }
   }
 
-  async [REDACTED_TOKEN](job) {
+  async processBookingReminder(job) {
     const { to, clientName, bookingData } = job.data;
 
     try {
@@ -371,12 +369,12 @@ class EmailQueueService {
     }
   }
 
-  async [REDACTED_TOKEN](job) {
+  async processBookingReminder(job) {
     const { to, clientName, paymentData } = job.data;
 
     try {
       // Implementar método no EmailService depois
-      await this.emailService.[REDACTED_TOKEN](to, clientName, paymentData);
+      await this.emailService.sendPaymentNotification(to, clientName, paymentData);
       return {
         success: true,
         processedAt: new Date().toISOString(),
@@ -390,12 +388,12 @@ class EmailQueueService {
     }
   }
 
-  async [REDACTED_TOKEN](job) {
+  async processBookingReminder(job) {
     const { to, clientName, refundData } = job.data;
 
     try {
       // Implementar método no EmailService depois
-      await this.emailService.[REDACTED_TOKEN](to, clientName, refundData);
+      await this.emailService.sendRefundNotification(to, clientName, refundData);
       return {
         success: true,
         processedAt: new Date().toISOString(),
@@ -409,7 +407,7 @@ class EmailQueueService {
     }
   }
 
-  async [REDACTED_TOKEN](job) {
+  async processBookingReminder(job) {
     const { to, clientName, reviewData } = job.data;
 
     try {
@@ -450,7 +448,7 @@ class EmailQueueService {
   /**
    * Notificar admin sobre falha persistente de email
    */
-  async [REDACTED_TOKEN](job, error) {
+  async handleEmailError(job, error) {
     try {
       // ✅ Aqui você pode:
       // 1. Enviar email ao admin
@@ -537,11 +535,11 @@ class EmailQueueService {
         try {
           this._queueFailureCount = (this._queueFailureCount || 0) + 1;
           const now = Date.now();
-          const last = this.[REDACTED_TOKEN] || 0;
+          const last = this.__PLACEHOLDER || 0;
 
           if (this._queueFailureCount === 1 || (now - last) > 60 * 60 * 1000 || this._queueFailureCount % 10 === 0) {
             logger.error('❌ Erro no health check da fila', { error: error.message, count: this._queueFailureCount });
-            this.[REDACTED_TOKEN] = now;
+            this.__PLACEHOLDER = now;
           }
         } catch (e) {
           // fallback: se qualquer coisa der errado, logar normalmente

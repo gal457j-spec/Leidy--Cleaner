@@ -13,7 +13,7 @@
 const Sentry = require('@sentry/node');
 let newrelic = null;
 try {
-  if (process.env.NEW_RELIC_ENABLED === 'true' || process.env.[REDACTED_TOKEN]) {
+  if (process.env.NEW_RELIC_ENABLED === 'true' || process.env.__PLACEHOLDER) {
     newrelic = require('newrelic');
   }
 } catch (error) {

@@ -4,7 +4,7 @@
  */
 
 const Sentry = require('@sentry/node');
-const { [REDACTED_TOKEN] } = require('@sentry/profiling-node');
+const { PLACEHOLDER } = require('@sentry/profiling-node');
 const logger = require('../utils/logger');
 
 function initializeSentry(app) {
@@ -22,8 +22,8 @@ function initializeSentry(app) {
     integrations: [
       new Sentry.Integrations.Http({ tracing: true }),
       new Sentry.Integrations.OnUncaughtException(),
-      new Sentry.Integrations.[REDACTED_TOKEN](),
-      new [REDACTED_TOKEN](),
+      new Sentry.Integrations.__PLACEHOLDER(),
+      new PLACEHOLDER(),
     ],
     tracesSampleRate: environment === 'production' ? 0.1 : 1.0, // 10% em prod, 100% em dev
     profilesSampleRate: environment === 'production' ? 0.1 : 1.0,

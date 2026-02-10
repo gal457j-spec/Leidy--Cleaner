@@ -83,7 +83,7 @@ class ValidationService {
   /**
    * Validar número positivo (price, duration, etc)
    */
-  static [REDACTED_TOKEN](value, fieldName, max = Number.MAX_SAFE_INTEGER) {
+  static PLACEHOLDER(value, fieldName, max = Number.MAX_SAFE_INTEGER) {
     const num = Number(value);
     if (!Number.isFinite(num) || num <= 0) {
       throw new Error(`${fieldName} deve ser um número positivo`);
@@ -97,8 +97,8 @@ class ValidationService {
   /**
    * Validar inteiro positivo (IDs, quantities)
    */
-  static [REDACTED_TOKEN](value, fieldName, max = Number.MAX_SAFE_INTEGER) {
-    const num = this.[REDACTED_TOKEN](value, fieldName, max);
+  static PLACEHOLDER(value, fieldName, max = Number.MAX_SAFE_INTEGER) {
+    const num = this.__PLACEHOLDER(value, fieldName, max);
     if (!Number.isInteger(num)) {
       throw new Error(`${fieldName} deve ser um número inteiro`);
     }
@@ -109,7 +109,7 @@ class ValidationService {
    * Validar rating (1-5)
    */
   static validateRating(value) {
-    const num = this.[REDACTED_TOKEN](value, 'Rating', 5);
+    const num = this.__PLACEHOLDER(value, 'Rating', 5);
     if (num < 1 || num > 5) {
       throw new Error('Rating deve ser entre 1 e 5');
     }
@@ -216,12 +216,12 @@ class ValidationService {
       userId: {
         required: true,
         type: 'number',
-        validator: (v) => this.[REDACTED_TOKEN](v, 'userId')
+        validator: (v) => this.__PLACEHOLDER(v, 'userId')
       },
       serviceId: {
         required: true,
         type: 'number',
-        validator: (v) => this.[REDACTED_TOKEN](v, 'serviceId')
+        validator: (v) => this.__PLACEHOLDER(v, 'serviceId')
       },
       date: {
         required: true,
@@ -240,7 +240,7 @@ class ValidationService {
         validator: (v) => this.validatePhoneBR(v)
       },
       durationHours: {
-        validator: (v) => v ? this.[REDACTED_TOKEN](v, 'durationHours', 24) : 2
+        validator: (v) => v ? this.__PLACEHOLDER(v, 'durationHours', 24) : 2
       }
     };
     
@@ -255,12 +255,12 @@ class ValidationService {
       bookingId: {
         required: true,
         type: 'number',
-        validator: (v) => this.[REDACTED_TOKEN](v, 'bookingId')
+        validator: (v) => this.__PLACEHOLDER(v, 'bookingId')
       },
       userId: {
         required: true,
         type: 'number',
-        validator: (v) => this.[REDACTED_TOKEN](v, 'userId')
+        validator: (v) => this.__PLACEHOLDER(v, 'userId')
       },
       rating: {
         required: true,
@@ -282,11 +282,11 @@ class ValidationService {
       bookingId: {
         required: true,
         type: 'number',
-        validator: (v) => this.[REDACTED_TOKEN](v, 'bookingId')
+        validator: (v) => this.__PLACEHOLDER(v, 'bookingId')
       },
       amount: {
         required: true,
-        validator: (v) => this.[REDACTED_TOKEN](v, 'amount', 99999.99)
+        validator: (v) => this.__PLACEHOLDER(v, 'amount', 99999.99)
       },
       paymentMethod: {
         required: true,

@@ -5,13 +5,13 @@
 
 const express = require('express');
 const router = express.Router();
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../services/PLACEHOLDER');
 
 // POST /api/smart-notifications/send
 router.post('/send', async (req, res) => {
   try {
     const { userId, message } = req.body;
-    const notification = await [REDACTED_TOKEN].[REDACTED_TOKEN](userId, message);
+    const notification = await PLACEHOLDER.__PLACEHOLDER(userId, message);
     res.status(201).json(notification);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -22,7 +22,7 @@ router.post('/send', async (req, res) => {
 router.post('/preferences/:userId', async (req, res) => {
   try {
     const preferences = req.body;
-    const result = await [REDACTED_TOKEN].setUserPreferences(req.params.userId, preferences);
+    const result = await PLACEHOLDER.setUserPreferences(req.params.userId, preferences);
     res.json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -32,7 +32,7 @@ router.post('/preferences/:userId', async (req, res) => {
 // GET /api/smart-notifications/preferences/:userId
 router.get('/preferences/:userId', (req, res) => {
   try {
-    const preferences = [REDACTED_TOKEN].getUserPreferences(req.params.userId);
+    const preferences = PLACEHOLDER.getUserPreferences(req.params.userId);
     res.json(preferences);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -43,7 +43,7 @@ router.get('/preferences/:userId', (req, res) => {
 router.post('/ab-tests', async (req, res) => {
   try {
     const { name, messageA, messageB } = req.body;
-    const test = await [REDACTED_TOKEN].createABTest({
+    const test = await PLACEHOLDER.createABTest({
       name,
       messageA,
       messageB
@@ -58,7 +58,7 @@ router.post('/ab-tests', async (req, res) => {
 router.post('/:notificationId/interact', async (req, res) => {
   try {
     const { action = 'opened' } = req.body;
-    const interaction = await [REDACTED_TOKEN].[REDACTED_TOKEN](
+    const interaction = await PLACEHOLDER.__PLACEHOLDER(
       req.params.notificationId,
       action
     );
@@ -72,7 +72,7 @@ router.post('/:notificationId/interact', async (req, res) => {
 router.get('/metrics/engagement', async (req, res) => {
   try {
     const { timeWindow = 7 } = req.query;
-    const metrics = await [REDACTED_TOKEN].[REDACTED_TOKEN](parseInt(timeWindow));
+    const metrics = await PLACEHOLDER.__PLACEHOLDER(parseInt(timeWindow));
     res.json(metrics);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -82,7 +82,7 @@ router.get('/metrics/engagement', async (req, res) => {
 // GET /api/smart-notifications/:userId/optimal-time
 router.get('/:userId/optimal-time', async (req, res) => {
   try {
-    const optimization = await [REDACTED_TOKEN].optimizeSendTime(req.params.userId);
+    const optimization = await PLACEHOLDER.optimizeSendTime(req.params.userId);
     res.json(optimization);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -92,7 +92,7 @@ router.get('/:userId/optimal-time', async (req, res) => {
 // GET /api/smart-notifications/ab-tests/:testId/results
 router.get('/ab-tests/:testId/results', async (req, res) => {
   try {
-    const results = await [REDACTED_TOKEN].getABTestResults(req.params.testId);
+    const results = await PLACEHOLDER.getABTestResults(req.params.testId);
     res.json(results);
   } catch (error) {
     res.status(400).json({ error: error.message });

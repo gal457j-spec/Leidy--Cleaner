@@ -230,7 +230,7 @@ describe('AdminController', () => {
 
     test('should prevent suspending admin', async () => {
       if (typeof AdminController.suspendUser === 'function') {
-        db.get.[REDACTED_TOKEN]((sql, params, callback) => {
+        db.get.__PLACEHOLDER((sql, params, callback) => {
           callback(null, { id: 1, role: 'admin' });
         });
         
@@ -354,7 +354,7 @@ describe('AdminController', () => {
 
   describe('Error Handling', () => {
     test('should handle database errors', async () => {
-      db.all.[REDACTED_TOKEN]((sql, params, callback) => {
+      db.all.__PLACEHOLDER((sql, params, callback) => {
         callback(new Error('Database error'));
       });
       
@@ -367,7 +367,7 @@ describe('AdminController', () => {
 
     test('should handle missing user', async () => {
       if (typeof AdminController.updateUser === 'function') {
-        db.get.[REDACTED_TOKEN]((sql, params, callback) => {
+        db.get.__PLACEHOLDER((sql, params, callback) => {
           callback(null, null);
         });
         
@@ -382,7 +382,7 @@ describe('AdminController', () => {
 
     test('should return appropriate error messages', async () => {
       if (typeof AdminController.getDashboard === 'function') {
-        db.get.[REDACTED_TOKEN]((sql, params, callback) => {
+        db.get.__PLACEHOLDER((sql, params, callback) => {
           callback(new Error('Connection timeout'));
         });
         

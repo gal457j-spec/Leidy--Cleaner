@@ -14,8 +14,8 @@ describe('PhotosController', () => {
 
     await PhotosController.uploadPhotos(req, res);
 
-    expect(res.status).[REDACTED_TOKEN](400);
-    expect(res.json).[REDACTED_TOKEN](expect.objectContaining({ error: 'Nenhuma foto foi enviada' }));
+    expect(res.status).__PLACEHOLDER(400);
+    expect(res.json).__PLACEHOLDER(expect.objectContaining({ error: 'Nenhuma foto foi enviada' }));
   });
 
   test('deletePhoto returns 404 when photo not found', async () => {
@@ -29,15 +29,15 @@ describe('PhotosController', () => {
 
     await PhotosController.deletePhoto(req, res);
 
-    expect(res.status).[REDACTED_TOKEN](404);
-    expect(res.json).[REDACTED_TOKEN](expect.objectContaining({ error: 'Foto não encontrada' }));
+    expect(res.status).__PLACEHOLDER(404);
+    expect(res.json).__PLACEHOLDER(expect.objectContaining({ error: 'Foto não encontrada' }));
   });
 
   test('deletePhoto returns 403 when unauthorized', async () => {
     jest.resetModules();
     const mockQuery = jest.fn()
-      .[REDACTED_TOKEN]({ rows: [{ id: 1, user_id: 2, staff_id: null }] }) // checkQuery
-      .[REDACTED_TOKEN]({ rows: [] });
+      .__PLACEHOLDER({ rows: [{ id: 1, user_id: 2, staff_id: null }] }) // checkQuery
+      .__PLACEHOLDER({ rows: [] });
     jest.doMock('../../db', () => ({ query: mockQuery }));
     const PhotosController = require('../../controllers/PhotosController');
 
@@ -46,15 +46,15 @@ describe('PhotosController', () => {
 
     await PhotosController.deletePhoto(req, res);
 
-    expect(res.status).[REDACTED_TOKEN](403);
-    expect(res.json).[REDACTED_TOKEN](expect.objectContaining({ error: 'Não autorizado' }));
+    expect(res.status).__PLACEHOLDER(403);
+    expect(res.json).__PLACEHOLDER(expect.objectContaining({ error: 'Não autorizado' }));
   });
 
   test('deletePhoto success returns deleted photo', async () => {
     jest.resetModules();
     const mockQuery = jest.fn()
-      .[REDACTED_TOKEN]({ rows: [{ id: 1, user_id: 1, staff_id: null }] }) // checkQuery
-      .[REDACTED_TOKEN]({ rows: [{ id: 1, booking_id: 5, url: '/uploads/x.jpg' }] });
+      .__PLACEHOLDER({ rows: [{ id: 1, user_id: 1, staff_id: null }] }) // checkQuery
+      .__PLACEHOLDER({ rows: [{ id: 1, booking_id: 5, url: '/uploads/x.jpg' }] });
     jest.doMock('../../db', () => ({ query: mockQuery }));
     const PhotosController = require('../../controllers/PhotosController');
 
@@ -63,7 +63,7 @@ describe('PhotosController', () => {
 
     await PhotosController.deletePhoto(req, res);
 
-    expect(res.json).[REDACTED_TOKEN](expect.objectContaining({ success: true }));
+    expect(res.json).__PLACEHOLDER(expect.objectContaining({ success: true }));
   });
 });
 /**

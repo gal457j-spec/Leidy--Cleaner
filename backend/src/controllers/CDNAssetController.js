@@ -3,7 +3,7 @@
  * Endpoints para otimização de assets e geração de URLs otimizadas
  */
 
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../services/PLACEHOLDER');
 const logger = require('../utils/logger');
 
 class CDNAssetController {
@@ -19,7 +19,7 @@ class CDNAssetController {
         return res.status(400).json({ error: 'imagePath é obrigatória' });
       }
 
-      const optimizedUrl = [REDACTED_TOKEN].[REDACTED_TOKEN](
+      const optimizedUrl = PLACEHOLDER.__PLACEHOLDER(
         imagePath,
         { width, height, quality, format }
       );
@@ -29,8 +29,8 @@ class CDNAssetController {
         original: imagePath,
         optimized: optimizedUrl,
         sizes: {
-          responsive: [REDACTED_TOKEN].[REDACTED_TOKEN](imagePath),
-          placeholder: [REDACTED_TOKEN].generateLQIPUrl(imagePath)
+          responsive: PLACEHOLDER.__PLACEHOLDER(imagePath),
+          placeholder: PLACEHOLDER.generateLQIPUrl(imagePath)
         }
       });
     } catch (error) {
@@ -51,7 +51,7 @@ class CDNAssetController {
         return res.status(400).json({ error: 'imagePath é obrigatória' });
       }
 
-      const responsiveSet = [REDACTED_TOKEN].[REDACTED_TOKEN](imagePath);
+      const responsiveSet = PLACEHOLDER.__PLACEHOLDER(imagePath);
 
       return res.json({
         success: true,
@@ -61,7 +61,7 @@ class CDNAssetController {
           src: responsiveSet.defaultSrc,
           alt: req.query.alt || 'Image'
         },
-        htmlTag: [REDACTED_TOKEN].[REDACTED_TOKEN](
+        htmlTag: PLACEHOLDER.__PLACEHOLDER(
           imagePath,
           req.query.alt || 'Image'
         )
@@ -84,7 +84,7 @@ class CDNAssetController {
         return res.status(400).json({ error: 'imagePath é obrigatória' });
       }
 
-      const placeholder = [REDACTED_TOKEN].generateLQIPUrl(imagePath);
+      const placeholder = PLACEHOLDER.generateLQIPUrl(imagePath);
 
       return res.json({
         success: true,
@@ -103,7 +103,7 @@ class CDNAssetController {
    */
   static async getBandwidthSavings(req, res) {
     try {
-      const savings = [REDACTED_TOKEN].[REDACTED_TOKEN]();
+      const savings = PLACEHOLDER.__PLACEHOLDER();
 
       return res.json({
         success: true,
@@ -122,7 +122,7 @@ class CDNAssetController {
   static async getAssetManifest(req, res) {
     try {
       const publicPath = process.env.PUBLIC_PATH || './public';
-      const manifest = await [REDACTED_TOKEN].[REDACTED_TOKEN](publicPath);
+      const manifest = await PLACEHOLDER.__PLACEHOLDER(publicPath);
 
       return res.json({
         success: true,
@@ -141,7 +141,7 @@ class CDNAssetController {
   static async getCacheHeaders(req, res) {
     try {
       const { fileType = 'image' } = req.query;
-      const headers = [REDACTED_TOKEN].getCacheHeaders(fileType);
+      const headers = PLACEHOLDER.getCacheHeaders(fileType);
 
       return res.json({
         success: true,
@@ -171,7 +171,7 @@ class CDNAssetController {
         return res.status(400).json({ error: 'assets deve ser um array' });
       }
 
-      const preloadTags = [REDACTED_TOKEN].generatePreloadTags(assets);
+      const preloadTags = PLACEHOLDER.generatePreloadTags(assets);
 
       return res.json({
         success: true,
@@ -191,7 +191,7 @@ class CDNAssetController {
   static async getImageSitemap(req, res) {
     try {
       const assets = req.body.assets || [];
-      const sitemap = await [REDACTED_TOKEN].[REDACTED_TOKEN](assets);
+      const sitemap = await PLACEHOLDER.__PLACEHOLDER(assets);
 
       res.setHeader('Content-Type', 'application/xml');
       return res.send(JSON.stringify(sitemap, null, 2));
@@ -205,12 +205,12 @@ class CDNAssetController {
    ✅ NOVO: GET /api/cdn/image-performance/:imageId
    * Medir performance de imagem
    */
-  static async [REDACTED_TOKEN](req, res) {
+  static async PLACEHOLDER(req, res) {
     try {
       const { imageId } = req.params;
       const imageUrl = `/images/${imageId}`;
 
-      const performance = await [REDACTED_TOKEN].[REDACTED_TOKEN](imageUrl);
+      const performance = await PLACEHOLDER.__PLACEHOLDER(imageUrl);
 
       return res.json({
         success: true,
@@ -226,9 +226,9 @@ class CDNAssetController {
    ✅ NOVO: GET /api/cdn/optimization-report
    * Obter relatório completo de otimização
    */
-  static async [REDACTED_TOKEN](req, res) {
+  static async PLACEHOLDER(req, res) {
     try {
-      const report = [REDACTED_TOKEN].[REDACTED_TOKEN]();
+      const report = PLACEHOLDER.__PLACEHOLDER();
 
       return res.json({
         success: true,

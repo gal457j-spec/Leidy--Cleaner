@@ -1,6 +1,6 @@
 const express = require('express');
 const { authenticateToken } = require('../middleware/auth');
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../services/PLACEHOLDER');
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.post('/create', authenticateToken, async (req, res) => {
       return res.status(400).json({ success: false, error: 'Parâmetros inválidos' });
     }
 
-    const booking = await [REDACTED_TOKEN].[REDACTED_TOKEN](
+    const booking = await PLACEHOLDER.__PLACEHOLDER(
       userId,
       professionalId,
       serviceId,
@@ -36,7 +36,7 @@ router.post('/create', authenticateToken, async (req, res) => {
 router.get('/my-recurring', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
-    const bookings = await [REDACTED_TOKEN].[REDACTED_TOKEN](userId);
+    const bookings = await PLACEHOLDER.__PLACEHOLDER(userId);
     res.json({ success: true, bookings });
   } catch (error) {
     console.error('Erro ao listar agendamentos recorrentes:', error);
@@ -48,7 +48,7 @@ router.get('/my-recurring', authenticateToken, async (req, res) => {
 router.post('/pause/:recurringId', authenticateToken, async (req, res) => {
   try {
     const { recurringId } = req.params;
-    const result = await [REDACTED_TOKEN].[REDACTED_TOKEN](recurringId);
+    const result = await PLACEHOLDER.__PLACEHOLDER(recurringId);
     res.json({ success: true, result });
   } catch (error) {
     console.error('Erro ao pausar agendamento:', error);
@@ -60,7 +60,7 @@ router.post('/pause/:recurringId', authenticateToken, async (req, res) => {
 router.post('/resume/:recurringId', authenticateToken, async (req, res) => {
   try {
     const { recurringId } = req.params;
-    const result = await [REDACTED_TOKEN].[REDACTED_TOKEN](recurringId);
+    const result = await PLACEHOLDER.__PLACEHOLDER(recurringId);
     res.json({ success: true, result });
   } catch (error) {
     console.error('Erro ao retomar agendamento:', error);
@@ -71,7 +71,7 @@ router.post('/resume/:recurringId', authenticateToken, async (req, res) => {
 // Gerar próximos agendamentos (executa via cron)
 router.post('/generate', authenticateToken, async (req, res) => {
   try {
-    const result = await [REDACTED_TOKEN].[REDACTED_TOKEN]();
+    const result = await PLACEHOLDER.__PLACEHOLDER();
     res.json({ success: true, result });
   } catch (error) {
     console.error('Erro ao gerar agendamentos:', error);

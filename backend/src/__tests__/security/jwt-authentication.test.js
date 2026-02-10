@@ -7,7 +7,7 @@ const request = require('supertest');
 const app = require('../../index');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || '[REDACTED_TOKEN]';
+const JWT_SECRET = process.env.JWT_SECRET || 'PLACEHOLDER';
 
 describe('JWT Authentication Security', () => {
   // User de teste

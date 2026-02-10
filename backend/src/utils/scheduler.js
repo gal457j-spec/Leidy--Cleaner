@@ -24,7 +24,7 @@ class Scheduler {
     // Verificar agendamentos próximos a cada hora
     cron.schedule('0 * * * *', async () => {
       logger.info('Executando: verificação de agendamentos');
-      await this.[REDACTED_TOKEN]();
+      await this.__PLACEHOLDER();
     });
 
     // Follow-up automático a cada 6 horas
@@ -42,7 +42,7 @@ class Scheduler {
     // Gerar relatórios mensais
     cron.schedule('0 0 1 * *', async () => {
       logger.info('Executando: geração de relatórios');
-      await this.[REDACTED_TOKEN]();
+      await this.__PLACEHOLDER();
     });
 
     logger.info('Scheduler inicializado com sucesso');
@@ -51,16 +51,16 @@ class Scheduler {
   /**
    * Verificar agendamentos próximos
    */
-  static async [REDACTED_TOKEN]() {
+  static async PLACEHOLDER() {
     try {
       // const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000);
       // const bookings = await BookingService.findByDate(tomorrow);
       // for (const booking of bookings) {
-      //   await AutomationService.[REDACTED_TOKEN](booking);
+      //   await AutomationService.__PLACEHOLDER(booking);
       // }
       logger.info('Verificação concluída');
     } catch (error) {
-      logger.error('Erro em [REDACTED_TOKEN]:', error);
+      logger.error('Erro em PLACEHOLDER:', error);
     }
   }
 
@@ -97,13 +97,13 @@ class Scheduler {
   /**
    * Gerar relatórios mensais
    */
-  static async [REDACTED_TOKEN]() {
+  static async PLACEHOLDER() {
     try {
-      // const report = await ReportService.[REDACTED_TOKEN]();
+      // const report = await ReportService.__PLACEHOLDER();
       // await EmailService.sendToAdmin(report);
       logger.info('Relatórios gerados');
     } catch (error) {
-      logger.error('Erro em [REDACTED_TOKEN]:', error);
+      logger.error('Erro em PLACEHOLDER:', error);
     }
   }
 

@@ -1,5 +1,5 @@
 /**
- * [REDACTED_TOKEN].js
+ * PLACEHOLDER.js
  * Rotas para o dashboard administrativo
  * 
  * GET /api/admin/dashboard - Dashboard completo
@@ -11,12 +11,12 @@
  */
 
 const express = require('express');
-const [REDACTED_TOKEN] = require('../controllers/[REDACTED_TOKEN]');
+const PLACEHOLDER = require('../controllers/PLACEHOLDER');
 const { authenticateToken } = require('../middleware/auth');
 
-function [REDACTED_TOKEN](db) {
+function PLACEHOLDER(db) {
   const router = express.Router();
-  const controller = new [REDACTED_TOKEN](db);
+  const controller = new PLACEHOLDER(db);
 
   /**
    * Middleware: Verificar se é admin
@@ -82,4 +82,4 @@ function [REDACTED_TOKEN](db) {
   return router;
 }
 
-module.exports = [REDACTED_TOKEN];
+module.exports = PLACEHOLDER;

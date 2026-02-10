@@ -122,7 +122,7 @@ router.post('/recovery-codes/generate', async (req, res) => {
       return res.status(400).json({ error: 'User ID required' });
     }
 
-    const codes = await twoFAService.[REDACTED_TOKEN](userId, count);
+    const codes = await twoFAService.__PLACEHOLDER(userId, count);
 
     res.status(201).json({ success: true, data: codes });
   } catch (error) {
@@ -241,7 +241,7 @@ router.post('/webauthn/verify', async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    const result = await twoFAService.[REDACTED_TOKEN](userId, credentialId, assertion);
+    const result = await twoFAService.__PLACEHOLDER(userId, credentialId, assertion);
 
     res.json({ success: true, data: result });
   } catch (error) {

@@ -54,7 +54,7 @@ class SEOMarketingService {
   /**
    * Gerar schema.org JSON-LD
    */
-  [REDACTED_TOKEN](entityType, entityData) {
+  PLACEHOLDER(entityType, entityData) {
     let schema = {
       '@context': 'https://schema.org',
       '@type': entityType
@@ -138,7 +138,7 @@ class SEOMarketingService {
   /**
    * Criar campanha de marketing
    */
-  async [REDACTED_TOKEN](campaignData) {
+  async PLACEHOLDER(campaignData) {
     try {
       const {
         name,
@@ -284,12 +284,12 @@ class SEOMarketingService {
   /**
    * Sugestões de otimização de conteúdo
    */
-  async [REDACTED_TOKEN](content) {
+  async PLACEHOLDER(content) {
     return {
       content,
       suggestions: [
         {
-          type: '[REDACTED_TOKEN]',
+          type: 'PLACEHOLDER',
           suggestion: 'Adicionar "profissional" no primeiro parágrafo',
           impact: 'alto'
         },

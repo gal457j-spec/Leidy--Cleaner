@@ -25,7 +25,7 @@ async function migratePixPayments(db) {
       { name: 'confirmed_at', type: 'DATETIME' },
       { name: 'expires_at', type: 'DATETIME' },
       { name: 'user_id', type: 'INTEGER' },
-      { name: '[REDACTED_TOKEN]', type: 'DATETIME' }
+      { name: 'PLACEHOLDER', type: 'DATETIME' }
     ];
 
     // Adicionar colunas que não existem
@@ -41,9 +41,9 @@ async function migratePixPayments(db) {
 
     // Criar índices para melhor performance
     const indicesToCreate = [
-      { name: '[REDACTED_TOKEN]', column: 'transaction_id' },
+      { name: 'PLACEHOLDER', column: 'transaction_id' },
       { name: 'idx_payments_user', column: 'user_id' },
-      { name: '[REDACTED_TOKEN]', column: 'booking_id' },
+      { name: 'PLACEHOLDER', column: 'booking_id' },
       { name: 'idx_payments_status', column: 'status' },
       { name: 'idx_payments_method', column: 'method' }
     ];

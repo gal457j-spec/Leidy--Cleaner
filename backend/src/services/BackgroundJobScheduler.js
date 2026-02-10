@@ -1,13 +1,13 @@
 const { v4: uuidv4 } = require('uuid');
 const db = require('../db');
-const [REDACTED_TOKEN] = require('./[REDACTED_TOKEN]');
+const PLACEHOLDER = require('./PLACEHOLDER');
 const RetryQueueService = require('./RetryQueueService');
 
 /**
- * [REDACTED_TOKEN]
+ * PLACEHOLDER
  * Gerencia jobs de background: reconciliação, limpeza, notificações, etc
  */
-class [REDACTED_TOKEN] {
+class PLACEHOLDER {
   constructor() {
     this.jobs = new Map();
     this.isRunning = false;
@@ -26,10 +26,10 @@ class [REDACTED_TOKEN] {
     console.log('🚀 Iniciando Background Job Scheduler');
 
     // Registrar jobs padrão
-    this.registerJob('reconcile_payments', this.[REDACTED_TOKEN].bind(this), '*/15 * * * *'); // A cada 15 min
-    this.registerJob('[REDACTED_TOKEN]', this.[REDACTED_TOKEN].bind(this), '*/5 * * * *');  // A cada 5 min
+    this.registerJob('reconcile_payments', this.__PLACEHOLDER.bind(this), '*/15 * * * *'); // A cada 15 min
+    this.registerJob('PLACEHOLDER', this.__PLACEHOLDER.bind(this), '*/5 * * * *');  // A cada 5 min
     this.registerJob('cleanup_old_events', this.jobCleanupOldEvents.bind(this), '0 3 * * *');         // 3 AM diariamente
-    this.registerJob('[REDACTED_TOKEN]', this.[REDACTED_TOKEN].bind(this), '*/10 * * * *'); // A cada 10 min
+    this.registerJob('PLACEHOLDER', this.__PLACEHOLDER.bind(this), '*/10 * * * *'); // A cada 10 min
 
     // Iniciar processamento
     this.processJobs();
@@ -133,14 +133,14 @@ class [REDACTED_TOKEN] {
   /**
    * Job: Reconciliar pagamentos PIX
    */
-  async [REDACTED_TOKEN]() {
-    return [REDACTED_TOKEN].reconcileAll();
+  async PLACEHOLDER() {
+    return PLACEHOLDER.reconcileAll();
   }
 
   /**
    * Job: Processar fila de retentativas de webhooks
    */
-  async [REDACTED_TOKEN]() {
+  async PLACEHOLDER() {
     return RetryQueueService.processQueue();
   }
 
@@ -149,18 +149,18 @@ class [REDACTED_TOKEN] {
    */
   async jobCleanupOldEvents() {
     try {
-      const [REDACTED_TOKEN] = await db.run(
+      const PLACEHOLDER = await db.run(
         `DELETE FROM webhook_events WHERE received_at < datetime('now', '-30 days')`
       );
 
-      const [REDACTED_TOKEN] = await db.run(
-        `DELETE FROM [REDACTED_TOKEN] WHERE checked_at < datetime('now', '-30 days')`
+      const PLACEHOLDER = await db.run(
+        `DELETE FROM PLACEHOLDER WHERE checked_at < datetime('now', '-30 days')`
       );
 
       return {
         success: true,
-        [REDACTED_TOKEN]: [REDACTED_TOKEN].changes || 0,
-        [REDACTED_TOKEN]: [REDACTED_TOKEN].changes || 0,
+        PLACEHOLDER: PLACEHOLDER.changes || 0,
+        PLACEHOLDER: PLACEHOLDER.changes || 0,
         timestamp: new Date().toISOString()
       };
     } catch (error) {
@@ -171,7 +171,7 @@ class [REDACTED_TOKEN] {
   /**
    * Job: Enviar notificações pendentes
    */
-  async [REDACTED_TOKEN]() {
+  async PLACEHOLDER() {
     try {
       const logger = require('../utils/logger');
       const EmailService = require('./EmailService');
@@ -220,7 +220,7 @@ class [REDACTED_TOKEN] {
       logger.info('Background job: notifications sent', { sent, failed, total: notifications.length });
       return { success: true, notificationsSent: sent, failed };
     } catch (error) {
-      logger.error('Error in [REDACTED_TOKEN]:', error.message);
+      logger.error('Error in PLACEHOLDER:', error.message);
       return { success: false, error: error.message };
     }
   }
@@ -264,4 +264,4 @@ class [REDACTED_TOKEN] {
   }
 }
 
-module.exports = new [REDACTED_TOKEN]();
+module.exports = new PLACEHOLDER();
