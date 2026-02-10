@@ -7,11 +7,13 @@ const { Pool } = require('pg');
 const logger = require('../utils/logger');
 
 let pool = null;
+let initializePoolOverride = null;
 
 /**
  * Initialize Supabase PostgreSQL pool
  */
 function initializePool() {
+  if (initializePoolOverride) return initializePoolOverride();
   if (pool) return pool;
 
   const databaseUrl = process.env.DATABASE_URL || process.env.SUPABASE_URL;
@@ -41,6 +43,12 @@ function initializePool() {
     return null;
   }
 }
+
+// Allow tests to override behavior via initializePool.__PLACEHOLDER(fn)
+initializePool.__PLACEHOLDER = function(fn) {
+  if (typeof fn === 'function') initializePoolOverride = fn;
+  return undefined;
+};
 
 /**
  * Execute query

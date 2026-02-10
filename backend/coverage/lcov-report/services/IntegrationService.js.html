@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.71% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/70</span>
+                <span class='fraction'>0/70</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.09% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/11</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.71% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/70</span>
+                <span class='fraction'>0/70</span>
             </div>
         
             
@@ -351,12 +351,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -628,18 +628,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * External Integrations Service
  * Google Calendar, WhatsApp, Slack, Telegram, Google Maps
  */
 &nbsp;
-const logger = require('../utils/logger');
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
 &nbsp;
 class IntegrationService {
-  constructor() {
-    this.integrations = new Map();
-    this.syncLog = new Map();
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+<span class="cstat-no" title="statement not covered" >    this.integrations = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.syncLog = new Map();</span>
   }
 &nbsp;
   /**
@@ -712,7 +712,7 @@ class IntegrationService {
           { emailAddress: { address: bookingData.customerEmail }, type: 'required' },
           { emailAddress: { address: bookingData.professionalEmail }, type: 'required' }
         ],
-        [REDACTED_TOKEN]: 15
+        PLACEHOLDER: 15
       };
 &nbsp;
       const integration = <span class="cstat-no" title="statement not covered" >{</span>
@@ -737,7 +737,7 @@ class IntegrationService {
   /**
    * WhatsApp Notification
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](phoneNumber, message, templateId = <span class="branch-0 cbranch-no" title="branch not covered" >null)</span> {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(phoneNumber, message, templateId = <span class="branch-0 cbranch-no" title="branch not covered" >null)</span> {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const notification = <span class="cstat-no" title="statement not covered" >{</span>
         id: `whatsapp_${Date.now()}`,
@@ -761,7 +761,7 @@ class IntegrationService {
   /**
    * Slack Team Notification
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](channelId, message, options = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(channelId, message, options = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const notification = <span class="cstat-no" title="statement not covered" >{</span>
         id: `slack_${Date.now()}`,
@@ -785,7 +785,7 @@ class IntegrationService {
   /**
    * Telegram Bot Notification
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](chatId, message, options = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(chatId, message, options = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const notification = <span class="cstat-no" title="statement not covered" >{</span>
         id: `telegram_${Date.now()}`,
@@ -911,7 +911,7 @@ class IntegrationService {
   }
 }
 &nbsp;
-module.exports = new IntegrationService();
+<span class="cstat-no" title="statement not covered" >module.exports = new IntegrationService();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -919,7 +919,7 @@ module.exports = new IntegrationService();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

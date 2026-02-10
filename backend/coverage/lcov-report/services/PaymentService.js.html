@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.4% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/37</span>
+                <span class='fraction'>0/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/10</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.55% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/36</span>
+                <span class='fraction'>0/36</span>
             </div>
         
             
@@ -226,7 +226,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -378,22 +378,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * PaymentService.js - Stripe Integration
  * Gerencia pagamentos de pacotes de horas
  */
 &nbsp;
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || <span class="branch-1 cbranch-no" title="branch not covered" >'sk_test_demo')</span>;
+const stripe = <span class="cstat-no" title="statement not covered" >require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_demo');</span>
 &nbsp;
 class PaymentService {
   /**
    * Criar session de checkout Stripe
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic async [REDACTED_TOKEN](userId, hourPackage, totalPrice) {
+<span class="fstat-no" title="function not covered" >  st</span>atic async PLACEHOLDER(userId, hourPackage, totalPrice) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const session = <span class="cstat-no" title="statement not covered" >await stripe.checkout.sessions.create({</span>
-        [REDACTED_TOKEN]: ['card'],
+        PLACEHOLDER: ['card'],
         mode: 'payment',
         customer_email: `user_${userId}@leidycleaner.local`,
         success_url: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
@@ -415,7 +415,7 @@ class PaymentService {
         metadata: {
           userId: userId.toString(),
           hourPackage: hourPackage.toString(),
-          type: '[REDACTED_TOKEN]'
+          type: 'PLACEHOLDER'
         }
       });
 &nbsp;
@@ -449,12 +449,12 @@ class PaymentService {
   /**
    * Validar webhook signature
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic [REDACTED_TOKEN](body, signature) {
+<span class="fstat-no" title="function not covered" >  st</span>atic PLACEHOLDER(body, signature) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const event = <span class="cstat-no" title="statement not covered" >stripe.webhooks.constructEvent(</span>
         body,
         signature,
-        process.env.[REDACTED_TOKEN] || '[REDACTED_TOKEN]'
+        process.env.__PLACEHOLDER || 'PLACEHOLDER'
       );
 <span class="cstat-no" title="statement not covered" >      return event;</span>
     } catch (error) {
@@ -466,7 +466,7 @@ class PaymentService {
   /**
    * Processar pagamento completo (webhook)
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic async [REDACTED_TOKEN](session) {
+<span class="fstat-no" title="function not covered" >  st</span>atic async PLACEHOLDER(session) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      return {</span>
         success: true,
@@ -484,7 +484,7 @@ class PaymentService {
   /**
    * Criar refund
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic async createRefund(paymentIntentId, reason = <span class="branch-0 cbranch-no" title="branch not covered" >'[REDACTED_TOKEN]')</span> {
+<span class="fstat-no" title="function not covered" >  st</span>atic async createRefund(paymentIntentId, reason = <span class="branch-0 cbranch-no" title="branch not covered" >'PLACEHOLDER')</span> {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const refund = <span class="cstat-no" title="statement not covered" >await stripe.refunds.create({</span>
         payment_intent: paymentIntentId,
@@ -525,7 +525,7 @@ class PaymentService {
   /**
    * Validar pagamento completo
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic async [REDACTED_TOKEN](sessionId) {
+<span class="fstat-no" title="function not covered" >  st</span>atic async PLACEHOLDER(sessionId) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const session = <span class="cstat-no" title="statement not covered" >await stripe.checkout.sessions.retrieve(sessionId);</span>
 <span class="cstat-no" title="statement not covered" >      return session.payment_status === 'paid';</span>
@@ -536,7 +536,7 @@ class PaymentService {
   }
 }
 &nbsp;
-module.exports = PaymentService;
+<span class="cstat-no" title="statement not covered" >module.exports = PaymentService;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -544,7 +544,7 @@ module.exports = PaymentService;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

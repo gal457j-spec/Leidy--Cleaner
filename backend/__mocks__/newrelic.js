@@ -7,5 +7,5 @@ module.exports = {
     if (typeof fn === 'function') return fn();
     return null;
   },
-  [REDACTED_TOKEN]: function () { return ''; },
+  recordCustomEvent: function () { return ''; },
 };

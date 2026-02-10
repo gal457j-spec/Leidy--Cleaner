@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.05% </span>
+                <span class="strong">6.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/76</span>
+                <span class='fraction'>5/74</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">17.64% </span>
+                <span class="strong">5.88% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/17</span>
+                <span class='fraction'>1/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.05% </span>
+                <span class="strong">6.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/76</span>
+                <span class='fraction'>5/74</span>
             </div>
         
             
@@ -416,8 +416,6 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -425,9 +423,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -458,21 +456,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -555,15 +553,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">102x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -755,16 +755,16 @@ class PermissionService {
     this.roles = new Map();
     this.roleHierarchy = new Map();
     
-    this.[REDACTED_TOKEN]();
-    this.[REDACTED_TOKEN]();
+    // this.__PLACEHOLDER();
+    // this.__PLACEHOLDER();
   }
 &nbsp;
   /**
    * Initialize default roles with hierarchy
    */
-  [REDACTED_TOKEN]() {
+<span class="fstat-no" title="function not covered" >  PL</span>ACEHOLDER() {
     // Define role hierarchy (higher level = more permissions)
-    const roles = {
+    const roles = <span class="cstat-no" title="statement not covered" >{</span>
       admin: {
         level: 100,
         description: 'Full system access',
@@ -797,19 +797,19 @@ class PermissionService {
       }
     };
 &nbsp;
-    for (const [role, config] of Object.entries(roles)) {
-      this.roles.set(role, config);
-      this.roleHierarchy.set(role, config.level);
+<span class="cstat-no" title="statement not covered" >    for (const [role, config] of Object.entries(roles)) {</span>
+<span class="cstat-no" title="statement not covered" >      this.roles.set(role, config);</span>
+<span class="cstat-no" title="statement not covered" >      this.roleHierarchy.set(role, config.level);</span>
     }
 &nbsp;
-    logger.info(`Initialized ${this.roles.size} roles`);
+<span class="cstat-no" title="statement not covered" >    logger.info(`Initialized ${this.roles.size} roles`);</span>
   }
 &nbsp;
   /**
    * Initialize default permissions
    */
-  [REDACTED_TOKEN]() {
-    const permissionMap = {
+<span class="fstat-no" title="function not covered" >  PL</span>ACEHOLDER() {
+    const permissionMap = <span class="cstat-no" title="statement not covered" >{</span>
       // Auth permissions
       'auth:login': ['guest', 'customer', 'staff', 'manager', 'admin'],
       'auth:register': ['guest'],
@@ -894,15 +894,15 @@ class PermissionService {
       'api:key:create': ['admin']
     };
 &nbsp;
-    for (const [permission, roles] of Object.entries(permissionMap)) {
-      this.permissions.set(permission, {
+<span class="cstat-no" title="statement not covered" >    for (const [permission, roles] of Object.entries(permissionMap)) {</span>
+<span class="cstat-no" title="statement not covered" >      this.permissions.set(permission, {</span>
         name: permission,
         allowedRoles: roles,
         description: `Permission: ${permission}`
       });
     }
 &nbsp;
-    logger.info(`Initialized ${this.permissions.size} permissions`);
+<span class="cstat-no" title="statement not covered" >    logger.info(`Initialized ${this.permissions.size} permissions`);</span>
   }
 &nbsp;
   /**
@@ -948,7 +948,7 @@ class PermissionService {
   /**
    * Get all permissions for a role
    */
-<span class="fstat-no" title="function not covered" >  ge</span>tPermissionsForRole(role) {
+<span class="fstat-no" title="function not covered" >  PL</span>ACEHOLDER(role) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const rolePermissions = <span class="cstat-no" title="statement not covered" >[];</span>
 <span class="cstat-no" title="statement not covered" >      for (const [permission, config] of this.permissions.entries()) {</span>
@@ -992,7 +992,7 @@ class PermissionService {
 <span class="cstat-no" title="statement not covered" >        result.push({</span>
           name: role,
           ...config,
-          permissions: this.[REDACTED_TOKEN](role)
+          permissions: this.__PLACEHOLDER(role)
         });
       }
 <span class="cstat-no" title="statement not covered" >      return result;</span>
@@ -1005,7 +1005,7 @@ class PermissionService {
   /**
    * Grant permission to role (dynamic)
    */
-<span class="fstat-no" title="function not covered" >  gr</span>antPermissionToRole(role, permissionName) {
+<span class="fstat-no" title="function not covered" >  PL</span>ACEHOLDER(role, permissionName) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const permission = <span class="cstat-no" title="statement not covered" >this.permissions.get(permissionName);</span>
 <span class="cstat-no" title="statement not covered" >      if (!permission) {</span>
@@ -1027,7 +1027,7 @@ class PermissionService {
   /**
    * Revoke permission from role (dynamic)
    */
-<span class="fstat-no" title="function not covered" >  re</span>[REDACTED_TOKEN](role, permissionName) {
+<span class="fstat-no" title="function not covered" >  PL</span>ACEHOLDER(role, permissionName) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const permission = <span class="cstat-no" title="statement not covered" >this.permissions.get(permissionName);</span>
 <span class="cstat-no" title="statement not covered" >      if (!permission) {</span>
@@ -1087,7 +1087,7 @@ module.exports = new PermissionService();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

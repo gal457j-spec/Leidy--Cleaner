@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for services/[REDACTED_TOKEN].js</title>
+    <title>Code coverage report for services/AdvancedPaymentService.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> [REDACTED_TOKEN].js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> AdvancedPaymentService.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.05% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/148</span>
+                <span class='fraction'>0/148</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.76% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/21</span>
+                <span class='fraction'>0/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/141</span>
+                <span class='fraction'>0/141</span>
             </div>
         
             
@@ -481,14 +481,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -888,20 +888,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Advanced Payment Service
  * Multiple payment gateways: Boleto, Apple Pay, Google Pay, PayPal, Subscriptions
  */
 &nbsp;
-const logger = require('../utils/logger');
-const crypto = require('crypto');
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
+const crypto = <span class="cstat-no" title="statement not covered" >require('crypto');</span>
 &nbsp;
-class [REDACTED_TOKEN] {
-  constructor() {
-    this.payments = new Map();
-    this.subscriptions = new Map();
-    this.paymentMethods = new Map();
+class AdvancedPaymentService_Auto_165 {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+<span class="cstat-no" title="statement not covered" >    this.payments = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.subscriptions = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.paymentMethods = new Map();</span>
   }
 &nbsp;
   /**
@@ -909,7 +909,7 @@ class [REDACTED_TOKEN] {
    */
 <span class="fstat-no" title="function not covered" >  as</span>ync createBoletoPayment(bookingId, amount, dueDate) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
-      const boletoNumber = <span class="cstat-no" title="statement not covered" >this.[REDACTED_TOKEN]();</span>
+      const boletoNumber = <span class="cstat-no" title="statement not covered" >this.AdvancedPaymentService_Auto_165();</span>
       const barcode = <span class="cstat-no" title="statement not covered" >this._generateBarcode();</span>
 &nbsp;
       const payment = <span class="cstat-no" title="statement not covered" >{</span>
@@ -942,7 +942,7 @@ class [REDACTED_TOKEN] {
   /**
    * Create Apple Pay payment
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](bookingId, amount, applePayToken) {
+<span class="fstat-no" title="function not covered" >  as</span>ync AdvancedPaymentService_Auto_165(bookingId, amount, applePayToken) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const payment = <span class="cstat-no" title="statement not covered" >{</span>
         id: crypto.randomUUID(),
@@ -974,7 +974,7 @@ class [REDACTED_TOKEN] {
   /**
    * Create Google Pay payment
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](bookingId, amount, googlePayToken) {
+<span class="fstat-no" title="function not covered" >  as</span>ync AdvancedPaymentService_Auto_165(bookingId, amount, googlePayToken) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const payment = <span class="cstat-no" title="statement not covered" >{</span>
         id: crypto.randomUUID(),
@@ -1030,7 +1030,7 @@ class [REDACTED_TOKEN] {
   /**
    * Execute PayPal payment
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](paymentId, payerDetails) {
+<span class="fstat-no" title="function not covered" >  as</span>ync AdvancedPaymentService_Auto_165(paymentId, payerDetails) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const payment = <span class="cstat-no" title="statement not covered" >this.payments.get(paymentId);</span>
 <span class="cstat-no" title="statement not covered" >      if (!payment) <span class="cstat-no" title="statement not covered" >throw new Error('Payment not found');</span></span>
@@ -1063,7 +1063,7 @@ class [REDACTED_TOKEN] {
         status: 'active',
         createdAt: new Date(),
         currentPeriodStart: new Date(),
-        currentPeriodEnd: this.[REDACTED_TOKEN](interval),
+        currentPeriodEnd: this.AdvancedPaymentService_Auto_165(interval),
         payments: []
       };
 &nbsp;
@@ -1118,7 +1118,7 @@ class [REDACTED_TOKEN] {
   /**
    * Process subscription billing
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](subscriptionId) {
+<span class="fstat-no" title="function not covered" >  as</span>ync AdvancedPaymentService_Auto_165(subscriptionId) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const subscription = <span class="cstat-no" title="statement not covered" >this.subscriptions.get(subscriptionId);</span>
 <span class="cstat-no" title="statement not covered" >      if (!subscription) <span class="cstat-no" title="statement not covered" >throw new Error('Subscription not found');</span></span>
@@ -1135,7 +1135,7 @@ class [REDACTED_TOKEN] {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      subscription.payments.push(payment);</span>
 <span class="cstat-no" title="statement not covered" >      subscription.currentPeriodStart = subscription.currentPeriodEnd;</span>
-<span class="cstat-no" title="statement not covered" >      subscription.currentPeriodEnd = this.[REDACTED_TOKEN](subscription.interval);</span>
+<span class="cstat-no" title="statement not covered" >      subscription.currentPeriodEnd = this.AdvancedPaymentService_Auto_165(subscription.interval);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      logger.info(`Subscription billing processed: ${subscriptionId}`);</span>
 <span class="cstat-no" title="statement not covered" >      return payment;</span>
@@ -1226,7 +1226,7 @@ class [REDACTED_TOKEN] {
   /**
    * Get customer subscriptions
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](customerId) {
+<span class="fstat-no" title="function not covered" >  as</span>ync AdvancedPaymentService_Auto_165(customerId) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const subs = <span class="cstat-no" title="statement not covered" >[];</span>
 <span class="cstat-no" title="statement not covered" >      for (const [, sub] of this.subscriptions.entries()) {</span>
@@ -1244,7 +1244,7 @@ class [REDACTED_TOKEN] {
   /**
    * Helper: Generate Boleto number
    */
-<span class="fstat-no" title="function not covered" >  _g</span>enerateBoletoNumber() {
+<span class="fstat-no" title="function not covered" >  Ad</span>vancedPaymentService_Auto_165() {
 <span class="cstat-no" title="statement not covered" >    return `${Math.random().toString().slice(2, 27)}.${Math.random().toString().slice(2, 7)} ${Math.random().toString().slice(2, 6)}.${Math.random().toString().slice(2, 7)}`;</span>
   }
 &nbsp;
@@ -1258,7 +1258,7 @@ class [REDACTED_TOKEN] {
   /**
    * Helper: Calculate next period end
    */
-<span class="fstat-no" title="function not covered" >  _c</span>[REDACTED_TOKEN](interval) {
+<span class="fstat-no" title="function not covered" >  Ad</span>vancedPaymentService_Auto_165(interval) {
     const now = <span class="cstat-no" title="statement not covered" >new Date();</span>
     const next = <span class="cstat-no" title="statement not covered" >new Date(now);</span>
 &nbsp;
@@ -1301,7 +1301,7 @@ class [REDACTED_TOKEN] {
   }
 }
 &nbsp;
-module.exports = new [REDACTED_TOKEN]();
+<span class="cstat-no" title="statement not covered" >module.exports = new AdvancedPaymentService_Auto_165();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1309,7 +1309,7 @@ module.exports = new [REDACTED_TOKEN]();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

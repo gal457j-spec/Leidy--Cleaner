@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.84% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/19</span>
+                <span class='fraction'>0/19</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.84% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/19</span>
+                <span class='fraction'>0/19</span>
             </div>
         
             
@@ -101,36 +101,25 @@
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -138,15 +127,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = require('express');
-const { authenticateToken } = require('../middleware/auth');
-const CancellationService = require('../services/CancellationService');
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const express = <span class="cstat-no" title="statement not covered" >require('express');</span>
+const { authenticateToken } = <span class="cstat-no" title="statement not covered" >require('../middleware/auth');</span>
+const CancellationService = <span class="cstat-no" title="statement not covered" >require('../services/CancellationService');</span>
 &nbsp;
-const router = express.Router();
+const router = <span class="cstat-no" title="statement not covered" >express.Router();</span>
 &nbsp;
 // Cancelar agendamento
-router.post('/cancel', authenticateToken, <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >router.post('/cancel', authenticateToken, <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
     const { bookingId, reason, refundAmount } = <span class="cstat-no" title="statement not covered" >req.body;</span>
     const userId = <span class="cstat-no" title="statement not covered" >req.user.id;</span>
@@ -166,9 +166,9 @@ router.post('/cancel', authenticateToken, <span class="fstat-no" title="function
 });
 &nbsp;
 // Obter estatísticas de cancelamento
-router.get('/stats', authenticateToken, <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >router.get('/stats', authenticateToken, <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
-    const stats = <span class="cstat-no" title="statement not covered" >await CancellationService.[REDACTED_TOKEN]();</span>
+    const stats = <span class="cstat-no" title="statement not covered" >await CancellationService.__PLACEHOLDER();</span>
 <span class="cstat-no" title="statement not covered" >    res.json({ success: true, stats });</span>
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    console.error('Erro ao obter estatísticas:', error);</span>
@@ -176,7 +176,7 @@ router.get('/stats', authenticateToken, <span class="fstat-no" title="function n
   }
 });
 &nbsp;
-module.exports = router;
+<span class="cstat-no" title="statement not covered" >module.exports = router;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -184,7 +184,7 @@ module.exports = router;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

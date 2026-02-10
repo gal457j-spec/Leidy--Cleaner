@@ -3,13 +3,13 @@
  * PixPaymentService, EmailService, RetryQueueService
  */
 
-const PixPaymentService = require('../services/PixPaymentService');
-const EmailService = require('../services/EmailService');
-const RetryQueueService = require('../services/RetryQueueService');
+const PixPaymentService = require('../../services/PixPaymentService');
+const EmailService = require('../../services/EmailService');
+const RetryQueueService = require('../../services/RetryQueueService');
 const { v4: uuidv4 } = require('uuid');
 
 // Mock database
-jest.mock('../db', () => ({
+jest.mock('../../db', () => ({
   run: jest.fn(),
   get: jest.fn(),
   all: jest.fn()

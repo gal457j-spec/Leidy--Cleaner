@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.35% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/31</span>
+                <span class='fraction'>0/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.35% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/31</span>
+                <span class='fraction'>0/31</span>
             </div>
         
             
@@ -176,15 +176,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -278,27 +278,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * SMS Service - Twilio
  * Envia SMS de lembrança, confirmação, etc
  */
 &nbsp;
-const twilio = require('twilio');
+const twilio = <span class="cstat-no" title="statement not covered" >require('twilio');</span>
 &nbsp;
 class SMSService {
-  constructor() {
-    const accountSid = process.env.TWILIO_ACCOUNT_SID;
-    const authToken = process.env.TWILIO_AUTH_TOKEN;
-    this.twilioNumber = process.env.TWILIO_PHONE_NUMBER || <span class="branch-1 cbranch-no" title="branch not covered" >'+1234567890';</span>
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+    const accountSid = <span class="cstat-no" title="statement not covered" >process.env.TWILIO_ACCOUNT_SID;</span>
+    const authToken = <span class="cstat-no" title="statement not covered" >process.env.TWILIO_AUTH_TOKEN;</span>
+<span class="cstat-no" title="statement not covered" >    this.twilioNumber = process.env.TWILIO_PHONE_NUMBER || '+1234567890';</span>
 &nbsp;
-    this.client = twilio(accountSid, authToken);
+<span class="cstat-no" title="statement not covered" >    this.client = twilio(accountSid, authToken);</span>
   }
 &nbsp;
   /**
    * Enviar SMS de confirmação
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](phone, clientName, bookingData) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(phone, clientName, bookingData) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const message = <span class="cstat-no" title="statement not covered" >await this.client.messages.create({</span>
         body: `✅ ${clientName}, seu agendamento foi confirmado! 📅 ${new Date(bookingData.date).toLocaleDateString('pt-BR')} às ${bookingData.time}. Local: ${bookingData.address.substring(0, 30)}... Valor: R$ ${parseFloat(bookingData.finalPrice).toFixed(2)}`,
@@ -316,7 +316,7 @@ class SMSService {
   /**
    * Enviar SMS de lembrança (1 hora antes)
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](phone, clientName, time, address) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(phone, clientName, time, address) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const message = <span class="cstat-no" title="statement not covered" >await this.client.messages.create({</span>
         body: `⏰ ${clientName}, lembrança! Seu agendamento é em 1 HORA (${time}). Local: ${address.substring(0, 40)}... Se não puder comparecer, avise logo!`,
@@ -334,7 +334,7 @@ class SMSService {
   /**
    * Enviar SMS para funcionária (novo agendamento)
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](phone, clientName, date, time, address, duration) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(phone, clientName, date, time, address, duration) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const message = <span class="cstat-no" title="statement not covered" >await this.client.messages.create({</span>
         body: `📌 Novo agendamento! Cliente: ${clientName}, Data: ${new Date(date).toLocaleDateString('pt-BR')}, Hora: ${time}, Duração: ${duration}h, Local: ${address.substring(0, 30)}...`,
@@ -352,7 +352,7 @@ class SMSService {
   /**
    * Enviar SMS de bônus desbloqueado
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](phone, clientName, bonusAmount) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(phone, clientName, bonusAmount) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const message = <span class="cstat-no" title="statement not covered" >await this.client.messages.create({</span>
         body: `🎉 ${clientName}, parabéns! Você desbloqueou R$ ${bonusAmount.toFixed(2)} de bônus! Use no próximo agendamento. 🎁`,
@@ -386,7 +386,7 @@ class SMSService {
   }
 }
 &nbsp;
-module.exports = new SMSService();
+<span class="cstat-no" title="statement not covered" >module.exports = new SMSService();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -394,7 +394,7 @@ module.exports = new SMSService();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

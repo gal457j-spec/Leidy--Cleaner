@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">8.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/60</span>
+                <span class='fraction'>0/60</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">7.14% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">8.62% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/58</span>
+                <span class='fraction'>0/58</span>
             </div>
         
             
@@ -340,13 +340,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -606,19 +606,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Backup &amp; Disaster Recovery Service
  * Backups automáticos, PITR, replicação, recuperação
  */
 &nbsp;
-const logger = require('../utils/logger');
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
 &nbsp;
 class BackupService {
-  constructor() {
-    this.backups = new Map();
-    this.restores = new Map();
-    this.replicationTasks = [];
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+<span class="cstat-no" title="statement not covered" >    this.backups = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.restores = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.replicationTasks = [];</span>
   }
 &nbsp;
   /**
@@ -671,7 +671,7 @@ class BackupService {
   /**
    * Criar backup incremental
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN]() {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER() {
     const backupId = <span class="cstat-no" title="statement not covered" >`backup_inc_${Date.now()}`;</span>
     const backup = <span class="cstat-no" title="statement not covered" >{</span>
       id: backupId,
@@ -691,7 +691,7 @@ class BackupService {
   /**
    * Agendar backups automáticos
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](config) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(config) {
 <span class="cstat-no" title="statement not covered" >    return {</span>
       enabled: true,
       schedule: config.schedule || 'daily',
@@ -705,7 +705,7 @@ class BackupService {
   /**
    * Restaurar de ponto específico no tempo (PITR)
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](restoreDate) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(restoreDate) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const restoreId = <span class="cstat-no" title="statement not covered" >`restore_${Date.now()}`;</span>
       const restore = <span class="cstat-no" title="statement not covered" >{</span>
@@ -775,7 +775,7 @@ class BackupService {
   /**
    * Configurar replicação geográfica
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](config) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(config) {
     const replication = <span class="cstat-no" title="statement not covered" >{</span>
       id: `repl_${Date.now()}`,
       primaryRegion: config.primaryRegion || 'sp-east',
@@ -800,7 +800,7 @@ class BackupService {
   /**
    * Obter versões de um arquivo
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](tableName) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(tableName) {
 <span class="cstat-no" title="statement not covered" >    return {</span>
       table: tableName,
       versions: [
@@ -862,13 +862,13 @@ class BackupService {
   /**
    ✅ NOVO: Validar integridade de banco de dados
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN]() {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER() {
 <span class="cstat-no" title="statement not covered" >    return {</span>
       timestamp: new Date().toISOString(),
       status: 'healthy',
       checks: {
         tableIntegrity: 'passed',
-        [REDACTED_TOKEN]: 'passed',
+        PLACEHOLDER: 'passed',
         indexConsistency: 'passed',
         dataConsistency: 'passed'
       },
@@ -878,7 +878,7 @@ class BackupService {
   }
 }
 &nbsp;
-module.exports = new BackupService();
+<span class="cstat-no" title="statement not covered" >module.exports = new BackupService();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -886,7 +886,7 @@ module.exports = new BackupService();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

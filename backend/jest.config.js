@@ -21,7 +21,7 @@ module.exports = {
   //   },
   // },
   testRegex: '(/__tests__/|\\.(test|spec))\\.js$',
-  [REDACTED_TOKEN]: ['/node_modules/', '/dist/', '/e2e/', '/coverage/'],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/', '/e2e/', '/coverage/'],
   verbose: true,
   maxWorkers: '50%',
 };

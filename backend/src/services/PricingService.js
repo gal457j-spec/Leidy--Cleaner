@@ -18,7 +18,7 @@ class PricingService {
    * Calcular preço dinâmico completo
    * Leva em conta: data, hora, cliente, histórico, etc
    */
-  async PricingService_Auto_207(data) {
+  async calculateDynamicPrice(data) {
     try {
       let basePrice = data.basePrice || 0;
 
@@ -29,12 +29,12 @@ class PricingService {
 
       // 2. Multiplicador por metragem
       if (data.metragem) {
-        basePrice += data.metragem * this.PricingService_Auto_207();
+        basePrice += data.metragem * this.getPricePerSquareMeter();
       }
 
       // 3. Multiplicador por tipo de limpeza
       if (data.cleaningType) {
-        basePrice *= this.PricingService_Auto_207(data.cleaningType);
+        basePrice *= this.getCleaningTypeMultiplier(data.cleaningType);
       }
 
       // 4. Multiplicador de data/hora (SURGE PRICING)
@@ -43,12 +43,12 @@ class PricingService {
 
       // 5. Multiplicador de frequência
       if (data.frequency) {
-        basePrice *= this.PricingService_Auto_207(data.frequency);
+        basePrice *= this.getFrequencyMultiplier(data.frequency);
       }
 
       // 6. Multiplicador de urgência
       if (data.urgency) {
-        basePrice *= this.PricingService_Auto_207(data.urgency);
+        basePrice *= this.getUrgencyMultiplier(data.urgency);
       }
 
       // 7. Desconto por lealdade (cliente recorrente)
@@ -60,8 +60,8 @@ class PricingService {
       basePrice -= discount;
 
       // 9. Adicionar taxa de serviço (configurável via pricing-matrix.json)
-      const PricingService_Auto_207 = (pricingMatrix.PricingService_Auto_207 || 5) / 100;
-      const serviceFee = basePrice * PricingService_Auto_207;
+      const serviceFeePercentage = (pricingMatrix.serviceFeePercentage || 5) / 100;
+      const serviceFee = basePrice * serviceFeePercentage;
       basePrice += serviceFee;
 
       // 10. Garantir preço mínimo (configurável)
@@ -74,14 +74,14 @@ class PricingService {
 
       // `loyaltyDiscount` é percentual; `discount` é valor absoluto sobre subtotal
       const subtotal = data.basePrice || (data.services ? data.services.reduce((s, x) => s + (x.basePrice || 0), 0) : 0);
-      const PricingService_Auto_207 = subtotal > 0 ? (discount / subtotal) : 0;
-      const combinedPercent = loyaltyDiscount + PricingService_Auto_207;
+      const discountPercentage = subtotal > 0 ? (discount / subtotal) : 0;
+      const combinedPercent = loyaltyDiscount + discountPercentage;
 
-      let PricingService_Auto_207 = discount;
+      let finalDiscount = discount;
       if (combinedPercent > maximumDiscount) {
         // limitar desconto absoluto para não ultrapassar o teto
-        const PricingService_Auto_207 = Math.max(0, maximumDiscount - loyaltyDiscount);
-        PricingService_Auto_207 = Math.round((subtotal * PricingService_Auto_207) * 100) / 100;
+        const maxAllowedDiscount = Math.max(0, maximumDiscount - loyaltyDiscount);
+        finalDiscount = Math.round((subtotal * maxAllowedDiscount) * 100) / 100;
       }
 
       // Recalcular preço final (re-aplicar service fee and min were already applied above)
@@ -96,13 +96,13 @@ class PricingService {
         basePrice: data.basePrice || subtotal,
         surgeMultiplier: surgeMultiplier,
         loyaltyDiscount: loyaltyDiscount,
-        totalDiscount: PricingService_Auto_207,
+        totalDiscount: finalDiscount,
         serviceFee: Math.round(serviceFee * 100) / 100,
         breakdown: {
           base: subtotal,
           surge: surgeMultiplier !== 1 ? `+${Math.round((surgeMultiplier - 1) * 100)}%` : '+0%',
           loyalty: loyaltyDiscount !== 0 ? `-${Math.round(loyaltyDiscount * 100)}%` : '0%',
-          discounts: PricingService_Auto_207,
+          discounts: finalDiscount,
           serviceFee: Math.round(serviceFee * 100) / 100
         }
       };
@@ -184,14 +184,14 @@ class PricingService {
   /**
    * Preço por metro quadrado
    */
-  PricingService_Auto_207() {
+  getPricePerSquareMeter() {
     return 0.5; // R$ 0.50 por m²
   }
 
   /**
    * Multiplicador por tipo de limpeza
    */
-  PricingService_Auto_207(type) {
+  getCleaningTypeMultiplier(type) {
     const multipliers = {
       standard: 1.0,
       deep: 1.5,
@@ -206,7 +206,7 @@ class PricingService {
   /**
    * Multiplicador por frequência
    */
-  PricingService_Auto_207(frequency) {
+  getFrequencyMultiplier(frequency) {
     const multipliers = {
       once: 1.0,
       weekly: 0.8,
@@ -219,7 +219,7 @@ class PricingService {
   /**
    * Multiplicador por urgência
    */
-  PricingService_Auto_207(urgency) {
+  getUrgencyMultiplier(urgency) {
     const multipliers = {
       normal: 1.0,
       express: 1.3,
@@ -268,25 +268,25 @@ class PricingService {
   /**
    * Simular múltiplas opções de preço
    */
-  async PricingService_Auto_207(data) {
+  async getPricingOptions(data) {
     const options = {};
     
     // Normal
-    options.normal = await this.PricingService_Auto_207({
+    options.normal = await this.calculateDynamicPrice({
       ...data,
       urgency: 'normal',
       frequency: 'once'
     });
 
     // Express
-    options.express = await this.PricingService_Auto_207({
+    options.express = await this.calculateDynamicPrice({
       ...data,
       urgency: 'express',
       frequency: 'once'
     });
 
     // Recorrente (desconto)
-    options.weekly = await this.PricingService_Auto_207({
+    options.weekly = await this.calculateDynamicPrice({
       ...data,
       frequency: 'weekly'
     });
@@ -299,7 +299,7 @@ class PricingService {
    * Retorna apenas o `finalPrice` numérico para testes e código antigo.
    */
   async calculatePrice(data) {
-    const result = await this.PricingService_Auto_207(data);
+    const result = await this.calculateDynamicPrice(data);
     if (result && typeof result.finalPrice === 'number') return result.finalPrice;
     // fallback: try to coerce if structure changed
     return Number(result) || 0;

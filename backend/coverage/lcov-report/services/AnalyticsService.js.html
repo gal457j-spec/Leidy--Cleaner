@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.22% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/71</span>
+                <span class='fraction'>0/71</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/25</span>
+                <span class='fraction'>0/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.35% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/56</span>
+                <span class='fraction'>0/56</span>
             </div>
         
             
@@ -250,11 +250,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -426,17 +426,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Analytics Service
  * Métricas em tempo real: revenue, bookings, conversão, churn, CLV
  */
 &nbsp;
-const logger = require('../utils/logger');
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
 &nbsp;
 class AnalyticsService {
-  constructor() {
-    this.metrics = {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+<span class="cstat-no" title="statement not covered" >    this.metrics = {</span>
       bookings: [],
       revenue: [],
       users: [],
@@ -524,7 +524,7 @@ class AnalyticsService {
   /**
    ✅ NOVO: Customer Lifetime Value (CLV)
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](userId) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(userId) {
     const userBookings = <span class="cstat-no" title="statement not covered" >this.metrics.bookings.filter(<span class="fstat-no" title="function not covered" >b </span>=&gt; <span class="cstat-no" title="statement not covered" >b.userId === userId)</span>;</span>
     const totalSpent = <span class="cstat-no" title="statement not covered" >userBookings.reduce(<span class="fstat-no" title="function not covered" >(s</span>um, b) =&gt; <span class="cstat-no" title="statement not covered" >sum + (b.price || 0),</span> 0);</span>
     const bookingCount = <span class="cstat-no" title="statement not covered" >userBookings.length;</span>
@@ -557,14 +557,14 @@ class AnalyticsService {
       churnedCount: churnedCustomers,
       totalCustomers,
       trend: 'Stable ✅',
-      riskCustomers: this.[REDACTED_TOKEN]()
+      riskCustomers: this.__PLACEHOLDER()
     };
   }
 &nbsp;
   /**
    ✅ NOVO: Identificar clientes em risco
    */
-<span class="fstat-no" title="function not covered" >  id</span>[REDACTED_TOKEN]() {
+<span class="fstat-no" title="function not covered" >  PL</span>ACEHOLDER() {
     const thirtyDaysAgo = <span class="cstat-no" title="statement not covered" >new Date();</span>
 <span class="cstat-no" title="statement not covered" >    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);</span>
 &nbsp;
@@ -583,7 +583,7 @@ class AnalyticsService {
 <span class="cstat-no" title="statement not covered" >      if (lastBooking.timestamp &lt; thirtyDaysAgo &amp;&amp; bookings.length &gt; 1) {</span>
 <span class="cstat-no" title="statement not covered" >        atRisk.push({</span>
           userId,
-          [REDACTED_TOKEN]: Math.floor(
+          PLACEHOLDER: Math.floor(
             (new Date() - lastBooking.timestamp) / (1000 * 60 * 60 * 24)
           ),
           totalSpent: bookings.reduce(<span class="fstat-no" title="function not covered" >(s</span>, b) =&gt; <span class="cstat-no" title="statement not covered" >s + (b.price || 0),</span> 0)
@@ -608,7 +608,7 @@ class AnalyticsService {
   }
 }
 &nbsp;
-module.exports = new AnalyticsService();
+<span class="cstat-no" title="statement not covered" >module.exports = new AnalyticsService();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -616,7 +616,7 @@ module.exports = new AnalyticsService();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

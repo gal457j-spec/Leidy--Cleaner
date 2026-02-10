@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for services/[REDACTED_TOKEN].js</title>
+    <title>Code coverage report for services/SmartNotificationService.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> [REDACTED_TOKEN].js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> SmartNotificationService.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.31% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/95</span>
+                <span class='fraction'>0/95</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/25</span>
+                <span class='fraction'>0/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.97% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/86</span>
+                <span class='fraction'>0/86</span>
             </div>
         
             
@@ -408,14 +408,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -742,30 +742,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Smart Notification Service
  * Notificações inteligentes multi-canal, preferências, A/B testing, timing otimizado
  */
 &nbsp;
-const logger = require('../utils/logger');
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
 &nbsp;
-class [REDACTED_TOKEN] {
-  constructor() {
-    this.notifications = new Map();
-    this.userPreferences = new Map();
-    this.abTests = new Map();
-    this.notificationLog = [];
+class SmartNotificationService_Auto_227 {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+<span class="cstat-no" title="statement not covered" >    this.notifications = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.userPreferences = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.abTests = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.notificationLog = [];</span>
   }
 &nbsp;
   /**
    * Enviar notificação inteligente (melhor canal + melhor timing)
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](userId, message) {
+<span class="fstat-no" title="function not covered" >  as</span>ync SmartNotificationService_Auto_227(userId, message) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const preferences = <span class="cstat-no" title="statement not covered" >this.getUserPreferences(userId);</span>
-      const optimalChannel = <span class="cstat-no" title="statement not covered" >this.[REDACTED_TOKEN](userId, preferences);</span>
-      const optimalTime = <span class="cstat-no" title="statement not covered" >this.[REDACTED_TOKEN](userId);</span>
+      const optimalChannel = <span class="cstat-no" title="statement not covered" >this.SmartNotificationService_Auto_227(userId, preferences);</span>
+      const optimalTime = <span class="cstat-no" title="statement not covered" >this.SmartNotificationService_Auto_227(userId);</span>
 &nbsp;
       const notificationId = <span class="cstat-no" title="statement not covered" >`notif_smart_${Date.now()}`;</span>
       const notification = <span class="cstat-no" title="statement not covered" >{</span>
@@ -805,7 +805,7 @@ class [REDACTED_TOKEN] {
   /**
    * Determinar melhor canal para o usuário
    */
-<span class="fstat-no" title="function not covered" >  de</span>[REDACTED_TOKEN](userId, preferences) {
+<span class="fstat-no" title="function not covered" >  Sm</span>artNotificationService_Auto_227(userId, preferences) {
     const weights = <span class="cstat-no" title="statement not covered" >{</span>
       push: 0.4,
       email: 0.3,
@@ -825,7 +825,7 @@ class [REDACTED_TOKEN] {
   /**
    * Calcular melhor hora para enviar notificação
    */
-<span class="fstat-no" title="function not covered" >  ca</span>[REDACTED_TOKEN](userId) {
+<span class="fstat-no" title="function not covered" >  Sm</span>artNotificationService_Auto_227(userId) {
     // Análise de histórico: quando o usuário mais interage
     const userHistory = <span class="cstat-no" title="statement not covered" >this.notificationLog.filter(<span class="fstat-no" title="function not covered" >n </span>=&gt; <span class="cstat-no" title="statement not covered" >n.userId === userId)</span>;</span>
 &nbsp;
@@ -977,7 +977,7 @@ class [REDACTED_TOKEN] {
   /**
    ✅ NOVO: Registrar interação de notificação
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](notificationId, action = <span class="branch-0 cbranch-no" title="branch not covered" >'opened')</span> {
+<span class="fstat-no" title="function not covered" >  as</span>ync SmartNotificationService_Auto_227(notificationId, action = <span class="branch-0 cbranch-no" title="branch not covered" >'opened')</span> {
     const notification = <span class="cstat-no" title="statement not covered" >this.notifications.get(notificationId);</span>
 <span class="cstat-no" title="statement not covered" >    if (!notification) <span class="cstat-no" title="statement not covered" >return;</span></span>
 &nbsp;
@@ -1008,7 +1008,7 @@ class [REDACTED_TOKEN] {
   /**
    * Obter métricas de engajamento
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](timeWindow = <span class="branch-0 cbranch-no" title="branch not covered" >7)</span> {
+<span class="fstat-no" title="function not covered" >  as</span>ync SmartNotificationService_Auto_227(timeWindow = <span class="branch-0 cbranch-no" title="branch not covered" >7)</span> {
     const recentNotifs = <span class="cstat-no" title="statement not covered" >this.notificationLog.filter(<span class="fstat-no" title="function not covered" >n </span>=&gt;</span>
 <span class="cstat-no" title="statement not covered" >      new Date() - new Date(n.timestamp) &lt; timeWindow * 24 * 60 * 60 * 1000</span>
     );
@@ -1082,7 +1082,7 @@ class [REDACTED_TOKEN] {
   }
 }
 &nbsp;
-module.exports = new [REDACTED_TOKEN]();
+<span class="cstat-no" title="statement not covered" >module.exports = new SmartNotificationService_Auto_227();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1090,7 +1090,7 @@ module.exports = new [REDACTED_TOKEN]();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

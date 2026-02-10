@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for services/[REDACTED_TOKEN].js</title>
+    <title>Code coverage report for services/RecommendationService.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> [REDACTED_TOKEN].js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> RecommendationService.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.61% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/65</span>
+                <span class='fraction'>0/65</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.08% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/59</span>
+                <span class='fraction'>0/59</span>
             </div>
         
             
@@ -313,8 +313,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -550,17 +550,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Recommendation Service
  * Sistema inteligente de recomendação de serviços
  * ✅ Cross-selling automático + Personalização + Churn Detection
  */
 &nbsp;
-const { getDb } = require('../db/sqlite');
-const logger = require('../utils/logger');
+const { getDb } = <span class="cstat-no" title="statement not covered" >require('../db/sqlite');</span>
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
 &nbsp;
-class [REDACTED_TOKEN] {
+class RecommendationService_Auto_214 {
   /**
    * Recomendar serviços correlatos
    * Baseado em:
@@ -568,7 +568,7 @@ class [REDACTED_TOKEN] {
    * 2. Popularidade regional
    * 3. Histórico do cliente
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](userId, currentServiceId, limit = <span class="branch-0 cbranch-no" title="branch not covered" >3)</span> {
+<span class="fstat-no" title="function not covered" >  as</span>ync RecommendationService_Auto_214(userId, currentServiceId, limit = <span class="branch-0 cbranch-no" title="branch not covered" >3)</span> {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const db = <span class="cstat-no" title="statement not covered" >await getDb();</span>
 &nbsp;
@@ -600,7 +600,7 @@ class [REDACTED_TOKEN] {
       // 2. Se usuário é conhecido, recomendação personalizada
       let personalizedRecs = <span class="cstat-no" title="statement not covered" >[];</span>
 <span class="cstat-no" title="statement not covered" >      if (userId) {</span>
-<span class="cstat-no" title="statement not covered" >        personalizedRecs = await this.[REDACTED_TOKEN](db, userId, currentServiceId, limit);</span>
+<span class="cstat-no" title="statement not covered" >        personalizedRecs = await this.RecommendationService_Auto_214(db, userId, currentServiceId, limit);</span>
       }
 &nbsp;
       // 3. Combinar e deduplicas
@@ -624,7 +624,7 @@ class [REDACTED_TOKEN] {
   /**
    * Recomendações personalizadas por usuário
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](db, userId, currentServiceId, limit) {
+<span class="fstat-no" title="function not covered" >  as</span>ync RecommendationService_Auto_214(db, userId, currentServiceId, limit) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const userHistory = <span class="cstat-no" title="statement not covered" >await new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        db.all(</span>
@@ -775,7 +775,7 @@ class [REDACTED_TOKEN] {
   /**
    * Upsell recommendations
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](userId, currentServiceId) {
+<span class="fstat-no" title="function not covered" >  as</span>ync RecommendationService_Auto_214(userId, currentServiceId) {
     const complementary = <span class="cstat-no" title="statement not covered" >{</span>
       'limpeza-residencial': ['higienização', 'deodoração', 'organização'],
       'limpeza-comercial': ['conservação', 'manutenção', 'higienização'],
@@ -794,7 +794,7 @@ class [REDACTED_TOKEN] {
   }
 }
 &nbsp;
-module.exports = new [REDACTED_TOKEN]();
+<span class="cstat-no" title="statement not covered" >module.exports = new RecommendationService_Auto_214();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -802,7 +802,7 @@ module.exports = new [REDACTED_TOKEN]();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

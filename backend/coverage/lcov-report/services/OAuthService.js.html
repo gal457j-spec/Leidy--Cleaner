@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.51% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/133</span>
+                <span class='fraction'>0/133</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/16</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.51% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/133</span>
+                <span class='fraction'>0/133</span>
             </div>
         
             
@@ -471,14 +471,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -866,27 +866,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * OAuth Service
  * Handles OAuth 2.0 authentication with Google, Facebook, WhatsApp
  * Also handles OTP via SMS and Email
  */
 &nbsp;
-const logger = require('../utils/logger');
-const crypto = require('crypto');
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
+const crypto = <span class="cstat-no" title="statement not covered" >require('crypto');</span>
 &nbsp;
 class OAuthService {
-  constructor() {
-    this.oauthProviders = new Map();
-    this.otpStorage = new Map(); // For production, use Redis
-    this.userTokens = new Map(); // For production, use database
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+<span class="cstat-no" title="statement not covered" >    this.oauthProviders = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.otpStorage = new Map(); </span>// For production, use Redis
+<span class="cstat-no" title="statement not covered" >    this.userTokens = new Map(); </span>// For production, use database
   }
 &nbsp;
   /**
    * Google OAuth Callback Handler
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](googleProfile) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(googleProfile) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      logger.info(`Google OAuth callback for user: ${googleProfile.email}`);</span>
 &nbsp;
@@ -923,7 +923,7 @@ class OAuthService {
   /**
    * Facebook OAuth Callback Handler
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](facebookProfile) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(facebookProfile) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      logger.info(`Facebook OAuth callback for user: ${facebookProfile.email}`);</span>
 &nbsp;
@@ -958,7 +958,7 @@ class OAuthService {
   /**
    * WhatsApp Business API Callback Handler
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](whatsappProfile) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(whatsappProfile) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      logger.info(`WhatsApp OAuth callback for user: ${whatsappProfile.phone}`);</span>
 &nbsp;
@@ -1268,7 +1268,7 @@ class OAuthService {
   }
 }
 &nbsp;
-module.exports = new OAuthService();
+<span class="cstat-no" title="statement not covered" >module.exports = new OAuthService();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1276,7 +1276,7 @@ module.exports = new OAuthService();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

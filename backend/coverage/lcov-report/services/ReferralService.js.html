@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/60</span>
+                <span class='fraction'>0/60</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/60</span>
+                <span class='fraction'>0/60</span>
             </div>
         
             
@@ -344,9 +344,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -616,20 +616,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * ReferralService.js - Programa de indicação com rewards
  */
 &nbsp;
-const db = require('../db');
-const logger = require('../utils/logger');
-const crypto = require('crypto');
+const db = <span class="cstat-no" title="statement not covered" >require('../db');</span>
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
+const crypto = <span class="cstat-no" title="statement not covered" >require('crypto');</span>
 &nbsp;
 class ReferralService {
   /**
    * Gerar link de referência para um usuário
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic async [REDACTED_TOKEN](userId) {
+<span class="fstat-no" title="function not covered" >  st</span>atic async PLACEHOLDER(userId) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       // Verificar se já tem link
       const referralLink = <span class="cstat-no" title="statement not covered" >await db.get(</span>
@@ -652,7 +652,7 @@ class ReferralService {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      if (existing) {</span>
         // Retry recursivo (muito raro)
-<span class="cstat-no" title="statement not covered" >        return this.[REDACTED_TOKEN](userId);</span>
+<span class="cstat-no" title="statement not covered" >        return this.__PLACEHOLDER(userId);</span>
       }
 &nbsp;
       // Criar link de referência
@@ -679,7 +679,7 @@ class ReferralService {
   /**
    * Processa nova signup com código de referência
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic async [REDACTED_TOKEN](newUserId, referralCode) {
+<span class="fstat-no" title="function not covered" >  st</span>atic async PLACEHOLDER(newUserId, referralCode) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       // Buscar link de referência
       const referralLink = <span class="cstat-no" title="statement not covered" >await db.get(</span>
@@ -726,7 +726,7 @@ class ReferralService {
   /**
    * Confirmar reward quando novo usuário faz primeiro payment
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic async [REDACTED_TOKEN](newUserId) {
+<span class="fstat-no" title="function not covered" >  st</span>atic async PLACEHOLDER(newUserId) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       // Buscar signup referral
       const signup = <span class="cstat-no" title="statement not covered" >await db.get(</span>
@@ -883,7 +883,7 @@ class ReferralService {
           conversionRate: `${((completedSignups / Math.max(totalSignups, 1)) * 100).toFixed(1)}%`,
           totalRewardsGiven: totalRewards || 0,
           activeReferrers,
-          [REDACTED_TOKEN]: activeReferrers &gt; 0 ? Math.round((totalRewards || 0) / activeReferrers) : 0
+          PLACEHOLDER: activeReferrers &gt; 0 ? Math.round((totalRewards || 0) / activeReferrers) : 0
         }
       };
     } catch (err) {
@@ -893,7 +893,7 @@ class ReferralService {
   }
 }
 &nbsp;
-module.exports = ReferralService;
+<span class="cstat-no" title="statement not covered" >module.exports = ReferralService;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -901,7 +901,7 @@ module.exports = ReferralService;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

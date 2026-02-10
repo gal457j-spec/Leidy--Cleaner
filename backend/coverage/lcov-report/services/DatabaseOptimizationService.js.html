@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for services/[REDACTED_TOKEN].js</title>
+    <title>Code coverage report for services/DatabaseOptimizationService.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> [REDACTED_TOKEN].js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> DatabaseOptimizationService.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/75</span>
+                <span class='fraction'>0/75</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.26% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/19</span>
+                <span class='fraction'>0/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/75</span>
+                <span class='fraction'>0/75</span>
             </div>
         
             
@@ -405,12 +405,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -736,18 +736,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Database Optimization Service
  * Análise de queries, connection pooling, e indices
  */
 &nbsp;
-const logger = require('../utils/logger');
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
 &nbsp;
-class [REDACTED_TOKEN] {
-  constructor() {
-    this.queryStats = new Map();
-    this.slowQueryThreshold = 100; // ms
+class DatabaseOptimizationService_Auto_185 {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+<span class="cstat-no" title="statement not covered" >    this.queryStats = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.slowQueryThreshold = 100; </span>// ms
   }
 &nbsp;
   /**
@@ -912,7 +912,7 @@ class [REDACTED_TOKEN] {
           column: 'email'
         },
         {
-          name: '[REDACTED_TOKEN]',
+          name: 'DatabaseOptimizationService_Auto_185',
           table: 'bookings',
           unique: false,
           seq: 0,
@@ -934,7 +934,7 @@ class [REDACTED_TOKEN] {
   /**
    ✅ NOVO: Validar integridade de banco
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](db) {
+<span class="fstat-no" title="function not covered" >  as</span>ync DatabaseOptimizationService_Auto_185(db) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       // SQLite PRAGMA integrity_check;
       // Simular resposta
@@ -1038,7 +1038,7 @@ class [REDACTED_TOKEN] {
   /**
    ✅ NOVO: Backup incrementar
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](db, backupPath) {
+<span class="fstat-no" title="function not covered" >  as</span>ync DatabaseOptimizationService_Auto_185(db, backupPath) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      logger.log({</span>
         level: 'info',
@@ -1073,7 +1073,7 @@ class [REDACTED_TOKEN] {
   }
 }
 &nbsp;
-module.exports = new [REDACTED_TOKEN]();
+<span class="cstat-no" title="statement not covered" >module.exports = new DatabaseOptimizationService_Auto_185();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1081,7 +1081,7 @@ module.exports = new [REDACTED_TOKEN]();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

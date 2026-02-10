@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.53% </span>
+                <span class="strong">69.23% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/26</span>
+                <span class='fraction'>18/26</span>
             </div>
         
             
@@ -171,30 +171,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -202,7 +193,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -243,8 +243,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">94x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -253,12 +253,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -267,8 +267,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Authentication Middleware
  * Verifica token JWT
@@ -278,8 +278,8 @@ const jwt = require('jsonwebtoken');
 const logger = require('../utils/logger');
 &nbsp;
 // Use environment variables or defaults for dev
-const JWT_SECRET = process.env.JWT_SECRET || <span class="branch-1 cbranch-no" title="branch not covered" >'[REDACTED_TOKEN]';</span>
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || <span class="branch-1 cbranch-no" title="branch not covered" >'[REDACTED_TOKEN]';</span>
+const JWT_SECRET = process.env.JWT_SECRET || 'PLACEHOLDER';
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'PLACEHOLDER';
 &nbsp;
 // Warning if not set in production
 <span class="missing-if-branch" title="if path not taken" >I</span>if (process.env.NODE_ENV === 'production' &amp;&amp; (<span class="branch-1 cbranch-no" title="branch not covered" >!process.env.JWT_SECRET </span>|| <span class="branch-2 cbranch-no" title="branch not covered" >!process.env.JWT_REFRESH_SECRET)</span>) {
@@ -297,7 +297,7 @@ const generateToken = <span class="fstat-no" title="function not covered" >(u</s
 };
 &nbsp;
 // ✅ CORRIGIDO: Gerar refresh token
-const [REDACTED_TOKEN] = <span class="fstat-no" title="function not covered" >(u</span>serId) =&gt; {
+const generateRefreshToken = <span class="fstat-no" title="function not covered" >(u</span>serId) =&gt; {
 <span class="cstat-no" title="statement not covered" >  return jwt.sign(</span>
     { userId },
     JWT_REFRESH_SECRET,
@@ -365,7 +365,7 @@ module.exports = {
   authenticateToken,
   authorizeRole,
   generateToken,     // ✅ NOVO
-  [REDACTED_TOKEN], // ✅ NOVO
+  generateRefreshToken, // ✅ NOVO
   requireRole, // compat
 };
 &nbsp;
@@ -379,7 +379,7 @@ module.exports.authorize = module.exports.authorizeRole;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

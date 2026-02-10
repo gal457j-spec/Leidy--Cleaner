@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for services/[REDACTED_TOKEN].js</title>
+    <title>Code coverage report for services/HourPackagingService.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> [REDACTED_TOKEN].js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> HourPackagingService.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.22% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/62</span>
+                <span class='fraction'>0/62</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.5% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/57</span>
+                <span class='fraction'>0/57</span>
             </div>
         
             
@@ -287,7 +287,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -498,22 +498,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Hour Packaging Service - Sistema de Pacotes de Horas
  * Cliente compra pacotes de horas (40h, 60h, 80h, etc)
  * Depois usa conforme necessário com desconto nas taxas
  */
 &nbsp;
-const { getDb } = require('../db/sqlite');
+const { getDb } = <span class="cstat-no" title="statement not covered" >require('../db/sqlite');</span>
 &nbsp;
-class [REDACTED_TOKEN] {
+class HourPackagingService_Auto_191 {
   /**
    * Gerar lista de pacotes disponíveis
    * 40h (primeira), depois +20h cada
    * Sem máximo fixo, mas calculamos até um razoável (420h = 10 pacotes)
    */
-<span class="fstat-no" title="function not covered" >  ge</span>tAvailablePackages() {
+<span class="fstat-no" title="function not covered" >  Ho</span>urPackagingService_Auto_191() {
     const packages = <span class="cstat-no" title="statement not covered" >[];</span>
 <span class="cstat-no" title="statement not covered" >    for (let i = <span class="cstat-no" title="statement not covered" >40;</span> i &lt;= 420; i += 20) {</span>
       const pricePerHour = <span class="cstat-no" title="statement not covered" >this.getPricePerHour(i);</span>
@@ -647,7 +647,7 @@ class [REDACTED_TOKEN] {
         usedHours: credit.used_hours,
       };
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      console.error('[[REDACTED_TOKEN]] Erro ao buscar crédito:', error.message);</span>
+<span class="cstat-no" title="statement not covered" >      console.error('[HourPackagingService_Auto_191] Erro ao buscar crédito:', error.message);</span>
 <span class="cstat-no" title="statement not covered" >      return { hasCredit: false, availableHours: 0 };</span>
     }
   }
@@ -709,14 +709,14 @@ class [REDACTED_TOKEN] {
    * Ex: se pede 50h, sugere pacote de 60h
    */
 <span class="fstat-no" title="function not covered" >  su</span>ggestPackage(requestedHours) {
-    const packages = <span class="cstat-no" title="statement not covered" >this.[REDACTED_TOKEN]();</span>
+    const packages = <span class="cstat-no" title="statement not covered" >this.HourPackagingService_Auto_191();</span>
     // Encontrar o primeiro pacote que atende às horas solicitadas
     const suggested = <span class="cstat-no" title="statement not covered" >packages.find(<span class="fstat-no" title="function not covered" >(p</span>kg) =&gt; <span class="cstat-no" title="statement not covered" >pkg.hours &gt;= requestedHours)</span>;</span>
 <span class="cstat-no" title="statement not covered" >    return suggested || packages[packages.length - 1]; </span>// fallback para maior
   }
 }
 &nbsp;
-module.exports = new [REDACTED_TOKEN]();
+<span class="cstat-no" title="statement not covered" >module.exports = new HourPackagingService_Auto_191();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -724,7 +724,7 @@ module.exports = new [REDACTED_TOKEN]();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

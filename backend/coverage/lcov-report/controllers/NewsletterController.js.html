@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for controllers/[REDACTED_TOKEN].js</title>
+    <title>Code coverage report for controllers/NewsletterController.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">controllers</a> [REDACTED_TOKEN].js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">controllers</a> NewsletterController.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.55% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/90</span>
+                <span class='fraction'>0/90</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">13.95% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/43</span>
+                <span class='fraction'>0/43</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.55% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/90</span>
+                <span class='fraction'>0/90</span>
             </div>
         
             
@@ -395,9 +395,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -405,12 +405,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -487,11 +487,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -540,8 +540,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -716,28 +716,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Newsletter Controller
  * Gerencia inscrições de newsletter
  */
 &nbsp;
-const { getDb } = require('../db/sqlite');
-const EmailService = require('../services/EmailService');
-const logger = require('../utils/logger');
+const { getDb } = <span class="cstat-no" title="statement not covered" >require('../db/sqlite');</span>
+const EmailService = <span class="cstat-no" title="statement not covered" >require('../services/EmailService');</span>
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
 &nbsp;
-class [REDACTED_TOKEN] {
+class NewsletterController_Auto_65 {
   /**
    * Inscrever email na newsletter
    * POST /api/newsletter/subscribe
    */
-  static async subscribe(req, res) {
-    try {
-      const { email, name } = req.body;
+<span class="fstat-no" title="function not covered" >  st</span>atic async subscribe(req, res) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      const { email, name } = <span class="cstat-no" title="statement not covered" >req.body;</span>
 &nbsp;
       // Validar email
-      <span class="missing-if-branch" title="else path not taken" >E</span>if (!email || !this.isValidEmail(email)) {
-        return res.status(400).json({
+<span class="cstat-no" title="statement not covered" >      if (!email || !this.isValidEmail(email)) {</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).json({</span>
           success: false,
           message: 'Email inválido'
         });
@@ -754,7 +754,7 @@ class [REDACTED_TOKEN] {
       // Verificar se já existe
       const db = <span class="cstat-no" title="statement not covered" >await getDb();</span>
       const existing = <span class="cstat-no" title="statement not covered" >await db.get(</span>
-        'SELECT id FROM [REDACTED_TOKEN] WHERE email = ?',
+        'SELECT id FROM NewsletterController_Auto_65 WHERE email = ?',
         email
       );
 &nbsp;
@@ -770,7 +770,7 @@ class [REDACTED_TOKEN] {
       const subscribedAt = <span class="cstat-no" title="statement not covered" >new Date().toISOString();</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      await db.run(</span>
-        `INSERT INTO [REDACTED_TOKEN] (id, email, name, status, subscribedAt, unsubscribedAt)
+        `INSERT INTO NewsletterController_Auto_65 (id, email, name, status, subscribedAt, unsubscribedAt)
          VALUES (?, ?, ?, ?, ?, ?)`,
         id,
         email.toLowerCase(),
@@ -783,7 +783,7 @@ class [REDACTED_TOKEN] {
       // Enviar email de confirmação
 <span class="cstat-no" title="statement not covered" >      try {</span>
         const emailService = <span class="cstat-no" title="statement not covered" >new EmailService();</span>
-<span class="cstat-no" title="statement not covered" >        await emailService.[REDACTED_TOKEN](email, name);</span>
+<span class="cstat-no" title="statement not covered" >        await emailService.NewsletterController_Auto_65(email, name);</span>
 <span class="cstat-no" title="statement not covered" >        logger.info(`Newsletter subscription: ${email}`);</span>
       } catch (emailError) {
 <span class="cstat-no" title="statement not covered" >        logger.warn(`Email envio falhou mas inscrição foi salva: ${email}`, emailError);</span>
@@ -813,12 +813,12 @@ class [REDACTED_TOKEN] {
    * Desinscrever da newsletter
    * POST /api/newsletter/unsubscribe
    */
-  static async unsubscribe(req, res) {
-    try {
-      const { email } = req.body;
+<span class="fstat-no" title="function not covered" >  st</span>atic async unsubscribe(req, res) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      const { email } = <span class="cstat-no" title="statement not covered" >req.body;</span>
 &nbsp;
-      <span class="missing-if-branch" title="else path not taken" >E</span>if (!email || !this.isValidEmail(email)) {
-        return res.status(400).json({
+<span class="cstat-no" title="statement not covered" >      if (!email || !this.isValidEmail(email)) {</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).json({</span>
           success: false,
           message: 'Email inválido'
         });
@@ -828,7 +828,7 @@ class [REDACTED_TOKEN] {
       
       // Verificar se existe
       const subscriber = <span class="cstat-no" title="statement not covered" >await db.get(</span>
-        'SELECT id FROM [REDACTED_TOKEN] WHERE email = ?',
+        'SELECT id FROM NewsletterController_Auto_65 WHERE email = ?',
         email.toLowerCase()
       );
 &nbsp;
@@ -842,7 +842,7 @@ class [REDACTED_TOKEN] {
       // Atualizar status
       const unsubscribedAt = <span class="cstat-no" title="statement not covered" >new Date().toISOString();</span>
 <span class="cstat-no" title="statement not covered" >      await db.run(</span>
-        'UPDATE [REDACTED_TOKEN] SET status = ?, unsubscribedAt = ? WHERE email = ?',
+        'UPDATE NewsletterController_Auto_65 SET status = ?, unsubscribedAt = ? WHERE email = ?',
         'unsubscribed',
         unsubscribedAt,
         email.toLowerCase()
@@ -866,9 +866,9 @@ class [REDACTED_TOKEN] {
   /**
    * Validar formato de email
    */
-  static isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+<span class="fstat-no" title="function not covered" >  st</span>atic isValidEmail(email) {
+    const emailRegex = <span class="cstat-no" title="statement not covered" >/^[^\s@]+@[^\s@]+\.[^\s@]+$/;</span>
+<span class="cstat-no" title="statement not covered" >    return emailRegex.test(email);</span>
   }
 &nbsp;
   /**
@@ -883,7 +883,7 @@ class [REDACTED_TOKEN] {
       
       const offset = <span class="cstat-no" title="statement not covered" >(page - 1) * limit;</span>
       
-      let query = <span class="cstat-no" title="statement not covered" >'SELECT * FROM [REDACTED_TOKEN]';</span>
+      let query = <span class="cstat-no" title="statement not covered" >'SELECT * FROM NewsletterController_Auto_65';</span>
       const params = <span class="cstat-no" title="statement not covered" >[];</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      if (status &amp;&amp; status !== 'all') {</span>
@@ -897,7 +897,7 @@ class [REDACTED_TOKEN] {
       const subscribers = <span class="cstat-no" title="statement not covered" >await db.all(query, params);</span>
 &nbsp;
       // Contar total
-      let countQuery = <span class="cstat-no" title="statement not covered" >'SELECT COUNT(*) as total FROM [REDACTED_TOKEN]';</span>
+      let countQuery = <span class="cstat-no" title="statement not covered" >'SELECT COUNT(*) as total FROM NewsletterController_Auto_65';</span>
 <span class="cstat-no" title="statement not covered" >      if (status &amp;&amp; status !== 'all') {</span>
 <span class="cstat-no" title="statement not covered" >        countQuery += ' WHERE status = ?';</span>
       }
@@ -944,7 +944,7 @@ class [REDACTED_TOKEN] {
       
       // Obter todos os inscritos ativos
       const subscribers = <span class="cstat-no" title="statement not covered" >await db.all(</span>
-        'SELECT email, name FROM [REDACTED_TOKEN] WHERE status = ? ORDER BY subscribedAt DESC',
+        'SELECT email, name FROM NewsletterController_Auto_65 WHERE status = ? ORDER BY subscribedAt DESC',
         'active'
       );
 &nbsp;
@@ -1005,21 +1005,21 @@ class [REDACTED_TOKEN] {
       const db = <span class="cstat-no" title="statement not covered" >await getDb();</span>
 &nbsp;
       const totalActive = <span class="cstat-no" title="statement not covered" >await db.get(</span>
-        'SELECT COUNT(*) as count FROM [REDACTED_TOKEN] WHERE status = ?',
+        'SELECT COUNT(*) as count FROM NewsletterController_Auto_65 WHERE status = ?',
         'active'
       );
 &nbsp;
       const totalUnsubscribed = <span class="cstat-no" title="statement not covered" >await db.get(</span>
-        'SELECT COUNT(*) as count FROM [REDACTED_TOKEN] WHERE status = ?',
+        'SELECT COUNT(*) as count FROM NewsletterController_Auto_65 WHERE status = ?',
         'unsubscribed'
       );
 &nbsp;
       const totalAll = <span class="cstat-no" title="statement not covered" >await db.get(</span>
-        'SELECT COUNT(*) as count FROM [REDACTED_TOKEN]'
+        'SELECT COUNT(*) as count FROM NewsletterController_Auto_65'
       );
 &nbsp;
       const recentSubscribers = <span class="cstat-no" title="statement not covered" >await db.all(</span>
-        'SELECT email, name, subscribedAt FROM [REDACTED_TOKEN] WHERE status = ? ORDER BY subscribedAt DESC LIMIT 10',
+        'SELECT email, name, subscribedAt FROM NewsletterController_Auto_65 WHERE status = ? ORDER BY subscribedAt DESC LIMIT 10',
         'active'
       );
 &nbsp;
@@ -1043,7 +1043,7 @@ class [REDACTED_TOKEN] {
   }
 }
 &nbsp;
-module.exports = [REDACTED_TOKEN];
+<span class="cstat-no" title="statement not covered" >module.exports = NewsletterController_Auto_65;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1051,7 +1051,7 @@ module.exports = [REDACTED_TOKEN];
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

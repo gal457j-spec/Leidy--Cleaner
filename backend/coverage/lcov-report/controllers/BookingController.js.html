@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.01% </span>
+                <span class="strong">28.16% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>47/174</span>
+                <span class='fraction'>49/174</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.05% </span>
+                <span class="strong">25.31% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>19/79</span>
+                <span class='fraction'>20/79</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.01% </span>
+                <span class="strong">28.16% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>47/174</span>
+                <span class='fraction'>49/174</span>
             </div>
         
             
@@ -918,10 +918,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -955,30 +955,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1064,7 +1064,7 @@
  */
 &nbsp;
 const { getDb } = require('../db/sqlite'); // ✅ Usar pool centralizado
-const { [REDACTED_TOKEN], [REDACTED_TOKEN] } = require('../utils/priceCalculator');
+const { calculatePrice, generatePriceSummary } = require('../utils/priceCalculator');
 const ValidationService = require('../services/ValidationService');
 const CacheService = require('../services/CacheService');
 const QueryCacheService = require('../services/QueryCacheService');
@@ -1158,11 +1158,11 @@ class BookingController {
         status: 'pending'
       };
 &nbsp;
-      const priceCalc = <span class="cstat-no" title="statement not covered" >[REDACTED_TOKEN](booking, service);</span>
+      const priceCalc = <span class="cstat-no" title="statement not covered" >PLACEHOLDER(booking, service);</span>
 <span class="cstat-no" title="statement not covered" >      booking.base_price = priceCalc.basePrice;</span>
 <span class="cstat-no" title="statement not covered" >      booking.extra_quarter_hours = priceCalc.extraQuarter;</span>
 <span class="cstat-no" title="statement not covered" >      booking.staff_fee = priceCalc.staffFee;</span>
-<span class="cstat-no" title="statement not covered" >      booking.[REDACTED_TOKEN] = priceCalc.postWorkAdjustment;</span>
+<span class="cstat-no" title="statement not covered" >      booking.__PLACEHOLDER = priceCalc.postWorkAdjustment;</span>
 <span class="cstat-no" title="statement not covered" >      booking.final_price = priceCalc.finalPrice;</span>
 &nbsp;
       // ✅ Aplicar bônus de fidelidade
@@ -1175,12 +1175,12 @@ class BookingController {
       const result = <span class="cstat-no" title="statement not covered" >await db.run(`INSERT INTO bookings (</span>
           user_id, service_id, date, time, duration_hours,
           address, phone, base_price, extra_quarter_hours,
-          staff_fee, [REDACTED_TOKEN], final_price,
+          staff_fee, PLACEHOLDER, final_price,
           is_post_work, has_extra_quarter, status, notes
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, validated.userId, validated.serviceId, validated.date, validated.time, 
       validated.durationHours, validated.address, validated.phone,
       booking.base_price, booking.extra_quarter_hours,
-      booking.staff_fee, booking.[REDACTED_TOKEN], booking.final_price,
+      booking.staff_fee, booking.__PLACEHOLDER, booking.final_price,
       booking.is_post_work, booking.has_extra_quarter, 'pending', sanitizedNotes);
 &nbsp;
       // ✅ Invalidar cache
@@ -1201,7 +1201,7 @@ class BookingController {
       // ✅ Enfileirar email de confirmação (assíncrono - não bloqueia resposta)
 <span class="cstat-no" title="statement not covered" >      if (user.email) {</span>
 <span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >          await EmailQueueService.[REDACTED_TOKEN](</span>
+<span class="cstat-no" title="statement not covered" >          await EmailQueueService.__PLACEHOLDER(</span>
             user.email,
             user.name || user.full_name,
             {
@@ -1248,7 +1248,7 @@ class BookingController {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      res.status(500).json({</span>
         error: 'Erro ao criar agendamento',
-        code: '[REDACTED_TOKEN]'
+        code: 'PLACEHOLDER'
       });
 <span class="cstat-no" title="statement not covered" >        logger.error('Error creating booking', { </span>
           error: error.message,
@@ -1415,10 +1415,10 @@ class BookingController {
 &nbsp;
       await db.run(query, params);
 &nbsp;
-      const booking = <span class="cstat-no" title="statement not covered" >await db.get('SELECT * FROM bookings WHERE id = ?', bookingId);</span>
+      const booking = await db.get('SELECT * FROM bookings WHERE id = ?', bookingId);
 &nbsp;
       // ✅ NOVO: Invalidar cache de bookings do usuário
-<span class="cstat-no" title="statement not covered" >      QueryCacheService.invalidateUserCache(booking.user_id);</span>
+      QueryCacheService.invalidateUserCache(booking.user_id);
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      await db.close();</span>
 <span class="cstat-no" title="statement not covered" >      res.json({</span>
@@ -1452,9 +1452,9 @@ class BookingController {
 &nbsp;
       // Primeiro, obter o booking antes de cancelar (para pegar o userId)
       const booking = await db.get('SELECT * FROM bookings WHERE id = ?', bookingId);
-<span class="cstat-no" title="statement not covered" >      if (!booking) {</span>
-<span class="cstat-no" title="statement not covered" >        await db.close();</span>
-<span class="cstat-no" title="statement not covered" >        return res.status(404).json({ error: 'Agendamento não encontrado' });</span>
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (!booking) {
+        await db.close();
+        return res.status(404).json({ error: 'Agendamento não encontrado' });
       }
 &nbsp;
       const notes = <span class="cstat-no" title="statement not covered" >reason ? ` | Motivo do cancelamento: ${reason}` : '';</span>
@@ -1473,9 +1473,9 @@ class BookingController {
       });
 &nbsp;
     } catch (error) {
-      logger.error('Erro ao cancelar agendamento:', error);
-      await db.close();
-      res.status(500).json({ error: error.message });
+<span class="cstat-no" title="statement not covered" >      logger.error('Erro ao cancelar agendamento:', error);</span>
+<span class="cstat-no" title="statement not covered" >      await db.close();</span>
+<span class="cstat-no" title="statement not covered" >      res.status(500).json({ error: error.message });</span>
     }
   }
 &nbsp;
@@ -1494,7 +1494,7 @@ class BookingController {
 <span class="cstat-no" title="statement not covered" >        return res.status(404).json({ error: 'Usuário não encontrado' });</span>
       }
 &nbsp;
-      const loyaltyCalc = <span class="cstat-no" title="statement not covered" >[REDACTED_TOKEN](user);</span>
+      const loyaltyCalc = <span class="cstat-no" title="statement not covered" >PLACEHOLDER(user);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      await db.close();</span>
 <span class="cstat-no" title="statement not covered" >      res.json({</span>
@@ -1518,7 +1518,7 @@ class BookingController {
   /**
    * Criar agendamento recorrente
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](req, res) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(req, res) {
     const db = <span class="cstat-no" title="statement not covered" >await getDb();</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const { userId } = <span class="cstat-no" title="statement not covered" >req.user;</span>
@@ -1561,7 +1561,7 @@ module.exports = new BookingController();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

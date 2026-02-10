@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/15</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/15</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
@@ -128,18 +128,25 @@
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,7 +171,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -183,7 +190,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -192,19 +199,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Webhook Routes
  * Webhooks de pagamentos e integrações
  */
 &nbsp;
-const express = require('express');
-const router = express.Router();
+const express = <span class="cstat-no" title="statement not covered" >require('express');</span>
+const router = <span class="cstat-no" title="statement not covered" >express.Router();</span>
+// const pixWebhookRoutes = require('./pixWebhook.routes');
 &nbsp;
 /**
  * Webhook do Stripe
  */
-router.post('/stripe', express.raw({ type: 'application/json' }), <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >router.post('/stripe', express.raw({ type: 'application/json' }), <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
     // const event = req.body;
 &nbsp;
@@ -229,7 +242,7 @@ router.post('/stripe', express.raw({ type: 'application/json' }), <span class="f
 /**
  * Webhook do Mercado Pago
  */
-router.post('/mercadopago', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >router.post('/mercadopago', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
     // const data = req.body;
 &nbsp;
@@ -248,7 +261,7 @@ router.post('/mercadopago', <span class="fstat-no" title="function not covered" 
 /**
  * Webhook do Google Calendar
  */
-router.post('/google-calendar', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >router.post('/google-calendar', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
     // Sincronizar eventos do calendário
 <span class="cstat-no" title="statement not covered" >    res.json({ received: true });</span>
@@ -257,7 +270,12 @@ router.post('/google-calendar', <span class="fstat-no" title="function not cover
   }
 });
 &nbsp;
-module.exports = router;
+/**
+ * Webhooks PIX - Pagamentos
+ */
+<span class="cstat-no" title="statement not covered" >router.use('/pix', pixWebhookRoutes);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >module.exports = router;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -265,7 +283,7 @@ module.exports = router;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

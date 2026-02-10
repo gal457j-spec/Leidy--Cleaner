@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">8.98% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/89</span>
+                <span class='fraction'>0/89</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/15</span>
+                <span class='fraction'>0/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.63% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/83</span>
+                <span class='fraction'>0/83</span>
             </div>
         
             
@@ -306,16 +306,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -536,23 +536,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Pricing Controller
  * Endpoint para cálculo dinâmico de preços
  * GET /api/pricing/calculate?serviceId=1&amp;date=2024-02-15&amp;time=14:00
  */
 &nbsp;
-const PricingService = require('../services/PricingService');
-const logger = require('../utils/logger');
-const { getDb } = require('../db/sqlite');
+const PricingService = <span class="cstat-no" title="statement not covered" >require('../services/PricingService');</span>
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
+const { getDb } = <span class="cstat-no" title="statement not covered" >require('../db/sqlite');</span>
 &nbsp;
 class PricingController {
-  constructor() {
-    this.[REDACTED_TOKEN] = ['standard', 'deep', 'move_in_out', 'commercial'];
-    this.ALLOWED_FREQUENCIES = ['once', 'weekly', 'biweekly', 'monthly'];
-    this.ALLOWED_URGENCIES = ['normal', 'express', 'emergency'];
-    this.MAX_SERVICE_IDS = 10;
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+<span class="cstat-no" title="statement not covered" >    this.__PLACEHOLDER = ['standard', 'deep', 'move_in_out', 'commercial'];</span>
+<span class="cstat-no" title="statement not covered" >    this.ALLOWED_FREQUENCIES = ['once', 'weekly', 'biweekly', 'monthly'];</span>
+<span class="cstat-no" title="statement not covered" >    this.ALLOWED_URGENCIES = ['normal', 'express', 'emergency'];</span>
+<span class="cstat-no" title="statement not covered" >    this.MAX_SERVICE_IDS = 10;</span>
   }
 &nbsp;
   // Helpers
@@ -623,8 +623,8 @@ class PricingController {
       }
 &nbsp;
       // Validate enums
-<span class="cstat-no" title="statement not covered" >      if (!this._validateEnum(cleaningType, this.[REDACTED_TOKEN])) {</span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'Invalid cleaningType', code: '[REDACTED_TOKEN]' });</span>
+<span class="cstat-no" title="statement not covered" >      if (!this._validateEnum(cleaningType, this.__PLACEHOLDER)) {</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'Invalid cleaningType', code: 'PLACEHOLDER' });</span>
       }
 <span class="cstat-no" title="statement not covered" >      if (!this._validateEnum(frequency, this.ALLOWED_FREQUENCIES)) {</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'Invalid frequency', code: 'INVALID_FREQUENCY' });</span>
@@ -650,7 +650,7 @@ class PricingController {
       }
 &nbsp;
       // Calcular preço dinâmico
-      const pricingResult = <span class="cstat-no" title="statement not covered" >await PricingService.[REDACTED_TOKEN]({</span>
+      const pricingResult = <span class="cstat-no" title="statement not covered" >await PricingService.__PLACEHOLDER({</span>
         basePrice: services.reduce(<span class="fstat-no" title="function not covered" >(s</span>um, s) =&gt; <span class="cstat-no" title="statement not covered" >sum + (s.base_price || 0),</span> 0),
         services: services.map(<span class="fstat-no" title="function not covered" >(s</span>) =&gt; (<span class="cstat-no" title="statement not covered" >{ basePrice: s.base_price, name: s.name })</span>),
         date,
@@ -661,7 +661,7 @@ class PricingController {
         frequency,
         urgency,
         isNewCustomer: userId ? await this.isNewCustomer(db, userId) : false,
-        daysUntilService: this.[REDACTED_TOKEN](date, time)
+        daysUntilService: this.__PLACEHOLDER(date, time)
       });
 &nbsp;
       // Retornar resultado com breakdown
@@ -692,7 +692,7 @@ class PricingController {
    * GET /api/pricing/simulate
    * Simula múltiplas opções de preço
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](req, res) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(req, res) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const { serviceId, date, time, userId } = <span class="cstat-no" title="statement not covered" >req.query;</span>
 &nbsp;
@@ -713,14 +713,14 @@ class PricingController {
 <span class="cstat-no" title="statement not covered" >        return res.status(404).json({ error: 'Service not found' });</span>
       }
 &nbsp;
-      const options = <span class="cstat-no" title="statement not covered" >await PricingService.[REDACTED_TOKEN]({</span>
+      const options = <span class="cstat-no" title="statement not covered" >await PricingService.__PLACEHOLDER({</span>
         basePrice: service.base_price,
         services: [{ basePrice: service.base_price, name: service.name }],
         date,
         time,
         userId,
         isNewCustomer: userId ? await this.isNewCustomer(db, userId) : false,
-        daysUntilService: this.[REDACTED_TOKEN](date, time)
+        daysUntilService: this.__PLACEHOLDER(date, time)
       });
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return res.json({</span>
@@ -754,7 +754,7 @@ class PricingController {
   /**
    * Calcular dias até o serviço
    */
-<span class="fstat-no" title="function not covered" >  ca</span>[REDACTED_TOKEN](dateStr, timeStr) {
+<span class="fstat-no" title="function not covered" >  PL</span>ACEHOLDER(dateStr, timeStr) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       // Prefer explicit YYYY-MM-DD and HH:mm -&gt; create a local datetime
       let iso = <span class="cstat-no" title="statement not covered" >dateStr;</span>
@@ -773,7 +773,7 @@ class PricingController {
   }
 }
 &nbsp;
-module.exports = new PricingController();
+<span class="cstat-no" title="statement not covered" >module.exports = new PricingController();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -781,7 +781,7 @@ module.exports = new PricingController();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

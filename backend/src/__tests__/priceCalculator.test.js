@@ -3,19 +3,19 @@
  */
 
 const {
-  priceCalculator_test_Auto_26,
-  priceCalculator_test_Auto_26,
-  priceCalculator_test_Auto_26
+  calculatePrice,
+  computeLoyaltyBonus,
+  generatePriceSummary
 } = require('../utils/priceCalculator');
 
 describe('priceCalculator', () => {
-  describe('priceCalculator_test_Auto_26', () => {
+  describe('calculatePrice', () => {
     const baseService = {
       name: 'Limpeza Completa',
       base_price: 40,
-      priceCalculator_test_Auto_26: 20,
-      priceCalculator_test_Auto_26: 40,
-      priceCalculator_test_Auto_26: 1.50
+      calculatePrice: 20,
+      calculatePrice: 40,
+      calculatePrice: 1.50
     };
 
     test('should calculate basic price for 1 hour', () => {
@@ -25,7 +25,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.basePrice).toBe(40);
       expect(result.extraQuarter).toBe(0);
       expect(result.staffFee).toBe(0);
@@ -40,7 +40,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.basePrice).toBe(60); // 40 + 20
       expect(result.finalPrice).toBe(60);
     });
@@ -52,7 +52,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.basePrice).toBe(80); // 40 + 20 + 20
       expect(result.finalPrice).toBe(80);
     });
@@ -64,11 +64,11 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       const expectedBasePrice = 60;
-      const priceCalculator_test_Auto_26 = 15; // 60 * 0.25
+      const calculatePrice = 15; // 60 * 0.25
       expect(result.basePrice).toBe(expectedBasePrice);
-      expect(result.extraQuarter).toBe(priceCalculator_test_Auto_26);
+      expect(result.extraQuarter).toBe(calculatePrice);
       expect(result.finalPrice).toBe(75);
     });
 
@@ -79,7 +79,7 @@ describe('priceCalculator', () => {
         has_staff: true,
         is_post_work: false
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       const expectedBasePrice = 60;
       const expectedStaffFee = 24; // 60 * 0.40
       expect(result.basePrice).toBe(expectedBasePrice);
@@ -94,7 +94,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: true
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       const expectedBasePrice = 60;
       const expectedPostWorkAdj = 30; // 60 * (1.50 - 1) = 60 * 0.50
       expect(result.basePrice).toBe(expectedBasePrice);
@@ -109,7 +109,7 @@ describe('priceCalculator', () => {
         has_staff: true,
         is_post_work: true
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.finalPrice).toBeGreaterThan(0);
       expect(result.extraQuarter).toBeGreaterThan(0);
       expect(result.staffFee).toBeGreaterThan(0);
@@ -124,7 +124,7 @@ describe('priceCalculator', () => {
         is_post_work: false,
         loyalty_bonus: 10
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.finalPrice).toBe(50); // 60 - 10
     });
 
@@ -136,7 +136,7 @@ describe('priceCalculator', () => {
         is_post_work: false,
         loyalty_bonus: 100
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.finalPrice).toBe(0); // Max(0, 40 - 100) = 0
     });
 
@@ -148,7 +148,7 @@ describe('priceCalculator', () => {
         is_post_work: false
       };
       const minimalService = {};
-      const result = priceCalculator_test_Auto_26(booking, minimalService);
+      const result = calculatePrice(booking, minimalService);
       expect(result.basePrice).toBe(60); // Uses default 40 for 1st hour, 20 for 2nd
       expect(result.finalPrice).toBe(60);
     });
@@ -160,7 +160,7 @@ describe('priceCalculator', () => {
         has_staff: true,
         is_post_work: false
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.breakdown).toBeDefined();
       expect(result.breakdown['1ª hora']).toBe(40);
       expect(result.breakdown['Total']).toBe(result.finalPrice);
@@ -174,7 +174,7 @@ describe('priceCalculator', () => {
         is_post_work: false,
         loyalty_bonus: 0
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.finalPrice).toBe(60);
     });
 
@@ -185,7 +185,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.finalPrice).toBe(60);
     });
 
@@ -197,7 +197,7 @@ describe('priceCalculator', () => {
         is_post_work: false,
         loyalty_bonus: undefined
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.finalPrice).toBe(60);
     });
 
@@ -209,7 +209,7 @@ describe('priceCalculator', () => {
         is_post_work: false,
         loyalty_bonus: null
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.finalPrice).toBe(60);
     });
 
@@ -221,7 +221,7 @@ describe('priceCalculator', () => {
         is_post_work: false,
         loyalty_bonus: false
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.finalPrice).toBe(60);
     });
 
@@ -233,7 +233,7 @@ describe('priceCalculator', () => {
         is_post_work: false,
         loyalty_bonus: 20
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.finalPrice).toBe(40);
     });
 
@@ -244,7 +244,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.extraQuarter).toBe(0);
     });
 
@@ -255,28 +255,28 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.staffFee).toBe(0);
     });
 
-    test('should set priceCalculator_test_Auto_26 to 0 when not post work', () => {
+    test('should set calculatePrice to 0 when not post work', () => {
       const booking = {
         duration_hours: 2,
         has_extra_quarter: false,
         has_staff: false,
         is_post_work: false
       };
-      const result = priceCalculator_test_Auto_26(booking, baseService);
+      const result = calculatePrice(booking, baseService);
       expect(result.postWorkAdjustment).toBe(0);
     });
   });
 
-  describe('priceCalculator_test_Auto_26', () => {
+  describe('calculatePrice', () => {
     test('should indicate bonus not reached with 0 stars', () => {
       const user = {
         five_star_streak: 0
       };
-      const result = priceCalculator_test_Auto_26(user);
+      const result = calculatePrice(user);
       expect(result.bonusReached).toBe(false);
       expect(result.bonusAmount).toBe(0);
       expect(result.message).toContain('0/10');
@@ -286,7 +286,7 @@ describe('priceCalculator', () => {
       const user = {
         five_star_streak: 5
       };
-      const result = priceCalculator_test_Auto_26(user);
+      const result = calculatePrice(user);
       expect(result.bonusReached).toBe(false);
       expect(result.message).toContain('5/10');
       expect(result.message).toContain('5');
@@ -297,7 +297,7 @@ describe('priceCalculator', () => {
         five_star_streak: 10,
         bonus_redeemed: false
       };
-      const result = priceCalculator_test_Auto_26(user);
+      const result = calculatePrice(user);
       expect(result.bonusReached).toBe(true);
       expect(result.bonusAmount).toBe(100);
       expect(result.message).toContain('🎉');
@@ -308,14 +308,14 @@ describe('priceCalculator', () => {
         five_star_streak: 10,
         bonus_redeemed: true
       };
-      const result = priceCalculator_test_Auto_26(user);
+      const result = calculatePrice(user);
       expect(result.bonusAmount).toBe(100);
       expect(result.message).toContain('✅');
     });
 
     test('should use default five_star_streak of 0', () => {
       const user = {};
-      const result = priceCalculator_test_Auto_26(user);
+      const result = calculatePrice(user);
       expect(result.fiveStarStreak).toBe(0);
       expect(result.bonusAmount).toBe(0);
     });
@@ -325,7 +325,7 @@ describe('priceCalculator', () => {
         five_star_streak: 15,
         bonus_redeemed: false
       };
-      const result = priceCalculator_test_Auto_26(user);
+      const result = calculatePrice(user);
       expect(result.bonusReached).toBe(true);
       expect(result.bonusAmount).toBe(100);
     });
@@ -334,7 +334,7 @@ describe('priceCalculator', () => {
       const user = {
         five_star_streak: 7
       };
-      const result = priceCalculator_test_Auto_26(user);
+      const result = calculatePrice(user);
       expect(result.fiveStarStreak).toBe(7);
     });
 
@@ -342,7 +342,7 @@ describe('priceCalculator', () => {
       const user = {
         five_star_streak: 3
       };
-      const result = priceCalculator_test_Auto_26(user);
+      const result = calculatePrice(user);
       expect(result.message).toContain('3');
       expect(result.message).toContain('7');
     });
@@ -357,20 +357,20 @@ describe('priceCalculator', () => {
         bonus_redeemed: true
       };
       
-      const resultNotRedeemed = priceCalculator_test_Auto_26(userNotRedeemed);
-      const resultRedeemed = priceCalculator_test_Auto_26(userRedeemed);
+      const resultNotRedeemed = calculatePrice(userNotRedeemed);
+      const resultRedeemed = calculatePrice(userRedeemed);
       
       expect(resultNotRedeemed.message).not.toEqual(resultRedeemed.message);
     });
   });
 
-  describe('priceCalculator_test_Auto_26', () => {
+  describe('calculatePrice', () => {
     const baseService = {
       name: 'Limpeza Completa',
       base_price: 40,
-      priceCalculator_test_Auto_26: 20,
-      priceCalculator_test_Auto_26: 40,
-      priceCalculator_test_Auto_26: 1.50
+      calculatePrice: 20,
+      calculatePrice: 40,
+      calculatePrice: 1.50
     };
 
     test('should generate summary with service title and duration', () => {
@@ -380,7 +380,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const summary = priceCalculator_test_Auto_26(booking, baseService);
+      const summary = calculatePrice(booking, baseService);
       expect(summary.serviceTitle).toBe('Limpeza Completa');
       expect(summary.duration).toBe('2h');
     });
@@ -392,7 +392,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const summary = priceCalculator_test_Auto_26(booking, baseService);
+      const summary = calculatePrice(booking, baseService);
       expect(Array.isArray(summary.components)).toBe(true);
       expect(summary.components.length).toBeGreaterThan(0);
     });
@@ -404,7 +404,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const summary = priceCalculator_test_Auto_26(booking, baseService);
+      const summary = calculatePrice(booking, baseService);
       const totalComponent = summary.components.find(c => c.label === 'TOTAL');
       expect(totalComponent).toBeDefined();
       expect(totalComponent.highlight).toBe(true);
@@ -417,7 +417,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const summary = priceCalculator_test_Auto_26(booking, baseService);
+      const summary = calculatePrice(booking, baseService);
       const baseComponent = summary.components.find(c => c.label === 'Preço base');
       expect(baseComponent).toBeDefined();
       expect(baseComponent.value).toContain('60');
@@ -430,7 +430,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const summary = priceCalculator_test_Auto_26(booking, baseService);
+      const summary = calculatePrice(booking, baseService);
       const quarterComponent = summary.components.find(c => c.label.includes('Quarto do trabalho'));
       expect(quarterComponent).toBeDefined();
     });
@@ -442,7 +442,7 @@ describe('priceCalculator', () => {
         has_staff: true,
         is_post_work: false
       };
-      const summary = priceCalculator_test_Auto_26(booking, baseService);
+      const summary = calculatePrice(booking, baseService);
       const staffComponent = summary.components.find(c => c.label.includes('Taxa funcionária'));
       expect(staffComponent).toBeDefined();
     });
@@ -454,7 +454,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: true
       };
-      const summary = priceCalculator_test_Auto_26(booking, baseService);
+      const summary = calculatePrice(booking, baseService);
       const postWorkComponent = summary.components.find(c => c.label.includes('Pós-obra'));
       expect(postWorkComponent).toBeDefined();
     });
@@ -466,7 +466,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const summary = priceCalculator_test_Auto_26(booking, baseService);
+      const summary = calculatePrice(booking, baseService);
       const extraComponents = summary.components.filter(c => c.label.includes('Quarto do trabalho'));
       expect(extraComponents.length).toBe(0);
     });
@@ -478,7 +478,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const summary = priceCalculator_test_Auto_26(booking, baseService);
+      const summary = calculatePrice(booking, baseService);
       const baseComponent = summary.components.find(c => c.label === 'Preço base');
       expect(baseComponent.value).toMatch(/R\$ \d+\.\d{2}/);
     });
@@ -490,8 +490,8 @@ describe('priceCalculator', () => {
         has_staff: true,
         is_post_work: true
       };
-      const summary = priceCalculator_test_Auto_26(booking, baseService);
-      expect(summary.components.length).priceCalculator_test_Auto_26(5); // base, quarter, staff, post, total
+      const summary = calculatePrice(booking, baseService);
+      expect(summary.components.length).calculatePrice(5); // base, quarter, staff, post, total
     });
 
     test('should format duration with hours suffix', () => {
@@ -501,7 +501,7 @@ describe('priceCalculator', () => {
         has_staff: false,
         is_post_work: false
       };
-      const summary = priceCalculator_test_Auto_26(booking, baseService);
+      const summary = calculatePrice(booking, baseService);
       expect(summary.duration).toBe('4h');
     });
   });

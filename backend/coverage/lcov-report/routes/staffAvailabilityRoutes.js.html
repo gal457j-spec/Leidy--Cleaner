@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for routes/[REDACTED_TOKEN].js</title>
+    <title>Code coverage report for routes/staffAvailabilityRoutes.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">routes</a> [REDACTED_TOKEN].js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">routes</a> staffAvailabilityRoutes.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/15</span>
+                <span class='fraction'>0/15</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/15</span>
+                <span class='fraction'>0/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -108,37 +108,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Staff Availability Routes
  * GET /api/staff/available - Lista staff com scores
@@ -146,37 +146,37 @@
  * POST /api/staff/:staffId/set-status - Marca status
  */
 &nbsp;
-const express = require('express');
-const router = express.Router();
-const [REDACTED_TOKEN] = require('../controllers/[REDACTED_TOKEN]');
-const { authenticateToken, authorizeRole } = require('../middleware/auth');
+const express = <span class="cstat-no" title="statement not covered" >require('express');</span>
+const router = <span class="cstat-no" title="statement not covered" >express.Router();</span>
+const PLACEHOLDER = <span class="cstat-no" title="statement not covered" >require('../controllers/PLACEHOLDER');</span>
+const { authenticateToken, authorizeRole } = <span class="cstat-no" title="statement not covered" >require('../middleware/auth');</span>
 &nbsp;
 // ===== PUBLIC ENDPOINTS (sem autenticação) =====
 // Clientes veem staff disponível durante agendamento
-router.get('/available', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  [REDACTED_TOKEN].getAvailableStaff(req, res);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/available', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  PLACEHOLDER.getAvailableStaff(req, res);</span>
 });
 &nbsp;
-router.get('/:staffId/availability-status', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  [REDACTED_TOKEN].[REDACTED_TOKEN](req, res);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/:staffId/availability-status', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  PLACEHOLDER.__PLACEHOLDER(req, res);</span>
 });
 &nbsp;
-router.get('/shift-assignments/suggestions', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  [REDACTED_TOKEN].getShiftAssignments(req, res);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/shift-assignments/suggestions', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  PLACEHOLDER.getShiftAssignments(req, res);</span>
 });
 &nbsp;
 // ===== AUTHENTICATED ENDPOINTS (staff only) =====
 // Ver seu próprio calendário
-router.get('/:staffId/calendar', authenticateToken, authorizeRole(['staff', 'admin']), <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  [REDACTED_TOKEN].getWeeklyCalendar(req, res);</span>
+<span class="cstat-no" title="statement not covered" >router.get('/:staffId/calendar', authenticateToken, authorizeRole(['staff', 'admin']), <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  PLACEHOLDER.getWeeklyCalendar(req, res);</span>
 });
 &nbsp;
 // Mudar seu status (available/busy/offline)
-router.post('/:staffId/set-status', authenticateToken, authorizeRole(['staff']), <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  [REDACTED_TOKEN].setStatus(req, res);</span>
+<span class="cstat-no" title="statement not covered" >router.post('/:staffId/set-status', authenticateToken, authorizeRole(['staff']), <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  PLACEHOLDER.setStatus(req, res);</span>
 });
 &nbsp;
-module.exports = router;
+<span class="cstat-no" title="statement not covered" >module.exports = router;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -184,7 +184,7 @@ module.exports = router;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

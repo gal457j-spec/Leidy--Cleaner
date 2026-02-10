@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for services/[REDACTED_TOKEN].js</title>
+    <title>Code coverage report for services/RecurringBookingService.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> [REDACTED_TOKEN].js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> RecurringBookingService.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.65% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/82</span>
+                <span class='fraction'>0/82</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.09% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/11</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.94% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/76</span>
+                <span class='fraction'>0/76</span>
             </div>
         
             
@@ -302,11 +302,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -530,23 +530,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Recurring Booking Service
  * Agendamentos recorrentes (semanal, quinzenal, mensal)
  */
 &nbsp;
-const logger = require('../utils/logger');
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
 &nbsp;
-class [REDACTED_TOKEN] {
-  constructor() {
-    this.recurringBookings = new Map();
+class RecurringBookingService_Auto_215 {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+<span class="cstat-no" title="statement not covered" >    this.recurringBookings = new Map();</span>
   }
 &nbsp;
   /**
    * Criar booking recorrente
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](booking) {
+<span class="fstat-no" title="function not covered" >  as</span>ync RecurringBookingService_Auto_215(booking) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const {
         userId,
@@ -575,7 +575,7 @@ class [REDACTED_TOKEN] {
         time,
         notes,
         status: 'active',
-        nextOccurrence: this.[REDACTED_TOKEN](frequency, dayOfWeek, time),
+        nextOccurrence: this.RecurringBookingService_Auto_215(frequency, dayOfWeek, time),
         createdAt: new Date(),
         discount: 10 // 10% desconto para recorrentes
       };
@@ -600,7 +600,7 @@ class [REDACTED_TOKEN] {
   /**
    ✅ NOVO: Calcular próxima ocorrência
    */
-<span class="fstat-no" title="function not covered" >  ca</span>[REDACTED_TOKEN](frequency, dayOfWeek, time) {
+<span class="fstat-no" title="function not covered" >  Re</span>curringBookingService_Auto_215(frequency, dayOfWeek, time) {
     const now = <span class="cstat-no" title="statement not covered" >new Date();</span>
     const nextDate = <span class="cstat-no" title="statement not covered" >new Date(now);</span>
 &nbsp;
@@ -709,7 +709,7 @@ class [REDACTED_TOKEN] {
       };
 &nbsp;
       // Atualizar próxima ocorrência
-<span class="cstat-no" title="statement not covered" >      recurring.nextOccurrence = this.[REDACTED_TOKEN](</span>
+<span class="cstat-no" title="statement not covered" >      recurring.nextOccurrence = this.RecurringBookingService_Auto_215(</span>
         recurring.frequency,
         recurring.dayOfWeek,
         recurring.time
@@ -732,7 +732,7 @@ class [REDACTED_TOKEN] {
   /**
    ✅ NOVO: Listar bookings recorrentes do usuário
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](userId) {
+<span class="fstat-no" title="function not covered" >  as</span>ync RecurringBookingService_Auto_215(userId) {
     const userRecurring = <span class="cstat-no" title="statement not covered" >Array.from(this.recurringBookings.values())</span>
       .filter(<span class="fstat-no" title="function not covered" >r </span>=&gt; <span class="cstat-no" title="statement not covered" >r.userId === userId)</span>;
 &nbsp;
@@ -764,7 +764,7 @@ class [REDACTED_TOKEN] {
   }
 }
 &nbsp;
-module.exports = new [REDACTED_TOKEN]();
+<span class="cstat-no" title="statement not covered" >module.exports = new RecurringBookingService_Auto_215();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -772,7 +772,7 @@ module.exports = new [REDACTED_TOKEN]();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

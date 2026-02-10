@@ -1,37 +1,37 @@
 /* eslint-disable */
 var jumpToCode = (function init() {
     // Classes of code we would like to highlight in the file view
-    var [REDACTED_TOKEN] = ['.cbranch-no', '.cstat-no', '.fstat-no'];
+    var missingCoverageClasses = ['.cbranch-no', '.cstat-no', '.fstat-no'];
 
     // Elements to highlight in the file listing view
     var fileListingElements = ['td.pct.low'];
 
     // We don't want to select elements that are direct descendants of another match
-    var notSelector = ':not(' + [REDACTED_TOKEN].join('):not(') + ') > '; // becomes `:not(a):not(b) > `
+    var notSelector = ':not(' + missingCoverageClasses.join('):not(') + ') > '; // becomes `:not(a):not(b) > `
 
     // Selector that finds elements on the page to which we can jump
     var selector =
         fileListingElements.join(', ') +
         ', ' +
         notSelector +
-        [REDACTED_TOKEN].join(', ' + notSelector); // becomes `:not(a):not(b) > a, :not(a):not(b) > b`
+        missingCoverageClasses.join(', ' + notSelector); // becomes `:not(a):not(b) > a, :not(a):not(b) > b`
 
     // The NodeList of matching elements
-    var [REDACTED_TOKEN] = document.querySelectorAll(selector);
+    var missingCoverageElements = document.querySelectorAll(selector);
 
     var currentIndex;
 
     function toggleClass(index) {
-        [REDACTED_TOKEN]
+        missingCoverageElements
             .item(currentIndex)
             .classList.remove('highlighted');
-        [REDACTED_TOKEN].item(index).classList.add('highlighted');
+        missingCoverageElements.item(index).classList.add('highlighted');
     }
 
     function makeCurrent(index) {
         toggleClass(index);
         currentIndex = index;
-        [REDACTED_TOKEN].item(index).scrollIntoView({
+        missingCoverageElements.item(index).scrollIntoView({
             behavior: 'smooth',
             block: 'center',
             inline: 'center'
@@ -41,8 +41,8 @@ var jumpToCode = (function init() {
     function goToPrevious() {
         var nextIndex = 0;
         if (typeof currentIndex !== 'number' || currentIndex === 0) {
-            nextIndex = [REDACTED_TOKEN].length - 1;
-        } else if ([REDACTED_TOKEN].length > 1) {
+            nextIndex = missingCoverageElements.length - 1;
+        } else if (missingCoverageElements.length > 1) {
             nextIndex = currentIndex - 1;
         }
 
@@ -54,7 +54,7 @@ var jumpToCode = (function init() {
 
         if (
             typeof currentIndex === 'number' &&
-            currentIndex < [REDACTED_TOKEN].length - 1
+            currentIndex < missingCoverageElements.length - 1
         ) {
             nextIndex = currentIndex + 1;
         }

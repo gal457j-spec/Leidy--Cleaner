@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.62% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/43</span>
+                <span class='fraction'>0/43</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.09% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/11</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.19% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/41</span>
+                <span class='fraction'>0/41</span>
             </div>
         
             
@@ -379,13 +379,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -684,19 +684,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * SEO &amp; Marketing Service
  * Meta tags, sitemap, schema.org, SEO analytics, campanhas
  */
 &nbsp;
-const logger = require('../utils/logger');
+const logger = <span class="cstat-no" title="statement not covered" >require('../utils/logger');</span>
 &nbsp;
 class SEOMarketingService {
-  constructor() {
-    this.campaigns = new Map();
-    this.seoMetrics = new Map();
-    this.contentAnalysis = new Map();
+<span class="fstat-no" title="function not covered" >  co</span>nstructor() {
+<span class="cstat-no" title="statement not covered" >    this.campaigns = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.seoMetrics = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.contentAnalysis = new Map();</span>
   }
 &nbsp;
   /**
@@ -741,7 +741,7 @@ class SEOMarketingService {
   /**
    * Gerar schema.org JSON-LD
    */
-<span class="fstat-no" title="function not covered" >  ge</span>nerateSchemaMarkup(entityType, entityData) {
+<span class="fstat-no" title="function not covered" >  PL</span>ACEHOLDER(entityType, entityData) {
     let schema = <span class="cstat-no" title="statement not covered" >{</span>
       '@context': 'https://schema.org',
       '@type': entityType
@@ -825,7 +825,7 @@ class SEOMarketingService {
   /**
    * Criar campanha de marketing
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](campaignData) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(campaignData) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const {
         name,
@@ -971,12 +971,12 @@ class SEOMarketingService {
   /**
    * Sugestões de otimização de conteúdo
    */
-<span class="fstat-no" title="function not covered" >  as</span>ync [REDACTED_TOKEN](content) {
+<span class="fstat-no" title="function not covered" >  as</span>ync PLACEHOLDER(content) {
 <span class="cstat-no" title="statement not covered" >    return {</span>
       content,
       suggestions: [
         {
-          type: '[REDACTED_TOKEN]',
+          type: 'PLACEHOLDER',
           suggestion: 'Adicionar "profissional" no primeiro parágrafo',
           impact: 'alto'
         },
@@ -995,7 +995,7 @@ class SEOMarketingService {
   }
 }
 &nbsp;
-module.exports = new SEOMarketingService();
+<span class="cstat-no" title="statement not covered" >module.exports = new SEOMarketingService();</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1003,7 +1003,7 @@ module.exports = new SEOMarketingService();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

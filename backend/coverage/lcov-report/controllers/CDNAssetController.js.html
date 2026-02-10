@@ -556,7 +556,7 @@
  * Endpoints para otimização de assets e geração de URLs otimizadas
  */
 &nbsp;
-const [REDACTED_TOKEN] = require('../services/[REDACTED_TOKEN]');
+const CDNAssetOptimizerService = require('../services/CDNAssetOptimizerService');
 const logger = require('../utils/logger');
 &nbsp;
 class CDNAssetController {
@@ -572,7 +572,7 @@ class CDNAssetController {
 <span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'imagePath é obrigatória' });</span>
       }
 &nbsp;
-      const optimizedUrl = <span class="cstat-no" title="statement not covered" >[REDACTED_TOKEN].[REDACTED_TOKEN](</span>
+      const optimizedUrl = <span class="cstat-no" title="statement not covered" >CDNAssetOptimizerService.__PLACEHOLDER(</span>
         imagePath,
         { width, height, quality, format }
       );
@@ -582,8 +582,8 @@ class CDNAssetController {
         original: imagePath,
         optimized: optimizedUrl,
         sizes: {
-          responsive: [REDACTED_TOKEN].[REDACTED_TOKEN](imagePath),
-          placeholder: [REDACTED_TOKEN].generateLQIPUrl(imagePath)
+          responsive: CDNAssetOptimizerService.__PLACEHOLDER(imagePath),
+          placeholder: CDNAssetOptimizerService.generateLQIPUrl(imagePath)
         }
       });
     } catch (error) {
@@ -604,7 +604,7 @@ class CDNAssetController {
 <span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'imagePath é obrigatória' });</span>
       }
 &nbsp;
-      const responsiveSet = <span class="cstat-no" title="statement not covered" >[REDACTED_TOKEN].[REDACTED_TOKEN](imagePath);</span>
+      const responsiveSet = <span class="cstat-no" title="statement not covered" >CDNAssetOptimizerService.__PLACEHOLDER(imagePath);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return res.json({</span>
         success: true,
@@ -614,7 +614,7 @@ class CDNAssetController {
           src: responsiveSet.defaultSrc,
           alt: req.query.alt || 'Image'
         },
-        htmlTag: [REDACTED_TOKEN].[REDACTED_TOKEN](
+        htmlTag: CDNAssetOptimizerService.__PLACEHOLDER(
           imagePath,
           req.query.alt || 'Image'
         )
@@ -637,7 +637,7 @@ class CDNAssetController {
 <span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'imagePath é obrigatória' });</span>
       }
 &nbsp;
-      const placeholder = <span class="cstat-no" title="statement not covered" >[REDACTED_TOKEN].generateLQIPUrl(imagePath);</span>
+      const placeholder = <span class="cstat-no" title="statement not covered" >CDNAssetOptimizerService.generateLQIPUrl(imagePath);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return res.json({</span>
         success: true,
@@ -656,7 +656,7 @@ class CDNAssetController {
    */
 <span class="fstat-no" title="function not covered" >  st</span>atic async getBandwidthSavings(req, res) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
-      const savings = <span class="cstat-no" title="statement not covered" >[REDACTED_TOKEN].[REDACTED_TOKEN]();</span>
+      const savings = <span class="cstat-no" title="statement not covered" >CDNAssetOptimizerService.__PLACEHOLDER();</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return res.json({</span>
         success: true,
@@ -675,7 +675,7 @@ class CDNAssetController {
 <span class="fstat-no" title="function not covered" >  st</span>atic async getAssetManifest(req, res) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const publicPath = <span class="cstat-no" title="statement not covered" >process.env.PUBLIC_PATH || './public';</span>
-      const manifest = <span class="cstat-no" title="statement not covered" >await [REDACTED_TOKEN].[REDACTED_TOKEN](publicPath);</span>
+      const manifest = <span class="cstat-no" title="statement not covered" >await CDNAssetOptimizerService.__PLACEHOLDER(publicPath);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return res.json({</span>
         success: true,
@@ -694,7 +694,7 @@ class CDNAssetController {
 <span class="fstat-no" title="function not covered" >  st</span>atic async getCacheHeaders(req, res) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const { fileType = <span class="branch-0 cbranch-no" title="branch not covered" >'image' </span>} = <span class="cstat-no" title="statement not covered" >req.query;</span>
-      const headers = <span class="cstat-no" title="statement not covered" >[REDACTED_TOKEN].getCacheHeaders(fileType);</span>
+      const headers = <span class="cstat-no" title="statement not covered" >CDNAssetOptimizerService.getCacheHeaders(fileType);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return res.json({</span>
         success: true,
@@ -724,7 +724,7 @@ class CDNAssetController {
 <span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: 'assets deve ser um array' });</span>
       }
 &nbsp;
-      const preloadTags = <span class="cstat-no" title="statement not covered" >[REDACTED_TOKEN].generatePreloadTags(assets);</span>
+      const preloadTags = <span class="cstat-no" title="statement not covered" >CDNAssetOptimizerService.generatePreloadTags(assets);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return res.json({</span>
         success: true,
@@ -744,7 +744,7 @@ class CDNAssetController {
 <span class="fstat-no" title="function not covered" >  st</span>atic async getImageSitemap(req, res) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const assets = <span class="cstat-no" title="statement not covered" >req.body.assets || [];</span>
-      const sitemap = <span class="cstat-no" title="statement not covered" >await [REDACTED_TOKEN].[REDACTED_TOKEN](assets);</span>
+      const sitemap = <span class="cstat-no" title="statement not covered" >await CDNAssetOptimizerService.__PLACEHOLDER(assets);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      res.setHeader('Content-Type', 'application/xml');</span>
 <span class="cstat-no" title="statement not covered" >      return res.send(JSON.stringify(sitemap, null, 2));</span>
@@ -758,12 +758,12 @@ class CDNAssetController {
    ✅ NOVO: GET /api/cdn/image-performance/:imageId
    * Medir performance de imagem
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic async [REDACTED_TOKEN](req, res) {
+<span class="fstat-no" title="function not covered" >  st</span>atic async getImagePerformance(req, res) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       const { imageId } = <span class="cstat-no" title="statement not covered" >req.params;</span>
       const imageUrl = <span class="cstat-no" title="statement not covered" >`/images/${imageId}`;</span>
 &nbsp;
-      const performance = <span class="cstat-no" title="statement not covered" >await [REDACTED_TOKEN].[REDACTED_TOKEN](imageUrl);</span>
+      const performance = <span class="cstat-no" title="statement not covered" >await CDNAssetOptimizerService.__PLACEHOLDER(imageUrl);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return res.json({</span>
         success: true,
@@ -779,9 +779,9 @@ class CDNAssetController {
    ✅ NOVO: GET /api/cdn/optimization-report
    * Obter relatório completo de otimização
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic async [REDACTED_TOKEN](req, res) {
+<span class="fstat-no" title="function not covered" >  st</span>atic async getImagePerformance(req, res) {
 <span class="cstat-no" title="statement not covered" >    try {</span>
-      const report = <span class="cstat-no" title="statement not covered" >[REDACTED_TOKEN].[REDACTED_TOKEN]();</span>
+      const report = <span class="cstat-no" title="statement not covered" >CDNAssetOptimizerService.__PLACEHOLDER();</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return res.json({</span>
         success: true,
@@ -802,7 +802,7 @@ module.exports = CDNAssetController;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>

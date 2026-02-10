@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for services/[REDACTED_TOKEN].js</title>
+    <title>Code coverage report for services/ProfessionalRatingService.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> [REDACTED_TOKEN].js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> ProfessionalRatingService.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.11% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/36</span>
+                <span class='fraction'>0/36</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/32</span>
+                <span class='fraction'>0/32</span>
             </div>
         
             
@@ -188,10 +188,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -302,18 +302,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
- * [REDACTED_TOKEN].js
+ * ProfessionalRatingService_Auto_208.js
  * Avaliação de profissional pelo admin
  */
 &nbsp;
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
+const sqlite3 = <span class="cstat-no" title="statement not covered" >require('sqlite3').verbose();</span>
+const path = <span class="cstat-no" title="statement not covered" >require('path');</span>
 &nbsp;
-const DB_PATH = path.join(__dirname, '../../backend_data/database.db');
+const DB_PATH = <span class="cstat-no" title="statement not covered" >path.join(__dirname, '../../backend_data/database.db');</span>
 &nbsp;
-class [REDACTED_TOKEN] {
+class ProfessionalRatingService_Auto_208 {
   /**
    * Adicionar avaliação do profissional
    */
@@ -322,7 +322,7 @@ class [REDACTED_TOKEN] {
       const db = <span class="cstat-no" title="statement not covered" >new sqlite3.Database(DB_PATH);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      db.run(</span>
-        `INSERT INTO [REDACTED_TOKEN] (professional_id, admin_id, rating, feedback, created_at)
+        `INSERT INTO ProfessionalRatingService_Auto_208 (professional_id, admin_id, rating, feedback, created_at)
          VALUES (?, ?, ?, ?, datetime('now'))`,
         [professionalId, adminId, rating, feedback],
 <span class="fstat-no" title="function not covered" >        fu</span>nction (err) {
@@ -333,7 +333,7 @@ class [REDACTED_TOKEN] {
 &nbsp;
           // Atualizar média
 <span class="cstat-no" title="statement not covered" >          db.get(</span>
-            `SELECT AVG(rating) as avg_rating FROM [REDACTED_TOKEN] WHERE professional_id = ?`,
+            `SELECT AVG(rating) as avg_rating FROM ProfessionalRatingService_Auto_208 WHERE professional_id = ?`,
             [professionalId],
 <span class="fstat-no" title="function not covered" >            (e</span>rr, row) =&gt; {
 <span class="cstat-no" title="statement not covered" >              db.run(</span>
@@ -355,13 +355,13 @@ class [REDACTED_TOKEN] {
   /**
    * Obter histórico de avaliações
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic [REDACTED_TOKEN](professionalId) {
+<span class="fstat-no" title="function not covered" >  st</span>atic ProfessionalRatingService_Auto_208(professionalId) {
 <span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
       const db = <span class="cstat-no" title="statement not covered" >new sqlite3.Database(DB_PATH);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      db.all(</span>
         `SELECT pr.*, a.name as admin_name 
-         FROM [REDACTED_TOKEN] pr
+         FROM ProfessionalRatingService_Auto_208 pr
          LEFT JOIN users a ON pr.admin_id = a.id
          WHERE pr.professional_id = ?
          ORDER BY pr.created_at DESC`,
@@ -378,7 +378,7 @@ class [REDACTED_TOKEN] {
   /**
    * Profissionais com avaliação baixa (flag para ação)
    */
-<span class="fstat-no" title="function not covered" >  st</span>atic [REDACTED_TOKEN](minRating = <span class="branch-0 cbranch-no" title="branch not covered" >3.0)</span> {
+<span class="fstat-no" title="function not covered" >  st</span>atic ProfessionalRatingService_Auto_208(minRating = <span class="branch-0 cbranch-no" title="branch not covered" >3.0)</span> {
 <span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
       const db = <span class="cstat-no" title="statement not covered" >new sqlite3.Database(DB_PATH);</span>
 &nbsp;
@@ -404,7 +404,7 @@ class [REDACTED_TOKEN] {
     const db = <span class="cstat-no" title="statement not covered" >new sqlite3.Database(DB_PATH);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    db.run(`</span>
-      CREATE TABLE IF NOT EXISTS [REDACTED_TOKEN] (
+      CREATE TABLE IF NOT EXISTS ProfessionalRatingService_Auto_208 (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         professional_id INTEGER NOT NULL,
         admin_id INTEGER NOT NULL,
@@ -415,14 +415,14 @@ class [REDACTED_TOKEN] {
         FOREIGN KEY (admin_id) REFERENCES users(id)
       )
     `, <span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
-<span class="cstat-no" title="statement not covered" >      if (err) <span class="cstat-no" title="statement not covered" >console.error('Erro ao criar tabela [REDACTED_TOKEN]:', err);</span></span>
-      else <span class="cstat-no" title="statement not covered" >console.log('✅ Tabela [REDACTED_TOKEN] criada');</span>
+<span class="cstat-no" title="statement not covered" >      if (err) <span class="cstat-no" title="statement not covered" >console.error('Erro ao criar tabela ProfessionalRatingService_Auto_208:', err);</span></span>
+      else <span class="cstat-no" title="statement not covered" >console.log('✅ Tabela ProfessionalRatingService_Auto_208 criada');</span>
 <span class="cstat-no" title="statement not covered" >      db.close();</span>
     });
   }
 }
 &nbsp;
-module.exports = [REDACTED_TOKEN];
+<span class="cstat-no" title="statement not covered" >module.exports = ProfessionalRatingService_Auto_208;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -430,7 +430,7 @@ module.exports = [REDACTED_TOKEN];
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-09T18:51:14.990Z
+                at 2026-02-10T20:40:08.660Z
             </div>
         <script src="../prettify.js"></script>
         <script>
