@@ -32,7 +32,7 @@ export default function Header() {
                   alt="Leidy Cleaner Brand" 
                   width={64} 
                   height={64} 
-                  className="object-cover group-hover:scale-110 decoded duration-500" 
+                  className="object-cover group-hover:scale-110 duration-500" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-400 rounded-full animate-pulse shadow-lg"></div>

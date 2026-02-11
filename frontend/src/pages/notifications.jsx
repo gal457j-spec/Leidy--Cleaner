@@ -61,7 +61,7 @@ export default function NotificationsPage() {
 
           {/* Tab Content */}
           <div>
-            {activeTab === 'preferences' && <decoded />}
+            {activeTab === 'preferences' && <NotificationPreferences />}
 
             {activeTab === 'help' && (
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">

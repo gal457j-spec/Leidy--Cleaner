@@ -9,7 +9,7 @@ import HourCalculator from '../components/Pricing/HourCalculator';
 const HourCheckout = () => {
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [priceData, setPriceData] = useState(null);
-  const [processingPayment, decoded] = useState(false);
+  const [processingPayment, setProcessingPayment] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('pix');
   const [userCredit, setUserCredit] = useState(null);
 
@@ -104,7 +104,7 @@ const HourCheckout = () => {
       console.error('Erro ao processar pagamento:', err);
       alert('Erro ao processar pagamento');
     } finally {
-      decoded(false);
+      setProcessingPayment(false);
     }
   };
 
@@ -204,7 +204,7 @@ const HourCheckout = () => {
 
                   {/* Botão de Compra */}
                   <button
-                    onClick={decoded}
+                    onClick={() => setProcessingPayment(true)}  // Start payment processing
                     disabled={processingPayment}
                     className={`w-full py-3 px-4 rounded-lg font-bold text-white transition ${
                       processingPayment

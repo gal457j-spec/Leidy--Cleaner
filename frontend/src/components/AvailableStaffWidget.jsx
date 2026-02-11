@@ -1,15 +1,14 @@
 /**
- * decoded.jsx
+ * AvailableStaffWidget.jsx
  * Mostra staff disponível com scores, ratings, carga
  * Componente reutilizável para booking flow
  * ✅ Real-time updates via WebSocket ready
  */
 
 import React, { useEffect, useState } from 'react';
-import styles from './decoded.module.css';
 import { apiCall } from '../config/api';
 
-const decoded = ({ 
+const AvailableStaffWidget = ({ 
   date, 
   time, 
   serviceId, 
@@ -299,4 +298,4 @@ const decoded = ({
   );
 };
 
-export default decoded;
+export default AvailableStaffWidget;

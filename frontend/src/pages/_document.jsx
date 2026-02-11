@@ -47,7 +47,7 @@ export default class MyDocument extends Document {
           <link rel="manifest" href="/site.webmanifest" />
           {/* Legacy ICO fallback */}
           <link rel="shortcut icon" href="/favicon.ico" />
-          <meta name="decoded" content="yes" />
+          <meta name="theme-color" content="#10b981" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         </Head>
