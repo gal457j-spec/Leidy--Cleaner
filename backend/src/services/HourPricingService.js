@@ -52,25 +52,22 @@ class HourPricingService {
   static calculatePrice(hours, extras = []) {
     if (hours <= 0) throw new Error('Hours must be greater than 0');
 
-    // ============ CÁLCULO DO PREÇO BASE ============
+    // ============ CÁLCULO DO PREÇO BASE (HORAS) ============
     let basePrice = this.BASE_PRICE;
 
     if (hours <= this.HOURS_THRESHHOLD) {
       // Até 8 horas: R$ 40 + (horas - 1) * R$ 20
-      // Porque a primeira hora já está incluída no base
       basePrice = this.BASE_PRICE + (hours - 1) * this.PRICE_PER_HOUR;
     } else {
       // Após 8 horas: R$ 40 + 7*20 = R$ 180, depois * 1.4
-      // Preço de 8 horas
       const eightHourPrice = this.BASE_PRICE + (this.HOURS_THRESHHOLD - 1) * this.PRICE_PER_HOUR;
-      // Horas adicionais (acima de 8)
       const extraHours = hours - this.HOURS_THRESHHOLD;
-      // Taxa de 40% aplicada
       basePrice = eightHourPrice * (1 + this.SURGE_TAX) + extraHours * this.PRICE_PER_HOUR;
     }
 
-    // ============ CÁLCULO DOS EXTRAS ============
-    let extrasTotal = 0;
+    // ============ CÁLCULO DOS EXTRAS PERCENTUAIS ============
+    let percentualExtrasTotal = 0;
+    let fixedExtrasTotal = 0;
     const extrasBreakdown = [];
 
     if (extras && Array.isArray(extras)) {
@@ -78,46 +75,64 @@ class HourPricingService {
         const extra = this.EXTRAS[extraId];
         if (!extra) continue;
 
-        let extraPrice = 0;
-
         if (extra.type === 'percentage') {
-          // Calcular percentual sobre a base
-          extraPrice = basePrice * extra.value;
-          
-          // Aplicar taxa de 40% se necessário
-          if (extra.withTax) {
-            extraPrice = extraPrice * (1 + this.EXTRAS_TAX);
-          }
+          // Calcular percentual sobre a base (sem taxa ainda)
+          const percentualValue = basePrice * extra.value;
+          percentualExtrasTotal += percentualValue;
+          extrasBreakdown.push({
+            name: extra.name,
+            type: 'percentage',
+            baseValue: percentualValue,
+            isPercentual: true
+          });
         } else if (extra.type === 'fixed') {
-          // Valor fixo
-          extraPrice = extra.value;
-          // Não aplicar taxa (levar_produtos não tem taxa)
+          // Valor fixo (sem taxa)
+          fixedExtrasTotal += extra.value;
+          extrasBreakdown.push({
+            name: extra.name,
+            type: 'fixed',
+            baseValue: extra.value,
+            isPercentual: false
+          });
         }
-
-        extrasTotal += extraPrice;
-        extrasBreakdown.push({
-          name: extra.name,
-          type: extra.type,
-          baseValue: extra.type === 'percentage' ? basePrice * extra.value : extra.value,
-          tax: extra.withTax ? (basePrice * extra.value * this.EXTRAS_TAX) : 0,
-          total: extraPrice
-        });
       }
     }
 
-    // ============ PREÇO FINAL ============
-    const finalPrice = basePrice + extrasTotal;
+    // ============ APLICAR TAXA DE 40% ============
+    // A taxa é aplicada em cima de (horas + extras percentuais)
+    // Os extras fixos (levar produtos) não recebem taxa
+    const subtotalComTaxa = basePrice + percentualExtrasTotal;
+    const taxValue = subtotalComTaxa * this.EXTRAS_TAX;
+    
+    // Atualizar breakdown com tax
+    extrasBreakdown.forEach((extra, idx) => {
+      if (extra.isPercentual) {
+        const taxOnThisExtra = extra.baseValue * this.EXTRAS_TAX;
+        extrasBreakdown[idx].tax = taxOnThisExtra;
+        extrasBreakdown[idx].total = extra.baseValue + taxOnThisExtra;
+      } else {
+        extrasBreakdown[idx].tax = 0;
+        extrasBreakdown[idx].total = extra.baseValue;
+      }
+    });
+
+    // ============ CÁLCULO FINAL ============
+    const finalPrice = basePrice + percentualExtrasTotal + taxValue + fixedExtrasTotal;
 
     return {
       hours,
       basePrice: Math.round(basePrice * 100) / 100,
+      percentualExtrasTotal: Math.round(percentualExtrasTotal * 100) / 100,
+      taxValue: Math.round(taxValue * 100) / 100,
+      fixedExtrasTotal: Math.round(fixedExtrasTotal * 100) / 100,
       extrasBreakdown,
-      extrasTotal: Math.round(extrasTotal * 100) / 100,
       finalPrice: Math.round(finalPrice * 100) / 100,
       breakdown: {
         basePriceCalculation: `R$ ${this.BASE_PRICE} + (${hours - 1} × R$ ${this.PRICE_PER_HOUR})`,
-        extrasTax: `${this.EXTRAS_TAX * 100}% nos extras (exceto Levar Produtos)`,
-        summary: `R$ ${Math.round(basePrice * 100) / 100} + R$ ${Math.round(extrasTotal * 100) / 100} = R$ ${Math.round(finalPrice * 100) / 100}`
+        withPercentualExtras: `R$ ${Math.round(basePrice * 100) / 100} + R$ ${Math.round(percentualExtrasTotal * 100) / 100}`,
+        taxApplied: `${this.EXTRAS_TAX * 100}% = R$ ${Math.round(taxValue * 100) / 100}`,
+        withFixedExtras: `+ R$ ${Math.round(fixedExtrasTotal * 100) / 100} (fixos)`,
+        summary: `R$ ${Math.round(finalPrice * 100) / 100}`
       }
     };
   }
