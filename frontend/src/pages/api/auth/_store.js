@@ -1,5 +1,7 @@
-// Shared in-memory store for dev auth endpoints
-let users = [];
+// Shared in-memory store for dev auth endpoints.
+// Use `globalThis` so data survives hot-reloads in Next dev server.
+if (!globalThis.__DEMO_AUTH_USERS__) globalThis.__DEMO_AUTH_USERS__ = [];
+const users = globalThis.__DEMO_AUTH_USERS__;
 
 function generateId() {
   return String(users.length + 1);
@@ -7,7 +9,7 @@ function generateId() {
 
 export function findByEmail(email) {
   if (!email) return null;
-  return users.find(u => u.email.toLowerCase() === email.toLowerCase()) || null;
+  return users.find(u => u.email && u.email.toLowerCase() === email.toLowerCase()) || null;
 }
 
 export function addUser({ name, email, phone, password, role = 'cliente' }) {

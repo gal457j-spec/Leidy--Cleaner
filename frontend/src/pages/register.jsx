@@ -15,6 +15,7 @@ export default function Register() {
     email: '',
     phone: '',
     password: '',
+    role: 'cliente',
     confirmPassword: '',
     acceptTerms: false
   })
@@ -49,7 +50,8 @@ export default function Register() {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        password: formData.password
+        password: formData.password,
+        role: formData.role
       })
       localStorage.setItem('token', data.token)
       localStorage.setItem('user', JSON.stringify(data.user))
@@ -104,6 +106,15 @@ export default function Register() {
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Confirmar Senha</label>
                   <input name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-primary-700 dark:bg-primary-900 dark:text-white" />
                   {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tipo de Conta</label>
+                  <select name="role" value={formData.role} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-primary-700 dark:bg-primary-900 dark:text-white">
+                    <option value="cliente">Cliente</option>
+                    <option value="funcionario">Funcionário</option>
+                    <option value="adm">Administrador</option>
+                  </select>
                 </div>
 
                 <div className="flex items-start gap-3">

@@ -61,9 +61,13 @@ export function AuthProvider({ children }) {
       });
       
       setUser(data.user);
-      setToken(data.accessToken);
-      try { localStorage.setItem('auth_token', data.accessToken); } catch (e) {}
+      // accept both accessToken or token field from mock
+      const tokenValue = data.accessToken || data.token || null;
+      setToken(tokenValue);
+      try { if (tokenValue) localStorage.setItem('auth_token', tokenValue); } catch (e) {}
+      try { if (tokenValue) localStorage.setItem('token', tokenValue); } catch (e) {}
       localStorage.setItem('auth_user', JSON.stringify(data.user));
+      localStorage.setItem('user', JSON.stringify(data.user));
       
       return data.user;
     } catch (err) {
@@ -104,9 +108,12 @@ export function AuthProvider({ children }) {
       });
       
       setUser(data.user);
-      setToken(data.accessToken);
-      try { localStorage.setItem('auth_token', data.accessToken); } catch (e) {}
+      const tokenValue = data.accessToken || data.token || null;
+      setToken(tokenValue);
+      try { if (tokenValue) localStorage.setItem('auth_token', tokenValue); } catch (e) {}
+      try { if (tokenValue) localStorage.setItem('token', tokenValue); } catch (e) {}
       localStorage.setItem('auth_user', JSON.stringify(data.user));
+      localStorage.setItem('user', JSON.stringify(data.user));
       
       return data.user;
     } catch (err) {
@@ -119,12 +126,17 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = !!token;
 
+  const isAdmin = !!user && user.role === 'adm';
+  const isFuncionario = !!user && user.role === 'funcionario';
+
   const value = {
     user,
     token,
     isLoading,
     error,
     isAuthenticated,
+    isAdmin,
+    isFuncionario,
     login,
     logout,
     register
