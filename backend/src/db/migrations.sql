@@ -148,19 +148,6 @@ CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
 CREATE INDEX IF NOT EXISTS idx_loyalty_user ON loyalty_history(user_id);
 CREATE INDEX IF NOT EXISTS idx_recurring_user ON recurring_bookings(user_id);
 
--- SEED: Services padrão
-INSERT OR IGNORE INTO services (name, description, base_price, discount_per_hour, service_fee, extra_quarter_multiplier, duration, category) VALUES
-('Limpeza Básica', 'Limpeza geral da residência', 40.00, 20.00, 40.00, 1.50, 120, 'residencial'),
-('Limpeza Profunda', 'Limpeza completa com detalhes', 40.00, 20.00, 40.00, 1.50, 180, 'residencial'),
-('Limpeza Pós-Reforma', 'Limpeza especializada pós-obra', 40.00, 20.00, 40.00, 2.00, 240, 'comercial'),
-('Limpeza de Escritório', 'Limpeza de ambiente comercial', 40.00, 20.00, 40.00, 1.50, 90, 'comercial'),
-('Limpeza de Vidros', 'Serviço especializado em janelas', 40.00, 20.00, 40.00, 1.50, 60, 'especializado'),
-('Higienização de Estofados', 'Limpeza de móveis estofados', 40.00, 20.00, 40.00, 1.50, 120, 'especializado');
-
--- SEED: User Admin padrão
-INSERT OR IGNORE INTO users (email, password, name, phone, role) VALUES
-('admin@leidycleaner.com', '$2b$10$placeholder', 'Administrador', '5198030000', 'admin');
-
 -- TABELA: chat_messages
 CREATE TABLE IF NOT EXISTS chat_messages (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -265,3 +252,20 @@ CREATE TABLE IF NOT EXISTS payment_reconciliation (
 CREATE INDEX IF NOT EXISTS idx_payment_reconciliation_transaction_id ON payment_reconciliation(transaction_id);
 CREATE INDEX IF NOT EXISTS idx_payment_reconciliation_reconciled ON payment_reconciliation(reconciled);
 CREATE INDEX IF NOT EXISTS idx_payment_reconciliation_checked_at ON payment_reconciliation(checked_at);
+
+-- ============================================
+-- SEED DATA (Inserir APÓS todas as tabelas)
+-- ============================================
+
+-- SEED: Services padrão
+INSERT OR IGNORE INTO services (name, description, base_price, discount_per_hour, service_fee, extra_quarter_multiplier, duration, category) VALUES
+('Limpeza Básica', 'Limpeza geral da residência', 40.00, 20.00, 40.00, 1.50, 120, 'residencial'),
+('Limpeza Profunda', 'Limpeza completa com detalhes', 40.00, 20.00, 40.00, 1.50, 180, 'residencial'),
+('Limpeza Pós-Reforma', 'Limpeza especializada pós-obra', 40.00, 20.00, 40.00, 2.00, 240, 'comercial'),
+('Limpeza de Escritório', 'Limpeza de ambiente comercial', 40.00, 20.00, 40.00, 1.50, 90, 'comercial'),
+('Limpeza de Vidros', 'Serviço especializado em janelas', 40.00, 20.00, 40.00, 1.50, 60, 'especializado'),
+('Higienização de Estofados', 'Limpeza de móveis estofados', 40.00, 20.00, 40.00, 1.50, 120, 'especializado');
+
+-- SEED: User Admin padrão
+INSERT OR IGNORE INTO users (email, password, name, phone, role) VALUES
+('admin@leidycleaner.com', '$2b$10$placeholder', 'Administrador', '5198030000', 'admin');
