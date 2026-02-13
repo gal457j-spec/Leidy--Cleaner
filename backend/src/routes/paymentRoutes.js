@@ -91,13 +91,13 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
       event = StripeService.constructEvent(req.body, signature);
     } catch (err) {
       if (err.statusCode === 401) {
-        console.error('❌ Assinatura Stripe inválida (HMAC falhou)');
+        logger?.error('Invalid Stripe signature (HMAC failed)');
         return res.status(401).json({ error: 'Invalid signature' });
       }
       throw err;
     }
 
-    console.log('🔔 Webhook Stripe validado:', event.type);
+    logger?.debug('Stripe webhook validated', { eventType: event.type });
 
     // Processar evento de pagamento bem-sucedido
     if (event.type === 'payment_intent.succeeded') {
@@ -106,7 +106,7 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
       const userId = paymentIntent.metadata?.userId;
 
       if (bookingId && userId) {
-        console.log(`✅ Pagamento confirmado: booking ${bookingId}, user ${userId}`);
+        logger?.info('Payment confirmed', { bookingId, userId });
         // TODO: Atualizar status do agendamento no banco como "confirmado"
       }
     }

@@ -122,8 +122,7 @@ class AddonsService {
         FOREIGN KEY (addon_id) REFERENCES addons(id)
       )
     `, (err) => {
-      if (err) console.error('Erro ao criar tabelas addons:', err);
-      else console.log('✅ Tabelas addons criadas');
+      if (err) logger?.error('Failed to create addons tables', { error: err });
       db.close();
     });
   }

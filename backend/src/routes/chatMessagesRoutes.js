@@ -148,8 +148,7 @@ const createChatTable = () => {
       FOREIGN KEY (recipient_id) REFERENCES users(id)
     )
   `, (err) => {
-    if (err) console.error('Erro ao criar tabela chat_messages:', err);
-    else console.log('✅ Tabela chat_messages criada');
+    if (err) logger?.error('Failed to create chat_messages table', { error: err });
     db.close();
   });
 };

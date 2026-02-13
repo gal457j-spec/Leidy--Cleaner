@@ -81,7 +81,7 @@ function validateEnv() {
     const env = envSchema.parse(process.env);
     // Log validation success (use simple log since logger may not be ready)
     if (process.env.NODE_ENV !== 'test') {
-      console.log('✅ Environment variables validated successfully');
+      // Validation successful - no need to log in production
     }
     return env;
   } catch (error) {
