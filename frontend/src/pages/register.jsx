@@ -14,6 +14,9 @@ export default function Register() {
     name: '',
     email: '',
     phone: '',
+    cpf: '',
+    photo: null,
+    photoPreview: null,
     password: '',
     role: 'cliente',
     confirmPassword: '',
@@ -27,6 +30,9 @@ export default function Register() {
     if (!formData.email) newErrors.email = 'Email é obrigatório'
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Email inválido'
     if (!formData.phone) newErrors.phone = 'Telefone é obrigatório'
+    if (!formData.cpf) newErrors.cpf = 'CPF é obrigatório'
+    else if (!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(formData.cpf) && !/^\d{11}$/.test(formData.cpf)) newErrors.cpf = 'CPF inválido (formatos: 000.000.000-00 ou 00000000000)'
+    if (!formData.photo) newErrors.photo = 'Foto de perfil é obrigatória'
     if (!formData.password) newErrors.password = 'Senha é obrigatória'
     else if (formData.password.length < 8) newErrors.password = 'Senha deve ter no mínimo 8 caracteres'
     if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'As senhas não correspondem'
@@ -37,7 +43,22 @@ export default function Register() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
-    setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
+    if (type === 'file') {
+      const file = e.target.files[0]
+      if (file) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          setFormData(prev => ({ 
+            ...prev, 
+            photo: file,
+            photoPreview: e.target.result
+          }))
+        }
+        reader.readAsDataURL(file)
+      }
+    } else {
+      setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
+    }
     if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }))
   }
 
@@ -46,12 +67,19 @@ export default function Register() {
     if (!validateForm()) return
     setLoading(true)
     try {
-      const { data } = await axios.post('/api/auth/register', {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        password: formData.password,
-        role: formData.role
+      const formDataToSend = new FormData()
+      formDataToSend.append('name', formData.name)
+      formDataToSend.append('email', formData.email)
+      formDataToSend.append('phone', formData.phone)
+      formDataToSend.append('cpf', formData.cpf)
+      formDataToSend.append('password', formData.password)
+      formDataToSend.append('role', formData.role)
+      if (formData.photo) {
+        formDataToSend.append('photo', formData.photo)
+      }
+      
+      const { data } = await axios.post('/api/auth/register', formDataToSend, {
+        headers: { 'Content-Type': 'multipart/form-data' }
       })
       localStorage.setItem('token', data.token)
       localStorage.setItem('user', JSON.stringify(data.user))
@@ -92,20 +120,54 @@ export default function Register() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Telefone</label>
-                    <input name="phone" value={formData.phone} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-primary-700 dark:bg-primary-900 dark:text-white" />
+                    <input name="phone" value={formData.phone} onChange={handleChange} placeholder="(11) 99999-9999" className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-primary-700 dark:bg-primary-900 dark:text-white" />
                     {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                   </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">CPF</label>
+                    <input name="cpf" value={formData.cpf} onChange={handleChange} placeholder="000.000.000-00" className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-primary-700 dark:bg-primary-900 dark:text-white" />
+                    {errors.cpf && <p className="text-red-500 text-sm mt-1">{errors.cpf}</p>}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Senha</label>
                     <input name="password" type="password" value={formData.password} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-primary-700 dark:bg-primary-900 dark:text-white" />
                     {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
                   </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Confirmar Senha</label>
+                    <input name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-primary-700 dark:bg-primary-900 dark:text-white" />
+                    {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Confirmar Senha</label>
-                  <input name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-primary-700 dark:bg-primary-900 dark:text-white" />
-                  {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
+                <div className="border-2 border-dashed border-gray-300 dark:border-primary-700 rounded-lg p-6 text-center">
+                  <input 
+                    type="file" 
+                    name="photo" 
+                    accept="image/*" 
+                    onChange={handleChange} 
+                    className="hidden" 
+                    id="photoInput"
+                  />
+                  <label htmlFor="photoInput" className="cursor-pointer block">
+                    {formData.photoPreview ? (
+                      <div>
+                        <img src={formData.photoPreview} alt="Preview" className="w-24 h-24 rounded-full mx-auto mb-2 object-cover" />
+                        <p className="text-sm text-green-600 font-semibold">✓ Foto selecionada</p>
+                        <p className="text-xs text-gray-500 mt-1">Clique para alterar</p>
+                      </div>
+                    ) : (
+                      <div>
+                        <p className="text-2xl mb-2">📸</p>
+                        <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Selecione sua foto de perfil</p>
+                        <p className="text-xs text-gray-500 mt-1">PNG, JPG até 5MB</p>
+                      </div>
+                    )}
+                  </label>
+                  {errors.photo && <p className="text-red-500 text-sm mt-2">{errors.photo}</p>}
                 </div>
 
                 <div>
