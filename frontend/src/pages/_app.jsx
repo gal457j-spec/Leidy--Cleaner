@@ -6,8 +6,8 @@ import prefs from '../utils/preferences'
 import { AuthProvider } from '../context/AuthContext'
 import { ToastProvider } from '../context/ToastContext'
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
-import MobileBottomNav from '../components/Layout/MobileBottomNav'
-import MobileTopBar from '../components/Layout/MobileTopBar'
+import MobileBottomNav from '../components/Layout/Mobile/MobileBottomNav'
+import MobileTopBar from '../components/Layout/Mobile/MobileTopBar'
 import { LoyaltyProvider } from '../components/UI/LoyaltySystem'
 import { NotificationSystem } from '../components/UI/NotificationSystem'
 import WhatsAppButton from '../components/UI/WhatsAppButton'
@@ -15,7 +15,6 @@ import LiveChat from '../components/UI/LiveChat'
 import PushNotifications from '../components/UI/PushNotifications'
 import PWABanner from '../components/UI/PWABanner'
 import FloatingNavTools from '../components/UI/FloatingNavTools'
-import FloatingThemeSwitcher from '../components/UI/FloatingThemeSwitcher'
 import Script from 'next/script'
 import { useRouter } from 'next/router'
 import * as gtag from '../../lib/gtag'
@@ -72,7 +71,6 @@ export default function MyApp({ Component, pageProps }) {
               <LoyaltyProvider>
                 <NotificationSystem />
                   <FloatingNavTools />
-                  <FloatingThemeSwitcher />
                 <div className="min-h-[100vh] pb-20">
                   <div className="mobile-only">
                     <MobileTopBar />

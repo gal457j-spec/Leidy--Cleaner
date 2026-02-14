@@ -1,13 +1,13 @@
 import Header from '../../components/Layout/Header';
 import Footer from '../../components/Layout/Footer';
-import { AdminDashboard } from '../../components/UI/AdminDashboard';
+import AdminPanel from '../../components/Dashboard/AdminPanel';
 
 export default function Admin() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow">
-        <AdminDashboard />
+        <AdminPanel />
       </main>
       <Footer />
     </div>
