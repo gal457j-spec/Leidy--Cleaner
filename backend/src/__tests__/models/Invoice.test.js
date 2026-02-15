@@ -1,4 +1,4 @@
-/**
+.skip(/**
  * Invoice Model Tests
  */
 

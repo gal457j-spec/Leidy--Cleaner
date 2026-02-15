@@ -22,6 +22,14 @@ export default function AdminAnalytics() {
     setDateRange(router.query.range || '30days');
   }, [router.query.range]);
 
+  // Client-side authentication check (in-component)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (!token) router.push('/login');
+    }
+  }, [router]);
+
   const handleExport = async () => {
     try {
       setIsExporting(true);
@@ -136,7 +144,7 @@ export default function AdminAnalytics() {
       <style jsx>{`
         @media (max-width: 768px) {
           .grid {
-            [REDACTED_TOKEN]: 1fr;
+            grid-template-columns: 1fr;
           }
         }
       `}</style>
@@ -144,10 +152,3 @@ export default function AdminAnalytics() {
   );
 }
 
-// Client-side authentication check
-useEffect(() => {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    router.push('/login');
-  }
-}, [router]);

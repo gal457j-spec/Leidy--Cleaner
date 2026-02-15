@@ -47,8 +47,7 @@ export default function AdminSettings() {
     
     // Termos e política
     require_terms_acceptance: true,
-    terms_version: '1.0',
-  });
+    terms_version: '1.0' });
 
   // Verificar autenticação
   useEffect(() => {

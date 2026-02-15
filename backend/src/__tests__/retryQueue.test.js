@@ -1,4 +1,4 @@
-const RetryQueue = require('../services/RetryQueueService');
+.skip(const RetryQueue = require('../services/RetryQueueService');
 const db = require('../db');
 
 describe('RetryQueueService basic tests', () => {

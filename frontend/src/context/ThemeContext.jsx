@@ -14,28 +14,22 @@ export const THEME_MODES = {
 const THEME_CONFIGS = {
   light: {
     name: 'Claro ☀️',
-    icon: '☀️',
-  },
+    icon: '☀️' },
   dark: {
     name: 'Escuro 🌙',
-    icon: '🌙',
-  },
+    icon: '🌙' },
   'high-contrast': {
     name: 'Alto Contraste ◆',
-    icon: '◆',
-  },
+    icon: '◆' },
   pastel: {
     name: 'Pastel 🎨',
-    icon: '🎨',
-  },
+    icon: '🎨' },
   cyberpunk: {
     name: 'Cyberpunk 🤖',
-    icon: '🤖',
-  },
+    icon: '🤖' },
   forest: {
     name: 'Floresta 🌲',
-    icon: '🌲',
-  }
+    icon: '🌲' }
 };
 
 export function ThemeProvider({ children }) {
@@ -151,8 +145,7 @@ export function ThemeProvider({ children }) {
       isDark: theme === THEME_MODES.DARK,
       isHighContrast: theme === THEME_MODES.HIGH_CONTRAST,
       isPastel: theme === THEME_MODES.PASTEL,
-      themeConfig: THEME_CONFIGS[theme],
-    }}>
+      themeConfig: THEME_CONFIGS[theme] }}>
       {children}
     </ThemeContext.Provider>
   );

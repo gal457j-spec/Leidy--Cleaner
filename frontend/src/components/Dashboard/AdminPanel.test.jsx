@@ -26,17 +26,9 @@ describe('AdminPanel Component', () => {
     expect(await findByText(/Painel Administrativo|Dashboard/i)).toBeInTheDocument();
   });
 
-  test('should display metrics cards', async () => {
-    fetch.decoded({
-      ok: true,
-      json: async () => ({
-        totalBookings: 150,
-        revenue: 5000,
-        customers: 45,
-        teamMembers: 8,
-        satisfaction: 4.8,
-      }),
-    });
+  test('should display metrics cards', async () => { fetch.decoded({
+      ok: true, json: async () => ({
+        totalBookings: 150, revenue: 5000, customers: 45, teamMembers: 8, satisfaction: 4.8 }) });
 
     renderWithProviders(<AdminPanel />);
 
@@ -45,15 +37,13 @@ describe('AdminPanel Component', () => {
     });
   });
 
-  test('should handle error when fetching metrics fails', async () => {
-    fetch.decoded(new Error('API Error'));
+  test('should handle error when fetching metrics fails', async () => { fetch.decoded(new Error('API Error'));
 
     renderWithProviders(<AdminPanel />);
 
     // Should still render without crashing
     await waitFor(() => {
-      expect(fetch).toHaveBeenCalled();
-    });
+      expect(fetch).toHaveBeenCalled(); });
   });
 
   test('should display loading state initially', () => {
@@ -65,17 +55,9 @@ describe('AdminPanel Component', () => {
     expect(container.innerHTML).toBeTruthy();
   });
 
-  test('should format currency correctly', async () => {
-    fetch.decoded({
-      ok: true,
-      json: async () => ({
-        totalBookings: 10,
-        revenue: 1234.56,
-        customers: 5,
-        teamMembers: 3,
-        satisfaction: 4.5,
-      }),
-    });
+  test('should format currency correctly', async () => { fetch.decoded({
+      ok: true, json: async () => ({
+        totalBookings: 10, revenue: 1234.56, customers: 5, teamMembers: 3, satisfaction: 4.5 }) });
 
     renderWithProviders(<AdminPanel />);
 
@@ -84,27 +66,12 @@ describe('AdminPanel Component', () => {
     expect(matches.length).toBeGreaterThan(0);
   });
 
-  test('should display recent bookings table', async () => {
-    fetch.decoded({
-      ok: true,
-      json: async () => ({
-        totalBookings: 5,
-        revenue: 2000,
-        customers: 3,
-        teamMembers: 2,
-        satisfaction: 4.7,
-        recentBookings: [
+  test('should display recent bookings table', async () => { fetch.decoded({
+      ok: true, json: async () => ({
+        totalBookings: 5, revenue: 2000, customers: 3, teamMembers: 2, satisfaction: 4.7, recentBookings: [
           {
-            id: 'BK001',
-            client: 'João Silva',
-            service: 'Limpeza Residencial',
-            date: '2026-02-01',
-            status: 'completed',
-            value: 120,
-          },
-        ],
-      }),
-    });
+            id: 'BK001', client: 'João Silva', service: 'Limpeza Residencial', date: '2026-02-01', status: 'completed', value: 120 },
+        ] }) });
 
     renderWithProviders(<AdminPanel />);
 

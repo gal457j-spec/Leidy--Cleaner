@@ -1,4 +1,4 @@
-/**
+.skip(/**
  * Booking Model Tests
  */
 

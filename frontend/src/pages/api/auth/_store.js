@@ -32,11 +32,11 @@ export async function validateCredentials(email, password) {
   return passwordMatch ? user : null;
 }
 
-export function findByToken(token) {
+export function findByToken(token) { 
   try {
     const decoded = Buffer.from(token, 'base64').toString('utf8');
     const [email] = decoded.split(':');
-    return findByEmail(email);
+    return findByEmail(email); 
   } catch (e) {
     return null;
   }

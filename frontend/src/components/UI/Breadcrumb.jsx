@@ -18,8 +18,7 @@ export default function Breadcrumb() {
     'login': { label: '🔐 Entrar', icon: '🔐' },
     'register': { label: '👤 Cadastro', icon: '👤' },
     'servicos': { label: '✨ Serviços', icon: '✨' },
-    'minha-conta': { label: '⚙️ Minha Conta', icon: '⚙️' },
-  };
+    'minha-conta': { label: '⚙️ Minha Conta', icon: '⚙️' } };
 
   if (pathSegments.length === 0) return null;
 

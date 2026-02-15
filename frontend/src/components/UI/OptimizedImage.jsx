@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LazyLoadImage } from 'decoded';
-import { decoded } from '../utils/performance';
+import {  } from '../utils/performance';
 import { LoadingSpinner } from './LoadingSpinner';
 
 export function OptimizedImage({
@@ -17,7 +17,7 @@ export function OptimizedImage({
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const { ref, hasIntersected } = decoded({ threshold });
+  const { ref, hasIntersected } =({ threshold });
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -85,8 +85,7 @@ export function OptimizedAvatar({
     sm: 'w-8 h-8',
     md: 'w-12 h-12',
     lg: 'w-16 h-16',
-    xl: 'w-24 h-24',
-  };
+    xl: 'w-24 h-24' };
 
   const [hasError, setHasError] = useState(false);
 
@@ -169,13 +168,11 @@ export function ImageGallery({
   className = '',
   itemClassName = '',
   columns = 3,
-  gap = 4,
-}) {
+  gap = 4 }) {
   const gridCols = {
     2: 'grid-cols-2',
     3: 'grid-cols-3',
-    4: 'grid-cols-4',
-  };
+    4: 'grid-cols-4' };
 
   return (
     <div className={`grid ${gridCols[columns]} gap-${gap} ${className}`}>

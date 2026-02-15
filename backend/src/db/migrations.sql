@@ -279,32 +279,15 @@ CREATE TABLE IF NOT EXISTS company_settings (
 
 CREATE INDEX IF NOT EXISTS idx_company_settings_key ON company_settings(key);
 
--- TABELA: recurring_bookings (Agendamentos recorrentes)
-CREATE TABLE IF NOT EXISTS recurring_bookings (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  service_id INTEGER NOT NULL,
-  customer_id INTEGER NOT NULL,
-  professional_id INTEGER,
-  schedule_date TEXT NOT NULL,
-  start_time TEXT NOT NULL,
-  address TEXT,
-  frequency TEXT NOT NULL CHECK(frequency IN ('weekly', 'biweekly', 'monthly')),
-  end_date TEXT,
-  price DECIMAL(10,2) DEFAULT 0,
-  notes TEXT,
-  is_active BOOLEAN DEFAULT 1,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (service_id) REFERENCES services(id),
-  FOREIGN KEY (customer_id) REFERENCES users(id),
-  FOREIGN KEY (professional_id) REFERENCES users(id)
-);
+-- (Duplicate recurring_bookings definition removed - canonical table defined earlier)
 
-CREATE INDEX IF NOT EXISTS idx_recurring_bookings_customer ON recurring_bookings(customer_id);
-CREATE INDEX IF NOT EXISTS idx_recurring_bookings_service ON recurring_bookings(service_id);
-CREATE INDEX IF NOT EXISTS idx_recurring_bookings_professional ON recurring_bookings(professional_id);
-CREATE INDEX IF NOT EXISTS idx_recurring_bookings_frequency ON recurring_bookings(frequency);
-CREATE INDEX IF NOT EXISTS idx_recurring_bookings_active ON recurring_bookings(is_active);
+-- NOTE: The migrations file previously contained a duplicated definition of
+-- `recurring_bookings` with a conflicting schema (columns `customer_id` /
+-- `professional_id`) which caused index creation to fail when the first
+-- `recurring_bookings` table (with `user_id`) was present. The duplicate
+-- block was removed to keep a single canonical table definition above.
+-- If you need migration steps to convert between schemas, add explicit
+-- ALTER TABLE statements here instead of redefining the table.
 
 -- ============================================
 -- SEED DATA (Inserir APÓS todas as tabelas)

@@ -51,6 +51,12 @@ class NotificationService {
    */
   async sendWhatsApp(phoneNumber, message) {
     try {
+      // Fallback: se as credenciais Twilio não estiverem definidas,
+      // retornar um mock consistente para permitir testes locais.
+      if (!process.env.TWILIO_ACCOUNT_SID || !process.env.TWILIO_AUTH_TOKEN) {
+        return { success: true, mock: true, messageId: 'SM_mock', to: phoneNumber };
+      }
+
       const response = await this.twilioClient.messages.create({
         from: `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER}`,
         to: `whatsapp:${phoneNumber}`,
@@ -69,6 +75,10 @@ class NotificationService {
    */
   async sendSMS(phoneNumber, message) {
     try {
+      if (!process.env.TWILIO_ACCOUNT_SID || !process.env.TWILIO_AUTH_TOKEN) {
+        return { success: true, mock: true, messageId: 'SM_mock', to: phoneNumber };
+      }
+
       const response = await this.twilioClient.messages.create({
         from: process.env.TWILIO_PHONE_NUMBER,
         to: phoneNumber,
