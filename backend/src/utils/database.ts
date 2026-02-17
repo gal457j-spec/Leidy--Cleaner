@@ -18,7 +18,7 @@ pool.on('connect', () => {
   logger.info('✅ PostgreSQL pool conectado');
 });
 
-pool.on('error', (error) => {
+pool.on('error', (error: Error) => {
   logger.error('❌ Erro no pool PostgreSQL:', error);
 });
 

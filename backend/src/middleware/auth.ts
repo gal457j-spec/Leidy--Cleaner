@@ -1,11 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { verifyToken } from '../utils/jwt';
 import { logger } from '../utils/logger';
-import { ApiError } from './errorHandler';
-
-export interface AuthRequest extends Request {
-  user?: any;
-}
+import { ApiError, AuthRequest } from './errorHandler';
 
 export const authenticateToken = (
   req: AuthRequest,
@@ -47,6 +43,6 @@ export const authorizeRole = (...roles: string[]) => {
       });
     }
 
-    next();
+    return next();
   };
 };

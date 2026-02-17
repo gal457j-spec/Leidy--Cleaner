@@ -2,7 +2,6 @@ import { Response } from 'express';
 import { AuthRequest, asyncHandler, ApiError } from '../middleware/errorHandler';
 import { ServiceService } from '../services/ServiceService';
 import { serviceSchema } from '../utils/schemas';
-import { authorizeRole } from '../middleware/auth';
 
 export class ServiceController {
   static getAll = asyncHandler(async (req: AuthRequest, res: Response) => {
@@ -29,7 +28,7 @@ export class ServiceController {
   });
 
   static getById = asyncHandler(async (req: AuthRequest, res: Response) => {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
 
     const service = await ServiceService.getById(id);
 
@@ -75,9 +74,7 @@ export class ServiceController {
       throw ApiError('Only admins can update services', 403);
     }
 
-    const { id } = req.params;
-
-    // Validate schema
+    const { id } = req.params as { id: string };
     const { error, value } = serviceSchema.validate(req.body, {
       allowUnknown: true,
     });
@@ -104,7 +101,7 @@ export class ServiceController {
       throw ApiError('Only admins can delete services', 403);
     }
 
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
 
     const service = await ServiceService.getById(id);
 
@@ -119,7 +116,7 @@ export class ServiceController {
     });
   });
 
-  static getCategories = asyncHandler(async (req: AuthRequest, res: Response) => {
+  static getCategories = asyncHandler(async (_req: AuthRequest, res: Response) => {
     const categories = await ServiceService.getCategories();
 
     res.status(200).json({

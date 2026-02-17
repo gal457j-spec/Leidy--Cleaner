@@ -11,7 +11,7 @@ async function seedDatabase() {
       "SELECT COUNT(*) as count FROM users WHERE role = 'admin'"
     );
 
-    if (existingAdmin.rows[0].count === 0) {
+    if (((existingAdmin as any[])[0] as any).count === 0) {
       // Create admin user
       const adminPassword = await hashPassword(process.env.ADMIN_PASSWORD || 'admin123456');
       await query(
@@ -36,7 +36,7 @@ async function seedDatabase() {
       'SELECT COUNT(*) as count FROM services'
     );
 
-    if (existingServices.rows[0].count === 0) {
+    if ((existingServices[0] as any).count === 0) {
       // Default service categories and services
       const services = [
         {

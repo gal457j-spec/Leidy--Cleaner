@@ -8,6 +8,8 @@ export interface User {
   updatedAt: Date;
 }
 
+export type UserResponse = Omit<User, 'createdAt' | 'updatedAt'>;
+
 export interface AuthToken {
   accessToken: string;
   refreshToken: string;
@@ -15,7 +17,7 @@ export interface AuthToken {
 }
 
 export interface JWTPayload {
-  userId: string;
+  id: string;
   email: string;
   role: string;
 }

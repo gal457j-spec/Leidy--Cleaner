@@ -1,4 +1,4 @@
-import express, { Express, Request, Response, NextFunction } from 'express';
+import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -41,7 +41,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // Health check endpoint (público)
-app.get('/health', (req: Request, res: Response) => {
+app.get('/health', (_req: Request, res: Response) => {
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
@@ -54,7 +54,7 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/services', serviceRoutes);
 
 // Status endpoint
-app.get('/api/v1/status', (req: Request, res: Response) => {
+app.get('/api/v1/status', (_req: Request, res: Response) => {
   res.json({
     message: 'Vammos API v1',
     status: 'running',

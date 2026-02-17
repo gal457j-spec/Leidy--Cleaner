@@ -2,7 +2,6 @@ import { Response } from 'express';
 import { AuthRequest, asyncHandler, ApiError } from '../middleware/errorHandler';
 import { AuthService } from '../services/AuthService';
 import { registerSchema, loginSchema, refreshTokenSchema } from '../utils/schemas';
-import { logger } from '../utils/logger';
 
 export class AuthController {
   static register = asyncHandler(async (req: AuthRequest, res: Response) => {

@@ -99,13 +99,13 @@ export class ServiceService {
       fields.push(`description = $${paramCount++}`);
       values.push(serviceData.description);
     }
-    if (serviceData.base_price !== undefined) {
+    if (serviceData.basePrice !== undefined) {
       fields.push(`base_price = $${paramCount++}`);
-      values.push(serviceData.base_price);
+      values.push(serviceData.basePrice);
     }
-    if (serviceData.duration_minutes !== undefined) {
+    if (serviceData.durationMinutes !== undefined) {
       fields.push(`duration_minutes = $${paramCount++}`);
-      values.push(serviceData.duration_minutes);
+      values.push(serviceData.durationMinutes);
     }
     if (serviceData.category) {
       fields.push(`category = $${paramCount++}`);
@@ -134,6 +134,6 @@ export class ServiceService {
     const result = await query(
       'SELECT DISTINCT category FROM services WHERE is_active = true ORDER BY category'
     );
-    return result.map((row) => row.category);
+    return result.map((row: any) => row.category);
   }
 }

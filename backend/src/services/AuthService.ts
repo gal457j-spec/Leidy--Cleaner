@@ -2,7 +2,7 @@ import { query } from '../utils/database';
 import { hashPassword, comparePassword } from '../utils/password';
 import { generateTokens, verifyRefreshToken } from '../utils/jwt';
 import { logger } from '../utils/logger';
-import { User, JWTPayload } from '../types/auth';
+import { User, UserResponse, JWTPayload } from '../types/auth';
 
 export class AuthService {
   static async register(
@@ -10,7 +10,7 @@ export class AuthService {
     password: string,
     name: string,
     phone?: string
-  ): Promise<{ user: User; accessToken: string; refreshToken: string }> {
+  ): Promise<{ user: UserResponse; accessToken: string; refreshToken: string }> {
     // Check if user already exists
     const existingUsers = await query(
       'SELECT id FROM users WHERE email = $1',
@@ -61,7 +61,7 @@ export class AuthService {
   static async login(
     email: string,
     password: string
-  ): Promise<{ user: User; accessToken: string; refreshToken: string }> {
+  ): Promise<{ user: UserResponse; accessToken: string; refreshToken: string }> {
     // Get user by email
     const users = await query(
       'SELECT id, email, name, phone, role, password_hash FROM users WHERE email = $1',

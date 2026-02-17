@@ -3,11 +3,6 @@ import path from 'path';
 import { query } from '../utils/database';
 import { logger } from '../utils/logger';
 
-interface Migration {
-  name: string;
-  sql: string;
-}
-
 async function runMigrations() {
   try {
     logger.info('🔄 Starting database migrations...');
@@ -40,7 +35,7 @@ async function runMigrations() {
         [migrationName]
       );
 
-      if (result.rows.length > 0) {
+      if ((result as any[]).length > 0) {
         logger.info(`✅ Migration already executed: ${migrationName}`);
         continue;
       }
