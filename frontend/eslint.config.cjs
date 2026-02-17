@@ -9,11 +9,33 @@ module.exports = [
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: "module",
-      ecmaFeatures: { jsx: true }
+      parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: "module",
+        ecmaFeatures: { jsx: true }
+      },
+      globals: {
+        // browser globals
+        window: "readonly",
+        document: "readonly",
+        navigator: "readonly",
+        localStorage: "readonly",
+        location: "readonly",
+        fetch: "readonly",
+        Headers: "readonly",
+        Request: "readonly",
+        Response: "readonly",
+        FormData: "readonly",
+        // node globals
+        process: "readonly",
+        Buffer: "readonly",
+        global: "readonly",
+        __dirname: "readonly",
+        __filename: "readonly",
+        module: "readonly",
+        require: "readonly"
+      }
     },
-    env: { browser: true, es2022: true, node: true, jest: true },
     rules: {
       "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
       "no-console": "off",
@@ -24,22 +46,23 @@ module.exports = [
   // Tests override
   {
     files: ["**/*.test.js", "**/*.test.jsx", "**/*.spec.js", "**/*.spec.jsx"],
-    env: { jest: true },
-    globals: {
-      describe: "readonly",
-      it: "readonly",
-      beforeEach: "readonly",
-      afterEach: "readonly",
-      beforeAll: "readonly",
-      afterAll: "readonly",
-      expect: "readonly",
-      test: "readonly"
+    languageOptions: {
+      globals: {
+        describe: "readonly",
+        it: "readonly",
+        beforeEach: "readonly",
+        afterEach: "readonly",
+        beforeAll: "readonly",
+        afterAll: "readonly",
+        expect: "readonly",
+        test: "readonly"
+      }
     }
   },
 
   // Cypress globals
   {
     files: ["cypress/**/*.js", "cypress/**/*.jsx"],
-    globals: { cy: "readonly", Cypress: "readonly" }
+    languageOptions: { globals: { cy: "readonly", Cypress: "readonly" } }
   }
 ];
