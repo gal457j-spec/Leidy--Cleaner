@@ -15,7 +15,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
     "@sentry/react": "^10.38.0",
     "aos": "^2.3.4",
