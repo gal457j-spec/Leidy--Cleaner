@@ -37,3 +37,22 @@ export const getClient = async () => {
 };
 
 export default pool;
+
+// Ensure pool is closed on process exit to avoid open handles in tests
+const closePoolGracefully = async () => {
+  try {
+    await pool.end();
+    logger.info('✅ PostgreSQL pool closed gracefully');
+  } catch (err) {
+    // ignore
+  }
+};
+
+process.once('beforeExit', () => {
+  void closePoolGracefully();
+});
+
+process.once('SIGINT', async () => {
+  await closePoolGracefully();
+  process.exit(0);
+});

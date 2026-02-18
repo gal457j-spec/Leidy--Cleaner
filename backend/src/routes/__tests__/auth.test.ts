@@ -8,13 +8,15 @@ app.use(express.json());
 app.use('/api/v1/auth', authRoutes);
 app.use(errorHandler);
 
+const uniqueSuffix = () => `${Date.now()}${Math.floor(Math.random() * 1000)}`;
 describe('Auth Routes', () => {
   describe('POST /api/v1/auth/register', () => {
     it('should register a new user', async () => {
+      const email = `newemail+${uniqueSuffix()}@test.com`;
       const response = await request(app)
         .post('/api/v1/auth/register')
         .send({
-          email: 'newemail@test.com',
+          email,
           password: 'password123',
           name: 'Test User',
           phone: '11999999999'
@@ -40,11 +42,12 @@ describe('Auth Routes', () => {
     });
 
     it('should return 400 for duplicate email', async () => {
+      const email = `duplicate+${uniqueSuffix()}@test.com`;
       // First registration
       await request(app)
         .post('/api/v1/auth/register')
         .send({
-          email: 'duplicate@test.com',
+          email,
           password: 'password123',
           name: 'Test User',
           phone: '11999999999'
@@ -54,7 +57,7 @@ describe('Auth Routes', () => {
       const response = await request(app)
         .post('/api/v1/auth/register')
         .send({
-          email: 'duplicate@test.com',
+          email,
           password: 'password123',
           name: 'Test User 2',
           phone: '11999999999'
@@ -65,12 +68,15 @@ describe('Auth Routes', () => {
   });
 
   describe('POST /api/v1/auth/login', () => {
+    let loginEmail: string;
+
     beforeEach(async () => {
       // Create a user for login tests
+      loginEmail = `login+${uniqueSuffix()}@test.com`;
       await request(app)
         .post('/api/v1/auth/register')
         .send({
-          email: 'login@test.com',
+          email: loginEmail,
           password: 'password123',
           name: 'Login User',
           phone: '11999999999'
@@ -81,7 +87,7 @@ describe('Auth Routes', () => {
       const response = await request(app)
         .post('/api/v1/auth/login')
         .send({
-          email: 'login@test.com',
+          email: loginEmail,
           password: 'password123'
         });
 
@@ -121,10 +127,11 @@ describe('Auth Routes', () => {
 
     beforeEach(async () => {
       // Create a user and get refresh token
+      const email = `refresh+${uniqueSuffix()}@test.com`;
       const response = await request(app)
         .post('/api/v1/auth/register')
         .send({
-          email: 'refresh@test.com',
+          email,
           password: 'password123',
           name: 'Refresh User',
           phone: '11999999999'
@@ -163,10 +170,11 @@ describe('Auth Routes', () => {
 
     beforeEach(async () => {
       // Create a user and get access token
+      const email = `profile+${uniqueSuffix()}@test.com`;
       const response = await request(app)
         .post('/api/v1/auth/register')
         .send({
-          email: 'profile@test.com',
+          email,
           password: 'password123',
           name: 'Profile User',
           phone: '11999999999'
@@ -206,10 +214,11 @@ describe('Auth Routes', () => {
 
     beforeEach(async () => {
       // Create a user and get access token
+      const email = `update+${uniqueSuffix()}@test.com`;
       const response = await request(app)
         .post('/api/v1/auth/register')
         .send({
-          email: 'update@test.com',
+          email,
           password: 'password123',
           name: 'Update User',
           phone: '11999999999'

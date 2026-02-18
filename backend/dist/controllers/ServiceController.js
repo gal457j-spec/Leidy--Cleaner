@@ -1,7 +1,7 @@
 var _a;
 import { asyncHandler, ApiError } from '../middleware/errorHandler';
 import { ServiceService } from '../services/ServiceService';
-import { serviceSchema } from '../utils/schemas';
+import { serviceSchema, serviceUpdateSchema } from '../utils/schemas';
 export class ServiceController {
 }
 _a = ServiceController;
@@ -37,13 +37,14 @@ ServiceController.getById = asyncHandler(async (req, res) => {
     });
 });
 ServiceController.create = asyncHandler(async (req, res) => {
-    // Check admin role
-    if (req.user?.role !== 'admin') {
-        throw ApiError('Only admins can create services', 403);
-    }
+    // Validate payload first
     const { error, value } = serviceSchema.validate(req.body);
     if (error) {
         throw ApiError(error.details[0].message, 400);
+    }
+    // Then check admin role
+    if (req.user?.role !== 'admin') {
+        throw ApiError('Only admins can create services', 403);
     }
     const service = await ServiceService.create({
         name: value.name,
@@ -58,16 +59,17 @@ ServiceController.create = asyncHandler(async (req, res) => {
     });
 });
 ServiceController.update = asyncHandler(async (req, res) => {
-    // Check admin role
-    if (req.user?.role !== 'admin') {
-        throw ApiError('Only admins can update services', 403);
-    }
     const { id } = req.params;
-    const { error, value } = serviceSchema.validate(req.body, {
+    // Validate payload first (partial updates allowed)
+    const { error, value } = serviceUpdateSchema.validate(req.body, {
         allowUnknown: true,
     });
     if (error) {
         throw ApiError(error.details[0].message, 400);
+    }
+    // Then check admin role
+    if (req.user?.role !== 'admin') {
+        throw ApiError('Only admins can update services', 403);
     }
     const service = await ServiceService.update(id, value);
     if (!service) {

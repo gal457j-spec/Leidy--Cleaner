@@ -8,6 +8,7 @@ import { logger } from './utils/logger';
 import { errorHandler } from './middleware/errorHandler';
 import authRoutes from './routes/auth';
 import serviceRoutes from './routes/services';
+import companyRoutes from './routes/company';
 
 dotenv.config();
 
@@ -52,6 +53,7 @@ app.get('/health', (_req: Request, res: Response) => {
 // API v1 routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/services', serviceRoutes);
+app.use('/api/v1/company', companyRoutes);
 
 // Status endpoint
 app.get('/api/v1/status', (_req: Request, res: Response) => {

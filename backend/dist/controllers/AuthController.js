@@ -50,7 +50,7 @@ AuthController.refreshToken = asyncHandler(async (req, res) => {
     const tokens = await AuthService.refreshToken(refreshToken);
     res.status(200).json({
         message: 'Token refreshed successfully',
-        data: tokens,
+        data: { tokens },
     });
 });
 AuthController.getProfile = asyncHandler(async (req, res) => {

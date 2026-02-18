@@ -11,18 +11,16 @@ export class ServiceService {
   }): Promise<{ services: Service[]; total: number }> {
     let whereClause = 'WHERE is_active = true';
     const params: any[] = [];
-    let paramCount = 1;
 
     if (filters?.category) {
-      whereClause += ` AND category = $${paramCount++}`;
+      whereClause += ` AND category = $${params.length + 1}`;
       params.push(filters.category);
     }
 
     if (filters?.search) {
-      whereClause += ` AND (name ILIKE $${paramCount++} OR description ILIKE $${paramCount})`;
+      whereClause += ` AND (name ILIKE $${params.length + 1} OR description ILIKE $${params.length + 2})`;
       params.push(`%${filters.search}%`);
       params.push(`%${filters.search}%`);
-      paramCount += 2;
     }
 
     // Get total count
@@ -39,7 +37,7 @@ export class ServiceService {
       `SELECT id, name, description, base_price, duration_minutes, category, is_active, created_at
        FROM services ${whereClause}
        ORDER BY created_at DESC
-       LIMIT $${paramCount + 1} OFFSET $${paramCount + 2}`,
+       LIMIT $${params.length + 1} OFFSET $${params.length + 2}`,
       [...params, limit, offset]
     );
 

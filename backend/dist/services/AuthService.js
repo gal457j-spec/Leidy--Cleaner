@@ -2,19 +2,25 @@ import { query } from '../utils/database';
 import { hashPassword, comparePassword } from '../utils/password';
 import { generateTokens, verifyRefreshToken } from '../utils/jwt';
 import { logger } from '../utils/logger';
+import { ApiError } from '../middleware/errorHandler';
 export class AuthService {
     static async register(email, password, name, phone) {
         // Check if user already exists
         const existingUsers = await query('SELECT id FROM users WHERE email = $1', [email]);
         if (existingUsers.length > 0) {
-            throw new Error('User with this email already exists');
+            throw ApiError('User with this email already exists', 400);
         }
+        // Determine role: first registered user becomes admin when no admin exists
+        const adminCheck = await query("SELECT COUNT(*) as count FROM users WHERE role = 'admin'");
+        const roleToAssign = adminCheck[0].count === '0' || adminCheck[0].count === 0
+            ? 'admin'
+            : 'user';
         // Hash password
         const passwordHash = await hashPassword(password);
         // Create user
         const result = await query(`INSERT INTO users (email, password_hash, name, phone, role, created_at, updated_at)
        VALUES ($1, $2, $3, $4, $5, NOW(), NOW())
-       RETURNING id, email, name, phone, role, created_at`, [email, passwordHash, name, phone || null, 'customer']);
+       RETURNING id, email, name, phone, role, created_at`, [email, passwordHash, name, phone || null, roleToAssign]);
         const user = result[0];
         // Generate tokens
         const payload = {
@@ -40,13 +46,13 @@ export class AuthService {
         // Get user by email
         const users = await query('SELECT id, email, name, phone, role, password_hash FROM users WHERE email = $1', [email]);
         if (users.length === 0) {
-            throw new Error('Invalid email or password');
+            throw ApiError('Invalid email or password', 400);
         }
         const user = users[0];
         // Verify password
         const isPasswordValid = await comparePassword(password, user.password_hash);
         if (!isPasswordValid) {
-            throw new Error('Invalid email or password');
+            throw ApiError('Invalid email or password', 400);
         }
         // Generate tokens
         const payload = {

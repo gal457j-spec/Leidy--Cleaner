@@ -26,6 +26,15 @@ export const serviceSchema = Joi.object({
   category: Joi.string().required(),
 });
 
+// Update schema: all fields optional for partial updates
+export const serviceUpdateSchema = Joi.object({
+  name: Joi.string().min(2).optional(),
+  description: Joi.string().optional(),
+  basePrice: Joi.number().positive().optional(),
+  durationMinutes: Joi.number().positive().optional(),
+  category: Joi.string().optional(),
+});
+
 // Booking schemas
 export const bookingSchema = Joi.object({
   serviceId: Joi.string().uuid().required(),

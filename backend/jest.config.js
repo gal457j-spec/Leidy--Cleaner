@@ -1,4 +1,5 @@
 module.exports = {
+  preset: 'ts-jest',
   testEnvironment: 'node',
   globalSetup: '<rootDir>/jest.globalSetup.js',
   setupFiles: ['<rootDir>/jest.env.js'],
@@ -7,9 +8,9 @@ module.exports = {
     '^newrelic$': '<rootDir>/__mocks__/newrelic.js'
   },
   collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/**/*.test.js',
-    '!src/**/index.js',
+    'src/**/*.{js,ts}',
+    '!src/**/*.test.{js,ts}',
+    '!src/**/index.{js,ts}',
   ],
   coverageDirectory: 'coverage',
   // Threshold disabled initially; can be enabled after more tests are added
@@ -21,7 +22,7 @@ module.exports = {
   //     statements: 30,
   //   },
   // },
-  testRegex: '(/__tests__/|\\.(test|spec))\\.js$',
+  testRegex: '(/__tests__/|\\.(test|spec))\\.(js|ts)$',
   testPathIgnorePatterns: ['/node_modules/', '/dist/', '/e2e/', '/coverage/'],
   verbose: true,
   maxWorkers: '50%',

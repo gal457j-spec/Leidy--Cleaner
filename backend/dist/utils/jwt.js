@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { logger } from './logger';
+import { ApiError } from '../middleware/errorHandler';
 const JWT_SECRET = (process.env.JWT_SECRET || 'dev_secret_key');
 const JWT_REFRESH_SECRET = (process.env.JWT_REFRESH_SECRET || 'dev_refresh_secret');
 const JWT_EXPIRE = (process.env.JWT_EXPIRE || '24h');
@@ -25,7 +26,7 @@ export const verifyToken = (token) => {
     }
     catch (error) {
         logger.error('Token verification failed:', error);
-        throw new Error('Invalid token');
+        throw ApiError('Invalid token', 401);
     }
 };
 export const verifyRefreshToken = (token) => {
@@ -34,7 +35,7 @@ export const verifyRefreshToken = (token) => {
     }
     catch (error) {
         logger.error('Refresh token verification failed:', error);
-        throw new Error('Invalid refresh token');
+        throw ApiError('Invalid refresh token', 401);
     }
 };
 export const decodeToken = (token) => {

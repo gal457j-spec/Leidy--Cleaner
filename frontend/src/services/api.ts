@@ -31,7 +31,7 @@ interface ApiError {
 }
 
 class ApiClient {
-  private client: AxiosInstance;
+  public client: AxiosInstance;
 
   constructor() {
     this.client = axios.create({
@@ -307,4 +307,4 @@ class ApiClient {
 }
 
 export const apiClient = new ApiClient();
-export { User, Service, AuthTokens, ApiError };
+export type { User, Service, AuthTokens, ApiError };

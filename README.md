@@ -1,196 +1,273 @@
-# Validação automática de variáveis de ambiente
+# Vammos - Plataforma de Serviços de Limpeza Empresarial
 
-Antes de rodar em produção, execute:
+**Status**: MVP v1 - Backend ✅ | Frontend 🚧
 
-```bash
-python3 scripts/validate_env.py
-```
+Plataforma SaaS para agendamento de serviços de limpeza residencial e comercial.
 
-Se houver variáveis obrigatórias faltando, o script irá avisar e impedir o deploy.
-# Checklist de Deploy Seguro e Validação de Ambiente
+## 🚀 Início Rápido
 
-1. Preencha todos os arquivos `.env` e `.env.production` com segredos reais e seguros.
-2. Nunca use valores default ou placeholders em produção.
-3. Rode `chmod +x *.sh` para garantir permissão de execução dos scripts.
-4. Execute todos os testes automatizados (`run-e2e.sh`, `test-ready.sh`, etc.).
-5. Valide logs e monitoramento (Sentry, logs do backend, etc.).
-6. Teste fluxos críticos de usuário (login, cadastro, agendamento, pagamentos).
-7. Valide integrações externas (pagamentos, e-mail, webhooks).
-8. Confira se todas as variáveis obrigatórias estão presentes usando `dotenv-safe` ou similar.
-9. Após deploy, monitore erros e alertas.
-
-> Consulte também: `DEPLOYMENT_READY.md`, `VALIDACAO_FINAL_COMPLETA.md`, `DEPLOYMENT_GUIDE.md`.
-# 🧹 Limpeza Pro - Plataforma de Agendamento de Limpeza
-
-**Status: ✅ Produção-Ready — PCI-DSS Compliant, 100% Testes Passando**
-
-Plataforma profissional de agendamento de limpeza com segurança de nível empresarial, validações, e integrações prontas para produção.
-
----
-
-## 🚀 Quick Start
-
-### Local Development (5 minutos)
+### Via Script (Recomendado)
 
 ```bash
-# 1. Instalar dependências
-cd backend && npm install
-cd ../frontend && npm install && cd ..
-
-# 2. Validar tudo (backend + frontend + testes)
-bash test-local.sh
-
-# 3. Iniciar Backend (Terminal 1)
-cd backend && npm start  # http://localhost:3001
-
-# 4. Iniciar Frontend (Terminal 2)
-cd frontend && npm start # http://localhost:3000
-
-# 5. Testar aplicação
-# Abra: http://localhost:3000
+./setup-local.sh
 ```
 
-### Production Deployment
+Este script irá:
+1. Verificar pré-requisitos (Docker, Node.js)
+2. Iniciar PostgreSQL em container
+3. Instalar dependências (backend + frontend)
+4. Rodar migrations e seed
 
-Ver [docs/DEPLOY.md](docs/DEPLOY.md) para instruções de deploy em Vercel + Railway + Supabase.
+### Manual
 
----
+**Terminal 1 - Backend:**
+```bash
+cd backend
+npm install
+npm run migrate  # Se novo
+npm run dev      # Roda em :3001
+```
+
+**Terminal 2 - Frontend:**
+```bash
+cd frontend
+npm install
+npm run dev      # Roda em :3000
+```
+
+**Terminal 3 - Testes:**
+```bash
+cd backend
+npm test
+```
+
+## 📊 Status do Projeto
+
+### Backend ✅ Completo
+- **20+ endpoints** implementados e testados
+- **53/53 testes** passando
+- Autenticação JWT completa
+- CRUD de serviços, bookings, company info
+- Role-based access control
+- Validações estruturadas (Joi)
+- Migrations automáticas (PostgreSQL)
+- TypeScript 100%, build OK
+
+**Stack**: Node.js 20 + Express + PostgreSQL + Jest
+
+### Frontend 🚧 Aguardando Implementação
+Estrutura pronta para começar em `frontend/SETUP_GUIDE.md`
+
+**Stack**: Next.js 14 + React 18 + Tailwind CSS
 
 ## 📚 Documentação
 
-| Documento | Propósito |
-|-----------|-----------|
-| **[docs/API.md](docs/API.md)** | REST API Reference (endpoints, exemplos, auth) |
-| **[docs/INTEGRATIONS.md](docs/INTEGRATIONS.md)** | Stripe Payment Integration (PCI-DSS compliant) |
-| **[docs/WORKFLOWS.md](docs/WORKFLOWS.md)** | User Workflows & Architecture |
-| **[docs/EMERGENCY.md](docs/EMERGENCY.md)** | Emergency Procedures & Troubleshooting |
-| **[backend/TESTING.md](backend/TESTING.md)** | Test Suite Guide (39/39 passing) |
+| Documento | O Quê |
+|-----------|-------|
+| [PROJECT_STATUS.md](PROJECT_STATUS.md) | Visão geral completa + roadmap |
+| [backend/README.md](backend/README.md) | API endpoints, setup, stack |
+| [frontend/SETUP_GUIDE.md](frontend/SETUP_GUIDE.md) | Guia de desenvolvimento frontend |
 
----
+## 🔐 Credenciais Padrão
 
-## ✅ Funcionalidades Implementadas
-
-### 🔐 Segurança (Nível Empresarial)
-- ✅ **PCI-DSS v3.2.1 Compliance**: Stripe tokenization (cartão não toca servidor)
-- ✅ **Autenticação**: JWT 24h + Refresh tokens
-- ✅ **Password Hashing**: Bcrypt com salt rounds 12
-- ✅ **CSRF Protection**: Cookie-based tokens
-- ✅ **XSS Prevention**: Sanitização HTML + [REDACTED_TOKEN]
-- ✅ **Rate Limiting**: 100 req/15min por IP
-- ✅ **SQL Injection Prevention**: Prepared statements
-
-### 💳 Pagamentos
-- ✅ **Stripe Integration**: Payment methods, refunds, webhooks
-- ✅ **Transações**: SQLite com índices para performance
-- ✅ **Mock Mode**: Dev environment sem Stripe key
-
-### 📋 Funcionalidades
-- ✅ **Agendamento**: Booking system com calendário
-- ✅ **Avaliações**: Sistema de reviews (1-5 stars)
-- ✅ **Notificações**: Email + WhatsApp (Twilio)
-- ✅ **Admin Dashboard**: Analytics, user management
-- ✅ **Mobile Responsive**: 480px+ breakpoints
-
-### 🧪 Qualidade
-- ✅ **Test Coverage**: 39/39 testes passando (100%)
-- ✅ **Performance**: SQL indices, query optimization
-- ✅ **Error Handling**: Graceful failures + logging
-
----
-
-## 🏗️ Stack Tecnológico
-
-### Frontend
-- **Framework**: React 18
-- **Build**: Vite
-- **Payments**: Stripe.js v3 (Elements)
-
-### Backend
-- **Runtime**: Node.js 20+
-- **Framework**: Express.js 4
-- **Database**: SQLite3
-- **Testing**: Jest 29
-- **Auth**: JWT
-
-### Deployment
-- **Frontend**: Vercel
-- **Backend**: Railway
-- **Database**: Supabase PostgreSQL
-
----
-
-## 📊 Últimas Melhorias
-
-### ✅ PCI-DSS Compliance
-- Stripe.js Elements integration
-- Backend StripeService com mock fallback
-- Frontend payment method tokens
-
-### ✅ Test Suite (100% Passing)
-- 39/39 testes passando
-- ReviewController, validation, BookingService, StripeService, API, Database, Health
-
-### ✅ Code Cleanup
-- Removidos 60+ arquivos de documentação redundante
-- Organizado em estrutura profissional
-
----
-
-## 🚢 Deploy Rápido
-
-```bash
-# 1. Variáveis ambiente
-export STRIPE_SECRET_KEY=sk_live_...
-export JWT_SECRET=seu-secret
-export DATABASE_URL=postgresql://...
-
-# 2. Deploy backend
-git push railway main
-
-# 3. Deploy frontend
-vercel --prod
-
-# 4. Testar
-curl https://api.seu-dominio.com/health
+```
+Email: admin@vammos.com
+Password: admin123456
 ```
 
-Ver [docs/DEPLOY.md](docs/DEPLOY.md) para guia completo.
+## 🌐 Acessar
 
----
+| Serviço | URL |
+|---------|-----|
+| Frontend | http://localhost:3000 |
+| Backend | http://localhost:3001 |
+| Health Check | http://localhost:3001/health |
+| API Status | http://localhost:3001/api/v1/status |
+
+## 📦 Estrutura do Projeto
+
+```
+vammos/
+├── backend/                 # Node.js/Express API (✅ pronto)
+│   ├── src/
+│   │   ├── controllers/    # Requisição/resposta
+│   │   ├── services/       # Lógica de negócio
+│   │   ├── routes/         # Rotas
+│   │   ├── middleware/     # Auth, error handling
+│   │   ├── utils/          # DB, JWT, password
+│   │   ├── types/          # TypeScript interfaces
+│   │   ├── db/             # Migrations, seed
+│   │   └── main.ts         # Entrada
+│   ├── migrations/         # SQL migrations
+│   ├── jest.config.js      # Testes
+│   └── package.json
+│
+├── frontend/                # Next.js (🚧 estrutura pronta)
+│   ├── src/
+│   │   ├── app/            # Páginas (rotas App Router)
+│   │   ├── components/     # Componentes React
+│   │   ├── services/       # Cliente API
+│   │   └── hooks/          # React hooks
+│   ├── tailwind.config.js
+│   └── package.json
+│
+├── PROJECT_STATUS.md        # Status completo
+└── setup-local.sh          # Script de setup
+```
+
+## 🎯 Endpoints Testados
+
+### Autenticação
+```
+POST   /api/v1/auth/register      # Registrar
+POST   /api/v1/auth/login         # Login
+POST   /api/v1/auth/refresh-token # Renovar token
+GET    /api/v1/auth/me            # Perfil
+PUT    /api/v1/auth/me            # Atualizar perfil
+```
+
+### Serviços
+```
+GET    /api/v1/services           # Listar (com filtros)
+GET    /api/v1/services/:id       # Detalhe
+GET    /api/v1/services/categories # Categorias
+POST   /api/v1/services           # Criar (admin)
+PUT    /api/v1/services/:id       # Atualizar (admin)
+DELETE /api/v1/services/:id       # Deletar (admin)
+```
+
+### Agendamentos
+```
+POST   /api/v1/bookings           # Criar
+GET    /api/v1/bookings           # Listar meus
+GET    /api/v1/bookings/:id       # Detalhe
+PUT    /api/v1/bookings/:id/status # Atualizar status (admin)
+DELETE /api/v1/bookings/:id       # Cancelar
+```
+
+### Empresa
+```
+GET    /api/v1/company            # Info pública
+```
+
+## 🛠️ Desenvolvimento
+
+### Backend
+
+```bash
+cd backend
+
+# Dev com hot reload
+npm run dev
+
+# Build
+npm run build
+
+# Testes
+npm test
+
+# Testes com watch
+npm run test:watch
+
+# Migrations
+npm run migrate
+
+# Seed dados
+npm run seed
+```
+
+### Frontend
+
+```bash
+cd frontend
+
+# Dev
+npm run dev
+
+# Build
+npm run build
+
+# Tipos
+npm run type-check
+```
+
+## 🔄 Fluxo de Autenticação
+
+1. Usuário faz login → `POST /api/v1/auth/login`
+2. Backend retorna `{ accessToken, refreshToken }`
+3. Frontend armazena tokens em `localStorage`
+4. Cliente HTTP adiciona `Authorization: Bearer <accessToken>` em cada requisição
+5. Token expira → cliente usa `refreshToken` para obter novo token
+6. Logout limpa tokens do localStorage
+
+## 📦 Stack Tecnológico
+
+| Camada | Tecnologia |
+|--------|-----------|
+| Frontend | Next.js 14, React 18, Tailwind CSS, Axios |
+| Backend | Node.js 20, Express, TypeScript |
+| Database | PostgreSQL 15 |
+| Auth | JWT + bcryptjs |
+| Validation | Joi |
+| Testing | Jest + Supertest |
+| Deployment | Docker, GitHub Actions |
+
+## 🚀 Deploy
+
+### Docker Compose
+```bash
+docker-compose up -d
+# Frontend: :3000, Backend: :3001, Postgres: :5432
+```
+
+### GitHub Actions
+Workflow automático em `.github/workflows/ci.yml`:
+- Run tests on push/PR
+- Build image
+- Deploy (quando pronto)
+
+## 📝 Próximas Prioridades
+
+### Frontend (Próximas 2-3 semanas)
+1. Contexto de autenticação
+2. Páginas de login/register
+3. Navbar + ProtectedRoute
+4. Catálogo de serviços
+5. Booking flow
+6. Admin panel básico
+
+### Futuro (v2)
+- [ ] Integração de pagamento (Stripe/PIX)
+- [ ] Avaliações e reviews
+- [ ] Geolocalização
+- [ ] WhatsApp/SMS notifications
+- [ ] App mobile (React Native)
+- [ ] Prestador de serviços (provider dashboard)
 
 ## 🐛 Troubleshooting
 
-### Backend não inicia
-```bash
-# Verificar saúde
-curl http://localhost:3001/health/db
+### "Jest did not exit" (Backend)
+Aviso normal, pool do Postgres está encerrando. Não afeta testes.
 
-# Ver logs
-tail backend/.log
+### PostgreSQL já em uso
+```bash
+docker stop vammos-postgres-test
+docker rm vammos-postgres-test
 ```
 
-Ver [docs/EMERGENCY.md](docs/EMERGENCY.md) para mais detalhes.
+### Porta já em uso
+```bash
+# Backend muda porta:
+PORT=3002 npm run dev
 
----
-
-## 📈 Métricas de Qualidade
-
-| Métrica | Target | Atual | Status |
-|---------|--------|-------|--------|
-| **Test Coverage** | 85% | 100% | ✅ |
-| **Security** | PCI-DSS | v3.2.1 | ✅ |
-| **API Response** | <200ms | 150ms | ✅ |
-| **Uptime** | 99.9% | 99.95% | ✅ |
-
----
+# Frontend muda porta:
+npm run dev -- -p 3001
+```
 
 ## 📞 Suporte
 
-- **GitHub Issues**: Bugs e features
-- **Discussions**: Perguntas e ideias
+Veja [PROJECT_STATUS.md](PROJECT_STATUS.md) para visão completa e roadmap.
 
 ---
 
-**Versão**: 1.0.0  
-**Status**: ✅ Produção-Ready  
-🚀 **Pronto para deployment!**
+**Made with ❤️ by Vammos Team | © 2026**

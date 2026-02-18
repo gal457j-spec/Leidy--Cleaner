@@ -12,24 +12,25 @@ describe('Services Routes', () => {
     let adminToken;
     let userToken;
     let serviceId;
+    const uniqueSuffix = () => `${Date.now()}${Math.floor(Math.random() * 1000)}`;
     beforeEach(async () => {
         // Create admin user
+        const adminEmail = `admin+${uniqueSuffix()}@test.com`;
         const adminResponse = await request(app)
             .post('/api/v1/auth/register')
             .send({
-            email: 'admin@test.com',
+            email: adminEmail,
             password: 'admin123456',
             name: 'Admin User',
             phone: '11999999999'
         });
         adminToken = adminResponse.body.data.tokens.accessToken;
-        // Promote to admin (would need to be done via database, mock for now)
-        // For testing, we'll assume the first registered user is admin
         // Create regular user
+        const userEmail = `user+${uniqueSuffix()}@test.com`;
         const userResponse = await request(app)
             .post('/api/v1/auth/register')
             .send({
-            email: 'user@test.com',
+            email: userEmail,
             password: 'user123456',
             name: 'Regular User',
             phone: '11999999999'
