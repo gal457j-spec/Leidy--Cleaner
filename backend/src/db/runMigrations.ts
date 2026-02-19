@@ -18,6 +18,12 @@ async function runMigrations() {
 
     logger.info('📋 Migrations tracking table ready');
 
+    // In test environment, clear migrations tracking so tests always apply current SQL
+    if (process.env.NODE_ENV === 'test') {
+      logger.info('🧹 Clearing migrations table for test environment');
+      await query('DELETE FROM migrations');
+    }
+
     // Read all migration files
     const migrationsDir = path.join(__dirname, '../../migrations');
     const migrationFiles = fs.readdirSync(migrationsDir)

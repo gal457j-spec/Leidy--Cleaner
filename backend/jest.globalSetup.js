@@ -70,6 +70,14 @@ module.exports = async () => {
     }
 
     console.log('✅ All migrations executed successfully!');
+    // Ensure users role constraint includes 'staff' (handles legacy/changed role names)
+    try {
+      await pool.query("ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check");
+      await pool.query("ALTER TABLE users ADD CONSTRAINT users_role_check CHECK (role IN ('user','customer','admin','staff','provider'))");
+      console.log('✅ users_role_check constraint ensured');
+    } catch (e) {
+      console.warn('Could not ensure users_role_check constraint:', e.message || e);
+    }
   } catch (err) {
     console.error('❌ Database setup failed:', err.message);
     throw err;

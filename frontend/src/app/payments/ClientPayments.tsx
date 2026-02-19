@@ -6,7 +6,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { apiClient, Booking } from '@/services/api';
 import { redirectTo } from '@/utils/navigation';
 
-export default function PaymentsPage() {
+export default function ClientPayments() {
   const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
   const [booking, setBooking] = useState<Booking | null>(null);

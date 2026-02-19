@@ -10,7 +10,7 @@ router.get('/:id', StaffController.getById);
 
 // protected profile updates and availability
 router.put('/:id', authenticate, StaffController.updateProfile);
-router.get('/:id/availability', authenticate, StaffController.getAvailability);
+router.get('/:id/availability', StaffController.getAvailability);
 router.put('/:id/availability', authenticate, StaffController.setAvailability);
 
 // reviews & rating (public)

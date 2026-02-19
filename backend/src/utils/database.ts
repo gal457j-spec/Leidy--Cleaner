@@ -28,6 +28,7 @@ export const query = async (text: string, params?: any[]) => {
     return result.rows;
   } catch (error) {
     logger.error('Database query error:', error);
+    console.error('Failed SQL:', text, 'Params:', params);
     throw error;
   }
 };

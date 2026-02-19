@@ -24,7 +24,7 @@ export class PaymentController {
     if (!booking) throw ApiError('Booking not found', 404);
 
     // only owner or admin can pay
-    if (req.user.role !== 'admin' && booking.user_id !== req.user.id) {
+    if (req.user.role !== 'admin' && String(booking.user_id) !== req.user.id) {
       throw ApiError('Insufficient permissions', 403);
     }
 
@@ -42,7 +42,7 @@ export class PaymentController {
     const booking = await BookingService.getById(bookingId);
     if (!booking) throw ApiError('Booking not found', 404);
 
-    if (req.user.role !== 'admin' && booking.user_id !== req.user.id) {
+    if (req.user.role !== 'admin' && String(booking.user_id) !== req.user.id) {
       throw ApiError('Insufficient permissions', 403);
     }
 

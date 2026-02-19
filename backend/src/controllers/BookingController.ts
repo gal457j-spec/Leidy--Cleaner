@@ -61,7 +61,8 @@ export class BookingController {
 
     // fire off notifications asynchronously (don't block response)
     const NotificationService = require('../services/NotificationService').default;
-    NotificationService.notifyBookingCreated(booking).catch(() => {});
+    // some test mocks may return undefined for the mocked function; wrap with Promise.resolve
+    Promise.resolve(NotificationService.notifyBookingCreated(booking)).catch(() => {});
 
     res.status(201).json({ message: 'Booking created', data: { booking: camelize(booking) } });
   });
@@ -81,7 +82,7 @@ export class BookingController {
 
     // Only owner or admin can view
     if (!req.user) throw ApiError('Not authenticated', 401);
-    if (req.user.role !== 'admin' && booking.user_id !== req.user.id) {
+    if (req.user.role !== 'admin' && String(booking.user_id) !== req.user.id) {
       throw ApiError('Insufficient permissions', 403);
     }
 
@@ -109,7 +110,7 @@ export class BookingController {
     // allow owner or admin to delete
     const booking = await BookingService.getById(id);
     if (!booking) throw ApiError('Booking not found', 404);
-    if (req.user.role !== 'admin' && booking.user_id !== req.user.id) {
+    if (req.user.role !== 'admin' && String(booking.user_id) !== req.user.id) {
       throw ApiError('Insufficient permissions', 403);
     }
 

@@ -1,0 +1,2 @@
+-- Migration no longer needed: initial users table migration was updated
+-- to include 'staff' in the CHECK. Kept for historical reasons.

@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
   password_hash VARCHAR(255) NOT NULL,
   full_name VARCHAR(255) NOT NULL,
   phone VARCHAR(20),
-  role VARCHAR(50) NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'admin', 'provider')),
+  role VARCHAR(50) NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'customer', 'admin', 'staff', 'provider')),
   is_active BOOLEAN DEFAULT true,
   last_login TIMESTAMP,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

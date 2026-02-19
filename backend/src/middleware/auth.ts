@@ -17,6 +17,10 @@ export const authenticateToken = (
     }
 
     const user = verifyToken(token);
+    // normalize id to string to avoid type mismatch between DB (number) and route params
+    if (user && (user as any).id !== undefined) {
+      (user as any).id = String((user as any).id);
+    }
     req.user = user;
     next();
   } catch (error) {

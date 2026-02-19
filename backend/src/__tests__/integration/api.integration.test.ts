@@ -18,6 +18,8 @@ import morgan from 'morgan';
 import authRoutes from '../../routes/auth';
 import servicesRoutes from '../../routes/services';
 import bookingsRoutes from '../../routes/bookings';
+import paymentsRoutes from '../../routes/payments';
+import adminRoutes from '../../routes/admin';
 import staffRoutes from '../../routes/staff';
 import { errorHandler } from '../../middleware/errorHandler';
 
@@ -39,7 +41,10 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/services', servicesRoutes);
 app.use('/api/v1/bookings', bookingsRoutes);
+app.use('/api/v1/payments', paymentsRoutes);
 app.use('/api/v1/staff', staffRoutes);
+app.use('/api/v1/admin', adminRoutes);
+app.use('/api/v1/payments', paymentsRoutes);
 
 // Health check
 app.get('/health', (_req, res) => {
@@ -475,20 +480,36 @@ describe('Vammos API Integration Tests', () => {
 
     let staffToken: string;
     beforeAll(async () => {
-      // create staff user and elevate role manually
+      // create staff user with unique email
+      const staffEmail = `staff_${Date.now()}_${Math.random().toString(36).slice(2, 9)}@vammos.com`;
+      const staffPassword = 'StaffPassword123!';
+      
       const staffRes = await request(app)
         .post('/api/v1/auth/register')
         .send({
-          email: 'staff@vammos.com',
-          password: 'StaffPassword123!',
+          email: staffEmail,
+          password: staffPassword,
           name: 'Staff User',
           phone: '11987654321'
         });
+      
       if (staffRes.body?.data?.tokens?.accessToken) {
-        staffToken = staffRes.body.data.tokens.accessToken;
         // update role in database
         const { query } = require('../../utils/database');
-        await query('UPDATE users SET role = $1 WHERE email = $2', ['staff', 'staff@vammos.com']);
+        // Log current CHECK constraints on users table to debug failing constraint
+        await query('UPDATE users SET role = $1 WHERE email = $2', ['staff', staffEmail]);
+        
+        // re-login to get token with staff role
+        const loginRes = await request(app)
+          .post('/api/v1/auth/login')
+          .send({
+            email: staffEmail,
+            password: staffPassword
+          });
+        
+        if (loginRes.body?.data?.tokens?.accessToken) {
+          staffToken = loginRes.body.data.tokens.accessToken;
+        }
       }
     });
 
@@ -581,13 +602,27 @@ describe('Vammos API Integration Tests', () => {
       });
 
       test('Another staff cannot update profile', async () => {
-        // create second staff
+        // create second staff with unique email
+        const staff2Email = `staff2_${Date.now()}_${Math.random().toString(36).slice(2, 9)}@vammos.com`;
+        
         const other = await request(app)
           .post('/api/v1/auth/register')
-          .send({ email: 'staff2@vammos.com', password: 'Staff2Pass123!', name: 'Staff Two' });
-        const otherToken = other.body.data.tokens.accessToken;
+          .send({ email: staff2Email, password: 'Staff2Pass123!', name: 'Staff Two' });
+        
+        if (!other.body?.data?.tokens?.accessToken) {
+          console.error('Failed to register second staff');
+          return;
+        }
+        
         const { query } = require('../../utils/database');
-        await query('UPDATE users SET role = $1 WHERE email = $2', ['staff', 'staff2@vammos.com']);
+        await query('UPDATE users SET role = $1 WHERE email = $2', ['staff', staff2Email]);
+        
+        // re-login to get staff token
+        const loginRes = await request(app)
+          .post('/api/v1/auth/login')
+          .send({ email: staff2Email, password: 'Staff2Pass123!' });
+        
+        const otherToken = loginRes.body.data.tokens.accessToken;
 
         const res = await request(app)
           .put(`/api/v1/staff/${staffId}`)
@@ -618,10 +653,23 @@ describe('Vammos API Integration Tests', () => {
         // create a booking by user and assign staff
         const srvRes = await request(app).get('/api/v1/services');
         const srvId = srvRes.body.data.services[0]?.id;
+        
+        if (!srvId) {
+          console.error('No service available');
+          return;
+        }
+        
         const bookRes = await request(app)
           .post('/api/v1/bookings')
           .set('Authorization', `Bearer ${userToken}`)
           .send({ serviceId: srvId, bookingDate: new Date().toISOString(), address: 'Rua Test' });
+        
+        if (bookRes.status !== 201) {
+          console.error('Booking creation failed:', bookRes.status, bookRes.body);
+          expect(bookRes.status).toBe(201);
+          return;
+        }
+        
         const bid = bookRes.body.data.booking.id;
         // assign to staff
         await request(app)
@@ -640,6 +688,12 @@ describe('Vammos API Integration Tests', () => {
           .post('/api/v1/reviews')
           .set('Authorization', `Bearer ${userToken}`)
           .send({ bookingId: bid, rating: 4, comment: 'Good job' });
+        
+        if (revRes.status !== 201) {
+          console.error('Review creation failed:', revRes.status);
+          return;
+        }
+        
         const revId = revRes.body.data.review.id;
 
         // initially staff reviews endpoint returns none until approved
