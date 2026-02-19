@@ -3,13 +3,20 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
+import { apiClient } from '@/services/api';
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuth();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const [company, setCompany] = useState<{name: string; logoUrl: string} | null>(null);
+
+  useEffect(() => {
+    apiClient.getCompanyInfo().then(setCompany).catch(() => {});
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -20,20 +27,35 @@ export default function Navbar() {
     <nav className="bg-blue-700 text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-2xl font-bold">
-            ✨ Limpar Plus
+          <Link href="/" className="flex items-center text-2xl font-bold">
+            <img
+              src={company?.logoUrl || '/leidy-logo.png'}
+              alt={company?.name || 'Limpar Plus'}
+              className="h-8 w-auto mr-2"
+            />
+            <span>{company?.name || 'Limpar Plus'}</span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-6">
             <Link href="/" className="hover:text-blue-100 transition">Home</Link>
             <Link href="/services" className="hover:text-blue-100 transition">Serviços</Link>
+            <Link href="/staff-directory" className="hover:text-blue-100 transition">Equipe</Link>
 
             {isAuthenticated ? (
               <>
                 <Link href="/bookings" className="hover:text-blue-100 transition">Meus Agendamentos</Link>
 
                 {user?.role === 'admin' && (
-                  <Link href="/admin" className="hover:text-blue-100 transition font-semibold">Admin</Link>
+                  <>
+                    <Link href="/admin" className="hover:text-blue-100 transition font-semibold">Administração</Link>
+                    <Link href="/admin/bookings" className="hover:text-blue-100 transition">Agendamentos</Link>
+                    <Link href="/admin/reviews" className="hover:text-blue-100 transition">Avaliações</Link>
+                  </>
+                )}
+                {user?.role === 'staff' && (
+                  <>
+                    <Link href="/staff/bookings" className="hover:text-blue-100 transition font-semibold">Minhas Tarefas</Link>
+                  </>
                 )}
 
                 <div className="relative group">
@@ -62,10 +84,22 @@ export default function Navbar() {
           <div className="md:hidden pb-4 space-y-2">
             <Link href="/" className="block py-2 hover:text-blue-100">Home</Link>
             <Link href="/services" className="block py-2 hover:text-blue-100">Serviços</Link>
+            <Link href="/staff-directory" className="block py-2 hover:text-blue-100">Equipe</Link>
             {isAuthenticated ? (
               <>
                 <Link href="/bookings" className="block py-2 hover:text-blue-100">Meus Agendamentos</Link>
-                {user?.role === 'admin' && <Link href="/admin" className="block py-2 hover:text-blue-100 font-semibold">Admin</Link>}
+                {user?.role === 'admin' && (
+                  <>
+                    <Link href="/admin" className="block py-2 hover:text-blue-100 font-semibold">Administração</Link>
+                    <Link href="/admin/bookings" className="block py-2 hover:text-blue-100">Agendamentos</Link>
+                    <Link href="/admin/reviews" className="block py-2 hover:text-blue-100">Avaliações</Link>
+                  </>
+                )}
+                {user?.role === 'staff' && (
+                  <>
+                    <Link href="/staff/bookings" className="block py-2 hover:text-blue-100 font-semibold">Minhas Tarefas</Link>
+                  </>
+                )}
                 <button onClick={handleLogout} className="block w-full text-left py-2 text-red-400 hover:text-red-300">Logout</button>
               </>
             ) : (

@@ -21,9 +21,9 @@ export function validateRegister(data: { name?: string; email?: string; password
   return null;
 }
 
-export function validateBooking(payload: { bookingDate?: string; address?: string; notes?: string; }): string | null {
+export function validateBooking(payload: { bookingDate?: string | Date; address?: string; notes?: string; }): string | null {
   if (!payload.bookingDate) return 'Data do agendamento é obrigatória';
-  const date = new Date(payload.bookingDate!);
+  const date = payload.bookingDate instanceof Date ? payload.bookingDate : new Date(payload.bookingDate!);
   if (isNaN(date.getTime())) return 'Data inválida';
   if (date.getTime() < Date.now() - 60_000) return 'A data deve ser no futuro';
   if (!payload.address || String(payload.address).trim().length < 5) return 'Endereço inválido';

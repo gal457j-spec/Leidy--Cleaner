@@ -1,24 +1,37 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { apiClient } from '../../services/api';
+import { apiClient, Booking } from '../../services/api';
+import BookingCard from '@/components/BookingCard';
 
 export default function BookingsPage() {
-  const [bookings, setBookings] = useState<any[]>([]);
+  const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const load = async () => {
+    try {
+      const res = await apiClient.getBookings();
+      setBookings(res.bookings || []);
+    } catch (err) {
+      // ignore
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await apiClient.client.get('/bookings');
-        setBookings(res.data.data.bookings || []);
-      } catch (err) {
-        // ignore
-      } finally {
-        setLoading(false);
-      }
-    })();
+    load();
   }, []);
+
+  const handleCancel = async (id: string) => {
+    if (!confirm('Cancelar este agendamento?')) return;
+    try {
+      await apiClient.deleteBooking(id);
+      await load();
+    } catch (err: any) {
+      alert(err.message || 'Erro ao cancelar');
+    }
+  };
 
   return (
     <div>
@@ -29,11 +42,7 @@ export default function BookingsPage() {
         <div className="space-y-3">
           {bookings.length === 0 && <p>Nenhum agendamento encontrado.</p>}
           {bookings.map((b) => (
-            <div key={b.id} className="border p-3 rounded">
-              <p className="font-semibold">Serviço: {b.service_name || b.service_id}</p>
-              <p>Data: {new Date(b.scheduled_date).toLocaleString()}</p>
-              <p>Status: {b.status}</p>
-            </div>
+            <BookingCard key={b.id} booking={b} onCancel={() => handleCancel(b.id)} />
           ))}
         </div>
       )}

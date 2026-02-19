@@ -41,7 +41,39 @@ export const bookingSchema = Joi.object({
   bookingDate: Joi.date().iso().required(),
   address: Joi.string().required(),
   notes: Joi.string().optional(),
+  staffId: Joi.string().uuid().optional(),
   metragem: Joi.number().positive().optional(),
   frequency: Joi.string().valid('once', 'weekly', 'biweekly', 'monthly').default('once'),
   urgency: Joi.string().valid('low', 'normal', 'high').default('normal'),
 });
+
+// Review schema
+export const reviewSchema = Joi.object({
+  bookingId: Joi.string().uuid().required(),
+  rating: Joi.number().integer().min(1).max(5).required(),
+  comment: Joi.string().optional(),
+  images: Joi.array().items(Joi.string().uri()).optional(),
+});
+
+// Staff assignment schema (admin)
+export const assignStaffSchema = Joi.object({
+  bookingId: Joi.string().uuid().required(),
+  staffId: Joi.string().uuid().required(),
+});
+
+// Profile update schema (used by staff themselves or admin)
+export const profileUpdateSchema = Joi.object({
+  name: Joi.string().min(2).optional(),
+  phone: Joi.string().optional(),
+  bio: Joi.string().max(1000).optional().allow(null),
+  photoUrl: Joi.string().uri().optional().allow(null),
+});
+
+// Availability slot schema
+export const availabilitySlotSchema = Joi.object({
+  day: Joi.string().valid('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday').required(),
+  startTime: Joi.string().pattern(/^\d{2}:\d{2}$/).required(),
+  endTime: Joi.string().pattern(/^\d{2}:\d{2}$/).required(),
+});
+
+export const availabilityArraySchema = Joi.array().items(availabilitySlotSchema);

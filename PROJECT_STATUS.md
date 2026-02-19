@@ -43,6 +43,11 @@
 - ✅ PUT `/api/v1/bookings/:id/status` (admin)
 - ✅ DELETE `/api/v1/bookings/:id`
 
+**Payments:**
+- ✅ POST `/api/v1/payments` (legacy)
+- ✅ POST `/api/v1/payments/checkout` (Stripe)
+- ✅ POST `/api/v1/payments/webhook` (Stripe)
+
 **Company:**
 - ✅ GET `/api/v1/company`
 
@@ -54,10 +59,10 @@
 
 - ✅ Tabela `users` (id, email, password_hash, name, phone, role, created_at)
 - ✅ Tabela `services` (id, name, description, category, base_price, duration_minutes)
-- ✅ Tabela `bookings` (id, user_id, service_id, scheduled_date, status, total_price, notes)
-- ✅ Tabela `reviews` (id, booking_id, user_id, rating, comment)
+- ✅ Tabela `bookings` (id, user_id, service_id, scheduled_date, status, total_price, notes, address)
+- ✅ Tabela `reviews` (id, booking_id, user_id, rating, comment, is_approved, images)
 - ✅ Tabela `company_info` (id, name, legal_name, email, phone, address, city, state, country, postal_code, logo_url, description, terms)
-- ✅ Migrations automáticas
+- ✅ Migrations automáticas (incluindo campos de reviews)
 - ✅ Índices para performance
 
 ### Dados Padrão (Seed)
@@ -195,6 +200,7 @@ frontend/
 **MVP v1**:
 - Autenticação básica
 - Catálogo de serviços
+- Real calendar picker for booking (replaced placeholder)
 - Agendamento simples
 - Admin panel
 

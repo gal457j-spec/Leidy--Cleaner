@@ -7,6 +7,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'jsx', 'json', 'node', 'ts', 'tsx'],
   moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
+    '^@\/(.*)$': '<rootDir>/src/$1',
     '^.+\\.(css|scss|sass)$': 'identity-obj-proxy',
     '^.+\\.(jpg|jpeg|png|gif|svg|webp)$': '<rootDir>/__mocks__/fileMock.js',
     '^next\\/image$': '<rootDir>/__mocks__/next/image.js',

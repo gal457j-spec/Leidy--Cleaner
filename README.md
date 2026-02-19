@@ -238,7 +238,19 @@ Workflow automático em `.github/workflows/ci.yml`:
 
 ### Futuro (v2)
 - [ ] Integração de pagamento (Stripe/PIX)
-- [ ] Avaliações e reviews
+- [x] Avaliações e reviews (com moderação)
+
+### Environment variables
+
+The backend supports Stripe checkout when configured:
+
+```
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+FRONTEND_URL=http://localhost:3000
+```
+
+If `STRIPE_SECRET_KEY` is not set the payment flow will fall back to the simple update.
 - [ ] Geolocalização
 - [ ] WhatsApp/SMS notifications
 - [ ] App mobile (React Native)

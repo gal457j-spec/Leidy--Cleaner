@@ -8,7 +8,12 @@ import { logger } from './utils/logger';
 import { errorHandler } from './middleware/errorHandler';
 import authRoutes from './routes/auth';
 import serviceRoutes from './routes/services';
+import bookingsRoutes from './routes/bookings';
+import paymentsRoutes from './routes/payments';
 import companyRoutes from './routes/company';
+import adminRoutes from './routes/admin';
+import reviewsRoutes from './routes/reviews';
+import staffRoutes from './routes/staff';
 
 dotenv.config();
 
@@ -41,6 +46,10 @@ app.use(limiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
+// static file serving for uploads
+import path from 'path';
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+
 // Health check endpoint (público)
 app.get('/health', (_req: Request, res: Response) => {
   res.json({
@@ -53,7 +62,12 @@ app.get('/health', (_req: Request, res: Response) => {
 // API v1 routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/services', serviceRoutes);
+app.use('/api/v1/bookings', bookingsRoutes);
+app.use('/api/v1/payments', paymentsRoutes);
 app.use('/api/v1/company', companyRoutes);
+app.use('/api/v1/admin', adminRoutes);
+app.use('/api/v1/reviews', reviewsRoutes);
+app.use('/api/v1/staff', staffRoutes);
 
 // Status endpoint
 app.get('/api/v1/status', (_req: Request, res: Response) => {

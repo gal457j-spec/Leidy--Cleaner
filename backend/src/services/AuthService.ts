@@ -59,6 +59,8 @@ export class AuthService {
         name: user.full_name,
         phone: user.phone,
         role: user.role,
+        bio: user.bio,
+        photoUrl: user.photo_url,
       },
       accessToken,
       refreshToken,
@@ -71,7 +73,7 @@ export class AuthService {
   ): Promise<{ user: UserResponse; accessToken: string; refreshToken: string }> {
     // Get user by email
     const users = await query(
-      'SELECT id, email, full_name, phone, role, password_hash FROM users WHERE email = $1',
+      'SELECT id, email, full_name, phone, role, password_hash, bio, photo_url FROM users WHERE email = $1',
       [email]
     );
 
@@ -106,6 +108,8 @@ export class AuthService {
         name: user.full_name,
         phone: user.phone,
         role: user.role,
+        bio: user.bio,
+        photoUrl: user.photo_url,
       },
       accessToken,
       refreshToken,
@@ -132,7 +136,7 @@ export class AuthService {
 
   static async getUserById(id: string): Promise<User | null> {
     const result = await query(
-      'SELECT id, email, full_name, phone, role, created_at FROM users WHERE id = $1',
+      'SELECT id, email, full_name, phone, role, bio, photo_url, created_at, updated_at FROM users WHERE id = $1',
       [id]
     );
 
@@ -155,6 +159,14 @@ export class AuthService {
       fields.push(`phone = $${paramCount++}`);
       values.push(updates.phone);
     }
+    if (updates.bio !== undefined) {
+      fields.push(`bio = $${paramCount++}`);
+      values.push(updates.bio);
+    }
+    if (updates.photoUrl !== undefined) {
+      fields.push(`photo_url = $${paramCount++}`);
+      values.push(updates.photoUrl);
+    }
 
     if (fields.length === 0) {
       return this.getUserById(id);
@@ -167,5 +179,13 @@ export class AuthService {
 
     const result = await query(query_str, values);
     return result.length > 0 ? result[0] : null;
+  }
+
+  static async getUsersByRole(role: string): Promise<User[]> {
+    const result = await query(
+      'SELECT id, email, full_name as name, phone, role, bio, photo_url as "photoUrl", created_at FROM users WHERE role = $1',
+      [role]
+    );
+    return result;
   }
 }

@@ -116,4 +116,17 @@ export class AuthController {
       data: { user: userResponse },
     });
   });
+
+  // admin helper: list users by role (e.g. staff)
+  static listByRole = asyncHandler(async (req: AuthRequest, res: Response) => {
+    if (req.user?.role !== 'admin') {
+      throw ApiError('Only admins can list users', 403);
+    }
+    const role = (req.query.role as string) || '';
+    if (!role) {
+      throw ApiError('Role query parameter required', 400);
+    }
+    const users = await AuthService.getUsersByRole(role);
+    res.status(200).json({ message: 'Users retrieved', data: { users } });
+  });
 }

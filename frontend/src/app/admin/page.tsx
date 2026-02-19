@@ -14,6 +14,7 @@ export default function AdminPage() {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
   const [toDelete, setToDelete] = useState<any | null>(null);
+  const [stats, setStats] = useState<{ users: number; services: number; bookings: number; pendingReviews?: number } | null>(null);
 
   const load = async () => {
     try {
@@ -26,6 +27,9 @@ export default function AdminPage() {
 
   useEffect(() => {
     load();
+    apiClient.getStats()
+      .then((s) => setStats(s))
+      .catch(() => {})
   }, []);
 
   const handleDelete = async (s: any) => {
@@ -42,7 +46,18 @@ export default function AdminPage() {
     <ProtectedRoute role="admin">
       <div>
         <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
+        {stats && (
+          <div className="mb-4 p-3 bg-green-50 rounded">
+            <p>Usuários: {stats.users}</p>
+            <p>Serviços: {stats.services}</p>
+            <p>Bookings: {stats.bookings}</p>
+            <p>Avaliações pendentes: {stats.pendingReviews}</p>
+          </div>
+        )}
         <p className="mb-4">CRUD básico de serviços (apenas admin).</p>
+        <p className="mb-4">
+          <a href="/admin/reviews" className="text-blue-600 hover:underline">Gerenciar avaliações</a>
+        </p>
 
         <div className="mb-6">
           <h3 className="font-semibold mb-2">Criar / Editar Serviço</h3>

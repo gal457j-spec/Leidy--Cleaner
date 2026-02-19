@@ -79,8 +79,8 @@
 ## Fase 3: Sistema de Agendamentos (3-4 dias)
 
 ### Componentes
-- [ ] `src/components/booking-form.tsx`
-  - [ ] Seleção de data (datepicker)
+- [x] `src/components/booking-form.tsx`
+  - [x] Seleção de data (datepicker) (usando react-datepicker)
   - [ ] Endereço (input)
   - [ ] Notas (textarea)
   - [ ] Validação

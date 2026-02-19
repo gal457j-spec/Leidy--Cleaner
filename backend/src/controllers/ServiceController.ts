@@ -3,6 +3,21 @@ import { AuthRequest, asyncHandler, ApiError } from '../middleware/errorHandler'
 import { ServiceService } from '../services/ServiceService';
 import { serviceSchema, serviceUpdateSchema } from '../utils/schemas';
 
+
+// helper to convert snake_case keys to camelCase recursively
+function camelize(obj: any): any {
+  if (Array.isArray(obj)) return obj.map(camelize);
+  if (obj && typeof obj === 'object') {
+    return Object.fromEntries(
+      Object.entries(obj).map(([k, v]) => {
+        const camelKey = k.replace(/_([a-z])/g, (_m, c) => c.toUpperCase());
+        return [camelKey, camelize(v)];
+      })
+    );
+  }
+  return obj;
+}
+
 export class ServiceController {
   static getAll = asyncHandler(async (req: AuthRequest, res: Response) => {
     const { limit, offset, category, search } = req.query;
@@ -17,7 +32,7 @@ export class ServiceController {
     res.status(200).json({
       message: 'Services retrieved',
       data: {
-        services: result.services,
+        services: camelize(result.services),
         pagination: {
           total: result.total,
           limit: limit ? parseInt(limit as string) : 10,
@@ -38,7 +53,7 @@ export class ServiceController {
 
     res.status(200).json({
       message: 'Service retrieved',
-      data: { service },
+      data: { service: camelize(service) },
     });
   });
 
@@ -65,7 +80,7 @@ export class ServiceController {
 
     res.status(201).json({
       message: 'Service created successfully',
-      data: { service },
+      data: { service: camelize(service) },
     });
   });
 
@@ -94,7 +109,7 @@ export class ServiceController {
 
     res.status(200).json({
       message: 'Service updated successfully',
-      data: { service },
+      data: { service: camelize(service) },
     });
   });
 

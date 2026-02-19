@@ -13,6 +13,8 @@ interface User {
   name: string;
   phone?: string;
   role: 'customer' | 'staff' | 'admin';
+  bio?: string;
+  photoUrl?: string;
 }
 
 interface Service {
@@ -25,6 +27,33 @@ interface Service {
   isActive: boolean;
 }
 
+interface Booking {
+  id: string;
+  userId: string;
+  serviceId: string;
+  scheduledDate: string;
+  totalPrice: number;
+  address?: string;
+  notes?: string;
+  status: string;
+  paymentStatus?: string;
+  createdAt: string;
+  updatedAt: string;
+  serviceName?: string; // Joined from services
+}
+interface Review {
+  id: string;
+  bookingId: string;
+  userId: string;
+  rating: number;
+  comment?: string;
+  images?: string[];
+  isApproved: boolean;
+  serviceName?: string;
+  serviceId?: string;
+  createdAt: string;
+  updatedAt: string;
+}
 interface ApiError {
   message: string;
   status: number;
@@ -192,6 +221,15 @@ class ApiClient {
     this.clearTokens();
   }
 
+  async getCompanyInfo(): Promise<any> {
+    try {
+      const response = await this.client.get('/company');
+      return response.data.data.company;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
   // Service endpoints
   async getServices(options?: {
     limit?: number;
@@ -252,6 +290,208 @@ class ApiClient {
   async deleteService(id: string): Promise<void> {
     try {
       await this.client.delete(`/services/${id}`);
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  // booking endpoints
+  async createBooking(data: {
+    serviceId: string;
+    bookingDate: string;
+    address: string;
+    notes?: string;
+    staffId?: string;
+  }): Promise<Booking> {
+    try {
+      const response = await this.client.post('/bookings', data);
+      return response.data.data.booking;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getBookingById(id: string): Promise<Booking> {
+    try {
+      const response = await this.client.get(`/bookings/${id}`);
+      return response.data.data.booking;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async deleteBooking(id: string): Promise<void> {
+    try {
+      await this.client.delete(`/bookings/${id}`);
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async updateBookingStatus(id: string, status: string): Promise<Booking> {
+    try {
+      const response = await this.client.put(`/bookings/${id}/status`, { status });
+      return response.data.data.booking;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getAllBookings(): Promise<{ bookings: Booking[] }> {
+    try {
+      const response = await this.client.get('/bookings/all');
+      return response.data.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async assignStaffToBooking(bookingId: string, staffId: string): Promise<Booking> {
+    try {
+      const response = await this.client.post('/bookings/assign', { bookingId, staffId });
+      return response.data.data.booking;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getStaffBookings(): Promise<{ bookings: Booking[] }> {
+    try {
+      const response = await this.client.get('/bookings/staff');
+      return response.data.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  // staff directory / profile endpoints
+  async getStaffList(): Promise<User[]> {
+    try {
+      const response = await this.client.get('/staff');
+      return response.data.data.staff;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getStaffById(id: string): Promise<User> {
+    try {
+      const response = await this.client.get(`/staff/${id}`);
+      return response.data.data.staff;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async updateStaffProfile(id: string, updates: Partial<User>): Promise<User> {
+    try {
+      const response = await this.client.put(`/staff/${id}`, updates);
+      return response.data.data.staff;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getStaffAvailability(id: string): Promise<Array<{ id: string; staffId: string; day: string; startTime: string; endTime: string }>> {
+    try {
+      const response = await this.client.get(`/staff/${id}/availability`);
+      return response.data.data.availability;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async setStaffAvailability(id: string, slots: Array<{ day: string; startTime: string; endTime: string }>): Promise<Array<{ id: string; staffId: string; day: string; startTime: string; endTime: string }>> {
+    try {
+      const response = await this.client.put(`/staff/${id}/availability`, slots);
+      return response.data.data.availability;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getStaffReviews(id: string): Promise<Review[]> {
+    try {
+      const response = await this.client.get(`/staff/${id}/reviews`);
+      return response.data.data.reviews;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getStaffRating(id: string): Promise<number> {
+    try {
+      const response = await this.client.get(`/staff/${id}/rating`);
+      return response.data.data.rating;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  // review endpoints
+
+  async getUsersByRole(role: string): Promise<User[]> {
+    try {
+      const response = await this.client.get('/auth/users', { params: { role } });
+      return response.data.data.users;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+  async createReview(data: {
+    bookingId: string;
+    rating: number;
+    comment?: string;
+    images?: string[];
+  }): Promise<Review> {
+    try {
+      const response = await this.client.post('/reviews', data);
+      return response.data.data.review;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getBookingReviews(bookingId: string): Promise<{ reviews: Review[] }> {
+    try {
+      const response = await this.client.get(`/reviews/${bookingId}`);
+      return response.data.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getPublicReviews(serviceId?: string): Promise<Review[]> {
+    try {
+      const response = await this.client.get('/reviews/public', { params: { serviceId } });
+      return response.data.data.reviews;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getBookings(): Promise<{ bookings: Booking[] }> {
+    try {
+      const response = await this.client.get('/bookings');
+      return response.data.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async createCheckoutSession(bookingId: string): Promise<{ url: string }> {
+    try {
+      const response = await this.client.post('/payments/checkout', { bookingId });
+      return response.data.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getStats(): Promise<{ users: number; services: number; bookings: number; pendingReviews?: number }> {
+    try {
+      const response = await this.client.get('/admin/stats');
+      return response.data.data.stats;
     } catch (error) {
       throw this.handleError(error);
     }

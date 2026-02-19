@@ -13,4 +13,7 @@ router.post('/refresh-token', AuthController.refreshToken);
 router.get('/me', authenticateToken, AuthController.getProfile);
 router.put('/me', authenticateToken, AuthController.updateProfile);
 
+// Admin route to list users by role (e.g. ?role=staff)
+router.get('/users', authenticateToken, AuthController.listByRole);
+
 export default router;
