@@ -94,6 +94,8 @@ export const query = async (text: string, params?: any[]): Promise<any[]> => {
         sql = sql.replace(/RETURNING[\s\S]*$/i, '');
       }
       sql = sql.replace(/\bNOW\(\)/ig, 'CURRENT_TIMESTAMP');
+      // Convert PostgreSQL $N placeholders to SQLite ?
+      sql = sql.replace(/\$\d+/g, '?');
 
       const trimmed = sql.trim().toLowerCase();
 

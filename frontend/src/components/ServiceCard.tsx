@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Service } from '../services/api';
 import { Card, CardContent } from './ui/Card';
@@ -14,6 +14,22 @@ export default function ServiceCard({
   rating?: number;
   reviewCount?: number;
 }) {
+  const [price, setPrice] = useState<{ basePrice: number; fee: number; total: number } | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    const loadPrice = async () => {
+      try {
+        const { apiClient } = await import('../services/api');
+        const res = await apiClient.getPriceEstimate(service.durationMinutes || 60);
+        if (mounted) setPrice({ basePrice: res.basePrice, fee: res.fee, total: res.total });
+      } catch (e) {
+        // ignore
+      }
+    };
+    loadPrice();
+    return () => { mounted = false; };
+  }, [service.durationMinutes]);
   return (
     <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] border-0 shadow-md bg-white">
       <div className="relative">
@@ -55,9 +71,9 @@ export default function ServiceCard({
           <div className="flex items-center justify-between pt-2 border-t border-gray-100">
             <div className="flex flex-col">
               <span className="text-2xl font-bold text-primary">
-                R$ {service.basePrice}
+                R$ {price ? price.total.toFixed(2) : (service.basePrice || 0).toFixed(2)}
               </span>
-              <span className="text-xs text-gray-500">por serviço</span>
+              <span className="text-xs text-gray-500">(incl. taxa)</span>
             </div>
 
             <Link href={`/services/${service.id}`}>

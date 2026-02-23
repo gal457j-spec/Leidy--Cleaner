@@ -29,6 +29,7 @@ export default function BookingForm({
   const [address, setAddress] = useState(initialAddress);
   const [notes, setNotes] = useState(initialNotes);
   const [service, setService] = useState<any | null>(null);
+  const [priceBreakdown, setPriceBreakdown] = useState<{ basePrice: number; fee: number; total: number } | null>(null);
   const [staffList, setStaffList] = useState<any[]>([]);
   const [selectedStaff, setSelectedStaff] = useState('');
   const [loading, setLoading] = useState(false);
@@ -52,7 +53,13 @@ export default function BookingForm({
     if (serviceId) {
       apiClient
         .getServiceById(serviceId)
-        .then((s) => setService(s))
+        .then((s) => {
+          setService(s);
+          // fetch price breakdown for display
+          apiClient.getPriceEstimate(s.durationMinutes || 60).then((p) => {
+            setPriceBreakdown({ basePrice: p.basePrice, fee: p.fee, total: p.total });
+          }).catch(() => {});
+        })
         .catch(() => {});
     }
     // fetch staff list for optional assignment
@@ -134,8 +141,11 @@ export default function BookingForm({
               </div>
               <div className="text-right">
                 <div className="text-2xl font-bold text-primary">
-                  R$ {service.basePrice}
-                </div>
+                    R$ {priceBreakdown ? priceBreakdown.total.toFixed(2) : (service.basePrice || 0).toFixed(2)}
+                  </div>
+                  {priceBreakdown && (
+                    <div className="text-xs text-gray-500">Base R$ {priceBreakdown.basePrice.toFixed(2)} + taxa R$ {priceBreakdown.fee.toFixed(2)}</div>
+                  )}
               </div>
             </div>
           </div>

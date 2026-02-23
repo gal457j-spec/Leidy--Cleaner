@@ -14,6 +14,7 @@ export default function ServicesPage() {
     setLoading(true);
     try {
       const res = await apiClient.getServices({ limit: 50, ...opts });
+      console.log('Services response:', res);
       setServices(res.services || []);
 
       // calculate review stats
@@ -31,11 +32,11 @@ export default function ServicesPage() {
           }
         });
         setReviewStats(stats);
-      } catch {
-        // ignore
+      } catch (err) {
+        console.log('Reviews error (ignoring):', err);
       }
     } catch (err) {
-      // ignore
+      console.error('Services loading error:', err);
     } finally {
       setLoading(false);
     }

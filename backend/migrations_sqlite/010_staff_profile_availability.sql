@@ -1,7 +1,7 @@
 -- add bio and photo_url to users for staff profiles
-ALTER TABLE users
-  ADD COLUMN IF NOT EXISTS bio TEXT,
-  ADD COLUMN IF NOT EXISTS photo_url TEXT(255);
+-- Add bio and photo_url columns to users (separate ALTERs for sqlite compatibility)
+ALTER TABLE users ADD COLUMN bio TEXT;
+ALTER TABLE users ADD COLUMN photo_url TEXT;
 
 -- table to store staff availability slots
 CREATE TABLE IF NOT EXISTS staff_availability (

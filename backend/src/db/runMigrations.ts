@@ -21,6 +21,7 @@ async function runMigrations() {
           executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )`;
 
+    logger.info('Create migrations table SQL:', createMigrationsTableSQL.replace(/\n/g, ' '));
     await query(createMigrationsTableSQL);
 
     logger.info('📋 Migrations tracking table ready');
@@ -37,6 +38,7 @@ async function runMigrations() {
     const actualMigrationsDir = dbType === 'sqlite'
       ? path.join(__dirname, '../../migrations_sqlite')
       : migrationsDir;
+    logger.info(`Using migrations dir: ${actualMigrationsDir} (dbType=${dbType})`);
     const migrationFiles = fs.readdirSync(actualMigrationsDir)
       .filter(file => file.endsWith('.sql'))
       .sort();

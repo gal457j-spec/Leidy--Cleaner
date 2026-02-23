@@ -68,16 +68,16 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
               <img
                 src={company?.logoUrl || '/leidy-logo.png'}
-                alt={company?.name || 'Limpar Plus'}
+                alt={company?.name || 'Leidy Cleaner'}
                 className="w-8 h-8 object-contain"
               />
             </div>
             <div className="hidden sm:block">
               <span className="text-xl font-bold text-gray-900">
-                {company?.name || 'Limpar Plus'}
+                {company?.name || 'Leidy Cleaner'}
               </span>
             </div>
           </Link>

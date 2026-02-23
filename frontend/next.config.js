@@ -12,6 +12,18 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
 
+  // Proxy API calls to backend during development
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/api/v1/:path*',
+          destination: 'http://localhost:3001/api/v1/:path*',
+        },
+      ],
+    };
+  },
+
   // Disable static optimization for pages with dynamic search params
   experimental: {
     // Encourage dynamic optimization

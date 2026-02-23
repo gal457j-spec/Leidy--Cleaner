@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1';
+// Use relative API path by default so previews and proxied hosts work
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api/v1';
 
 interface AuthTokens {
   accessToken: string;
@@ -346,6 +347,15 @@ class ApiClient {
     }
   }
 
+  async listMyBookings(): Promise<{ bookings: Booking[] }> {
+    try {
+      const response = await this.client.get('/bookings');
+      return response.data.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
   async assignStaffToBooking(bookingId: string, staffId: string): Promise<Booking> {
     try {
       const response = await this.client.post('/bookings/assign', { bookingId, staffId });
@@ -470,6 +480,16 @@ class ApiClient {
     }
   }
 
+  // pricing endpoint
+  async getPriceEstimate(minutes: number): Promise<{ basePrice: number; fee: number; total: number; durationMinutes: number; durationHours: number }> {
+    try {
+      const response = await this.client.get('/services/pricing/calculate', { params: { minutes } });
+      return response.data.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
   async getBookings(): Promise<{ bookings: Booking[] }> {
     try {
       const response = await this.client.get('/bookings');
@@ -491,6 +511,15 @@ class ApiClient {
   async confirmPixPayment(bookingId: string): Promise<{ success: boolean; booking: Booking }> {
     try {
       const response = await this.client.post('/payments/pix/confirm', { bookingId });
+      return response.data.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async checkoutBooking(bookingId: string): Promise<{ booking: Booking }> {
+    try {
+      const response = await this.client.post('/payments/checkout', { bookingId });
       return response.data.data;
     } catch (error) {
       throw this.handleError(error);

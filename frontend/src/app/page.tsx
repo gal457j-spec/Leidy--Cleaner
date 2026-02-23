@@ -119,7 +119,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Por que escolher a Limpar Plus?
+              Por que escolher a Leidy Cleaner?
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Descubra os benefícios de contratar nossos serviços profissionais
