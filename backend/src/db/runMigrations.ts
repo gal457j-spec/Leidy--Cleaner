@@ -9,11 +9,15 @@ async function runMigrations() {
 
     // Create migrations tracking table if it doesn't exist
     const dbType = process.env.DB_TYPE || 'postgres';
+    // choose the proper SQL depending on the database type.  the sqlite
+    // version must use CURRENT_TIMESTAMP – `datetime('now')` is not allowed as
+    // a DEFAULT expression and was causing a syntax error during the earlier
+    // run.  this mirrors the format used by the other sqlite migrations.
     const createMigrationsTableSQL = dbType === 'sqlite'
       ? `CREATE TABLE IF NOT EXISTS migrations (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           name TEXT NOT NULL UNIQUE,
-          executed_at DATETIME DEFAULT datetime('now')
+          executed_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )`
       : `CREATE TABLE IF NOT EXISTS migrations (
           id SERIAL PRIMARY KEY,
@@ -21,7 +25,8 @@ async function runMigrations() {
           executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )`;
 
-    logger.info('Create migrations table SQL:', createMigrationsTableSQL.replace(/\n/g, ' '));
+    // log the actual SQL in a single string so it can be debugged if it fails
+    logger.info(`Create migrations table SQL: ${createMigrationsTableSQL.replace(/\n/g, ' ')}`);
     await query(createMigrationsTableSQL);
 
     logger.info('📋 Migrations tracking table ready');
@@ -66,10 +71,13 @@ async function runMigrations() {
       logger.info(`🚀 Executing migration: ${migrationName}`);
       
       // Execute all statements in the SQL file
-      const statements = sql
+      // remove all single-line comments first so that semicolons inside them
+      // don’t confuse our naive split.  then split on `;` and trim the results.
+      const cleaned = sql.replace(/--.*$/gm, '');
+      const statements = cleaned
         .split(';')
         .map(stmt => stmt.trim())
-        .filter(stmt => stmt.length > 0 && !stmt.startsWith('--'));
+        .filter(stmt => stmt.length > 0);
 
       for (const statement of statements) {
         try {

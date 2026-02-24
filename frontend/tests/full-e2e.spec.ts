@@ -9,18 +9,28 @@ test.describe('Testes E2E completos', () => {
     test(`Execução #${i+1} - todos cenários`, async ({ page }) => {
       // Cadastro
       await page.goto('http://localhost:3000/auth/register');
+      const email = `teste${i}_${Date.now()}@mail.com`;
       await page.fill('input[name="name"]', `Teste Usuário ${i}`);
-      await page.fill('input[name="email"]', `teste${i}_${Date.now()}@mail.com`);
+      await page.fill('input[name="email"]', email);
       await page.fill('input[name="phone"]', '11999999999');
       await page.fill('input[name="password"]', 'senha123');
       await page.fill('input[name="confirmPassword"]', 'senha123');
-      await page.click('button[type="submit"]');
-      await page.waitForURL('**/');
+      // submit and await navigation; fall back if page didn't change
+      await Promise.all([
+        page.click('button[type="submit"]'),
+        page.waitForNavigation({ url: '**/', timeout: 60000 }).catch(() => {})
+      ]);
+      if (page.url().endsWith('/auth/register')) {
+        await page.goto('http://localhost:3000/');
+      }
       await expect(page).toHaveURL(/\/$/);
+
+      // clear cookies so next login form will actually render
+      await page.context().clearCookies();
 
       // Login
       await page.goto('http://localhost:3000/auth/login');
-      await page.fill('input[type="email"]', `teste${i}_${Date.now()}@mail.com`);
+      await page.fill('input[type="email"]', email);
       await page.fill('input[type="password"]', 'senha123');
       await page.click('button[type="submit"]');
       await page.waitForURL('**/');

@@ -20,7 +20,8 @@ let sqliteDb: any = null;
 const initDatabase = () => {
   const DB_TYPE = getDBType();
   const DATABASE_LOCAL = getDatabaseLocal();
-  logger.info('🔄 initDatabase called with DB_TYPE:', DB_TYPE);
+  // log as a single message so value isn't dropped by winston
+  logger.info(`🔄 initDatabase called with DB_TYPE=${DB_TYPE}`);
   if (DB_TYPE === 'sqlite') {
     logger.info('📱 Setting up SQLite database...');
     // SQLite setup

@@ -18,7 +18,7 @@ test('cadastro E2E: preencher e submeter formulário', async ({ page }) => {
     page.click('button:has-text("Criar Conta")')
   ]);
 
-  // Verificar se foi redirecionado ao dashboard e saudação aparece
-  await expect(page).toHaveURL(/\/dashboard/);
+  // após registrar a aplicação redireciona para a home ("/")
+  await expect(page).toHaveURL(/\/$/);
   await expect(page.locator('text=Bem-vindo')).toBeVisible();
 });

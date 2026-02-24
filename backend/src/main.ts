@@ -101,6 +101,19 @@ app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 // Swagger (API documentation)
 setupSwagger(app);
 
+// run database seed in test mode so company and admin data exist for E2E
+// (migrations are executed separately in docker/setup scripts but tests spawn
+// the server manually).  this mirrors the behaviour of setup-local, which
+// also seeds on start.
+if (process.env.NODE_ENV === 'test') {
+  import('./db/seed').then(m => m.seedDatabase())
+    .catch(err => {
+      logger.error('❌ Seeding on startup failed:', err);
+      // fail early so Playwright sees the error
+      process.exit(1);
+    });
+}
+
 // Health check endpoint (público)
 app.get('/health', async (_req: Request, res: Response) => {
   const health = {
