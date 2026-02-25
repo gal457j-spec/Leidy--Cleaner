@@ -68,14 +68,14 @@ describe('Analytics API', () => {
           name: 'Regular User'
         });
 
-      const userToken = userResponse.body.data.token;
+      const userToken = userResponse.body.data?.tokens?.accessToken;
 
       const response = await request(app)
         .get('/api/v1/analytics/dashboard')
         .set('Authorization', `Bearer ${userToken}`);
 
       expect(response.status).toBe(403);
-      expect(response.body.message).toContain('Only admins');
+      expect(response.body.error.message).toContain('Only admins');
     });
   });
 

@@ -71,12 +71,12 @@ export class AnalyticsService {
       // Receita por mês
       const revenueByMonthResult = await query(`
         SELECT
-          TO_CHAR(created_at, 'YYYY-MM') as month,
+          strftime('%Y-%m', created_at) as month,
           COALESCE(SUM(total_price), 0) as revenue,
           COUNT(*) as bookings
         FROM bookings
         WHERE status = 'completed'
-        GROUP BY TO_CHAR(created_at, 'YYYY-MM')
+        GROUP BY strftime('%Y-%m', created_at)
         ORDER BY month DESC
         LIMIT 12
       `);
@@ -84,11 +84,11 @@ export class AnalyticsService {
       // Crescimento de usuários
       const userGrowthResult = await query(`
         SELECT
-          TO_CHAR(created_at, 'YYYY-MM') as month,
+          strftime('%Y-%m', created_at) as month,
           COUNT(*) as new_users,
-          SUM(COUNT(*)) OVER (ORDER BY TO_CHAR(created_at, 'YYYY-MM')) as total_users
+          SUM(COUNT(*)) OVER (ORDER BY strftime('%Y-%m', created_at)) as total_users
         FROM users
-        GROUP BY TO_CHAR(created_at, 'YYYY-MM')
+        GROUP BY strftime('%Y-%m', created_at)
         ORDER BY month DESC
         LIMIT 12
       `);
@@ -242,20 +242,20 @@ export class AnalyticsService {
       const result = await query(`
         SELECT
           u.id as staff_id,
-          u.name as staff_name,
+          u.full_name as staff_name,
           COUNT(b.id) as total_bookings,
           COUNT(CASE WHEN b.status = 'completed' THEN 1 END) as completed_bookings,
           AVG(r.rating) as average_rating,
           COALESCE(SUM(b.total_price), 0) as total_revenue,
           CASE
-            WHEN COUNT(b.id) > 0 THEN ROUND(COUNT(CASE WHEN b.status = 'completed' THEN 1 END)::decimal / COUNT(b.id) * 100, 2)
+            WHEN COUNT(b.id) > 0 THEN ROUND(CAST(COUNT(CASE WHEN b.status = 'completed' THEN 1 END) AS REAL) / COUNT(b.id) * 100, 2)
             ELSE 0
           END as efficiency
         FROM users u
-        LEFT JOIN bookings b ON b.team_member_id = u.id
+        LEFT JOIN bookings b ON b.staff_id = u.id
         LEFT JOIN reviews r ON r.booking_id = b.id AND r.is_approved = true
         WHERE u.role = 'staff'
-        GROUP BY u.id, u.name
+        GROUP BY u.id, u.full_name
         ORDER BY total_bookings DESC
       `);
 
@@ -290,15 +290,15 @@ export class AnalyticsService {
           b.status,
           b.total_price,
           b.address,
-          u.name as customer_name,
+          u.full_name as customer_name,
           u.email as customer_email,
           s.name as service_name,
-          st.name as staff_name,
+          st.full_name as staff_name,
           b.created_at
         FROM bookings b
         JOIN users u ON u.id = b.user_id
         JOIN services s ON s.id = b.service_id
-        LEFT JOIN users st ON st.id = b.team_member_id
+        LEFT JOIN users st ON st.id = b.staff_id
         ${dateFilter}
         ORDER BY b.created_at DESC
       `);

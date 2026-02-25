@@ -14,7 +14,7 @@ class AnalyticsService {
                 : '';
             // Usuários
             const usersResult = await (0, database_1.query)('SELECT COUNT(*) as count FROM users');
-            const activeUsersResult = await (0, database_1.query)("SELECT COUNT(*) as count FROM users WHERE last_login > NOW() - INTERVAL '30 days'");
+            const activeUsersResult = await (0, database_1.query)("SELECT COUNT(*) as count FROM users WHERE last_login > datetime('now', '-30 days')");
             // Bookings
             const bookingsResult = await (0, database_1.query)(`SELECT COUNT(*) as count FROM bookings ${dateFilter.replace('created_at', 'created_at')}`);
             const completedResult = await (0, database_1.query)(`SELECT COUNT(*) as count FROM bookings WHERE status = 'completed' ${dateFilter ? 'AND ' + dateFilter.replace('WHERE', '').replace('created_at', 'created_at') : ''}`);
@@ -38,23 +38,23 @@ class AnalyticsService {
             // Receita por mês
             const revenueByMonthResult = await (0, database_1.query)(`
         SELECT
-          TO_CHAR(created_at, 'YYYY-MM') as month,
+          strftime('%Y-%m', created_at) as month,
           COALESCE(SUM(total_price), 0) as revenue,
           COUNT(*) as bookings
         FROM bookings
         WHERE status = 'completed'
-        GROUP BY TO_CHAR(created_at, 'YYYY-MM')
+        GROUP BY strftime('%Y-%m', created_at)
         ORDER BY month DESC
         LIMIT 12
       `);
             // Crescimento de usuários
             const userGrowthResult = await (0, database_1.query)(`
         SELECT
-          TO_CHAR(created_at, 'YYYY-MM') as month,
+          strftime('%Y-%m', created_at) as month,
           COUNT(*) as new_users,
-          SUM(COUNT(*)) OVER (ORDER BY TO_CHAR(created_at, 'YYYY-MM')) as total_users
+          SUM(COUNT(*)) OVER (ORDER BY strftime('%Y-%m', created_at)) as total_users
         FROM users
-        GROUP BY TO_CHAR(created_at, 'YYYY-MM')
+        GROUP BY strftime('%Y-%m', created_at)
         ORDER BY month DESC
         LIMIT 12
       `);
@@ -136,7 +136,7 @@ class AnalyticsService {
             const activeChatsResult = await (0, database_1.query)(`
         SELECT COUNT(*) as count
         FROM chat_rooms
-        WHERE updated_at > NOW() - INTERVAL '24 hours'
+        WHERE updated_at > datetime('now', '-24 hours')
       `);
             // Verificar saúde do sistema
             const alerts = [];
@@ -145,7 +145,7 @@ class AnalyticsService {
             const unassignedBookings = await (0, database_1.query)(`
         SELECT COUNT(*) as count
         FROM bookings
-        WHERE status = 'confirmed' AND (team_member_id IS NULL OR team_member_id = '')
+        WHERE status = 'confirmed' AND (staff_id IS NULL OR staff_id = '')
       `);
             if (parseInt(unassignedBookings[0].count) > 0) {
                 alerts.push(`${unassignedBookings[0].count} bookings sem staff atribuído`);
@@ -188,20 +188,20 @@ class AnalyticsService {
             const result = await (0, database_1.query)(`
         SELECT
           u.id as staff_id,
-          u.name as staff_name,
+          u.full_name as staff_name,
           COUNT(b.id) as total_bookings,
           COUNT(CASE WHEN b.status = 'completed' THEN 1 END) as completed_bookings,
           AVG(r.rating) as average_rating,
           COALESCE(SUM(b.total_price), 0) as total_revenue,
           CASE
-            WHEN COUNT(b.id) > 0 THEN ROUND(COUNT(CASE WHEN b.status = 'completed' THEN 1 END)::decimal / COUNT(b.id) * 100, 2)
+            WHEN COUNT(b.id) > 0 THEN ROUND(CAST(COUNT(CASE WHEN b.status = 'completed' THEN 1 END) AS REAL) / COUNT(b.id) * 100, 2)
             ELSE 0
           END as efficiency
         FROM users u
-        LEFT JOIN bookings b ON b.team_member_id = u.id
+        LEFT JOIN bookings b ON b.staff_id = u.id
         LEFT JOIN reviews r ON r.booking_id = b.id AND r.is_approved = true
         WHERE u.role = 'staff'
-        GROUP BY u.id, u.name
+        GROUP BY u.id, u.full_name
         ORDER BY total_bookings DESC
       `);
             return result.map((row) => ({
@@ -234,15 +234,15 @@ class AnalyticsService {
           b.status,
           b.total_price,
           b.address,
-          u.name as customer_name,
+          u.full_name as customer_name,
           u.email as customer_email,
           s.name as service_name,
-          st.name as staff_name,
+          st.full_name as staff_name,
           b.created_at
         FROM bookings b
         JOIN users u ON u.id = b.user_id
         JOIN services s ON s.id = b.service_id
-        LEFT JOIN users st ON st.id = b.team_member_id
+        LEFT JOIN users st ON st.id = b.staff_id
         ${dateFilter}
         ORDER BY b.created_at DESC
       `);

@@ -77,7 +77,7 @@ BookingController.create = (0, errorHandler_1.asyncHandler)(async (req, res) => 
                         const staffNotificationData = {
                             staffName: staff.name,
                             staffEmail: staff.email,
-                            customerName: user.name,
+                            customerName: user.full_name,
                             serviceName: service.name,
                             scheduledDate: bookingDate,
                             address: address

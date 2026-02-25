@@ -44,17 +44,3 @@ CREATE INDEX IF NOT EXISTS idx_chat_rooms_updated_at ON chat_rooms(updated_at);
 CREATE INDEX IF NOT EXISTS idx_chat_messages_booking_id ON chat_messages(booking_id);
 CREATE INDEX IF NOT EXISTS idx_chat_messages_sender_id ON chat_messages(sender_id);
 CREATE INDEX IF NOT EXISTS idx_chat_messages_created_at ON chat_messages(created_at);
-
--- Create trigger to update updated_at timestamp
-CREATE OR REPLACE FUNCTION update_chat_room_updated_at()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.updated_at = CURRENT_TIMESTAMP;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_update_chat_room_updated_at
-    BEFORE UPDATE ON chat_rooms
-    FOR EACH ROW
-    EXECUTE FUNCTION update_chat_room_updated_at();
