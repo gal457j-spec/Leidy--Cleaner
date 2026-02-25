@@ -6,18 +6,8 @@ const errorHandler_1 = require("../middleware/errorHandler");
 const ServiceService_1 = require("../services/ServiceService");
 const schemas_1 = require("../utils/schemas");
 const cache_1 = require("../utils/cache");
-// helper to convert snake_case keys to camelCase recursively
-function camelize(obj) {
-    if (Array.isArray(obj))
-        return obj.map(camelize);
-    if (obj && typeof obj === 'object') {
-        return Object.fromEntries(Object.entries(obj).map(([k, v]) => {
-            const camelKey = k.replace(/_([a-z])/g, (_m, c) => c.toUpperCase());
-            return [camelKey, camelize(v)];
-        }));
-    }
-    return obj;
-}
+const transformers_1 = require("../utils/transformers");
+const constants_1 = require("../utils/constants");
 class ServiceController {
 }
 exports.ServiceController = ServiceController;
@@ -42,7 +32,7 @@ ServiceController.getAll = (0, errorHandler_1.asyncHandler)(async (req, res) => 
         search: search,
     });
     const responseData = {
-        services: camelize(result.services),
+        services: (0, transformers_1.camelize)(result.services),
         pagination: {
             total: result.total,
             limit: limit ? parseInt(limit) : 10,
@@ -64,7 +54,7 @@ ServiceController.getById = (0, errorHandler_1.asyncHandler)(async (req, res) =>
     }
     res.status(200).json({
         message: 'Service retrieved',
-        data: { service: camelize(service) },
+        data: { service: (0, transformers_1.camelize)(service) },
     });
 });
 ServiceController.create = (0, errorHandler_1.asyncHandler)(async (req, res) => {
@@ -74,7 +64,7 @@ ServiceController.create = (0, errorHandler_1.asyncHandler)(async (req, res) => 
         throw (0, errorHandler_1.ApiError)(error.details[0].message, 400);
     }
     // Then check admin role
-    if (req.user?.role !== 'admin') {
+    if (req.user?.role !== constants_1.UserRole.ADMIN) {
         throw (0, errorHandler_1.ApiError)('Only admins can create services', 403);
     }
     const service = await ServiceService_1.ServiceService.create({
@@ -88,7 +78,7 @@ ServiceController.create = (0, errorHandler_1.asyncHandler)(async (req, res) => 
     cache_1.cache.clear();
     res.status(201).json({
         message: 'Service created successfully',
-        data: { service: camelize(service) },
+        data: { service: (0, transformers_1.camelize)(service) },
     });
 });
 ServiceController.update = (0, errorHandler_1.asyncHandler)(async (req, res) => {
@@ -101,7 +91,7 @@ ServiceController.update = (0, errorHandler_1.asyncHandler)(async (req, res) => 
         throw (0, errorHandler_1.ApiError)(error.details[0].message, 400);
     }
     // Then check admin role
-    if (req.user?.role !== 'admin') {
+    if (req.user?.role !== constants_1.UserRole.ADMIN) {
         throw (0, errorHandler_1.ApiError)('Only admins can update services', 403);
     }
     const service = await ServiceService_1.ServiceService.update(id, value);
@@ -110,12 +100,12 @@ ServiceController.update = (0, errorHandler_1.asyncHandler)(async (req, res) => 
     }
     res.status(200).json({
         message: 'Service updated successfully',
-        data: { service: camelize(service) },
+        data: { service: (0, transformers_1.camelize)(service) },
     });
 });
 ServiceController.delete = (0, errorHandler_1.asyncHandler)(async (req, res) => {
     // Check admin role
-    if (req.user?.role !== 'admin') {
+    if (req.user?.role !== constants_1.UserRole.ADMIN) {
         throw (0, errorHandler_1.ApiError)('Only admins can delete services', 403);
     }
     const { id } = req.params;

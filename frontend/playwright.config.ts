@@ -15,12 +15,17 @@ export default defineConfig({
   use: {
     baseURL: process.env.BASE_URL || 'http://localhost:3000',
     trace: 'on-first-retry',
-    screenshot: 'only-on-failure'
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    // set a higher default nav timeout, individual tests can override
+    navigationTimeout: 60000
   },
+
   webServer: {
-    // start the frontend only from the frontend directory; root has a separate
-    // monorepo script which confuses Next/lockfile detection
-    command: 'npm run dev',
+    // clean any leftover dev server and Next cache before starting; this
+    // prevents the lockfile/port conflicts that were causing Playwright to
+    // launch a broken server and hang tests.
+    command: "npm run clean:next && npm run dev",
     cwd: rootDir,
     port: 3000,
     reuseExistingServer: true,

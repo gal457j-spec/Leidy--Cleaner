@@ -9,7 +9,7 @@ async function seedDatabase() {
         logger_1.logger.info('🌱 Starting database seeding...');
         // For tests, use direct database connection to avoid module conflicts
         let testQuery = database_1.query;
-        if (process.env.NODE_ENV === 'test' && process.env.DB_TYPE !== 'sqlite') {
+        if (require('../config').NODE_ENV === 'test' && process.env.DB_TYPE !== 'sqlite') {
             const { Pool } = require('pg');
             const testPool = new Pool({
                 host: process.env.DB_HOST || 'localhost',
@@ -61,9 +61,14 @@ async function seedDatabase() {
         const servicesCount = parseInt(existingServices[0].count || '0', 10);
         if (servicesCount === 0) {
             const services = [
-                { name: 'Limpeza Residencial Básica', description: 'Varredura, limpeza de pisos, banheiros e cozinha.', category: 'Residencial', base_price: 180.0, duration_minutes: 90 },
-                { name: 'Limpeza Residencial Profunda', description: 'Limpeza completa e detalhada.', category: 'Residencial', base_price: 400.0, duration_minutes: 240 },
-                { name: 'Limpeza Pós-Obra', description: 'Remoção de poeira e resíduos.', category: 'Residencial', base_price: 800.0, duration_minutes: 360 },
+                { name: 'Limpeza Residencial Básica', description: 'Varredura, limpeza de pisos, banheiros e cozinha. Serviço de até 2 horas (máx 8 horas total).', category: 'Residencial', base_price: 0, duration_minutes: 120 },
+                { name: 'Limpeza Residencial Profunda', description: 'Limpeza completa e detalhada em todas as áreas. Até 4 horas (máx 8 horas total).', category: 'Residencial', base_price: 0, duration_minutes: 240 },
+                { name: 'Limpeza Pós-Obra', description: 'Remoção de poeira e resíduos após reformas. Até 6 horas (máx 8 horas total).', category: 'Residencial', base_price: 0, duration_minutes: 360 },
+                { name: 'Limpeza Comercial', description: 'Limpeza profissional para escritórios e comércios. Até 4 horas (máx 8 horas total).', category: 'Comercial', base_price: 0, duration_minutes: 240 },
+                { name: 'Limpeza de Carpete', description: 'Higienização profissional de tapetes e carpetes. Até 3 horas (máx 8 horas total).', category: 'Especializada', base_price: 0, duration_minutes: 180 },
+                { name: 'Limpeza de Janelas', description: 'Limpeza de vidros e fachada. Até 2 horas (máx 8 horas total).', category: 'Especializada', base_price: 0, duration_minutes: 90 },
+                { name: 'Limpeza de Estofados', description: 'Higienização de sofás e poltronas. Até 2 horas (máx 8 horas total).', category: 'Especializada', base_price: 0, duration_minutes: 120 },
+                { name: 'Limpeza Verde Ecológica', description: 'Limpeza com produtos eco-friendly. Até 2 horas (máx 8 horas total).', category: 'Especializada', base_price: 0, duration_minutes: 120 },
             ];
             for (const service of services) {
                 await testQuery(`INSERT INTO services (name, description, category, base_price, duration_minutes, is_active)

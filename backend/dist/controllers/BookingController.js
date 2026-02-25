@@ -8,18 +8,8 @@ exports.BookingController = void 0;
 const errorHandler_1 = require("../middleware/errorHandler");
 const database_1 = require("../utils/database");
 const BookingService_1 = __importDefault(require("../services/BookingService"));
-// helper to convert snake_case keys to camelCase recursively
-function camelize(obj) {
-    if (Array.isArray(obj))
-        return obj.map(camelize);
-    if (obj && typeof obj === 'object') {
-        return Object.fromEntries(Object.entries(obj).map(([k, v]) => {
-            const camelKey = k.replace(/_([a-z])/g, (_m, c) => c.toUpperCase());
-            return [camelKey, camelize(v)];
-        }));
-    }
-    return obj;
-}
+const priceCalculator_1 = require("../utils/priceCalculator");
+const transformers_1 = require("../utils/transformers");
 class BookingController {
 }
 exports.BookingController = BookingController;
@@ -47,20 +37,21 @@ BookingController.create = (0, errorHandler_1.asyncHandler)(async (req, res) => 
     if (!service) {
         throw (0, errorHandler_1.ApiError)('Service not found', 404);
     }
-    // service.base_price from DB (snake_case) or service.basePrice (camelized)
-    const totalPrice = Number(service.basePrice || service.base_price || 0);
+    // service.duration_minutes from DB (snake_case) or service.durationMinutes (camelized)
+    const durationMinutes = Number(service.durationMinutes || service.duration_minutes || 60);
+    const totalPrice = (0, priceCalculator_1.calculateServicePrice)(durationMinutes, false); // false = duration in minutes
     const booking = await BookingService_1.default.createBooking(req.user.id, serviceId, bookingDate, totalPrice, address, notes, staffId);
     // fire off notifications asynchronously (don't block response)
     const NotificationService = require('../services/NotificationService').default;
     // some test mocks may return undefined for the mocked function; wrap with Promise.resolve
     Promise.resolve(NotificationService.notifyBookingCreated(booking)).catch(() => { });
-    res.status(201).json({ message: 'Booking created', data: { booking: camelize(booking) } });
+    res.status(201).json({ message: 'Booking created', data: { booking: (0, transformers_1.camelize)(booking) } });
 });
 BookingController.listByUser = (0, errorHandler_1.asyncHandler)(async (req, res) => {
     if (!req.user)
         throw (0, errorHandler_1.ApiError)('Not authenticated', 401);
     const bookings = await BookingService_1.default.getBookingsByUser(req.user.id);
-    res.status(200).json({ message: 'Bookings retrieved', data: { bookings: camelize(bookings) } });
+    res.status(200).json({ message: 'Bookings retrieved', data: { bookings: (0, transformers_1.camelize)(bookings) } });
 });
 BookingController.getById = (0, errorHandler_1.asyncHandler)(async (req, res) => {
     const { id } = req.params;
@@ -73,7 +64,7 @@ BookingController.getById = (0, errorHandler_1.asyncHandler)(async (req, res) =>
     if (req.user.role !== 'admin' && String(booking.user_id) !== req.user.id) {
         throw (0, errorHandler_1.ApiError)('Insufficient permissions', 403);
     }
-    const respBooking = camelize(booking);
+    const respBooking = (0, transformers_1.camelize)(booking);
     res.status(200).json({ message: 'Booking retrieved', data: { booking: respBooking } });
 });
 BookingController.updateStatus = (0, errorHandler_1.asyncHandler)(async (req, res) => {
@@ -86,7 +77,7 @@ BookingController.updateStatus = (0, errorHandler_1.asyncHandler)(async (req, re
     const booking = await BookingService_1.default.updateStatus(id, status);
     if (!booking)
         throw (0, errorHandler_1.ApiError)('Booking not found', 404);
-    res.status(200).json({ message: 'Booking status updated', data: { booking: camelize(booking) } });
+    res.status(200).json({ message: 'Booking status updated', data: { booking: (0, transformers_1.camelize)(booking) } });
 });
 BookingController.remove = (0, errorHandler_1.asyncHandler)(async (req, res) => {
     const { id } = req.params;
@@ -108,7 +99,7 @@ BookingController.listAll = (0, errorHandler_1.asyncHandler)(async (req, res) =>
         throw (0, errorHandler_1.ApiError)('Only admins can view all bookings', 403);
     }
     const bookings = await BookingService_1.default.getAllBookings();
-    res.status(200).json({ message: 'Bookings retrieved', data: { bookings: camelize(bookings) } });
+    res.status(200).json({ message: 'Bookings retrieved', data: { bookings: (0, transformers_1.camelize)(bookings) } });
 });
 // staff endpoints
 BookingController.assignStaff = (0, errorHandler_1.asyncHandler)(async (req, res) => {
@@ -124,7 +115,7 @@ BookingController.assignStaff = (0, errorHandler_1.asyncHandler)(async (req, res
     if (!updated) {
         throw (0, errorHandler_1.ApiError)('Booking not found', 404);
     }
-    res.status(200).json({ message: 'Staff assigned', data: { booking: camelize(updated) } });
+    res.status(200).json({ message: 'Staff assigned', data: { booking: (0, transformers_1.camelize)(updated) } });
 });
 BookingController.listByStaff = (0, errorHandler_1.asyncHandler)(async (req, res) => {
     if (!req.user)
@@ -135,7 +126,7 @@ BookingController.listByStaff = (0, errorHandler_1.asyncHandler)(async (req, res
     }
     const staffId = req.user.id;
     const bookings = await BookingService_1.default.getBookingsByStaff(staffId);
-    res.status(200).json({ message: 'Bookings retrieved', data: { bookings: camelize(bookings) } });
+    res.status(200).json({ message: 'Bookings retrieved', data: { bookings: (0, transformers_1.camelize)(bookings) } });
 });
 exports.default = BookingController;
 //# sourceMappingURL=BookingController.js.map

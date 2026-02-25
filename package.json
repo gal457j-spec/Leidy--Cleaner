@@ -8,6 +8,7 @@
     "setup": "bash scripts/setup.sh",
     "setup:local": "bash setup-local-nodocker.sh",
     "clean": "bash scripts/clean.sh",
+    "clean:all": "npm --prefix frontend run clean:next && rm -f frontend/.next/dev/lock && pkill -f 'next dev' || true && pkill -f 'tsx watch src/main.ts' || true && rm -rf backend/**/*.sqlite && rm -rf backend/*.db|| true",
     "dev": "bash scripts/dev.sh",
     "dev:local": "./start-local.sh",
     "dev:single-port": "cd frontend && npm run dev:full",

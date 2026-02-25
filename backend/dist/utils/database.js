@@ -20,7 +20,8 @@ let sqliteDb = null;
 const initDatabase = () => {
     const DB_TYPE = getDBType();
     const DATABASE_LOCAL = getDatabaseLocal();
-    logger_1.logger.info('🔄 initDatabase called with DB_TYPE:', DB_TYPE);
+    // log as a single message so value isn't dropped by winston
+    logger_1.logger.info(`🔄 initDatabase called with DB_TYPE=${DB_TYPE}`);
     if (DB_TYPE === 'sqlite') {
         logger_1.logger.info('📱 Setting up SQLite database...');
         // SQLite setup
@@ -55,7 +56,7 @@ const initDatabase = () => {
                 : {
                     host: process.env.DB_HOST || 'localhost',
                     port: parseInt(process.env.DB_PORT || '5432'),
-                    database: process.env.DB_NAME || (process.env.NODE_ENV === 'test' ? 'leidycleaner_test' : 'leidycleaner_dev'),
+                    database: process.env.DB_NAME || (require('../config').NODE_ENV === 'test' ? 'leidycleaner_test' : 'leidycleaner_dev'),
                     user: process.env.DB_USER || 'postgres',
                     password: process.env.DB_PASSWORD || 'postgres',
                 };
@@ -92,6 +93,8 @@ const query = async (text, params) => {
                 sql = sql.replace(/RETURNING[\s\S]*$/i, '');
             }
             sql = sql.replace(/\bNOW\(\)/ig, 'CURRENT_TIMESTAMP');
+            // Convert PostgreSQL $N placeholders to SQLite ?
+            sql = sql.replace(/\$\d+/g, '?');
             const trimmed = sql.trim().toLowerCase();
             if (trimmed.startsWith('select')) {
                 sqliteDb.all(sql, params || [], (err, rows) => {

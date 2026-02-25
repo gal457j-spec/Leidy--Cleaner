@@ -32,7 +32,7 @@ async function runMigrations() {
     logger.info('📋 Migrations tracking table ready');
 
     // In test environment, clear migrations tracking so tests always apply current SQL
-    if (process.env.NODE_ENV === 'test') {
+    if (require('../config').NODE_ENV === 'test') {
       logger.info('🧹 Clearing migrations table for test environment');
       await query('DELETE FROM migrations');
     }

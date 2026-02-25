@@ -1,0 +1,276 @@
+[2m[WebServer] [22m[33m[1m⚠[22m[39m Warning: Next.js inferred your workspace root, but it may not be correct.
+[2m[WebServer] [22m We detected multiple lockfiles and selected the directory of /workspaces/Leidy--Cleaner/package-lock.json as the root directory.
+[2m[WebServer] [22m To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+[2m[WebServer] [22m   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+[2m[WebServer] [22m Detected additional lockfiles: 
+[2m[WebServer] [22m   * /workspaces/Leidy--Cleaner/frontend/package-lock.json
+[2m[WebServer] [22m
+
+Running 11 tests using 1 worker
+
+[2m[WebServer] [22m(node:204236) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[2m[WebServer] [22m(Use `node --trace-deprecation ...` to show where the warning was created)
+  ✘   1 [chromium] › tests/e2e.spec.ts:3:1 › fluxo de cadastro, login e agendamento (1.0m)
+  ✘   2 [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #1 - todos cenários (1.0m)
+  ✘   3 [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #2 - todos cenários (1.0m)
+  ✘   4 [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #3 - todos cenários (1.0m)
+  ✘   5 [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #4 - todos cenários (1.0m)
+  ✘   6 [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #5 - todos cenários (1.0m)
+  ✘   7 [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #6 - todos cenários (1.0m)
+  ✘   8 [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #7 - todos cenários (1.0m)
+  ✘   9 [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #8 - todos cenários (1.0m)
+  ✘  10 [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #9 - todos cenários (1.0m)
+  ✘  11 [chromium] › tests/register.spec.ts:3:1 › cadastro E2E: preencher e submeter formulário (1.0m)
+
+
+  1) [chromium] › tests/e2e.spec.ts:3:1 › fluxo de cadastro, login e agendamento ───────────────────
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: Target page, context or browser has been closed
+
+      22 |         // navigation didn't occur, attempt manual load so subsequent steps hit
+      23 |         // the same error quickly
+    > 24 |         await page.goto('http://localhost:3000/');
+         |                    ^
+      25 |       }
+      26 |   await expect(page).toHaveURL(/\/$/);
+      27 |
+        at /workspaces/Leidy--Cleaner/frontend/tests/e2e.spec.ts:24:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/e2e-fluxo-de-cadastro-login-e-agendamento-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/e2e-fluxo-de-cadastro-login-e-agendamento-chromium/error-context.md
+
+  2) [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #1 - todos cenários ─
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: Target page, context or browser has been closed
+
+      22 |       ]);
+      23 |       if (page.url().endsWith('/auth/register')) {
+    > 24 |         await page.goto('http://localhost:3000/');
+         |                    ^
+      25 |       }
+      26 |       await expect(page).toHaveURL(/\/$/);
+      27 |
+        at /workspaces/Leidy--Cleaner/frontend/tests/full-e2e.spec.ts:24:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/full-e2e-Testes-E2E-completos-Execução-1---todos-cenários-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/full-e2e-Testes-E2E-completos-Execução-1---todos-cenários-chromium/error-context.md
+
+  3) [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #2 - todos cenários ─
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: Target page, context or browser has been closed
+
+      22 |       ]);
+      23 |       if (page.url().endsWith('/auth/register')) {
+    > 24 |         await page.goto('http://localhost:3000/');
+         |                    ^
+      25 |       }
+      26 |       await expect(page).toHaveURL(/\/$/);
+      27 |
+        at /workspaces/Leidy--Cleaner/frontend/tests/full-e2e.spec.ts:24:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/full-e2e-Testes-E2E-completos-Execução-2---todos-cenários-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/full-e2e-Testes-E2E-completos-Execução-2---todos-cenários-chromium/error-context.md
+
+  4) [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #3 - todos cenários ─
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: Target page, context or browser has been closed
+
+      22 |       ]);
+      23 |       if (page.url().endsWith('/auth/register')) {
+    > 24 |         await page.goto('http://localhost:3000/');
+         |                    ^
+      25 |       }
+      26 |       await expect(page).toHaveURL(/\/$/);
+      27 |
+        at /workspaces/Leidy--Cleaner/frontend/tests/full-e2e.spec.ts:24:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/full-e2e-Testes-E2E-completos-Execução-3---todos-cenários-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/full-e2e-Testes-E2E-completos-Execução-3---todos-cenários-chromium/error-context.md
+
+  5) [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #4 - todos cenários ─
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: Target page, context or browser has been closed
+
+      22 |       ]);
+      23 |       if (page.url().endsWith('/auth/register')) {
+    > 24 |         await page.goto('http://localhost:3000/');
+         |                    ^
+      25 |       }
+      26 |       await expect(page).toHaveURL(/\/$/);
+      27 |
+        at /workspaces/Leidy--Cleaner/frontend/tests/full-e2e.spec.ts:24:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/full-e2e-Testes-E2E-completos-Execução-4---todos-cenários-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/full-e2e-Testes-E2E-completos-Execução-4---todos-cenários-chromium/error-context.md
+
+  6) [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #5 - todos cenários ─
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: Target page, context or browser has been closed
+
+      22 |       ]);
+      23 |       if (page.url().endsWith('/auth/register')) {
+    > 24 |         await page.goto('http://localhost:3000/');
+         |                    ^
+      25 |       }
+      26 |       await expect(page).toHaveURL(/\/$/);
+      27 |
+        at /workspaces/Leidy--Cleaner/frontend/tests/full-e2e.spec.ts:24:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/full-e2e-Testes-E2E-completos-Execução-5---todos-cenários-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/full-e2e-Testes-E2E-completos-Execução-5---todos-cenários-chromium/error-context.md
+
+  7) [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #6 - todos cenários ─
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: Target page, context or browser has been closed
+
+      22 |       ]);
+      23 |       if (page.url().endsWith('/auth/register')) {
+    > 24 |         await page.goto('http://localhost:3000/');
+         |                    ^
+      25 |       }
+      26 |       await expect(page).toHaveURL(/\/$/);
+      27 |
+        at /workspaces/Leidy--Cleaner/frontend/tests/full-e2e.spec.ts:24:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/full-e2e-Testes-E2E-completos-Execução-6---todos-cenários-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/full-e2e-Testes-E2E-completos-Execução-6---todos-cenários-chromium/error-context.md
+
+  8) [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #7 - todos cenários ─
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: Target page, context or browser has been closed
+
+      22 |       ]);
+      23 |       if (page.url().endsWith('/auth/register')) {
+    > 24 |         await page.goto('http://localhost:3000/');
+         |                    ^
+      25 |       }
+      26 |       await expect(page).toHaveURL(/\/$/);
+      27 |
+        at /workspaces/Leidy--Cleaner/frontend/tests/full-e2e.spec.ts:24:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/full-e2e-Testes-E2E-completos-Execução-7---todos-cenários-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/full-e2e-Testes-E2E-completos-Execução-7---todos-cenários-chromium/error-context.md
+
+  9) [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #8 - todos cenários ─
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: Target page, context or browser has been closed
+
+      22 |       ]);
+      23 |       if (page.url().endsWith('/auth/register')) {
+    > 24 |         await page.goto('http://localhost:3000/');
+         |                    ^
+      25 |       }
+      26 |       await expect(page).toHaveURL(/\/$/);
+      27 |
+        at /workspaces/Leidy--Cleaner/frontend/tests/full-e2e.spec.ts:24:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/full-e2e-Testes-E2E-completos-Execução-8---todos-cenários-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/full-e2e-Testes-E2E-completos-Execução-8---todos-cenários-chromium/error-context.md
+
+  10) [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #9 - todos cenários 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.goto: Target page, context or browser has been closed
+
+      22 |       ]);
+      23 |       if (page.url().endsWith('/auth/register')) {
+    > 24 |         await page.goto('http://localhost:3000/');
+         |                    ^
+      25 |       }
+      26 |       await expect(page).toHaveURL(/\/$/);
+      27 |
+        at /workspaces/Leidy--Cleaner/frontend/tests/full-e2e.spec.ts:24:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/full-e2e-Testes-E2E-completos-Execução-9---todos-cenários-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/full-e2e-Testes-E2E-completos-Execução-9---todos-cenários-chromium/error-context.md
+
+  11) [chromium] › tests/register.spec.ts:3:1 › cadastro E2E: preencher e submeter formulário ──────
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: page.fill: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[name="name"]')[22m
+
+
+       5 |   await page.goto('http://localhost:3000/cadastro');
+       6 |
+    >  7 |   await page.fill('input[name="name"]', 'Playwright User');
+         |              ^
+       8 |   const email = `pw.user.${Date.now()}@example.com`;
+       9 |   await page.fill('input[name="email"]', email);
+      10 |   await page.fill('input[name="phone"]', '+5511999000111');
+        at /workspaces/Leidy--Cleaner/frontend/tests/register.spec.ts:7:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/register-cadastro-E2E-preencher-e-submeter-formulário-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/register-cadastro-E2E-preencher-e-submeter-formulário-chromium/error-context.md
+
+  11 failed
+    [chromium] › tests/e2e.spec.ts:3:1 › fluxo de cadastro, login e agendamento ────────────────────
+    [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #1 - todos cenários ──
+    [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #2 - todos cenários ──
+    [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #3 - todos cenários ──
+    [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #4 - todos cenários ──
+    [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #5 - todos cenários ──
+    [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #6 - todos cenários ──
+    [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #7 - todos cenários ──
+    [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #8 - todos cenários ──
+    [chromium] › tests/full-e2e.spec.ts:9:5 › Testes E2E completos › Execução #9 - todos cenários ──
+    [chromium] › tests/register.spec.ts:3:1 › cadastro E2E: preencher e submeter formulário ────────
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

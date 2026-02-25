@@ -1,10 +1,16 @@
 import { test, expect } from '@playwright/test';
+import { BASE_URL, resetDb, attachNetworkLogger } from './helpers';
+
+test.beforeEach(async ({ page }) => {
+  attachNetworkLogger(page);
+  await resetDb(page);
+});
 
 test('fluxo de cadastro, login e agendamento', async ({ page }) => {
   // register a new account and remember the email we used so we can
   // log back in later.  the page redirects to `/` after signup, not
   // `/dashboard` as some older tests assumed.
-  await page.goto('http://localhost:3000/auth/register');
+  await page.goto(`${BASE_URL}/auth/register`);
   const email = `teste${Date.now()}@mail.com`;
   await page.fill('input[name="name"]', 'Teste Usuário');
   await page.fill('input[name="email"]', email);
@@ -21,7 +27,7 @@ test('fluxo de cadastro, login e agendamento', async ({ page }) => {
       if (page.url().endsWith('/auth/register')) {
         // navigation didn't occur, attempt manual load so subsequent steps hit
         // the same error quickly
-        await page.goto('http://localhost:3000/');
+        await page.goto(`${BASE_URL}/`);
       }
   await expect(page).toHaveURL(/\/$/);
 
@@ -30,13 +36,13 @@ test('fluxo de cadastro, login e agendamento', async ({ page }) => {
   await page.context().clearCookies();
 
   // Login with the same account we just registered
-  await page.goto('http://localhost:3000/auth/login');
+  await page.goto(`${BASE_URL}/auth/login`);
   await page.fill('input[type="email"]', email);
   await page.fill('input[type="password"]', 'senha123');
   await page.click('button[type="submit"]');
   await page.waitForURL('**/');
 
   // Catálogo
-  await page.goto('http://localhost:3000/');
+  await page.goto(`${BASE_URL}/`);
   await expect(page.locator('text=Nossos Serviços')).toBeVisible();
 });

@@ -1,5 +1,5 @@
-import { Express } from 'express';
-declare const app: Express;
-export declare const closeServer: () => Promise<void>;
-export default app;
+import http from 'http';
+declare let server: http.Server | null;
+declare function startServer(): void;
+export { server, startServer };
 //# sourceMappingURL=main.d.ts.map

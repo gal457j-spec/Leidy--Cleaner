@@ -10,9 +10,10 @@
     "export": "next build && next export",
     "start": "next start",
     "lint": "eslint src __mocks__ *.config.js *.config.ts --ext .js,.jsx,.ts,.tsx",
-    "clean:next": "pkill -f 'next dev' || true && rm -rf .next && rm -f .next/dev/lock",
-    "pretest:e2e": "npm run clean:next",
+    "clean:next": "pkill -f '[n]ext dev' || true && rm -rf .next && rm -f .next/dev/lock && echo CLEAN_DONE",
+    "pretest:e2e": "npm run clean:next && fuser -k 3001/tcp || true && (cd ../backend && NODE_ENV=test PORT=3001 DB_TYPE=sqlite npm run dev:test &) && sleep 2",
     "test:e2e": "npx playwright test",
+    "e2e:ci": "xvfb-run --auto-servernum npx playwright test --reporter=list",
     "cypress:open": "cypress open --project ./frontend",
     "cypress:run": "cypress run --project ./frontend",
     "test": "jest"

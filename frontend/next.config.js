@@ -1,7 +1,15 @@
 /** @type {import('next').NextConfig} */
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// replicate __dirname in ES module scope
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 const nextConfig = {
   // Configure Turbopack (Next.js 16+)
-  turbopack: {},
+  turbopack: {
+    root: __dirname
+  },
 
   // Image optimization
   images: {

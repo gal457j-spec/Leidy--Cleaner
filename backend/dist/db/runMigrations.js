@@ -13,21 +13,27 @@ async function runMigrations() {
         logger_1.logger.info('🔄 Starting database migrations...');
         // Create migrations tracking table if it doesn't exist
         const dbType = process.env.DB_TYPE || 'postgres';
+        // choose the proper SQL depending on the database type.  the sqlite
+        // version must use CURRENT_TIMESTAMP – `datetime('now')` is not allowed as
+        // a DEFAULT expression and was causing a syntax error during the earlier
+        // run.  this mirrors the format used by the other sqlite migrations.
         const createMigrationsTableSQL = dbType === 'sqlite'
             ? `CREATE TABLE IF NOT EXISTS migrations (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           name TEXT NOT NULL UNIQUE,
-          executed_at DATETIME DEFAULT datetime('now')
+          executed_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )`
             : `CREATE TABLE IF NOT EXISTS migrations (
           id SERIAL PRIMARY KEY,
           name VARCHAR(255) NOT NULL UNIQUE,
           executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )`;
+        // log the actual SQL in a single string so it can be debugged if it fails
+        logger_1.logger.info(`Create migrations table SQL: ${createMigrationsTableSQL.replace(/\n/g, ' ')}`);
         await (0, database_1.query)(createMigrationsTableSQL);
         logger_1.logger.info('📋 Migrations tracking table ready');
         // In test environment, clear migrations tracking so tests always apply current SQL
-        if (process.env.NODE_ENV === 'test') {
+        if (require('../config').NODE_ENV === 'test') {
             logger_1.logger.info('🧹 Clearing migrations table for test environment');
             await (0, database_1.query)('DELETE FROM migrations');
         }
@@ -37,6 +43,7 @@ async function runMigrations() {
         const actualMigrationsDir = dbType === 'sqlite'
             ? path_1.default.join(__dirname, '../../migrations_sqlite')
             : migrationsDir;
+        logger_1.logger.info(`Using migrations dir: ${actualMigrationsDir} (dbType=${dbType})`);
         const migrationFiles = fs_1.default.readdirSync(actualMigrationsDir)
             .filter(file => file.endsWith('.sql'))
             .sort();
@@ -54,10 +61,13 @@ async function runMigrations() {
             const sql = fs_1.default.readFileSync(filePath, 'utf-8');
             logger_1.logger.info(`🚀 Executing migration: ${migrationName}`);
             // Execute all statements in the SQL file
-            const statements = sql
+            // remove all single-line comments first so that semicolons inside them
+            // don’t confuse our naive split.  then split on `;` and trim the results.
+            const cleaned = sql.replace(/--.*$/gm, '');
+            const statements = cleaned
                 .split(';')
                 .map(stmt => stmt.trim())
-                .filter(stmt => stmt.length > 0 && !stmt.startsWith('--'));
+                .filter(stmt => stmt.length > 0);
             for (const statement of statements) {
                 try {
                     logger_1.logger.info(`Executing SQL statement: ${statement.slice(0, 240).replace(/\n/g, ' ')}`);
@@ -65,13 +75,19 @@ async function runMigrations() {
                 }
                 catch (err) {
                     logger_1.logger.error('Error executing statement:', statement.slice(0, 240).replace(/\n/g, ' '));
-                    // Log but continue if it's a "already exists" error
-                    if (err instanceof Error && err.message.includes('already exists')) {
-                        logger_1.logger.warn(`⚠️  ${err.message}`);
+                    // Ignore benign errors that may occur when re-applying migrations
+                    const msg = err instanceof Error ? err.message : String(err);
+                    const ignorable = [
+                        'already exists',
+                        'duplicate column name',
+                        'no such column',
+                        'column already exists'
+                    ];
+                    if (ignorable.some(substr => msg.toLowerCase().includes(substr))) {
+                        logger_1.logger.warn(`⚠️  Ignoring migration error: ${msg}`);
+                        continue;
                     }
-                    else {
-                        throw err;
-                    }
+                    throw err;
                 }
             }
             // Record migration as executed

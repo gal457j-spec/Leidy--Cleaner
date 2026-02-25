@@ -38,18 +38,7 @@ exports.ReviewController = void 0;
 const errorHandler_1 = require("../middleware/errorHandler");
 const ReviewService_1 = require("../services/ReviewService");
 const schemas_1 = require("../utils/schemas");
-// helper to camelize
-function camelize(obj) {
-    if (Array.isArray(obj))
-        return obj.map(camelize);
-    if (obj && typeof obj === 'object') {
-        return Object.fromEntries(Object.entries(obj).map(([k, v]) => {
-            const camelKey = k.replace(/_([a-z])/g, (_m, c) => c.toUpperCase());
-            return [camelKey, camelize(v)];
-        }));
-    }
-    return obj;
-}
+const transformers_1 = require("../utils/transformers");
 class ReviewController {
 }
 exports.ReviewController = ReviewController;
@@ -70,7 +59,7 @@ ReviewController.create = (0, errorHandler_1.asyncHandler)(async (req, res) => {
         throw (0, errorHandler_1.ApiError)('Cannot review another user\'s booking', 403);
     }
     const review = await ReviewService_1.ReviewService.createReview(userId, value.bookingId, value.rating, value.comment, value.images);
-    res.status(201).json({ message: 'Review created', data: { review: camelize(review) } });
+    res.status(201).json({ message: 'Review created', data: { review: (0, transformers_1.camelize)(review) } });
 });
 ReviewController.getByBooking = (0, errorHandler_1.asyncHandler)(async (req, res) => {
     const { bookingId } = req.params;
@@ -83,19 +72,19 @@ ReviewController.getByBooking = (0, errorHandler_1.asyncHandler)(async (req, res
             throw (0, errorHandler_1.ApiError)('Not authorized', 403);
         }
     }
-    res.status(200).json({ message: 'Reviews fetched', data: { reviews: camelize(reviews) } });
+    res.status(200).json({ message: 'Reviews fetched', data: { reviews: (0, transformers_1.camelize)(reviews) } });
 });
 ReviewController.getPublic = (0, errorHandler_1.asyncHandler)(async (req, res) => {
     const { serviceId } = req.query;
     const reviews = await ReviewService_1.ReviewService.getPublic(serviceId);
-    res.status(200).json({ message: 'Public reviews', data: { reviews: camelize(reviews) } });
+    res.status(200).json({ message: 'Public reviews', data: { reviews: (0, transformers_1.camelize)(reviews) } });
 });
 ReviewController.listAll = (0, errorHandler_1.asyncHandler)(async (req, res) => {
     if (req.user.role !== 'admin') {
         throw (0, errorHandler_1.ApiError)('Only admins can view all reviews', 403);
     }
     const reviews = await ReviewService_1.ReviewService.getAll();
-    res.status(200).json({ message: 'All reviews', data: { reviews: camelize(reviews) } });
+    res.status(200).json({ message: 'All reviews', data: { reviews: (0, transformers_1.camelize)(reviews) } });
 });
 ReviewController.approve = (0, errorHandler_1.asyncHandler)(async (req, res) => {
     if (req.user.role !== 'admin') {
@@ -106,7 +95,7 @@ ReviewController.approve = (0, errorHandler_1.asyncHandler)(async (req, res) => 
     if (!review) {
         throw (0, errorHandler_1.ApiError)('Review not found', 404);
     }
-    res.status(200).json({ message: 'Review approved', data: { review: camelize(review) } });
+    res.status(200).json({ message: 'Review approved', data: { review: (0, transformers_1.camelize)(review) } });
 });
 ReviewController.uploadImages = (0, errorHandler_1.asyncHandler)(async (req, res) => {
     const { id } = req.params;
@@ -125,7 +114,7 @@ ReviewController.uploadImages = (0, errorHandler_1.asyncHandler)(async (req, res
     const baseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
     const urls = files.map(f => `${baseUrl}/uploads/reviews/${f.filename}`);
     const updated = await ReviewService_1.ReviewService.addImages(id, urls);
-    res.status(200).json({ message: 'Images uploaded', data: { review: camelize(updated) } });
+    res.status(200).json({ message: 'Images uploaded', data: { review: (0, transformers_1.camelize)(updated) } });
 });
 ReviewController.delete = (0, errorHandler_1.asyncHandler)(async (req, res) => {
     const { id } = req.params;

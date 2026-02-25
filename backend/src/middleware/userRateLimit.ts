@@ -11,13 +11,13 @@ import { Request } from 'express';
  */
 
 export const userRateLimit = rateLimit({
-  keyGenerator: (req: any, res) => {
+  keyGenerator: (req: any, _res: any) => {
     // Prioriza user_id se autenticado
     if (req.user?.id) {
       return `user:${req.user.id}`;
     }
     // Fallback para IP usando helper oficial que trata IPv6 corretamente
-    return ipKeyGenerator(req, res);
+    return ipKeyGenerator(req.ip);
   },
   max: (req: any) => {
     // Usuários autenticados: mais tolerantes
@@ -35,9 +35,10 @@ export const userRateLimit = rateLimit({
   // disable rate limiting entirely in test environment so E2E and unit
   // tests can flood endpoints without being throttled.  this mirrors other
   // middleware which often no-op during tests.
-  skip: (req: Request) => {
-    if (process.env.NODE_ENV === 'test') return true;
-    return req.path === '/health';
+  skip: () => {
+    // completely disable in test env
+    if (require('../config').NODE_ENV === 'test') return true;
+    return false; // health checks handled by other logic
   },
   // Custom handler para error
   handler: (req: Request, res: any) => {
@@ -63,14 +64,14 @@ export const userRateLimit = rateLimit({
  * 5 tentativas / 15 minutos por user/IP
  */
 export const authRateLimit = rateLimit({
-  keyGenerator: (req: any, res) => {
+  keyGenerator: (req: any, _res: any) => {
     // Se enviar email, usar como key
     const email = req.body?.email || '';
     if (email) {
       return `auth:email:${email}`;
     }
     // Fallback para IP usando helper IPv6-safe
-    return `auth:${ipKeyGenerator(req, res)}`;
+    return `auth:${ipKeyGenerator(req.ip)}`;
   },
   max: 5, // Muito restritivo para auth
   windowMs: 15 * 60 * 1000, // 15 minutos
@@ -78,7 +79,7 @@ export const authRateLimit = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   // bypass auth throttling during end-to-end tests
-  skip: (req: Request) => process.env.NODE_ENV === 'test',
+  skip: () => require('../config').NODE_ENV === 'test',
   handler: (req: Request, res: any) => {
     const rateLimit = (req as any).rateLimit;
     const retryAfter = rateLimit?.resetTime 

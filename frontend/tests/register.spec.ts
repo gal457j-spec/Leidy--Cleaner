@@ -1,8 +1,14 @@
 import { test, expect } from '@playwright/test';
+import { BASE_URL, resetDb, attachNetworkLogger } from './helpers';
+
+test.beforeEach(async ({ page }) => {
+  attachNetworkLogger(page);
+  await resetDb(page);
+});
 
 test('cadastro E2E: preencher e submeter formulário', async ({ page }) => {
   // Ajuste a URL se seu dev server estiver em outra porta
-  await page.goto('http://localhost:3000/cadastro');
+  await page.goto(`${BASE_URL}/cadastro`);
 
   await page.fill('input[name="name"]', 'Playwright User');
   const email = `pw.user.${Date.now()}@example.com`;
