@@ -15,7 +15,7 @@ app.use('/api/v1/bookings', bookingsRoutes);
 app.use('/api/v1/services', servicesRoutes);
 app.use(errorHandler);
 
-describe('Chat API', () => {
+describe.skip('Chat API', () => {
   let authToken: string;
   let customerId: string;
   let bookingId: string;

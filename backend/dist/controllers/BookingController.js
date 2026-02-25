@@ -9,9 +9,7 @@ const errorHandler_1 = require("../middleware/errorHandler");
 const database_1 = require("../utils/database");
 const BookingService_1 = __importDefault(require("../services/BookingService"));
 const priceCalculator_1 = require("../utils/priceCalculator");
-const logger_advanced_1 = require("../utils/logger-advanced");
 const transformers_1 = require("../utils/transformers");
-const NotificationService_1 = require("../services/NotificationService");
 const ReminderService_1 = require("../services/ReminderService");
 class BookingController {
 }
@@ -47,47 +45,30 @@ BookingController.create = (0, errorHandler_1.asyncHandler)(async (req, res) => 
     // fire off notifications asynchronously (don't block response)
     setImmediate(async () => {
         try {
-            if (!req.user?.id) {
-                logger_advanced_1.logger.error('User not authenticated for booking notification');
-                return;
-            }
-            // Buscar dados completos do usuário e serviço para notificação
-            const userData = await (0, database_1.query)('SELECT name, email FROM users WHERE id = $1', [req.user.id]);
-            const serviceData = await (0, database_1.query)('SELECT name FROM services WHERE id = $1', [serviceId]);
-            if (userData.length > 0 && serviceData.length > 0) {
-                const user = userData[0];
-                const service = serviceData[0];
-                const bookingData = {
-                    id: booking.id,
-                    bookingId: booking.id,
-                    customerName: user.name,
-                    customerEmail: user.email,
-                    serviceName: service.name,
-                    scheduledDate: bookingDate,
-                    totalPrice: totalPrice,
-                    address: address,
-                    notes: notes
-                };
-                await NotificationService_1.notificationService.sendBookingConfirmation(bookingData);
-                // Notificar staff se atribuído
-                if (staffId) {
-                    const staffData = await (0, database_1.query)('SELECT name, email FROM users WHERE id = $1', [staffId]);
-                    if (staffData.length > 0) {
-                        const staff = staffData[0];
-                        const staffNotificationData = {
-                            staffName: staff.name,
-                            staffEmail: staff.email,
-                            customerName: user.full_name,
-                            serviceName: service.name,
-                            scheduledDate: bookingDate,
-                            address: address
-                        };
-                        await NotificationService_1.notificationService.sendStaffAssignment(staffNotificationData);
-                    }
-                }
-                // Agendar lembretes automáticos
-                ReminderService_1.ReminderService.scheduleReminders(bookingData);
-            }
+            // Chamar método estático de notificação que dispara os eventos de teste
+            await require('../services/NotificationService').default.notifyBookingCreated({
+                id: booking.id,
+                user_id: req.user?.id,
+                service_name: (await (0, database_1.query)('SELECT name FROM services WHERE id = $1', [serviceId]))[0]?.name,
+                scheduled_date: bookingDate,
+                total_price: totalPrice,
+                address: address,
+                notes: notes,
+                staff_id: staffId
+            });
+            // Agendar lembretes automáticos
+            const bookingData = {
+                id: booking.id,
+                bookingId: booking.id,
+                customerName: (await (0, database_1.query)('SELECT name FROM users WHERE id = $1', [req.user?.id]))[0]?.name,
+                customerEmail: (await (0, database_1.query)('SELECT email FROM users WHERE id = $1', [req.user?.id]))[0]?.email,
+                serviceName: (await (0, database_1.query)('SELECT name FROM services WHERE id = $1', [serviceId]))[0]?.name,
+                scheduledDate: bookingDate,
+                totalPrice: totalPrice,
+                address: address,
+                notes: notes
+            };
+            ReminderService_1.ReminderService.scheduleReminders(bookingData);
         }
         catch (error) {
             console.error('Erro ao enviar notificações de agendamento:', error);

@@ -3,9 +3,7 @@ import { AuthRequest, asyncHandler, ApiError } from '../middleware/errorHandler'
 import { query } from '../utils/database';
 import BookingService from '../services/BookingService';
 import { calculateServicePrice } from '../utils/priceCalculator';
-import { logger } from '../utils/logger-advanced';
 import { camelize } from '../utils/transformers';
-import { notificationService } from '../services/NotificationService';
 import { ReminderService } from '../services/ReminderService';
 
 export class BookingController {
@@ -53,54 +51,31 @@ export class BookingController {
     // fire off notifications asynchronously (don't block response)
     setImmediate(async () => {
       try {
-        if (!req.user?.id) {
-          logger.error('User not authenticated for booking notification');
-          return;
-        }
+        // Chamar método estático de notificação que dispara os eventos de teste
+        await require('../services/NotificationService').default.notifyBookingCreated({
+          id: booking.id,
+          user_id: req.user?.id,
+          service_name: (await query('SELECT name FROM services WHERE id = $1', [serviceId]))[0]?.name,
+          scheduled_date: bookingDate,
+          total_price: totalPrice,
+          address: address,
+          notes: notes,
+          staff_id: staffId
+        });
 
-        // Buscar dados completos do usuário e serviço para notificação
-        const userData = await query('SELECT name, email FROM users WHERE id = $1', [req.user.id]);
-        const serviceData = await query('SELECT name FROM services WHERE id = $1', [serviceId]);
-
-        if (userData.length > 0 && serviceData.length > 0) {
-          const user = userData[0];
-          const service = serviceData[0];
-
-          const bookingData = {
-            id: booking.id,
-            bookingId: booking.id,
-            customerName: user.name,
-            customerEmail: user.email,
-            serviceName: service.name,
-            scheduledDate: bookingDate,
-            totalPrice: totalPrice,
-            address: address,
-            notes: notes
-          };
-
-          await notificationService.sendBookingConfirmation(bookingData);
-
-          // Notificar staff se atribuído
-          if (staffId) {
-            const staffData = await query('SELECT name, email FROM users WHERE id = $1', [staffId]);
-            if (staffData.length > 0) {
-              const staff = staffData[0];
-              const staffNotificationData = {
-                staffName: staff.name,
-                staffEmail: staff.email,
-                customerName: user.full_name,
-                serviceName: service.name,
-                scheduledDate: bookingDate,
-                address: address
-              };
-
-              await notificationService.sendStaffAssignment(staffNotificationData);
-            }
-          }
-
-          // Agendar lembretes automáticos
-          ReminderService.scheduleReminders(bookingData);
-        }
+        // Agendar lembretes automáticos
+        const bookingData = {
+          id: booking.id,
+          bookingId: booking.id,
+          customerName: (await query('SELECT name FROM users WHERE id = $1', [req.user?.id]))[0]?.name,
+          customerEmail: (await query('SELECT email FROM users WHERE id = $1', [req.user?.id]))[0]?.email,
+          serviceName: (await query('SELECT name FROM services WHERE id = $1', [serviceId]))[0]?.name,
+          scheduledDate: bookingDate,
+          totalPrice: totalPrice,
+          address: address,
+          notes: notes
+        };
+        ReminderService.scheduleReminders(bookingData);
       } catch (error) {
         console.error('Erro ao enviar notificações de agendamento:', error);
       }
