@@ -8,6 +8,7 @@ import React from 'react';
 import { apiClient } from '@/services/api';
 import { Button } from './ui/Button';
 import { Badge } from './ui/Badge';
+import ThemeToggle from './ThemeToggle';
 import {
   Menu,
   X,
@@ -46,10 +47,13 @@ export default function Navbar() {
     { href: '/', label: 'Home', icon: Home },
     { href: '/services', label: 'Serviços', icon: Briefcase },
     { href: '/staff-directory', label: 'Equipe', icon: Users },
+    { href: '/gallery', label: 'Galeria', icon: Star },
   ];
 
   const authenticatedNavItems = [
     { href: '/bookings', label: 'Agendamentos', icon: Calendar },
+    { href: '/favorites', label: 'Favoritos', icon: Star },
+    { href: '/personalization', label: 'Personalizar', icon: Settings },
   ];
 
   const adminNavItems = [
@@ -196,6 +200,7 @@ export default function Navbar() {
 
             {!isAuthenticated && (
               <div className="flex items-center gap-2 ml-4">
+                <ThemeToggle />
                 <Link href="/auth/login">
                   <Button variant="ghost" size="sm">
                     Entrar
@@ -295,6 +300,9 @@ export default function Navbar() {
 
               {!isAuthenticated && (
                 <div className="border-t border-gray-200 pt-3 mt-3 space-y-2">
+                  <div className="px-3 mb-2">
+                    <ThemeToggle />
+                  </div>
                   <Link href="/auth/login">
                     <Button variant="outline" className="w-full justify-start" size="sm">
                       Entrar

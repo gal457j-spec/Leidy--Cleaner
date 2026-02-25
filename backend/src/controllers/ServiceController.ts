@@ -2,7 +2,7 @@ import { Response } from 'express';
 import { AuthRequest, asyncHandler, ApiError } from '../middleware/errorHandler';
 import { ServiceService } from '../services/ServiceService';
 import { serviceSchema, serviceUpdateSchema } from '../utils/schemas';
-import { cache } from '../utils/cache';
+import { cacheService } from '../services/CacheService';
 import { camelize } from '../utils/transformers';
 import { UserRole } from '../utils/constants';
 
@@ -10,16 +10,12 @@ export class ServiceController {
   static getAll = asyncHandler(async (req: AuthRequest, res: Response) => {
     const { limit, offset, category, search } = req.query;
 
-    // Criar chave de cache baseada nos parâmetros
-    const cacheKey = `services:${limit || 10}:${offset || 0}:${category || ''}:${search || ''}`;
-
-    // Tentar obter do cache
-    const cachedResult = cache.get(cacheKey);
+    // Tentar obter do cache Redis
+    const cachedResult = await cacheService.getServices();
     if (cachedResult) {
       return res.status(200).json({
         message: 'Services retrieved (cached)',
-        data: cachedResult,
-        cached: true
+        data: { services: cachedResult, cached: true },
       });
     }
 
@@ -39,8 +35,8 @@ export class ServiceController {
       },
     };
 
-    // Cache por 5 minutos
-    cache.set(cacheKey, responseData, 300000);
+    // Cache no Redis por 1 hora
+    await cacheService.setServices(result.services);
 
     return res.status(200).json({
       message: 'Services retrieved',
@@ -85,7 +81,7 @@ export class ServiceController {
     });
 
     // Invalidar cache de serviços
-    cache.clear();
+    cacheService.clearAll();
 
     res.status(201).json({
       message: 'Service created successfully',

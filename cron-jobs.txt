@@ -1,0 +1,38 @@
+# ============================================
+# 🚀 LEIDY CLEANER - CRON JOBS
+# ============================================
+# Agendamento automático de tarefas críticas:
+# - Backup diário às 2:00 AM
+# - Limpeza de logs semanais
+# - Verificação de saúde do sistema
+# ============================================
+
+# Backup automático diário às 2:00 AM
+0 2 * * * /workspaces/Leidy--Cleaner/backup-auto.sh >> /workspaces/Leidy--Cleaner/logs/backup.log 2>&1
+
+# Limpeza de logs antigos (domingos às 3:00 AM)
+0 3 * * 0 /workspaces/Leidy--Cleaner/scripts/clean-logs.sh >> /workspaces/Leidy--Cleaner/logs/cleanup.log 2>&1
+
+# Verificação de saúde do sistema (a cada 6 horas)
+0 */6 * * * /workspaces/Leidy--Cleaner/scripts/health-check.sh >> /workspaces/Leidy--Cleaner/logs/health.log 2>&1
+
+# Otimização do banco de dados (segundas às 4:00 AM)
+0 4 * * 1 /workspaces/Leidy--Cleaner/scripts/optimize-db.sh >> /workspaces/Leidy--Cleaner/logs/db-optimize.log 2>&1
+
+# ============================================
+# INSTRUÇÕES DE INSTALAÇÃO:
+# ============================================
+#
+# 1. Instalar cron (se não estiver instalado):
+#    sudo apt-get update && sudo apt-get install cron
+#
+# 2. Adicionar este arquivo ao crontab:
+#    crontab -e
+#    # Cole o conteúdo acima no final do arquivo
+#
+# 3. Verificar se está funcionando:
+#    crontab -l
+#
+# 4. Ver logs em /workspaces/Leidy--Cleaner/logs/
+#
+# ============================================

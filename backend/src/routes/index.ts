@@ -6,6 +6,10 @@ import companyRoutes from './company';
 import adminRoutes from './admin';
 import reviewsRoutes from './reviews';
 import staffRoutes from './staff';
+import aiRoutes from './ai';
+import chatRoutes from './chat';
+import twoFactorRoutes from './twofactor';
+import analyticsRoutes from './analytics';
 
 // testing only...
 import testRoutes from './test';
@@ -19,5 +23,9 @@ export {
   adminRoutes,
   reviewsRoutes,
   staffRoutes,
+  aiRoutes,
+  chatRoutes,
+  twoFactorRoutes,
+  analyticsRoutes,
   testRoutes,
 };

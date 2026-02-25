@@ -11,6 +11,10 @@ const nextConfig = {
     root: __dirname
   },
 
+  // Performance optimizations
+  swcMinify: true,
+  compress: true,
+
   // Image optimization
   images: {
     unoptimized: true,
@@ -19,6 +23,23 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
   },
+
+  // Bundle analyzer (conditionally enabled)
+  ...(process.env.ANALYZE === 'true' && {
+    webpack: (config) => {
+      if (process.env.NODE_ENV === 'production') {
+        // Add bundle analyzer in production if ANALYZE=true
+        const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+        config.plugins.push(
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            openAnalyzer: false,
+          })
+        );
+      }
+      return config;
+    },
+  }),
 
   // Proxy API calls to backend during development
   async rewrites() {
@@ -32,10 +53,38 @@ const nextConfig = {
     };
   },
 
-  // Disable static optimization for pages with dynamic search params
-  experimental: {
-    // Encourage dynamic optimization
+  // Headers for security and performance
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
+          },
+        ],
+      },
+    ];
   },
+
+  // Experimental features for better performance
+  experimental: {
+    optimizeCss: true,
+    scrollRestoration: true,
+  },
+
+  // Output configuration
+  output: 'standalone',
+  outputFileTracingRoot: path.join(__dirname, '../../'),
 };
 
 export default nextConfig;

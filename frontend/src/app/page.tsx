@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { apiClient, Service } from '../services/api';
 import ServiceCard from '@/components/ServiceCard';
 import ServiceFilter from '@/components/ServiceFilter';
+import RecommendationsWidget from '@/components/RecommendationsWidget';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
@@ -143,6 +144,13 @@ export default function HomePage() {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Recommendations Section - Only for authenticated users */}
+      <section className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <RecommendationsWidget />
         </div>
       </section>
 

@@ -1,8 +1,12 @@
+"use client";
+
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Service } from '../services/api';
 import { Card, CardContent } from './ui/Card';
 import { Button } from './ui/Button';
+import FavoriteButton from './FavoriteButton';
 import { Star, Clock, Users, ArrowRight } from 'lucide-react';
 
 export default function ServiceCard({
@@ -31,20 +35,37 @@ export default function ServiceCard({
     return () => { mounted = false; };
   }, [service.durationMinutes]);
   return (
-    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] border-0 shadow-md bg-white">
-      <div className="relative">
-        <div className="absolute top-3 right-3">
-          <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
-            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-            <span className="text-sm font-semibold text-gray-900">
-              {rating ? rating.toFixed(1) : 'N/A'}
-            </span>
-            {reviewCount && (
-              <span className="text-xs text-gray-600">({reviewCount})</span>
-            )}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ y: -5 }}
+      className="group"
+    >
+      <Card className="overflow-hidden transition-all duration-300 hover:shadow-xl border-0 shadow-md bg-white dark:bg-gray-800">
+        <div className="relative">
+          <div className="absolute top-3 right-3 z-10">
+            <FavoriteButton
+              item={{
+                id: service.id.toString(),
+                type: 'service',
+                name: service.name
+              }}
+              className="bg-white/90 dark:bg-gray-700/90 hover:bg-white dark:hover:bg-gray-700"
+            />
+          </div>
+          <div className="absolute top-3 left-3">
+            <div className="bg-white/90 dark:bg-gray-700/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
+              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+              <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                {rating ? rating.toFixed(1) : 'N/A'}
+              </span>
+              {reviewCount && (
+                <span className="text-xs text-gray-600 dark:text-gray-300">({reviewCount})</span>
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
       <CardContent className="p-6">
         <div className="space-y-4">
@@ -90,5 +111,6 @@ export default function ServiceCard({
         </div>
       </CardContent>
     </Card>
+    </motion.div>
   );
 }

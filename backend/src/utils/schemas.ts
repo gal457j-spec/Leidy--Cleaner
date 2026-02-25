@@ -81,3 +81,30 @@ export const availabilitySlotSchema = Joi.object({
 });
 
 export const availabilityArraySchema = Joi.array().items(availabilitySlotSchema);
+
+// Chat message schema
+export const chatMessageSchema = Joi.object({
+  message: Joi.string().min(1).max(1000).required(),
+  messageType: Joi.string().valid('text', 'image', 'file').default('text'),
+  fileUrl: Joi.string().uri().optional(),
+});
+
+// Two-factor authentication schemas
+export const twoFactorSetupSchema = Joi.object({
+  secret: Joi.string().required(),
+  token: Joi.string().pattern(/^\d{6}$/).required(),
+});
+
+export const twoFactorVerifySchema = Joi.object({
+  token: Joi.string().pattern(/^\d{6}$/).required(),
+});
+
+export const backupCodeSchema = Joi.object({
+  code: Joi.string().length(8).required(),
+});
+
+// Analytics query schema
+export const analyticsQuerySchema = Joi.object({
+  startDate: Joi.string().isoDate().optional(),
+  endDate: Joi.string().isoDate().optional(),
+});

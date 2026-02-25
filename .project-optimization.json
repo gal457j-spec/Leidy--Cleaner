@@ -1,0 +1,101 @@
+{
+  "optimization": {
+    "last_cleaned": "2025-02-25",
+    "removed_dependencies": {
+      "frontend": [
+        "@headlessui/react",
+        "@heroicons/react", 
+        "@sentry/react",
+        "aos",
+        "axe-core",
+        "date-fns",
+        "express",
+        "lodash",
+        "next-pwa",
+        "qrcode.react",
+        "react-confetti",
+        "react-geolocated",
+        "recharts"
+      ],
+      "backend": [
+        "@sentry/node",
+        "bull",
+        "compression",
+        "csurf",
+        "firebase-admin",
+        "googleapis",
+        "natural",
+        "next",
+        "node-cron",
+        "openai",
+        "pdf-lib",
+        "prom-client",
+        "qrcode",
+        "redis",
+        "sanitize-html",
+        "speakeasy",
+        "stripe",
+        "web-push",
+        "zod"
+      ]
+    },
+    "removed_devDependencies": {
+      "frontend": [
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@babel/preset-typescript",
+        "@testing-library/user-event",
+        "autoprefixer",
+        "babel-jest",
+        "identity-obj-proxy",
+        "jest-environment-jsdom",
+        "postcss"
+      ],
+      "backend": [
+        "@babel/preset-env",
+        "@testing-library/jest-dom",
+        "@testing-library/react",
+        "@types/jest",
+        "@types/testing-library__jest-dom"
+      ]
+    },
+    "removed_files": [
+      "backend/jest.setup.js.backup",
+      "frontend/.next/",
+      "frontend/jest-results.json",
+      "frontend/test-output.css",
+      "frontend/tsconfig.tsbuildinfo",
+      "backend/dist/"
+    ],
+    "security_updates": {
+      "frontend_vulnerabilities_fixed": 2,
+      "backend_vulnerabilities_remaining": 14
+    }
+  },
+  "recommendations": {
+    "code_quality": [
+      "Considerar usar ESLint com regras mais strict",
+      "Implementar Prettier para formatação consistente",
+      "Adicionar testes de integração automatizados",
+      "Revisar branches Git antigas (backup/vammos-old-version)"
+    ],
+    "performance": [
+      "Implementar lazy loading para componentes",
+      "Otimizar imagens e assets",
+      "Usar code splitting no Next.js",
+      "Implementar caching adequado"
+    ],
+    "security": [
+      "Corrigir vulnerabilidades restantes no backend",
+      "Implementar Content Security Policy",
+      "Adicionar rate limiting mais robusto",
+      "Revisar permissões de arquivos"
+    ],
+    "maintenance": [
+      "Executar script clean-project.sh regularmente",
+      "Monitorar tamanho do node_modules",
+      "Atualizar dependências mensalmente",
+      "Fazer backup antes de grandes mudanças"
+    ]
+  }
+}

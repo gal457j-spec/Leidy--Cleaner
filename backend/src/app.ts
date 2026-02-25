@@ -18,6 +18,10 @@ import {
   adminRoutes,
   reviewsRoutes,
   staffRoutes,
+  aiRoutes,
+  chatRoutes,
+  twoFactorRoutes,
+  analyticsRoutes,
   testRoutes
 } from './routes';
 import { NODE_ENV, FRONTEND_URL, CORS_ALLOWED } from './config';
@@ -89,6 +93,10 @@ if (NODE_ENV === 'test') {
 }
 
 app.get('/health', async (_req: Request, res: Response) => {
+  const { cacheService } = await import('./services/CacheService');
+  const { ReminderService } = await import('./services/ReminderService');
+  const { notificationService } = await import('./services/NotificationService');
+
   const health = {
     status: 'ok',
     timestamp: new Date().toISOString(),
@@ -98,7 +106,14 @@ app.get('/health', async (_req: Request, res: Response) => {
     checks: {
       database: false,
       memory: true,
-      disk: true
+      disk: true,
+      cache: false,
+      notifications: false
+    },
+    services: {
+      cache: { connected: false, keys: 0, memory: '0' },
+      reminders: { total: 0, active: 0 },
+      notifications: { smtp: false }
     }
   };
 
@@ -115,6 +130,32 @@ app.get('/health', async (_req: Request, res: Response) => {
     logger.error('Health check failed - Database error details:', (error as Error).message);
     logger.error('DB_TYPE:', process.env.DB_TYPE);
     logger.error('DATABASE_LOCAL:', process.env.DATABASE_LOCAL);
+  }
+
+  // Verificar cache Redis
+  try {
+    const cacheStats = await cacheService.getStats();
+    health.checks.cache = cacheStats.connected;
+    health.services.cache = cacheStats;
+  } catch (error) {
+    logger.error('Cache health check failed:', error);
+  }
+
+  // Verificar sistema de lembretes
+  try {
+    const reminderStats = ReminderService.getStats();
+    health.services.reminders = reminderStats;
+  } catch (error) {
+    logger.error('Reminders health check failed:', error);
+  }
+
+  // Verificar sistema de notificações
+  try {
+    const smtpOk = await notificationService.testConnection();
+    health.checks.notifications = smtpOk;
+    health.services.notifications.smtp = smtpOk;
+  } catch (error) {
+    logger.error('Notifications health check failed:', error);
   }
 
   const memUsage = process.memoryUsage();
@@ -146,6 +187,10 @@ app.use('/api/v1/company', companyRoutes);
 app.use('/api/v1/admin', adminRoutes);
 app.use('/api/v1/reviews', reviewsRoutes);
 app.use('/api/v1/staff', staffRoutes);
+app.use('/api/v1/chat', chatRoutes);
+app.use('/api/v1/analytics', analyticsRoutes);
+app.use('/api/v1/2fa', twoFactorRoutes);
+app.use('/api/v1/ai', aiRoutes);
 
 if (NODE_ENV === 'test') {
   app.use('/api/v1/test', testRoutes);

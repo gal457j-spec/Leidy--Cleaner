@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.availabilityArraySchema = exports.availabilitySlotSchema = exports.profileUpdateSchema = exports.assignStaffSchema = exports.reviewSchema = exports.bookingSchema = exports.serviceUpdateSchema = exports.serviceSchema = exports.refreshTokenSchema = exports.loginSchema = exports.registerSchema = void 0;
+exports.analyticsQuerySchema = exports.backupCodeSchema = exports.twoFactorVerifySchema = exports.twoFactorSetupSchema = exports.chatMessageSchema = exports.availabilityArraySchema = exports.availabilitySlotSchema = exports.profileUpdateSchema = exports.assignStaffSchema = exports.reviewSchema = exports.bookingSchema = exports.serviceUpdateSchema = exports.serviceSchema = exports.refreshTokenSchema = exports.loginSchema = exports.registerSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 // Auth schemas
 exports.registerSchema = joi_1.default.object({
@@ -75,4 +75,26 @@ exports.availabilitySlotSchema = joi_1.default.object({
     endTime: joi_1.default.string().pattern(/^\d{2}:\d{2}$/).required(),
 });
 exports.availabilityArraySchema = joi_1.default.array().items(exports.availabilitySlotSchema);
+// Chat message schema
+exports.chatMessageSchema = joi_1.default.object({
+    message: joi_1.default.string().min(1).max(1000).required(),
+    messageType: joi_1.default.string().valid('text', 'image', 'file').default('text'),
+    fileUrl: joi_1.default.string().uri().optional(),
+});
+// Two-factor authentication schemas
+exports.twoFactorSetupSchema = joi_1.default.object({
+    secret: joi_1.default.string().required(),
+    token: joi_1.default.string().pattern(/^\d{6}$/).required(),
+});
+exports.twoFactorVerifySchema = joi_1.default.object({
+    token: joi_1.default.string().pattern(/^\d{6}$/).required(),
+});
+exports.backupCodeSchema = joi_1.default.object({
+    code: joi_1.default.string().length(8).required(),
+});
+// Analytics query schema
+exports.analyticsQuerySchema = joi_1.default.object({
+    startDate: joi_1.default.string().isoDate().optional(),
+    endDate: joi_1.default.string().isoDate().optional(),
+});
 //# sourceMappingURL=schemas.js.map

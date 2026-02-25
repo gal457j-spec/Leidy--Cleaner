@@ -4,8 +4,12 @@ import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import Navbar from '@/components/Navbar';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { ThemeProvider } from '@/contexts/ThemeContext';
+import { AdvancedThemeProvider } from '@/contexts/AdvancedThemeContext';
+import { NotificationProvider } from '@/contexts/NotificationContext';
 import NotificationBanner from '@/components/NotificationBanner';
 import CookieBanner from '@/components/CookieBanner';
+import Chatbot from '@/components/Chatbot';
 
 export const metadata: Metadata = {
   title: 'Leidy Cleaner - Limpeza Profissional',
@@ -37,11 +41,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <script dangerouslySetInnerHTML={{ __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXXXXXXXX');` }} />
       </head>
       <body>
-        <AuthProvider>
-          <Navbar />
-          <CookieBanner />
-          <main className="min-h-screen">{children}</main>
-        </AuthProvider>
+        <AdvancedThemeProvider>
+          <ThemeProvider>
+            <AuthProvider>
+              <NotificationProvider>
+                <Navbar />
+                <CookieBanner />
+                <main className="min-h-screen">{children}</main>
+                <Chatbot />
+              </NotificationProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </AdvancedThemeProvider>
       </body>
     </html>
   );
