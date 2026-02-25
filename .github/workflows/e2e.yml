@@ -1,0 +1,35 @@
+name: E2E Tests (Playwright)
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  playwright:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install frontend deps
+        working-directory: frontend
+        run: npm ci
+
+      - name: Start backend (test)
+        working-directory: backend
+        run: |
+          npm ci
+          NODE_ENV=test npm run dev &
+          sleep 2
+
+      - name: Run Playwright tests
+        working-directory: frontend
+        run: |
+          npx playwright install --with-deps
+          npm run test:e2e

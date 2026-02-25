@@ -1,0 +1,26 @@
+name: Deploy to server via SSH
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Copy deploy script
+        run: |
+          scp -o StrictHostKeyChecking=no -r ./deploy-final.sh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/
+
+      - name: Remote deploy (pull images & restart)
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "bash ~/deploy-final.sh"
